@@ -1,3 +1,20 @@
+label{
+  font-weight: normal;
+}
+
+.flexContainer{
+  display:flex;
+  align-items: center;
+}
+
+.rightItem{
+   margin-left: auto;
+}
+
+.leftItem{
+   margin-right: auto
+}
+
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -88,6 +105,13 @@
 }
 
 @media (min-width: 768px) {
+    img{
+      margin-top: 5%;
+
+    }
+    input{
+      min-width:555px;
+    }
     #wrapper {
         padding-left: 250px;
     }
@@ -111,5 +135,16 @@
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
+    }
+}
+img{
+  max-width: 100%;
+  max-height: 100%;
+  margin-top: 5%;
+}
+
+@media (max-width: 550px){
+    img{margin-top: 15%;
+
     }
 }
