@@ -86,6 +86,17 @@
       					<br>
       					<button class="btn btn-default" type="button" data-toggle="modal" data-target="#modalDisciplina">Adicionar Disciplina</button>
       				</div>
+					<div class="form-group">
+      					<label for="modulo"><h4>Modulo da Disciplina</h4></label>
+      					<select id="modulo" class="form-control">
+      						<option>Escolha o modulo</option>
+      						<option>2</option>
+      						<option>3</option>
+      						<option>4</option>
+      					</select>
+      					<br>
+      					<button class="btn btn-default" type="button" data-toggle="modal" data-target="#modalModulo">Adicionar Modulo</button>
+      				</div>
       				<div class="form-group">
       					<label for="enunciado"><h4>Enunciado da Questão</h4></label>
       					<textarea class="form-control" rows="5" id="enunciado" placeholder="Digite o enunciado da questão"></textarea>
@@ -153,26 +164,48 @@
       			</form>
       			<div id="modalDisciplina" class="modal fade" role="dialog">
       			  <div class="modal-dialog">
-        				<div class="modal-content">
-        				  <div class="modal-header">
-        					   <button type="button" class="close" data-dismiss="modal">&times;</button>
-        					   <h4 class="modal-title">Adicionar Disciplina</h4>
-        				  </div>
-        				  <div class="modal-body">
-        					  <form id="adicionarDisciplina">
-          						<div class="form-group">
-          							<label for="nomeDisciplina">Nome da nova Disciplina</label>
-          							<input class="form-control" placeholder="Digite o nome da disciplina" type="text" id="nomeDisciplina">
-          						</div>
-          						<button class="btn btn-default" type="submit">Salvar</button>
-        					  </form>
-        				  </div>
-        				  <div class="modal-footer">
-        					   <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-        				  </div>
-        				</div>
-      			 </div>
-      		 </div>
+        			<div class="modal-content">
+        			  <div class="modal-header">
+        				   <button type="button" class="close" data-dismiss="modal">&times;</button>
+        				   <h4 class="modal-title">Adicionar Disciplina</h4>
+        			  </div>
+        			  <div class="modal-body">
+        				  <form id="adicionarDisciplina">
+          					<div class="form-group">
+          						<label for="nomeDisciplina">Nome da nova Disciplina</label>
+          						<input class="form-control" placeholder="Digite o nome da disciplina" type="text" name="nomeDisciplina" id="nomeDisciplina">
+          					</div>
+          					<button class="btn btn-default" type="submit">Salvar</button>
+        				  </form>
+        			  </div>
+        			  <div class="modal-footer">
+        				   <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        			  </div>
+        			</div>
+      			  </div>
+      		    </div>
+				<div id="modalModulo" class="modal fade" role="dialog">
+      			  <div class="modal-dialog">
+        			<div class="modal-content">
+        			  <div class="modal-header">
+        				   <button type="button" class="close" data-dismiss="modal">&times;</button>
+        				   <h4 class="modal-title">Adicionar Modulo</h4>
+        			  </div>
+        			  <div class="modal-body">
+        				  <form id="adicionarDisciplina">
+          					<div class="form-group">
+          						<label for="nomeModulo">Nome do Novo Modulo</label>
+          						<input class="form-control" placeholder="Digite o nome do modulo" type="text" id="nomeModulo" name="nomeModulo">
+          					</div>
+          					<button class="btn btn-default" type="submit">Salvar</button>
+        				  </form>
+        			  </div>
+        			  <div class="modal-footer">
+        				   <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        			  </div>
+        			</div>
+      			  </div>
+      		    </div>
       	 </div>
        </div>
      </div>

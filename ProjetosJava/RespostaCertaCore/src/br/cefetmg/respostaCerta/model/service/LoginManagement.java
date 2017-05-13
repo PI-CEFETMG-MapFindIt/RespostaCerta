@@ -6,11 +6,13 @@
 package br.cefetmg.respostaCerta.model.service;
 
 import br.cefetmg.respostaCerta.model.domain.User;
+import br.cefetmg.respostaCerta.model.exception.BusinessException;
+import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 
 /**
  *
  * @author umcan
  */
 public interface LoginManagement {
-    public User loginUser(String username, String password);
+    public User loginUser(String username, String password) throws BusinessException, PersistenceException;
 }
