@@ -5,7 +5,9 @@
  */
 package br.cefetmg.respostaCerta.model.service;
 
-import br.cefetmg.respostaCerta.model.domain.Performance;
+import br.cefetmg.respostaCerta.model.domain.Module;
+import br.cefetmg.respostaCerta.model.domain.Subject;
+import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 
@@ -14,8 +16,7 @@ import br.cefetmg.respostaCerta.model.exception.PersistenceException;
  * @author umcan
  */
 public interface PerformanceManagement {
-    public Long registerPerformance(Performance performance) throws BusinessException, PersistenceException;
-    public void updatePerformance(Long id, Performance  performance) throws BusinessException, PersistenceException;
-    public void removePerformance(Long id) throws BusinessException, PersistenceException;
-    public Performance getPerformanceById(Long id) throws BusinessException, PersistenceException;
+    public Double calculateErrors(User usuario) throws BusinessException, PersistenceException;
+    public Double calculateErrorsByModule(User usuario, Module modulo) throws BusinessException, PersistenceException;
+    public Double calculateErrosBySubject(User usuario, Subject disciplina) throws BusinessException, PersistenceException;
 }
