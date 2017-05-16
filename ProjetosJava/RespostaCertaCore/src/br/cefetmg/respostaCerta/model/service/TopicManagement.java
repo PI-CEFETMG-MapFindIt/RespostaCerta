@@ -15,10 +15,9 @@ import java.util.List;
  *
  * @author umcan
  */
-public interface ForumManagement {
-    public Long registerForum(Forum forum) throws BusinessException, PersistenceException;
-    public void updateForum(Long id, Forum  forum) throws BusinessException, PersistenceException;
-    public void removeForum(Long id) throws BusinessException, PersistenceException;
-    public Forum getForumById(Long id) throws BusinessException, PersistenceException;
-    public List<Topic> getTopicsForum(Long id) throws BusinessException, PersistenceException;
+public interface TopicManagement {
+    public Long registerTopic(Topic topic) throws BusinessException, PersistenceException;
+    public void updateTopic(Long id, Topic  topic) throws BusinessException, PersistenceException;
+    public void removeTopic(Long id) throws BusinessException, PersistenceException;
+    public Topic getTopicById(Long id) throws BusinessException, PersistenceException;
 }

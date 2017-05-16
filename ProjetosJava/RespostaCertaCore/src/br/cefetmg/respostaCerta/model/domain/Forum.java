@@ -11,15 +11,15 @@ import java.time.LocalDate;
  *
  * @author umcan
  */
-public class Thread {
+public class Forum {
     private Question questao;
     private LocalDate dataCriacao;
     private boolean status;
 
-    public Thread() {
+    public Forum() {
     }
 
-    public Thread(Question questao, LocalDate dataCriacao, boolean status) {
+    public Forum(Question questao, LocalDate dataCriacao, boolean status) {
         this.questao = questao;
         this.dataCriacao = dataCriacao;
         this.status = status;

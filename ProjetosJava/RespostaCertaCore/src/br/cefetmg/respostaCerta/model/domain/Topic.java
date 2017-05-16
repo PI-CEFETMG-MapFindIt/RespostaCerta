@@ -19,12 +19,12 @@ public class Topic {
     private String txtMensagem;
     private LocalDate dataPostagem;
     private Image msgPhoto;
-    private Thread forum;
+    private Forum forum;
 
     public Topic() {
     }
     
-    public Topic(Question questao, User autor, String txtMensagem, LocalDate dataPostagem, Image msgPhoto, Thread forum) {
+    public Topic(Question questao, User autor, String txtMensagem, LocalDate dataPostagem, Image msgPhoto, Forum forum) {
         this.questao = questao;
         this.autor = autor;
         this.txtMensagem = txtMensagem;
@@ -81,11 +81,11 @@ public class Topic {
         this.msgPhoto = msgPhoto;
     }
 
-    public Thread getForum() {
+    public Forum getForum() {
         return forum;
     }
 
-    public void setForum(Thread forum) {
+    public void setForum(Forum forum) {
         this.forum = forum;
     }
     
