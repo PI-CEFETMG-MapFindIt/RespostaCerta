@@ -115,34 +115,3 @@
         margin-right: 0;
     }
 }
-
-.bordered {
-    width: 20vw;
-    height: 30vh;
-    padding: 1px;
-    border: 4px groove black;
-    margin-bottom: 4px;
-}
-
-.display {
-    display:flex;
-    flex-direction: column;
-    align-content: center;
-    max-width: 20vw;
-    max-height: 35vh;
-}
-
-.button {
-    background-color: gray;
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 17px;
-}
-
-.texto {
-    margin-left: 30px;
-}
-
