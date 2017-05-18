@@ -13,7 +13,6 @@ import java.time.LocalDate;
  */
 public class TopicAnswer {
     private Topic mensagem;
-    private Question questao;
     private Long idMensagemResposta;
     private User autor;
     private String txtMensagem;
@@ -22,9 +21,8 @@ public class TopicAnswer {
     public TopicAnswer() {
     }
     
-    public TopicAnswer(Topic mensagem, Question questao, User autor, String txtMensagem, LocalDate dataResposta) {
+    public TopicAnswer(Topic mensagem, User autor, String txtMensagem, LocalDate dataResposta) {
         this.mensagem = mensagem;
-        this.questao = questao;
         this.autor = autor;
         this.txtMensagem = txtMensagem;
         this.dataResposta = dataResposta;
@@ -36,14 +34,6 @@ public class TopicAnswer {
 
     public void setMensagem(Topic mensagem) {
         this.mensagem = mensagem;
-    }
-
-    public Question getQuestao() {
-        return questao;
-    }
-
-    public void setQuestao(Question questao) {
-        this.questao = questao;
     }
 
     public Long getIdMensagemResposta() {
