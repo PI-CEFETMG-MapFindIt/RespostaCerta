@@ -16,6 +16,7 @@ public class QuestionAnswer {
     private Question questao;
     private LocalDate dataResposta;
     private char idtResposta;
+    private Long idResposta;
 
     public QuestionAnswer() {
     }
@@ -57,6 +58,14 @@ public class QuestionAnswer {
 
     public void setIdtResposta(char idtResposta) {
         this.idtResposta = idtResposta;
+    }
+    
+    public Long getIdResposta(){
+        return this.idResposta;
+    }
+    
+    public void setIdResposta(Long idResposta){
+        this.idResposta=idResposta;
     }
     
     

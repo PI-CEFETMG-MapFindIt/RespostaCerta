@@ -15,19 +15,15 @@ public class User {
     private String loginUsuario;
     private String senhaUsuario;
     private char idtUsuario;
-    private String cidade;
-    private String estado;
 
     public User() {
     }
 
-    public User(String nomeUsuario, String loginUsuario, String senhaUsuario, char idtUsuario, String cidade, String estado) {
+    public User(String nomeUsuario, String loginUsuario, String senhaUsuario, char idtUsuario) {
         this.nomeUsuario = nomeUsuario;
         this.loginUsuario = loginUsuario;
         this.senhaUsuario = senhaUsuario;
         this.idtUsuario = idtUsuario;
-        this.cidade = cidade;
-        this.estado = estado;
     }
     
     public Long getIdUsuario() {
@@ -69,24 +65,5 @@ public class User {
     public void setIdtUsuario(char idtUsuario) {
         this.idtUsuario = idtUsuario;
     }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-    
-    
-    
     
 }

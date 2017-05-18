@@ -13,15 +13,13 @@ import java.time.LocalDate;
  */
 public class ClosedAnswer extends QuestionAnswer{
     private int resposta;
-    private boolean correta;
 
     public ClosedAnswer() {
     }
 
-    public ClosedAnswer(int resposta, boolean correta, User autor, Question questao, LocalDate dataResposta, char idtResposta) {
+    public ClosedAnswer(int resposta, User autor, Question questao, LocalDate dataResposta, char idtResposta) {
         super(autor, questao, dataResposta, idtResposta);
         this.resposta = resposta;
-        this.correta = correta;
     }
 
     public int getResposta() {
@@ -31,14 +29,4 @@ public class ClosedAnswer extends QuestionAnswer{
     public void setResposta(int resposta) {
         this.resposta = resposta;
     }
-
-    public boolean isCorreta() {
-        return correta;
-    }
-
-    public void setCorreta(boolean correta) {
-        this.correta = correta;
-    }
-    
-    
 }
