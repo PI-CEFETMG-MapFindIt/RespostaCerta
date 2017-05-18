@@ -15,21 +15,48 @@ import br.cefetmg.respostaCerta.model.exception.PersistenceException;
  */
 public class UserManagementImpl implements UserManagement{
 
+    /**
+     *
+     * @param user
+     * @return
+     * @throws BusinessException
+     * @throws PersistenceException
+     */
     @Override
     public Long registerUser(User user) throws BusinessException, PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param id
+     * @param user
+     * @throws BusinessException
+     * @throws PersistenceException
+     */
     @Override
     public void updateUser(Long id, User user) throws BusinessException, PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param id
+     * @throws BusinessException
+     * @throws PersistenceException
+     */
     @Override
     public void removeUser(Long id) throws BusinessException, PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws BusinessException
+     * @throws PersistenceException
+     */
     @Override
     public User getUserById(Long id) throws BusinessException, PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

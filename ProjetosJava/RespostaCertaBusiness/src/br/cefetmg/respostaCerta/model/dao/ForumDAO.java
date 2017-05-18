@@ -14,8 +14,8 @@ import java.util.List;
  * @author umcan
  */
 public interface ForumDAO {
-    public void insert(Thread forum) throws PersistenceException;
-    public void update(Thread forum) throws PersistenceException;
+    public void insert(Forum forum) throws PersistenceException;
+    public void update(Forum forum) throws PersistenceException;
     public Forum delete(Long forumId) throws PersistenceException;
     public Forum  getForumById(Long forumId) throws PersistenceException;
     public List<Forum> listAll() throws PersistenceException;

@@ -15,21 +15,48 @@ import br.cefetmg.respostaCerta.model.exception.PersistenceException;
  */
 public class QuestionAnswerManagementImpl implements QuestionAnswerManagement{
 
+    /**
+     *
+     * @param questionAnswer
+     * @return
+     * @throws BusinessException
+     * @throws PersistenceException
+     */
     @Override
     public Long registerQuestionAnswer(QuestionAnswer questionAnswer) throws BusinessException, PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param id
+     * @param questionAnswer
+     * @throws BusinessException
+     * @throws PersistenceException
+     */
     @Override
     public void updateQuestionAnswer(Long id, QuestionAnswer questionAnswer) throws BusinessException, PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param id
+     * @throws BusinessException
+     * @throws PersistenceException
+     */
     @Override
     public void removeQuestionAnswer(Long id) throws BusinessException, PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws BusinessException
+     * @throws PersistenceException
+     */
     @Override
     public QuestionAnswer getQuestionAnswerById(Long id) throws BusinessException, PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
