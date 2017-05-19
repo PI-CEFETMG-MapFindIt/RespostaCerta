@@ -15,26 +15,53 @@ import java.util.List;
  */
 public class TopicAnswerDAOImpl implements TopicAnswerDAO{
 
+    /**
+     *
+     * @param respostaTopico
+     * @throws PersistenceException
+     */
     @Override
     public void insert(TopicAnswer respostaTopico) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param respostaTopico
+     * @throws PersistenceException
+     */
     @Override
     public void update(TopicAnswer respostaTopico) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param respostaTopicoId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public TopicAnswer delete(Long respostaTopicoId) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param respostaTopicoId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public TopicAnswer getTopicAnswerById(Long respostaTopicoId) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public List<TopicAnswer> listAll() throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

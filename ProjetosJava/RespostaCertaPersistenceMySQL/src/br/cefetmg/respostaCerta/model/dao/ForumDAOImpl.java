@@ -15,28 +15,56 @@ import java.util.List;
  */
 public class ForumDAOImpl implements ForumDAO{
 
-    @Override
-    public void insert(Thread forum) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void update(Thread forum) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    /**
+     *
+     * @param forumId
+     * @return
+     * @throws PersistenceException
+     * Deleta o forum que tiver o id passado como parametro 
+     */
     @Override
     public Forum delete(Long forumId) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param forumId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public Forum getForumById(Long forumId) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public List<Forum> listAll() throws PersistenceException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     *
+     * @param forum
+     * @throws PersistenceException
+     */
+    @Override
+    public void insert(Forum forum) throws PersistenceException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     *
+     * @param forum
+     * @throws PersistenceException
+     */
+    @Override
+    public void update(Forum forum) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

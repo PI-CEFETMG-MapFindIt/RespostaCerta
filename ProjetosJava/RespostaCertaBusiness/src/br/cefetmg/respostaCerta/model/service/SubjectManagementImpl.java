@@ -15,21 +15,48 @@ import br.cefetmg.respostaCerta.model.exception.PersistenceException;
  */
 public class SubjectManagementImpl implements SubjectManagement{
 
+    /**
+     *
+     * @param subject
+     * @return
+     * @throws BusinessException
+     * @throws PersistenceException
+     */
     @Override
     public Long registerSubject(Subject subject) throws BusinessException, PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param id
+     * @param subject
+     * @throws BusinessException
+     * @throws PersistenceException
+     */
     @Override
     public void updateSubject(Long id, Subject subject) throws BusinessException, PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param id
+     * @throws BusinessException
+     * @throws PersistenceException
+     */
     @Override
     public void removeSubject(Long id) throws BusinessException, PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws BusinessException
+     * @throws PersistenceException
+     */
     @Override
     public Subject getSubjectById(Long id) throws BusinessException, PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

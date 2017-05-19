@@ -15,26 +15,53 @@ import java.util.List;
  */
 public class TopicDAOImpl implements TopicDAO{
 
+    /**
+     *
+     * @param topico
+     * @throws PersistenceException
+     */
     @Override
     public void insert(Topic topico) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param topico
+     * @throws PersistenceException
+     */
     @Override
     public void update(Topic topico) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param topicoId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public Topic delete(Long topicoId) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param topicoId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public Topic getTopicById(Long topicoId) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public List<Topic> listAll() throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -15,26 +15,53 @@ import java.util.List;
  */
 public class ModuleDAOImpl implements ModuleDAO{
 
+    /**
+     *
+     * @param modulo
+     * @throws PersistenceException
+     */
     @Override
     public void insert(Module modulo) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param modulo
+     * @throws PersistenceException
+     */
     @Override
     public void update(Module modulo) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param moduloId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public Module delete(Long moduloId) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param moduloId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public Module getModuleById(Long moduloId) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public List<Module> listAll() throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

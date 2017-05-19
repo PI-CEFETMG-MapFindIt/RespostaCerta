@@ -15,6 +15,14 @@ import br.cefetmg.respostaCerta.model.exception.PersistenceException;
  */
 public class LoginManagementImpl implements LoginManagement{
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     * @throws BusinessException
+     * @throws PersistenceException
+     */
     @Override
     public User loginUser(String username, String password) throws BusinessException, PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
