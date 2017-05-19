@@ -5,6 +5,7 @@
  */
 package br.cefetmg.respostaCerta.model.service;
 
+import br.cefetmg.respostaCerta.model.dao.ModuleDAO;
 import br.cefetmg.respostaCerta.model.domain.Module;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
@@ -14,7 +15,11 @@ import br.cefetmg.respostaCerta.model.exception.PersistenceException;
  * @author umcan
  */
 public class ModuleManagementImpl implements ModuleManagement{
-
+    private final ModuleDAO moduleDAO;
+    
+    public ModuleManagementImpl (ModuleDAO moduleDAO){
+        this.moduleDAO = moduleDAO;
+    }
     /**
      *
      * @param module
@@ -24,19 +29,21 @@ public class ModuleManagementImpl implements ModuleManagement{
      */
     @Override
     public Long registerSubject(Module module) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        moduleDAO.insert(module);
+        return moduleDAO.getModuleById(module.getIdModulo()).getIdModulo();
     }
 
     /**
      *
-     * @param id
+     * @param id // id do mudlo que se deseja atualizar
      * @param module
      * @throws BusinessException
      * @throws PersistenceException
      */
     @Override
     public void updateSubject(Long id, Module module) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        module.setIdModulo(id);
+        moduleDAO.update(module);
     }
 
     /**
@@ -47,7 +54,7 @@ public class ModuleManagementImpl implements ModuleManagement{
      */
     @Override
     public void removeSubject(Long id) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        moduleDAO.delete(id);
     }
 
     /**
@@ -59,7 +66,7 @@ public class ModuleManagementImpl implements ModuleManagement{
      */
     @Override
     public Module getSubjectById(Long id) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         return moduleDAO.getModuleById(id);
     }
     
 }

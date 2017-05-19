@@ -15,26 +15,53 @@ import java.util.List;
  */
 public class UserDAOImpl implements UserDAO{
 
+    /**
+     *
+     * @param usuario
+     * @throws PersistenceException
+     */
     @Override
     public void insert(User usuario) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param usuario
+     * @throws PersistenceException
+     */
     @Override
     public void update(User usuario) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param usuarioId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public User delete(Long usuarioId) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param usuarioId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public User getUserById(Long usuarioId) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public List<User> listAll() throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

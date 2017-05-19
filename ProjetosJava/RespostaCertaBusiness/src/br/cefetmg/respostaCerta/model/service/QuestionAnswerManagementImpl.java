@@ -8,13 +8,17 @@ package br.cefetmg.respostaCerta.model.service;
 import br.cefetmg.respostaCerta.model.domain.QuestionAnswer;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-
+import br.cefetmg.respostaCerta.model.dao.QuestionAnswerDAO;
 /**
  *
  * @author umcan
  */
 public class QuestionAnswerManagementImpl implements QuestionAnswerManagement{
-
+    private final QuestionAnswerDAO questionA;
+    
+    public QuestionAnswerManagementImpl (QuestionAnswerDAO questionA){
+        this.questionA = questionA;
+    }
     /**
      *
      * @param questionAnswer
@@ -24,7 +28,8 @@ public class QuestionAnswerManagementImpl implements QuestionAnswerManagement{
      */
     @Override
     public Long registerQuestionAnswer(QuestionAnswer questionAnswer) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        questionA.insert(questionAnswer);
+        return questionA.getQuestionAnswerById(questionAnswer.getIdResposta()).getIdResposta();
     }
 
     /**
@@ -36,7 +41,8 @@ public class QuestionAnswerManagementImpl implements QuestionAnswerManagement{
      */
     @Override
     public void updateQuestionAnswer(Long id, QuestionAnswer questionAnswer) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        questionAnswer.setIdResposta(id);
+        questionA.update(questionAnswer);
     }
 
     /**
@@ -47,7 +53,7 @@ public class QuestionAnswerManagementImpl implements QuestionAnswerManagement{
      */
     @Override
     public void removeQuestionAnswer(Long id) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        questionA.delete(id);
     }
 
     /**
@@ -59,7 +65,7 @@ public class QuestionAnswerManagementImpl implements QuestionAnswerManagement{
      */
     @Override
     public QuestionAnswer getQuestionAnswerById(Long id) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return questionA.getQuestionAnswerById(id);
     }
     
 }

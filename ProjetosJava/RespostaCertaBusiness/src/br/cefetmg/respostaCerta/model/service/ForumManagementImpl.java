@@ -33,12 +33,12 @@ public class ForumManagementImpl implements ForumManagement{
     @Override
     public Long registerForum(Forum forum) throws BusinessException, PersistenceException {
         forumDAO.insert(forum);
-        return forum.getQuestao().getIdQuestao();
+        return forumDAO.getForumById(forum.getQuestao().getIdQuestao()).getQuestao().getIdQuestao();
     }
 
     /**
      *
-     * @param id
+     * @param id // id da questão que terá o forum atualizado
      * @param forum
      * @throws BusinessException
      * @throws PersistenceException
@@ -46,30 +46,30 @@ public class ForumManagementImpl implements ForumManagement{
      */
     @Override
     public void updateForum(Long id, Forum forum) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        forum.getQuestao().setIdQuestao(id);
+        forumDAO.update(forum);
     }
 
     /**
      *
-     * @param id
+     * @param id // id do forum que será deletado
      * @throws BusinessException
      * @throws PersistenceException
      */
     @Override
     public void removeForum(Long id) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        forumDAO.delete(id);
     }
-
     /**
      *
      * @param id
-     * @return
+     * @return // retorna um objecto do tipo forum, que representa o forum da questão
      * @throws BusinessException
      * @throws PersistenceException
      */
     @Override
     public Forum getForumById(Long id) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return forumDAO.getForumById(id);
     }
 
     /**

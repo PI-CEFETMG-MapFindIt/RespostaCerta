@@ -27,6 +27,11 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
         
     }
     
+    /**
+     *
+     * @param respostaFechada
+     * @throws PersistenceException
+     */
     @Override
     public void insert(ClosedAnswer respostaFechada) throws PersistenceException {
         if(con==null){
@@ -52,6 +57,11 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
         }
     }
 
+    /**
+     *
+     * @param respostaFechada
+     * @throws PersistenceException
+     */
     @Override
     public void update(ClosedAnswer respostaFechada) throws PersistenceException {
         if(con==null){
@@ -78,6 +88,12 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
         }
     }
 
+    /**
+     *
+     * @param respostaId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public ClosedAnswer delete(Long respostaId) throws PersistenceException {
         if(con==null){
@@ -114,6 +130,12 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
         
     }
 
+    /**
+     *
+     * @param respostaId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public ClosedAnswer getClosedAnswerById(Long respostaId) throws PersistenceException {
         if(con==null){
@@ -137,6 +159,11 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public List<ClosedAnswer> listAll() throws PersistenceException {
         if(con==null){
