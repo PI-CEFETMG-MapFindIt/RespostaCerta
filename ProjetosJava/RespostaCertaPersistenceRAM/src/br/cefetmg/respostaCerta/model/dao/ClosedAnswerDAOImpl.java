@@ -26,6 +26,10 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
         closedCount = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ClosedAnswerDAOImpl getInstance() {
         
         if (closedDAO == null)
@@ -34,6 +38,11 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
         return  closedDAO;
     }
     
+    /**
+     *
+     * @param respostaFechada
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void insert(ClosedAnswer respostaFechada) throws PersistenceException {
 
@@ -50,6 +59,11 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
         closedAnswerDB.put(respId, respostaFechada);
     }
     
+    /**
+     *
+     * @param closedAnswer
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void update(ClosedAnswer closedAnswer) throws PersistenceException {
 
@@ -67,6 +81,12 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
         closedAnswerDB.replace(closedId, closedAnswer);
     }
 
+    /**
+     *
+     * @param closedId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     synchronized public ClosedAnswer delete(Long closedId) throws PersistenceException {
         if (closedId == null)
@@ -78,6 +98,12 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
         return closedAnswerDB.remove(closedId);
     }
 
+    /**
+     *
+     * @param closedId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public ClosedAnswer getClosedAnswerById(Long closedId) throws PersistenceException {
         
@@ -91,6 +117,11 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
         
     }
 
+    /**
+     *
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public List<ClosedAnswer> listAll() throws PersistenceException {
         List<ClosedAnswer> closedList = new ArrayList<>();

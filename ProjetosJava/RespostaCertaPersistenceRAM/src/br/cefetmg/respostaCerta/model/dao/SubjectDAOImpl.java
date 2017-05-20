@@ -23,10 +23,17 @@ public class SubjectDAOImpl implements SubjectDAO{
     private static final HashMap<Long, Subject> subjectDB = new HashMap<>();    
     private static long subjectCount;
     
+    /**
+     *
+     */
     public SubjectDAOImpl() { 
         subjectCount = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public static SubjectDAOImpl getInstance() {
         
         if (subjectDAO == null)
@@ -35,6 +42,11 @@ public class SubjectDAOImpl implements SubjectDAO{
         return  subjectDAO;
     }
     
+    /**
+     *
+     * @param subject
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void insert(Subject subject) throws PersistenceException {
 
@@ -51,6 +63,11 @@ public class SubjectDAOImpl implements SubjectDAO{
         subjectDB.put(subjectId, subject);
     }
     
+    /**
+     *
+     * @param subject
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void update(Subject subject) throws PersistenceException {
 
@@ -68,6 +85,12 @@ public class SubjectDAOImpl implements SubjectDAO{
         subjectDB.replace(subjectId, subject);
     }
 
+    /**
+     *
+     * @param subjectId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     synchronized public Subject delete(Long subjectId) throws PersistenceException {
         if (subjectId == null)
@@ -79,6 +102,12 @@ public class SubjectDAOImpl implements SubjectDAO{
         return subjectDB.remove(subjectId);
     }
 
+    /**
+     *
+     * @param subjectId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public Subject getSubjectById(Long subjectId) throws PersistenceException {
         
@@ -92,6 +121,11 @@ public class SubjectDAOImpl implements SubjectDAO{
         
     }
 
+    /**
+     *
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public List<Subject> listAll() throws PersistenceException {
         List<Subject> subjectList = new ArrayList<>();

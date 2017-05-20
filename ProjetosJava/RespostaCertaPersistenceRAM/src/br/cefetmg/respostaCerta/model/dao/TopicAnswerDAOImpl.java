@@ -24,10 +24,17 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
     private static final HashMap<Long, TopicAnswer> topicAnswerDB = new HashMap<>();    
     private static long topicAnswerCount;
     
+    /**
+     *
+     */
     public TopicAnswerDAOImpl() { 
         topicAnswerCount = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public static TopicAnswerDAOImpl getInstance() {
         
         if (topicAnswerDAO == null)
@@ -36,6 +43,11 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
         return  topicAnswerDAO;
     }
     
+    /**
+     *
+     * @param topicAnswer
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void insert(TopicAnswer topicAnswer) throws PersistenceException {
 
@@ -52,6 +64,11 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
         topicAnswerDB.put(topicAnswerId, topicAnswer);
     }
     
+    /**
+     *
+     * @param topicAnswer
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void update(TopicAnswer topicAnswer) throws PersistenceException {
 
@@ -69,6 +86,12 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
         topicAnswerDB.replace(topicAnswerId, topicAnswer);
     }
 
+    /**
+     *
+     * @param topicAnswerId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     synchronized public TopicAnswer delete(Long topicAnswerId) throws PersistenceException {
         if (topicAnswerId == null)
@@ -80,6 +103,12 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
         return topicAnswerDB.remove(topicAnswerId);
     }
 
+    /**
+     *
+     * @param topicAnswerId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public TopicAnswer getTopicAnswerById(Long topicAnswerId) throws PersistenceException {
         
@@ -93,6 +122,11 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
         
     }
 
+    /**
+     *
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public List<TopicAnswer> listAll() throws PersistenceException {
         List<TopicAnswer> topicAnswerList = new ArrayList<>();

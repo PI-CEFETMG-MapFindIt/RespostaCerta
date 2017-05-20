@@ -23,10 +23,17 @@ public class ModuleDAOImpl implements ModuleDAO{
     private static final HashMap<Long, Module> moduleDB = new HashMap<>();    
     private static long moduleCount;
     
+    /**
+     *
+     */
     public ModuleDAOImpl() { 
         moduleCount = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ModuleDAOImpl getInstance() {
         
         if (moduleDAO == null)
@@ -35,6 +42,11 @@ public class ModuleDAOImpl implements ModuleDAO{
         return  moduleDAO;
     }
     
+    /**
+     *
+     * @param module
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void insert(Module module) throws PersistenceException {
 
@@ -51,6 +63,11 @@ public class ModuleDAOImpl implements ModuleDAO{
         moduleDB.put(moduleId, module);
     }
     
+    /**
+     *
+     * @param module
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void update(Module module) throws PersistenceException {
 
@@ -68,6 +85,12 @@ public class ModuleDAOImpl implements ModuleDAO{
         moduleDB.replace(moduleId, module);
     }
 
+    /**
+     *
+     * @param moduleId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     synchronized public Module delete(Long moduleId) throws PersistenceException {
         if (moduleId == null)
@@ -79,6 +102,12 @@ public class ModuleDAOImpl implements ModuleDAO{
         return moduleDB.remove(moduleId);
     }
 
+    /**
+     *
+     * @param moduleId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public Module getModuleById(Long moduleId) throws PersistenceException {
         
@@ -92,6 +121,11 @@ public class ModuleDAOImpl implements ModuleDAO{
         
     }
 
+    /**
+     *
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public List<Module> listAll() throws PersistenceException {
         List<Module> moduleList = new ArrayList<>();

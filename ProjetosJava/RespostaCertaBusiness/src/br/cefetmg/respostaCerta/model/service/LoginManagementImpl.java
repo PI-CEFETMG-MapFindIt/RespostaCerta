@@ -8,13 +8,19 @@ package br.cefetmg.respostaCerta.model.service;
 import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-
+import br.cefetmg.respostaCerta.model.dao.UserDAO;
 /**
  *
- * @author umcan
+ * @author adalbs
  */
 public class LoginManagementImpl implements LoginManagement{
+    
+    private final UserDAO userDAO;
 
+    public LoginManagementImpl(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+   
     /**
      *
      * @param username

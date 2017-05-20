@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  *
- * @author umcan
+ * @author adalbs
  */
 public class ForumManagementImpl implements ForumManagement{
     private final ForumDAO forumDAO;

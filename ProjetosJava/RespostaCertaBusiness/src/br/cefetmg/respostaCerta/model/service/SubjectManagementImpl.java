@@ -11,7 +11,7 @@ import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 
 /**
  *
- * @author umcan
+ * @author adalbs
  */
 public class SubjectManagementImpl implements SubjectManagement{
 
