@@ -24,10 +24,17 @@ public class UserDAOImpl implements UserDAO{
     private static final HashMap<Long, User> userDB = new HashMap<>();    
     private static long userCount;
     
+    /**
+     *
+     */
     public UserDAOImpl() { 
         userCount = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public static UserDAOImpl getInstance() {
         
         if (userDAO == null)
@@ -36,6 +43,11 @@ public class UserDAOImpl implements UserDAO{
         return  userDAO;
     }
     
+    /**
+     *
+     * @param user
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void insert(User user) throws PersistenceException {
 
@@ -52,6 +64,11 @@ public class UserDAOImpl implements UserDAO{
         userDB.put(userId, user);
     }
     
+    /**
+     *
+     * @param user
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void update(User user) throws PersistenceException {
 
@@ -69,6 +86,12 @@ public class UserDAOImpl implements UserDAO{
         userDB.replace(userId, user);
     }
 
+    /**
+     *
+     * @param userId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     synchronized public User delete(Long userId) throws PersistenceException {
         if (userId == null)
@@ -80,6 +103,12 @@ public class UserDAOImpl implements UserDAO{
         return userDB.remove(userId);
     }
 
+    /**
+     *
+     * @param userId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public User getUserById(Long userId) throws PersistenceException {
         
@@ -93,6 +122,11 @@ public class UserDAOImpl implements UserDAO{
         
     }
 
+    /**
+     *
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public List<User> listAll() throws PersistenceException {
         List<User> userList = new ArrayList<>();

@@ -12,7 +12,7 @@ import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 
 /**
  *
- * @author umcan
+ * @author adalbs
  */
 public class ModuleManagementImpl implements ModuleManagement{
     private final ModuleDAO moduleDAO;

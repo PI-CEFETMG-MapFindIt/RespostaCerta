@@ -8,14 +8,19 @@ package br.cefetmg.respostaCerta.model.service;
 import br.cefetmg.respostaCerta.model.domain.TopicAnswer;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
+import br.cefetmg.respostaCerta.model.dao.TopicAnswerDAO;
 import java.util.List;
 
 /**
  *
- * @author umcan
+ * @author adalbs
  */
 public class TopicAnswerManagementImpl implements TopicAnswerManagement{
-
+    private final TopicAnswerDAO answearDAO;
+    
+    public TopicAnswerManagementImpl(TopicAnswerDAO answerDAO){
+        this.answearDAO=answerDAO;
+    }
     /**
      *
      * @param topicAnswer
@@ -25,7 +30,14 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      */
     @Override
     public Long registerTopic(TopicAnswer topicAnswer) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(topicAnswer.getAutor()==null || topicAnswer.getDataResposta()==null||topicAnswer.getTxtMensagem()==null){
+            throw new BusinessException("Campos de resposta não podem ser nulo");
+        }
+        answearDAO.insert(topicAnswer);
+        if(answearDAO.getTopicAnswerById(topicAnswer.getIdMensagemResposta())!=null){
+            return topicAnswer.getIdMensagemResposta();
+        }
+        throw new PersistenceException("Erro ao incerrir");
     }
 
     /**
@@ -37,7 +49,17 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      */
     @Override
     public void updateTopic(Long id, TopicAnswer topicAnswer) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(id == null){
+            throw new BusinessException("ID não pode ser nulo");
+        }
+        if(topicAnswer.getAutor()==null || topicAnswer.getDataResposta()==null||topicAnswer.getTxtMensagem()==null){
+            throw new BusinessException("Campos de resposta não podem ser nulo");
+        }
+        topicAnswer.setIdMensagemResposta(id);
+        answearDAO.update(topicAnswer);
+        if(!topicAnswer.equals(answearDAO.getTopicAnswerById(id))){
+            throw new PersistenceException("Erro de persistencia ao atualizar");
+        }
     }
 
     /**
@@ -48,7 +70,10 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      */
     @Override
     public void removeTopic(Long id) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(id == null){
+            throw new BusinessException("ID não pode ser nulo");
+        }
+        answearDAO.delete(id);
     }
 
     /**
@@ -60,6 +85,9 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      */
     @Override
     public TopicAnswer getTopicById(Long id) throws BusinessException, PersistenceException {
+        if(id == null){
+            throw new BusinessException("ID não pode ser nulo");
+        }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -72,7 +100,7 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      */
     @Override
     public List<TopicAnswer> getTopicAnswers(Long id) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return answearDAO.listAll();
     }
     
 }

@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  *
- * @author umcan
+ * @author adalbs
  */
 public class ForumManagementImpl implements ForumManagement{
     private final ForumDAO forumDAO;
@@ -32,8 +32,14 @@ public class ForumManagementImpl implements ForumManagement{
      */
     @Override
     public Long registerForum(Forum forum) throws BusinessException, PersistenceException {
+        if(forum.getDataCriacao()==null){
+            throw new BusinessException("Data de criação não pode ser nula");
+        }
         forumDAO.insert(forum);
-        return forumDAO.getForumById(forum.getQuestao().getIdQuestao()).getQuestao().getIdQuestao();
+        if (forumDAO.getForumById(forum.getQuestao().getIdQuestao())!=null){
+            return forumDAO.getForumById(forum.getQuestao().getIdQuestao()).getQuestao().getIdQuestao();
+        }
+        throw new PersistenceException("Erro de persisten ao incerrir");
     }
 
     /**
@@ -46,8 +52,14 @@ public class ForumManagementImpl implements ForumManagement{
      */
     @Override
     public void updateForum(Long id, Forum forum) throws BusinessException, PersistenceException {
+        if(id==null){
+            throw new BusinessException("id não pode ser nulo");
+        }
         forum.getQuestao().setIdQuestao(id);
         forumDAO.update(forum);
+        if(forumDAO.getForumById(id)!=forum){
+            throw new PersistenceException("Erro de persistencia ao atualizar");
+        }
     }
 
     /**
@@ -58,6 +70,9 @@ public class ForumManagementImpl implements ForumManagement{
      */
     @Override
     public void removeForum(Long id) throws BusinessException, PersistenceException {
+        if(id==null){
+            throw new BusinessException("id não pode ser nulo");
+        }
         forumDAO.delete(id);
     }
     /**
@@ -69,7 +84,10 @@ public class ForumManagementImpl implements ForumManagement{
      */
     @Override
     public Forum getForumById(Long id) throws BusinessException, PersistenceException {
-       return forumDAO.getForumById(id);
+       if(id==null){
+            throw new BusinessException("id não pode ser nulo");
+        }
+        return forumDAO.getForumById(id);
     }
 
     /**

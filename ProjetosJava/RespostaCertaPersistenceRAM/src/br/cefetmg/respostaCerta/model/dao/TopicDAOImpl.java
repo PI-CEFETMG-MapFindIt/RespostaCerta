@@ -24,10 +24,17 @@ public class TopicDAOImpl implements TopicDAO{
     private static final HashMap<Long, Topic> topicDB = new HashMap<>();    
     private static long topicCount;
     
+    /**
+     *
+     */
     public TopicDAOImpl() { 
         topicCount = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public static TopicDAOImpl getInstance() {
         
         if (topicDAO == null)
@@ -36,6 +43,11 @@ public class TopicDAOImpl implements TopicDAO{
         return  topicDAO;
     }
     
+    /**
+     *
+     * @param topic
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void insert(Topic topic) throws PersistenceException {
 
@@ -52,6 +64,11 @@ public class TopicDAOImpl implements TopicDAO{
         topicDB.put(topicId, topic);
     }
     
+    /**
+     *
+     * @param topic
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void update(Topic topic) throws PersistenceException {
 
@@ -69,6 +86,12 @@ public class TopicDAOImpl implements TopicDAO{
         topicDB.replace(topicId, topic);
     }
 
+    /**
+     *
+     * @param topicId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     synchronized public Topic delete(Long topicId) throws PersistenceException {
         if (topicId == null)
@@ -80,6 +103,12 @@ public class TopicDAOImpl implements TopicDAO{
         return topicDB.remove(topicId);
     }
 
+    /**
+     *
+     * @param topicId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public Topic getTopicById(Long topicId) throws PersistenceException {
         
@@ -93,6 +122,11 @@ public class TopicDAOImpl implements TopicDAO{
         
     }
 
+    /**
+     *
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public List<Topic> listAll() throws PersistenceException {
         List<Topic> topicList = new ArrayList<>();

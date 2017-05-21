@@ -22,10 +22,17 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
     private static final HashMap<Long, ClosedQuestion> closedQuestionDB = new HashMap<>();    
     private static long closedCount;
     
+    /**
+     *
+     */
     public ClosedQuestionDAOImpl() { 
         closedCount = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ClosedQuestionDAOImpl getInstance() {
         
         if (closedDAO == null)
@@ -34,6 +41,11 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
         return  closedDAO;
     }
     
+    /**
+     *
+     * @param questaoFechada
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void insert(ClosedQuestion questaoFechada) throws PersistenceException {
 
@@ -50,6 +62,11 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
         closedQuestionDB.put(questId, questaoFechada);
     }
     
+    /**
+     *
+     * @param closedQuestion
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void update(ClosedQuestion closedQuestion) throws PersistenceException {
 
@@ -67,6 +84,12 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
         closedQuestionDB.replace(closedId, closedQuestion);
     }
 
+    /**
+     *
+     * @param closedId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     synchronized public ClosedQuestion delete(Long closedId) throws PersistenceException {
         if (closedId == null)
@@ -78,6 +101,12 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
         return closedQuestionDB.remove(closedId);
     }
 
+    /**
+     *
+     * @param closedId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public ClosedQuestion getClosedQuestionById(Long closedId) throws PersistenceException {
         
@@ -91,6 +120,11 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
         
     }
 
+    /**
+     *
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public List<ClosedQuestion> listAll() throws PersistenceException {
         List<ClosedQuestion> closedList = new ArrayList<>();

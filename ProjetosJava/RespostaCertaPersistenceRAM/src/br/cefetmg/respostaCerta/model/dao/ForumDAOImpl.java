@@ -28,6 +28,10 @@ public class ForumDAOImpl implements ForumDAO{
         forumCount = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ForumDAOImpl getInstance() {
         
         if (forumDAO == null)
@@ -36,6 +40,11 @@ public class ForumDAOImpl implements ForumDAO{
         return  forumDAO;
     }
     
+    /**
+     *
+     * @param forum
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void insert(Forum forum) throws PersistenceException {
 
@@ -52,6 +61,11 @@ public class ForumDAOImpl implements ForumDAO{
         forumDB.put(forumId, forum);
     }
     
+    /**
+     *
+     * @param forum
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void update(Forum forum) throws PersistenceException {
 
@@ -69,6 +83,12 @@ public class ForumDAOImpl implements ForumDAO{
         forumDB.replace(forumId, forum);
     }
 
+    /**
+     *
+     * @param forumId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     synchronized public Forum delete(Long forumId) throws PersistenceException {
         if (forumId == null)
@@ -80,6 +100,12 @@ public class ForumDAOImpl implements ForumDAO{
         return forumDB.remove(forumId);
     }
 
+    /**
+     *
+     * @param forumId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public Forum getForumById(Long forumId) throws PersistenceException {
         
@@ -93,6 +119,11 @@ public class ForumDAOImpl implements ForumDAO{
         
     }
 
+    /**
+     *
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public List<Forum> listAll() throws PersistenceException {
         List<Forum> forumList = new ArrayList<>();

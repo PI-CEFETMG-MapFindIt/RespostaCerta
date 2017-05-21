@@ -8,13 +8,20 @@ package br.cefetmg.respostaCerta.model.service;
 import br.cefetmg.respostaCerta.model.domain.Subject;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-
+import br.cefetmg.respostaCerta.model.dao.SubjectDAO;
 /**
  *
- * @author umcan
+ * @author adalbs
  */
 public class SubjectManagementImpl implements SubjectManagement{
 
+    private final SubjectDAO subjectDAO;
+
+    public SubjectManagementImpl(SubjectDAO subjectDAO) {
+        this.subjectDAO = subjectDAO;
+    }
+    
+    
     /**
      *
      * @param subject
@@ -24,7 +31,14 @@ public class SubjectManagementImpl implements SubjectManagement{
      */
     @Override
     public Long registerSubject(Subject subject) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(subject.getNomeDominio()==null || subject.getDescDominio()==null){
+            throw new BusinessException("Campos não podem ser nulos");
+        }
+        subjectDAO.insert(subject);
+        if(subjectDAO.getSubjectById(subject.getIdDominio())!=null){
+            return subject.getIdDominio();
+        }
+        throw new PersistenceException("Erro ao incerrir");
     }
 
     /**
@@ -36,7 +50,14 @@ public class SubjectManagementImpl implements SubjectManagement{
      */
     @Override
     public void updateSubject(Long id, Subject subject) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(id == null){
+            throw new BusinessException("ID não pode ser nulo");
+        }
+        subject.setIdDominio(id);
+        if(subject.getNomeDominio()==null || subject.getDescDominio()==null){
+            throw new BusinessException("Campos não podem ser nulos");
+        }
+        subjectDAO.update(subject);
     }
 
     /**
@@ -47,7 +68,11 @@ public class SubjectManagementImpl implements SubjectManagement{
      */
     @Override
     public void removeSubject(Long id) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(id == null){
+            throw new BusinessException("ID não pode ser nulo");
+        }
+        subjectDAO.delete(id);
+
     }
 
     /**
@@ -59,7 +84,10 @@ public class SubjectManagementImpl implements SubjectManagement{
      */
     @Override
     public Subject getSubjectById(Long id) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(id == null){
+            throw new BusinessException("ID não pode ser nulo");
+        }
+        return subjectDAO.getSubjectById(id);
     }
     
 }

@@ -8,13 +8,21 @@ package br.cefetmg.respostaCerta.model.service;
 import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-
+import br.cefetmg.respostaCerta.model.dao.UserDAO;
+import java.util.List;
+import java.util.LinkedList;
 /**
  *
- * @author umcan
+ * @author adalbs
  */
 public class LoginManagementImpl implements LoginManagement{
-
+    
+    private final UserDAO userDAO;
+    
+    public LoginManagementImpl(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+   
     /**
      *
      * @param username
@@ -25,7 +33,17 @@ public class LoginManagementImpl implements LoginManagement{
      */
     @Override
     public User loginUser(String username, String password) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(username == null || password == null){
+            throw new BusinessException("Dados de login não podem ser nulos");
+        }
+        List<User> li ;
+        li = userDAO.listAll();
+        for(User user: li){
+            if (user.getLoginUsuario().equals(username) && user.getSenhaUsuario().equals(password)){
+                return user;
+            }
+        }
+        throw new PersistenceException("usuario inexistente");
     }
     
 }

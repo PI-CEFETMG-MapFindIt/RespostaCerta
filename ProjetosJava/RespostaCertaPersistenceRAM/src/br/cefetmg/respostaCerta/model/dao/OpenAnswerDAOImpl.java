@@ -28,6 +28,10 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
         openAnswerCount = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public static OpenAnswerDAOImpl getInstance() {
         
         if (openAnswerDAO == null)
@@ -36,6 +40,11 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
         return  openAnswerDAO;
     }
     
+    /**
+     *
+     * @param openAnswer
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void insert(OpenAnswer openAnswer) throws PersistenceException {
 
@@ -52,6 +61,11 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
         openAnswerDB.put(openAnswerId, openAnswer);
     }
     
+    /**
+     *
+     * @param openAnswer
+     * @throws PersistenceException
+     */
     @Override
     synchronized public void update(OpenAnswer openAnswer) throws PersistenceException {
 
@@ -69,6 +83,12 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
         openAnswerDB.replace(openAnswerId, openAnswer);
     }
 
+    /**
+     *
+     * @param openAnswerId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     synchronized public OpenAnswer delete(Long openAnswerId) throws PersistenceException {
         if (openAnswerId == null)
@@ -80,6 +100,12 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
         return openAnswerDB.remove(openAnswerId);
     }
 
+    /**
+     *
+     * @param openAnswerId
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public OpenAnswer getOpenAnswerById(Long openAnswerId) throws PersistenceException {
         
@@ -93,6 +119,11 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
         
     }
 
+    /**
+     *
+     * @return
+     * @throws PersistenceException
+     */
     @Override
     public List<OpenAnswer> listAll() throws PersistenceException {
         List<OpenAnswer> openAnswerList = new ArrayList<>();
