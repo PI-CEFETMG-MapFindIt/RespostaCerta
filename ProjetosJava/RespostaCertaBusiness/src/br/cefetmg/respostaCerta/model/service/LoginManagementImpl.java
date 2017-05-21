@@ -33,8 +33,8 @@ public class LoginManagementImpl implements LoginManagement{
      */
     @Override
     public User loginUser(String username, String password) throws BusinessException, PersistenceException {
-        if(username == null || password == null){
-            throw new BusinessException("Dados de login não podem ser nulos");
+        if(username == null || password == null || username.equals("") || password.equals("")){
+            throw new BusinessException("Dados de login não podem ser vazios");
         }
         List<User> li ;
         li = userDAO.listAll();
@@ -43,7 +43,7 @@ public class LoginManagementImpl implements LoginManagement{
                 return user;
             }
         }
-        throw new PersistenceException("usuario inexistente");
+        throw new BusinessException("Usuario inexistente");
     }
     
 }

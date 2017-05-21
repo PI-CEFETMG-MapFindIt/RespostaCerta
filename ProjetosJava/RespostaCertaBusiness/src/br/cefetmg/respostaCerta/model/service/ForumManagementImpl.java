@@ -32,14 +32,20 @@ public class ForumManagementImpl implements ForumManagement{
      */
     @Override
     public Long registerForum(Forum forum) throws BusinessException, PersistenceException {
+        if(forum==null){
+            throw new BusinessException("O forum não pode ser nulo");
+        }
         if(forum.getDataCriacao()==null){
             throw new BusinessException("Data de criação não pode ser nula");
+        }
+        if(forum.getQuestao()==null){
+            throw new BusinessException("O forum deve referenciar uma questao");
         }
         forumDAO.insert(forum);
         if (forumDAO.getForumById(forum.getQuestao().getIdQuestao())!=null){
             return forumDAO.getForumById(forum.getQuestao().getIdQuestao()).getQuestao().getIdQuestao();
         }
-        throw new PersistenceException("Erro de persisten ao incerrir");
+        throw new PersistenceException("Erro de persistencia ao inserir");
     }
 
     /**
@@ -53,7 +59,16 @@ public class ForumManagementImpl implements ForumManagement{
     @Override
     public void updateForum(Long id, Forum forum) throws BusinessException, PersistenceException {
         if(id==null){
-            throw new BusinessException("id não pode ser nulo");
+            throw new BusinessException("Id não pode ser nulo");
+        }
+        if(forum==null){
+            throw new BusinessException("O forum não pode ser nulo");
+        }
+        if(forum.getDataCriacao()==null){
+            throw new BusinessException("Data de criação não pode ser nula");
+        }
+        if(forum.getQuestao()==null){
+            throw new BusinessException("O forum deve referenciar uma questao");
         }
         forum.getQuestao().setIdQuestao(id);
         forumDAO.update(forum);
@@ -71,7 +86,7 @@ public class ForumManagementImpl implements ForumManagement{
     @Override
     public void removeForum(Long id) throws BusinessException, PersistenceException {
         if(id==null){
-            throw new BusinessException("id não pode ser nulo");
+            throw new BusinessException("Id não pode ser nulo");
         }
         forumDAO.delete(id);
     }
@@ -85,7 +100,7 @@ public class ForumManagementImpl implements ForumManagement{
     @Override
     public Forum getForumById(Long id) throws BusinessException, PersistenceException {
        if(id==null){
-            throw new BusinessException("id não pode ser nulo");
+            throw new BusinessException("Id não pode ser nulo");
         }
         return forumDAO.getForumById(id);
     }
