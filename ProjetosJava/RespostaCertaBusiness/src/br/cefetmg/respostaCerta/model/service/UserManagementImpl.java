@@ -82,9 +82,6 @@ public class UserManagementImpl implements UserManagement {
             throw new PersistenceException ("ID de busca nulo");
         }
         userDAO.delete(id);
-        if(userDAO.getUserById(id)!= null){
-            throw new PersistenceException("Erro ao deletar");
-        }
     }
     
     /**

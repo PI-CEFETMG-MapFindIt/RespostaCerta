@@ -52,8 +52,14 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
         if(id == null){
             throw new BusinessException("ID não pode ser nulo");
         }
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(topicAnswer.getAutor()==null || topicAnswer.getDataResposta()==null||topicAnswer.getTxtMensagem()==null){
+            throw new BusinessException("Campos de resposta não podem ser nulo");
+        }
+        topicAnswer.setIdMensagemResposta(id);
+        answearDAO.update(topicAnswer);
+        if(!topicAnswer.equals(answearDAO.getTopicAnswerById(id))){
+            throw new PersistenceException("Erro de persistencia ao atualizar");
+        }
     }
 
     /**
@@ -64,7 +70,10 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      */
     @Override
     public void removeTopic(Long id) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(id == null){
+            throw new BusinessException("ID não pode ser nulo");
+        }
+        answearDAO.delete(id);
     }
 
     /**
@@ -76,6 +85,9 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      */
     @Override
     public TopicAnswer getTopicById(Long id) throws BusinessException, PersistenceException {
+        if(id == null){
+            throw new BusinessException("ID não pode ser nulo");
+        }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -88,7 +100,7 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      */
     @Override
     public List<TopicAnswer> getTopicAnswers(Long id) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return answearDAO.listAll();
     }
     
 }
