@@ -33,6 +33,21 @@ public class QuestionManagementImpl implements QuestionManagement{
         if(question==null){
             throw new BusinessException("question não pode ser nulo");
         }
+        if(question.getCriador()==null){
+            throw new BusinessException("criador não pode ser nulo");
+        }
+        if(question.getDataCriacao()==null){
+            throw new BusinessException("data de criação não pode ser nulo");
+        }
+        if(question.getDominio()==null){
+            throw new BusinessException("dominio não pode ser nulo");
+        }
+        if(question.getEnunciadoQuestao()==null){
+            throw new BusinessException("enunciado não pode ser nulo");
+        }
+        if(question.getTituloQuestao()==null){
+            throw new BusinessException("titulo não pode ser nulo");
+        }
         quest.insert((ClosedQuestion) question);
         return question.getIdQuestao();
     }
@@ -49,10 +64,29 @@ public class QuestionManagementImpl implements QuestionManagement{
         if(question==null){
             throw new BusinessException("question não pode ser nulo");
         }
+        if(question.getCriador()==null){
+            throw new BusinessException("criador não pode ser nulo");
+        }
+        if(question.getDataCriacao()==null){
+            throw new BusinessException("data de criação não pode ser nulo");
+        }
+        if(question.getDominio()==null){
+            throw new BusinessException("dominio não pode ser nulo");
+        }
+        if(question.getEnunciadoQuestao()==null){
+            throw new BusinessException("enunciado não pode ser nulo");
+        }
+        if(question.getTituloQuestao()==null){
+            throw new BusinessException("titulo não pode ser nulo");
+        }
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");
         }
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        question.setIdQuestao(id);
+        quest.update((ClosedQuestion) question);
+        if(quest.getClosedQuestionById(id)!=question){
+            throw new PersistenceException("Erro ao atualizar");
+        }
     }
 
     /**
@@ -63,7 +97,11 @@ public class QuestionManagementImpl implements QuestionManagement{
      */
     @Override
     public void removeQuestion(Long id) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(id==null){
+            throw new BusinessException("Id não pode ser nulo");
+        }
+        quest.delete(id);
+        
     }
 
     /**
@@ -75,7 +113,10 @@ public class QuestionManagementImpl implements QuestionManagement{
      */
     @Override
     public Question getQuestionById(Long id) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(id==null){
+            throw new BusinessException("Id não pode ser nulo");
+        }
+        return quest.getClosedQuestionById(id);
     }
     
 }

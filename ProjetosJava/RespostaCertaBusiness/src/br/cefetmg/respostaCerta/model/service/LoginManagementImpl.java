@@ -10,7 +10,6 @@ import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.dao.UserDAO;
 import java.util.List;
-import java.util.LinkedList;
 /**
  *
  * @author adalbs
