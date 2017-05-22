@@ -13,6 +13,9 @@ import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.dao.ModuleDAO;
 import br.cefetmg.respostaCerta.model.dao.ClosedAnswerDAO;
 import br.cefetmg.respostaCerta.model.dao.SubjectDAO;
+import br.cefetmg.respostaCerta.model.domain.ClosedAnswer;
+import br.cefetmg.respostaCerta.model.dao.ClosedQuestionDAO;
+import java.util.List;
 /**
  *
  * @author adalbs
@@ -23,14 +26,22 @@ public class PerformanceManagementImpl implements PerformanceManagement{
     private final ClosedAnswerDAO answer;
     private final ModuleDAO module;
     private final SubjectDAO subject;
+    private final ClosedQuestionDAO quest;
 
-    public PerformanceManagementImpl(ClosedAnswerDAO answer, ModuleDAO module, SubjectDAO subject) {
+    /**
+     *
+     * @param answer
+     * @param module
+     * @param subject
+     * @param quest
+     */
+    public PerformanceManagementImpl(ClosedAnswerDAO answer, ModuleDAO module, SubjectDAO subject, ClosedQuestionDAO quest) {
         this.answer = answer;
         this.module = module;
         this.subject = subject;
+        this.quest = quest;
     }
-    
-    
+
     
     /**
      *
@@ -41,7 +52,29 @@ public class PerformanceManagementImpl implements PerformanceManagement{
      */
     @Override
     public Double calculateErrors(User user) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double totalerros=0;
+        if(user == null){
+          throw new BusinessException("usuarionão pode ser nulo");  
+        }
+        if(user.getIdUsuario()==null){
+            throw new BusinessException("ID dousuario não pode ser nulo"); 
+        }
+        if(user.getLoginUsuario() == null){
+          throw new BusinessException("Login do usuario não pode ser nulo");  
+        }
+        if(user.getNomeUsuario() == null){
+          throw new BusinessException("Nome do usuario não pode ser nulo");  
+        }
+        if(user.getSenhaUsuario() == null){
+          throw new BusinessException("Senha do usuario não pode ser nulo");  
+        }
+        List<ClosedAnswer> tempq=answer.listAll();
+        for (ClosedAnswer q : tempq){
+            if(q.getAutor().equals(user) && q.getResposta()==quest.getClosedQuestionById(q.getQuestao().getIdQuestao()).getCorreta()){
+                totalerros++;
+            }
+        }
+        return totalerros;
     }
 
     /**
@@ -54,7 +87,41 @@ public class PerformanceManagementImpl implements PerformanceManagement{
      */
     @Override
     public Double calculateErrorsByModule(User user, Module modulo) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(user == null){
+          throw new BusinessException("usuarionão pode ser nulo");  
+        }
+        if(user.getIdUsuario()==null){
+            throw new BusinessException("ID dousuario não pode ser nulo"); 
+        }
+        if(user.getLoginUsuario() == null){
+          throw new BusinessException("Login do usuario não pode ser nulo");  
+        }
+        if(user.getNomeUsuario() == null){
+          throw new BusinessException("Nome do usuario não pode ser nulo");  
+        }
+        if(user.getSenhaUsuario() == null){
+          throw new BusinessException("Senha do usuario não pode ser nulo");  
+        }
+        if(modulo==null){
+            throw new BusinessException("Modulo não pode ser nulo");
+        }
+        if(modulo.getDominio()==null){
+            throw new BusinessException("Dominio não pode ser nulo");
+        }
+        if(modulo.getNomeModulo()==null){
+            throw new BusinessException("Nome do modulo não pode ser nulo");
+        }
+        if(modulo.getDescModulo()==null){
+            throw new BusinessException("descrição do modulo não pode ser nulo");
+        }
+        double totalerros=0;
+        List<ClosedAnswer> tempq=answer.listAll();
+        for (ClosedAnswer q : tempq){
+            if(q.getAutor().equals(user) && q.getResposta()==quest.getClosedQuestionById(q.getQuestao().getIdQuestao()).getCorreta()&&q.getQuestao().getModulo().equals(modulo)){
+                totalerros++;
+            }
+        }
+        return totalerros;
     }
 
     /**
@@ -67,7 +134,39 @@ public class PerformanceManagementImpl implements PerformanceManagement{
      */
     @Override
     public Double calculateErrosBySubject(User user, Subject disciplina) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(user == null){
+          throw new BusinessException("usuarionão pode ser nulo");  
+        }
+        if(user.getIdUsuario()==null){
+            throw new BusinessException("ID dousuario não pode ser nulo"); 
+        }
+        if(user.getLoginUsuario() == null){
+          throw new BusinessException("Login do usuario não pode ser nulo");  
+        }
+        if(user.getNomeUsuario() == null){
+          throw new BusinessException("Nome do usuario não pode ser nulo");  
+        }
+        if(user.getSenhaUsuario() == null){
+          throw new BusinessException("Senha do usuario não pode ser nulo");  
+        }
+        if(disciplina==null){
+            throw new BusinessException("subject não pode ser nulo");
+        }
+        if(disciplina.getNomeDominio()==null){
+            throw new BusinessException("Nome do dominio não pode ser nulo");
+        }
+        if(disciplina.getDescDominio()==null){
+            throw new BusinessException("desc do dominio não pode ser nula");
+        }
+        double totalerros=0;
+        List<ClosedAnswer> tempq=answer.listAll();
+        for (ClosedAnswer q : tempq){
+            if(q.getAutor().equals(user) && q.getResposta()==quest.getClosedQuestionById(q.getQuestao().getIdQuestao()).getCorreta()&&subject.getSubjectById(disciplina.getIdDominio()).equals(disciplina)){
+                totalerros++;
+            }
+        }
+        return totalerros;
+        
     }
     
 }
