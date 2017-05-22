@@ -49,6 +49,7 @@ public class PerformanceManagementImpl implements PerformanceManagement{
      * @return
      * @throws BusinessException
      * @throws PersistenceException
+     * retorna o percentual de erros de questões
      */
     @Override
     public Double calculateErrors(User user) throws BusinessException, PersistenceException {
@@ -69,12 +70,15 @@ public class PerformanceManagementImpl implements PerformanceManagement{
           throw new BusinessException("Senha do usuario não pode ser nulo");  
         }
         List<ClosedAnswer> tempq=answer.listAll();
+        double totalquestoes=0;
         for (ClosedAnswer q : tempq){
-            if(q.getAutor().equals(user) && q.getResposta()==quest.getClosedQuestionById(q.getQuestao().getIdQuestao()).getCorreta()){
-                totalerros++;
+            if(q.getAutor().equals(user)){
+                totalquestoes++;
+                if(q.getResposta()==quest.getClosedQuestionById(q.getQuestao().getIdQuestao()).getCorreta())
+                    totalerros++;
             }
         }
-        return totalerros;
+        return (totalerros*100)/totalquestoes;
     }
 
     /**
@@ -84,6 +88,7 @@ public class PerformanceManagementImpl implements PerformanceManagement{
      * @return
      * @throws BusinessException
      * @throws PersistenceException
+     * Retorna o percentual de erros por modulo
      */
     @Override
     public Double calculateErrorsByModule(User user, Module modulo) throws BusinessException, PersistenceException {
@@ -115,13 +120,16 @@ public class PerformanceManagementImpl implements PerformanceManagement{
             throw new BusinessException("descrição do modulo não pode ser nulo");
         }
         double totalerros=0;
+        double totalquestoes=0;
         List<ClosedAnswer> tempq=answer.listAll();
         for (ClosedAnswer q : tempq){
-            if(q.getAutor().equals(user) && q.getResposta()==quest.getClosedQuestionById(q.getQuestao().getIdQuestao()).getCorreta()&&q.getQuestao().getModulo().equals(modulo)){
-                totalerros++;
+            if(q.getAutor().equals(user)){
+                totalquestoes++;
+                if(q.getResposta()==quest.getClosedQuestionById(q.getQuestao().getIdQuestao()).getCorreta()&&q.getQuestao().getModulo().equals(modulo))
+                    totalerros++;
             }
         }
-        return totalerros;
+        return (totalerros*100)/totalquestoes;
     }
 
     /**
@@ -131,6 +139,7 @@ public class PerformanceManagementImpl implements PerformanceManagement{
      * @return
      * @throws BusinessException
      * @throws PersistenceException
+     * retorna o percentual de erros por disciplina
      */
     @Override
     public Double calculateErrosBySubject(User user, Subject disciplina) throws BusinessException, PersistenceException {
@@ -159,13 +168,16 @@ public class PerformanceManagementImpl implements PerformanceManagement{
             throw new BusinessException("desc do dominio não pode ser nula");
         }
         double totalerros=0;
+        double totalquestoes=0;
         List<ClosedAnswer> tempq=answer.listAll();
         for (ClosedAnswer q : tempq){
-            if(q.getAutor().equals(user) && q.getResposta()==quest.getClosedQuestionById(q.getQuestao().getIdQuestao()).getCorreta()&&subject.getSubjectById(disciplina.getIdDominio()).equals(disciplina)){
-                totalerros++;
+            if(q.getAutor().equals(user)){
+                totalquestoes++;
+                if(q.getResposta()==quest.getClosedQuestionById(q.getQuestao().getIdQuestao()).getCorreta()&&subject.getSubjectById(disciplina.getIdDominio()).equals(disciplina))
+                    totalerros++;
             }
         }
-        return totalerros;
+        return (totalerros*100)/totalquestoes;
         
     }
     
