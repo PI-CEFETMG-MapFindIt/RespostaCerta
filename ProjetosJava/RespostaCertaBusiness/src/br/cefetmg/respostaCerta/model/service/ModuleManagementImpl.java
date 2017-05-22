@@ -29,6 +29,18 @@ public class ModuleManagementImpl implements ModuleManagement{
      */
     @Override
     public Long registerSubject(Module module) throws BusinessException, PersistenceException {
+        if(module==null){
+            throw new BusinessException("Modulo não pode ser nulo");
+        }
+        if(module.getDominio()==null){
+            throw new BusinessException("Dominio não pode ser nulo");
+        }
+        if(module.getNomeModulo()==null){
+            throw new BusinessException("Nome do modulo não pode ser nulo");
+        }
+        if(module.getDescModulo()==null){
+            throw new BusinessException("descrição do modulo não pode ser nulo");
+        }
         moduleDAO.insert(module);
         return moduleDAO.getModuleById(module.getIdModulo()).getIdModulo();
     }
@@ -42,6 +54,21 @@ public class ModuleManagementImpl implements ModuleManagement{
      */
     @Override
     public void updateSubject(Long id, Module module) throws BusinessException, PersistenceException {
+                if(module==null){
+            throw new BusinessException("Modulo não pode ser nulo");
+        }
+        if(module.getDominio()==null){
+            throw new BusinessException("Dominio não pode ser nulo");
+        }
+        if(module.getNomeModulo()==null){
+            throw new BusinessException("Nome do modulo não pode ser nulo");
+        }
+        if(module.getDescModulo()==null){
+            throw new BusinessException("descrição do modulo não pode ser nulo");
+        }
+        if(id==null){
+            throw new BusinessException("ID não pode ser nulo");
+        }
         module.setIdModulo(id);
         moduleDAO.update(module);
     }
@@ -54,6 +81,9 @@ public class ModuleManagementImpl implements ModuleManagement{
      */
     @Override
     public void removeSubject(Long id) throws BusinessException, PersistenceException {
+        if(id==null){
+            throw new BusinessException("ID não pode ser nulo");
+        }
         moduleDAO.delete(id);
     }
 
@@ -66,7 +96,10 @@ public class ModuleManagementImpl implements ModuleManagement{
      */
     @Override
     public Module getSubjectById(Long id) throws BusinessException, PersistenceException {
-         return moduleDAO.getModuleById(id);
+        if(id==null){
+            throw new BusinessException("ID não pode ser nulo");
+        } 
+        return moduleDAO.getModuleById(id);
     }
     
 }

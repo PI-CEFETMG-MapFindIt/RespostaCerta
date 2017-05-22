@@ -37,8 +37,17 @@ public class UserManagementImpl implements UserManagement {
      */
     @Override
     public Long registerUser(User user) throws BusinessException, PersistenceException {
-        if (user.getLoginUsuario() == null || user.getSenhaUsuario() == null || user.getNomeUsuario() == null) {
-            throw new BusinessException("Campos do usuario não podem estar vazios");
+        if(user==null){
+            throw new BusinessException("Usuario não pode ser nulo");
+        }
+        if (user.getLoginUsuario() == null) {
+            throw new BusinessException("login do usuario não pode ser null");
+        }
+        if (user.getSenhaUsuario() == null) {
+            throw new BusinessException("senha não pode ser null");
+        }
+        if (user.getNomeUsuario() == null) {
+            throw new BusinessException("nome usuario não pode ser null");
         }
         userDAO.insert(user);
         if (Objects.equals(userDAO.getUserById(user.getIdUsuario()), user)) {
@@ -60,14 +69,26 @@ public class UserManagementImpl implements UserManagement {
     @Override
     public void updateUser(Long id, User user) throws BusinessException, PersistenceException {
         user.setIdUsuario(id);
-        if(user.getNomeUsuario()== null || user.getSenhaUsuario()==null || user.getLoginUsuario()==null){
-            throw new BusinessException ("campos de usuario não podem ser vazios");
+        if(user==null){
+            throw new BusinessException("Usuario não pode ser nulo");
+        }
+        if (user.getLoginUsuario() == null) {
+            throw new BusinessException("login do usuario não pode ser null");
+        }
+        if (user.getSenhaUsuario() == null) {
+            throw new BusinessException("senha não pode ser null");
+        }
+        if (user.getNomeUsuario() == null) {
+            throw new BusinessException("nome usuario não pode ser null");
+        }
+        if(id==null){
+            throw new BusinessException("ID não pode ser nulo");
         }
         userDAO.update(user);
         if(userDAO.getUserById(id) != user){
             throw new PersistenceException("Erro de persistencia");
         }
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     /**
@@ -95,9 +116,6 @@ public class UserManagementImpl implements UserManagement {
     public User getUserById(Long id) throws BusinessException, PersistenceException {
         if(id == null){
             throw new BusinessException ("ID não pose ser nulo");
-        }
-        else if (userDAO.getUserById(id)== null){
-            throw new PersistenceException("Não exite usuario com o ID");
         }
         return userDAO.getUserById(id);
     }

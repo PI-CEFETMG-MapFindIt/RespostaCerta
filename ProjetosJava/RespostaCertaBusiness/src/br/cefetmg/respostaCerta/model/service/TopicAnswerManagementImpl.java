@@ -30,8 +30,17 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      */
     @Override
     public Long registerTopic(TopicAnswer topicAnswer) throws BusinessException, PersistenceException {
-        if(topicAnswer.getAutor()==null || topicAnswer.getDataResposta()==null||topicAnswer.getTxtMensagem()==null){
-            throw new BusinessException("Campos de resposta não podem ser nulo");
+        if(topicAnswer==null){
+            throw new BusinessException("topicanswer não pode ser nulo");
+        }
+        if(topicAnswer.getAutor()==null){
+            throw new BusinessException("Autor da resposta não pode ser nulo");
+        }
+        if(topicAnswer.getDataResposta()==null){
+            throw new BusinessException("Data da resposta não pode ser nula");
+        }
+        if(topicAnswer.getTxtMensagem()==null){
+            throw new BusinessException("tesxto não pode ser nulo");
         }
         answearDAO.insert(topicAnswer);
         if(answearDAO.getTopicAnswerById(topicAnswer.getIdMensagemResposta())!=null){
@@ -52,8 +61,17 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
         if(id == null){
             throw new BusinessException("ID não pode ser nulo");
         }
-        if(topicAnswer.getAutor()==null || topicAnswer.getDataResposta()==null||topicAnswer.getTxtMensagem()==null){
-            throw new BusinessException("Campos de resposta não podem ser nulo");
+        if(topicAnswer==null){
+            throw new BusinessException("topicanswer não pode ser nulo");
+        }
+        if(topicAnswer.getAutor()==null){
+            throw new BusinessException("Autor da resposta não pode ser nulo");
+        }
+        if(topicAnswer.getDataResposta()==null){
+            throw new BusinessException("Data da resposta não pode ser nula");
+        }
+        if(topicAnswer.getTxtMensagem()==null){
+            throw new BusinessException("tesxto não pode ser nulo");
         }
         topicAnswer.setIdMensagemResposta(id);
         answearDAO.update(topicAnswer);
@@ -88,7 +106,8 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
         if(id == null){
             throw new BusinessException("ID não pode ser nulo");
         }
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return answearDAO.getTopicAnswerById(id);
+        
     }
 
     /**
@@ -100,6 +119,9 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      */
     @Override
     public List<TopicAnswer> getTopicAnswers(Long id) throws BusinessException, PersistenceException {
+        if(id==null){
+            throw new BusinessException("ID não pode ser nulo");
+        }
         return answearDAO.listAll();
     }
     

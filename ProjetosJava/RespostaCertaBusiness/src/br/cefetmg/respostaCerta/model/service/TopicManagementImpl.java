@@ -32,14 +32,23 @@ public class TopicManagementImpl implements TopicManagement{
      */
     @Override
     public Long registerTopic(Topic topic) throws BusinessException, PersistenceException {
-        if(topic.getDataPostagem() == null || topic.getAutor()==null || topic.getTxtMensagem()==null){
-            throw new BusinessException ("Campos não podem ser nulos");
+        if(topic == null){
+            throw new BusinessException ("topico não pode ser nulo");
+        }
+        if(topic.getDataPostagem() == null){
+            throw new BusinessException ("Data da postagem não pode ser nulo");
+        }
+        if(topic.getAutor()==null){
+            throw new BusinessException ("Autor não pode ser nulo");
+        }
+        if(topic.getTxtMensagem()==null){
+            throw new BusinessException ("texto da mensagem não pode ser nulo");
         }
         topicDAO.insert(topic);
         if(topicDAO.getTopicById(topic.getIdMensagem())!=topic){
             throw new PersistenceException("Erro ao adicionar mensagem");
         }
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return topic.getIdMensagem();
     }
 
     /**
@@ -53,6 +62,18 @@ public class TopicManagementImpl implements TopicManagement{
     public void updateTopic(Long id, Topic topic) throws BusinessException, PersistenceException {
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");
+        }
+        if(topic == null){
+            throw new BusinessException ("topico não pode ser nulo");
+        }
+        if(topic.getDataPostagem() == null){
+            throw new BusinessException ("Data da postagem não pode ser nulo");
+        }
+        if(topic.getAutor()==null){
+            throw new BusinessException ("Autor não pode ser nulo");
+        }
+        if(topic.getTxtMensagem()==null){
+            throw new BusinessException ("texto da mensagem não pode ser nulo");
         }
         topic.setIdMensagem(id);
         topicDAO.update(topic);

@@ -31,8 +31,14 @@ public class SubjectManagementImpl implements SubjectManagement{
      */
     @Override
     public Long registerSubject(Subject subject) throws BusinessException, PersistenceException {
-        if(subject.getNomeDominio()==null || subject.getDescDominio()==null){
-            throw new BusinessException("Campos não podem ser nulos");
+        if(subject==null){
+            throw new BusinessException("subject não pode ser nulo");
+        }
+        if(subject.getNomeDominio()==null){
+            throw new BusinessException("Nome do dominio não pode ser nulo");
+        }
+        if( subject.getDescDominio()==null){
+            throw new BusinessException("desc do dominio não pode ser nula");
         }
         subjectDAO.insert(subject);
         if(subjectDAO.getSubjectById(subject.getIdDominio())!=null){
@@ -53,10 +59,16 @@ public class SubjectManagementImpl implements SubjectManagement{
         if(id == null){
             throw new BusinessException("ID não pode ser nulo");
         }
-        subject.setIdDominio(id);
-        if(subject.getNomeDominio()==null || subject.getDescDominio()==null){
-            throw new BusinessException("Campos não podem ser nulos");
+        if(subject==null){
+            throw new BusinessException("subject não pode ser nulo");
         }
+        if(subject.getNomeDominio()==null){
+            throw new BusinessException("Nome do dominio não pode ser nulo");
+        }
+        if( subject.getDescDominio()==null){
+            throw new BusinessException("desc do dominio não pode ser nula");
+        }
+        subject.setIdDominio(id);
         subjectDAO.update(subject);
     }
 
@@ -72,7 +84,6 @@ public class SubjectManagementImpl implements SubjectManagement{
             throw new BusinessException("ID não pode ser nulo");
         }
         subjectDAO.delete(id);
-
     }
 
     /**
