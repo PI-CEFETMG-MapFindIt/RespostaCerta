@@ -6,7 +6,6 @@
 package br.cefetmg.respostaCerta.model.dao;
 
 import br.cefetmg.respostaCerta.model.domain.User;
-import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import java.util.ArrayList;
 import java.util.HashMap;

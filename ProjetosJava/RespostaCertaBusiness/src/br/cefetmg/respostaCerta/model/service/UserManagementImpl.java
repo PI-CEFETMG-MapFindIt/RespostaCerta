@@ -41,16 +41,15 @@ public class UserManagementImpl implements UserManagement {
             throw new BusinessException("Usuario não pode ser nulo");
         }
         if (user.getLoginUsuario() == null) {
-            throw new BusinessException("login do usuario não pode ser null");
+            throw new BusinessException("Login do usuario não pode ser null");
         }
         if (user.getSenhaUsuario() == null) {
-            throw new BusinessException("senha não pode ser null");
+            throw new BusinessException("Senha não pode ser null");
         }
         if (user.getNomeUsuario() == null) {
-            throw new BusinessException("nome usuario não pode ser null");
+            throw new BusinessException("Nome usuario não pode ser null");
         }
         userDAO.insert(user);
-
     }
 
     /**
