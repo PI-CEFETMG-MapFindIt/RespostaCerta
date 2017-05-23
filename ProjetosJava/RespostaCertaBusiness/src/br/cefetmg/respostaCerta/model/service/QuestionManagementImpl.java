@@ -9,6 +9,7 @@ import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.dao.ClosedQuestionDAO;
+import br.cefetmg.respostaCerta.model.dao.OpenQuestionDAO;
 import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
 /**
  *
@@ -16,10 +17,12 @@ import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
  */
 public class QuestionManagementImpl implements QuestionManagement{
     
-    private final ClosedQuestionDAO quest;
+    private final ClosedQuestionDAO questC;
+    private final OpenQuestionDAO questO;
 
-    public QuestionManagementImpl(ClosedQuestionDAO quest) {
-        this.quest = quest;
+    public QuestionManagementImpl(ClosedQuestionDAO questC, OpenQuestionDAO questO) {
+        this.questC = questC;
+        this.questO = questO;
     }
     /**
      *
@@ -48,7 +51,11 @@ public class QuestionManagementImpl implements QuestionManagement{
         if(question.getTituloQuestao()==null){
             throw new BusinessException("titulo não pode ser nulo");
         }
-        quest.insert((ClosedQuestion) question);
+        if(question instanceof ClosedQuestion){
+            questC.insert((ClosedQuestion) question);
+        }else{
+            questO.insert(question);
+        }
         return question.getIdQuestao();
     }
 
@@ -83,10 +90,17 @@ public class QuestionManagementImpl implements QuestionManagement{
             throw new BusinessException("Id não pode ser nulo");
         }
         question.setIdQuestao(id);
-        quest.update((ClosedQuestion) question);
-        if(quest.getClosedQuestionById(id)!=question){
-            throw new PersistenceException("Erro ao atualizar");
-        }
+        if(question instanceof ClosedQuestion){
+            questC.update((ClosedQuestion) question);
+            if(questC.getClosedQuestionById(id)!=question){
+                throw new PersistenceException("Erro ao atualizar");
+            }
+        }else{
+            questO.update(question);
+            if(questO.getOpenQuestionById(id)!=question){
+                throw new PersistenceException("Erro ao atualizar");
+            }
+        }     
     }
 
     /**
@@ -96,11 +110,11 @@ public class QuestionManagementImpl implements QuestionManagement{
      * @throws PersistenceException
      */
     @Override
-    public void removeQuestion(Long id) throws BusinessException, PersistenceException {
+    public void removeOpenQuestion(Long id) throws BusinessException, PersistenceException {
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");
         }
-        quest.delete(id);
+        questO.delete(id);
         
     }
 
@@ -112,11 +126,35 @@ public class QuestionManagementImpl implements QuestionManagement{
      * @throws PersistenceException
      */
     @Override
-    public Question getQuestionById(Long id) throws BusinessException, PersistenceException {
+    public Question getOpenQuestionById(Long id) throws BusinessException, PersistenceException {
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");
         }
-        return quest.getClosedQuestionById(id);
+        return questO.getOpenQuestionById(id);
+    }
+    
+    @Override
+    public void removeClosedQuestion(Long id) throws BusinessException, PersistenceException {
+        if(id==null){
+            throw new BusinessException("Id não pode ser nulo");
+        }
+        questC.delete(id);
+        
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     * @throws BusinessException
+     * @throws PersistenceException
+     */
+    @Override
+    public ClosedQuestion getClosedQuestionById(Long id) throws BusinessException, PersistenceException {
+        if(id==null){
+            throw new BusinessException("Id não pode ser nulo");
+        }
+        return questC.getClosedQuestionById(id);
     }
     
 }

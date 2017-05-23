@@ -123,9 +123,9 @@ public class PerformanceManagementImpl implements PerformanceManagement{
         double totalquestoes=0;
         List<ClosedAnswer> tempq=answer.listAll();
         for (ClosedAnswer q : tempq){
-            if(q.getAutor().equals(user)){
+            if(q.getAutor().equals(user)&&q.getQuestao().getModulo().equals(modulo)){
                 totalquestoes++;
-                if(q.getResposta()==quest.getClosedQuestionById(q.getQuestao().getIdQuestao()).getCorreta()&&q.getQuestao().getModulo().equals(modulo))
+                if(q.getResposta()==quest.getClosedQuestionById(q.getQuestao().getIdQuestao()).getCorreta())
                     totalerros++;
             }
         }
@@ -171,9 +171,9 @@ public class PerformanceManagementImpl implements PerformanceManagement{
         double totalquestoes=0;
         List<ClosedAnswer> tempq=answer.listAll();
         for (ClosedAnswer q : tempq){
-            if(q.getAutor().equals(user)){
+            if(q.getAutor().equals(user)&&subject.getSubjectById(disciplina.getIdDominio()).equals(disciplina)){
                 totalquestoes++;
-                if(q.getResposta()==quest.getClosedQuestionById(q.getQuestao().getIdQuestao()).getCorreta()&&subject.getSubjectById(disciplina.getIdDominio()).equals(disciplina))
+                if(q.getResposta()==quest.getClosedQuestionById(q.getQuestao().getIdQuestao()).getCorreta())
                     totalerros++;
             }
         }
