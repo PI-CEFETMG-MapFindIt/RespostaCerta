@@ -19,4 +19,5 @@ public interface ClosedAnswerDAO {
     public ClosedAnswer delete(Long respostaId) throws PersistenceException;
     public ClosedAnswer getClosedAnswerById(Long respostaId) throws PersistenceException;
     public List<ClosedAnswer> listAll() throws PersistenceException;
+    public List<ClosedAnswer> getClosedAnswerByUser(Long userId) throws PersistenceException;
 }

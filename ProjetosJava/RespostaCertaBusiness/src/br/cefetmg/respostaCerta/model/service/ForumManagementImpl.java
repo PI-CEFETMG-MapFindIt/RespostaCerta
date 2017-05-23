@@ -6,12 +6,10 @@
 package br.cefetmg.respostaCerta.model.service;
 
 import br.cefetmg.respostaCerta.model.domain.Forum;
-import br.cefetmg.respostaCerta.model.domain.Topic;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.dao.ForumDAO;
 import br.cefetmg.respostaCerta.model.dao.TopicDAO;
-import java.util.List;
 
 /**
  *
@@ -19,8 +17,10 @@ import java.util.List;
  */
 public class ForumManagementImpl implements ForumManagement{
     private final ForumDAO forumDAO;
-    public ForumManagementImpl (ForumDAO forumDAO){
+    private final TopicDAO topicDAO;
+    public ForumManagementImpl (ForumDAO forumDAO, TopicDAO topicDAO){
         this.forumDAO= forumDAO;
+        this.topicDAO=topicDAO;
     }
 
     /**
@@ -32,7 +32,7 @@ public class ForumManagementImpl implements ForumManagement{
      * 
      */
     @Override
-    public Long registerForum(Forum forum) throws BusinessException, PersistenceException {
+    public void registerForum(Forum forum) throws BusinessException, PersistenceException {
         if(forum==null){
             throw new BusinessException("O forum não pode ser nulo");
         }
@@ -43,10 +43,6 @@ public class ForumManagementImpl implements ForumManagement{
             throw new BusinessException("O forum deve referenciar uma questao");
         }
         forumDAO.insert(forum);
-        if (forumDAO.getForumById(forum.getQuestao().getIdQuestao())!=null){
-            return forumDAO.getForumById(forum.getQuestao().getIdQuestao()).getQuestao().getIdQuestao();
-        }
-        throw new PersistenceException("Erro de persistencia ao inserir");
     }
 
     /**
@@ -104,22 +100,6 @@ public class ForumManagementImpl implements ForumManagement{
             throw new BusinessException("Id não pode ser nulo");
         }
         return forumDAO.getForumById(id);
-    }
-
-    /**
-     *
-     * @param id
-     * @return
-     * @throws BusinessException
-     * @throws PersistenceException
-     */
-    @Override
-    public List<Topic> getTopicsForum(Long id) throws BusinessException, PersistenceException {
-        if(id==null){
-            throw new BusinessException("");
-        }
-        List temp=forumDAO.getForumAnswer(id);
-        return temp;
     }
     
 }

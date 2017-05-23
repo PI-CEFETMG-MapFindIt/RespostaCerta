@@ -46,14 +46,6 @@ public interface ForumDAO {
      */
     public Forum  getForumById(Long forumId) throws PersistenceException;
 
-    /**
-     *
-     * @param questãoID
-     * @return
-     * @throws PersistenceException
-     * retorna todas as mensagens e sub mensagens recebendo como parametro o id da questão
-     */
-    public List<TopicAnswer>getForumAnswer(Long questãoID) throws PersistenceException;
 
     /**
      *

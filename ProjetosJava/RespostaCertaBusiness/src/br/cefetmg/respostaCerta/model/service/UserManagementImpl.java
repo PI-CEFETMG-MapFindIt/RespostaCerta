@@ -36,7 +36,7 @@ public class UserManagementImpl implements UserManagement {
      *  método registra um usario no banco de dados
      */
     @Override
-    public Long registerUser(User user) throws BusinessException, PersistenceException {
+    public void registerUser(User user) throws BusinessException, PersistenceException {
         if(user==null){
             throw new BusinessException("Usuario não pode ser nulo");
         }
@@ -50,11 +50,6 @@ public class UserManagementImpl implements UserManagement {
             throw new BusinessException("nome usuario não pode ser null");
         }
         userDAO.insert(user);
-        if (Objects.equals(userDAO.getUserById(user.getIdUsuario()), user)) {
-            return userDAO.getUserById(user.getIdUsuario()).getIdUsuario();
-        } else {
-            throw new PersistenceException("Falha ao registrar o usuario");
-        }
 
     }
 

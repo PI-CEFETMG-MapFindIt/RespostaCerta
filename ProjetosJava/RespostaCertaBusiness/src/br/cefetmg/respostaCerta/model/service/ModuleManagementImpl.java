@@ -9,6 +9,7 @@ import br.cefetmg.respostaCerta.model.dao.ModuleDAO;
 import br.cefetmg.respostaCerta.model.domain.Module;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
+import java.util.List;
 
 /**
  *
@@ -28,7 +29,7 @@ public class ModuleManagementImpl implements ModuleManagement{
      * @throws PersistenceException
      */
     @Override
-    public Long registerSubject(Module module) throws BusinessException, PersistenceException {
+    public void registerModule(Module module) throws BusinessException, PersistenceException {
         if(module==null){
             throw new BusinessException("Modulo não pode ser nulo");
         }
@@ -42,7 +43,6 @@ public class ModuleManagementImpl implements ModuleManagement{
             throw new BusinessException("descrição do modulo não pode ser nulo");
         }
         moduleDAO.insert(module);
-        return moduleDAO.getModuleById(module.getIdModulo()).getIdModulo();
     }
 
     /**
@@ -53,7 +53,7 @@ public class ModuleManagementImpl implements ModuleManagement{
      * @throws PersistenceException
      */
     @Override
-    public void updateSubject(Long id, Module module) throws BusinessException, PersistenceException {
+    public void updateModule(Long id, Module module) throws BusinessException, PersistenceException {
                 if(module==null){
             throw new BusinessException("Modulo não pode ser nulo");
         }
@@ -80,7 +80,7 @@ public class ModuleManagementImpl implements ModuleManagement{
      * @throws PersistenceException
      */
     @Override
-    public void removeSubject(Long id) throws BusinessException, PersistenceException {
+    public void removeModule(Long id) throws BusinessException, PersistenceException {
         if(id==null){
             throw new BusinessException("ID não pode ser nulo");
         }
@@ -95,11 +95,19 @@ public class ModuleManagementImpl implements ModuleManagement{
      * @throws PersistenceException
      */
     @Override
-    public Module getSubjectById(Long id) throws BusinessException, PersistenceException {
+    public Module getModuleById(Long id) throws BusinessException, PersistenceException {
         if(id==null){
             throw new BusinessException("ID não pode ser nulo");
         } 
         return moduleDAO.getModuleById(id);
+    }
+
+    @Override
+    public List<Module> getModulesSubject(Long subjectId) throws BusinessException, PersistenceException {
+        if(subjectId==null){
+            throw new BusinessException("ID não pode ser nulo");
+        } 
+        return moduleDAO.getModulesSubject(subjectId);
     }
     
 }

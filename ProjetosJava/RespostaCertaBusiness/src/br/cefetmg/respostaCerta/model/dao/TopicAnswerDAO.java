@@ -20,4 +20,5 @@ public interface TopicAnswerDAO {
     public TopicAnswer delete(Long respostaTopicoId) throws PersistenceException;
     public TopicAnswer getTopicAnswerById(Long respostaTopicoId) throws PersistenceException;
     public List<TopicAnswer> listAll() throws PersistenceException;
+    public List<TopicAnswer>getTopicAnswer(Long mensagemID) throws PersistenceException;
 }

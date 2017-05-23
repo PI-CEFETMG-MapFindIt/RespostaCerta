@@ -30,7 +30,7 @@ public class SubjectManagementImpl implements SubjectManagement{
      * @throws PersistenceException
      */
     @Override
-    public Long registerSubject(Subject subject) throws BusinessException, PersistenceException {
+    public void registerSubject(Subject subject) throws BusinessException, PersistenceException {
         if(subject==null){
             throw new BusinessException("subject não pode ser nulo");
         }
@@ -41,10 +41,6 @@ public class SubjectManagementImpl implements SubjectManagement{
             throw new BusinessException("desc do dominio não pode ser nula");
         }
         subjectDAO.insert(subject);
-        if(subjectDAO.getSubjectById(subject.getIdDominio())!=null){
-            return subject.getIdDominio();
-        }
-        throw new PersistenceException("Erro ao incerrir");
     }
 
     /**

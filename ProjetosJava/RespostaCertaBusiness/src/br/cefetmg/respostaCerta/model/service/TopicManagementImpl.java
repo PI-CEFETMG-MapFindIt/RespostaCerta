@@ -9,6 +9,8 @@ import br.cefetmg.respostaCerta.model.domain.Topic;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.dao.TopicDAO;
+import br.cefetmg.respostaCerta.model.domain.TopicAnswer;
+import java.util.List;
 
 /**
  *
@@ -31,7 +33,7 @@ public class TopicManagementImpl implements TopicManagement{
      * @throws PersistenceException
      */
     @Override
-    public Long registerTopic(Topic topic) throws BusinessException, PersistenceException {
+    public void registerTopic(Topic topic) throws BusinessException, PersistenceException {
         if(topic == null){
             throw new BusinessException ("topico não pode ser nulo");
         }
@@ -45,10 +47,6 @@ public class TopicManagementImpl implements TopicManagement{
             throw new BusinessException ("texto da mensagem não pode ser nulo");
         }
         topicDAO.insert(topic);
-        if(topicDAO.getTopicById(topic.getIdMensagem())!=topic){
-            throw new PersistenceException("Erro ao adicionar mensagem");
-        }
-        return topic.getIdMensagem();
     }
 
     /**
@@ -109,6 +107,22 @@ public class TopicManagementImpl implements TopicManagement{
             throw new BusinessException("ID não pode ser nulo");
         }
         return topicDAO.getTopicById(id);
+    }
+ 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws BusinessException
+     * @throws PersistenceException
+     */
+    @Override
+    public List<Topic> getTopicsForum(Long id) throws BusinessException, PersistenceException {
+        if(id==null){
+            throw new BusinessException("Id do forum nao pode ser nulo");
+        }
+        List topics=topicDAO.getForumTopic(id);
+        return topics;
     }
     
 }

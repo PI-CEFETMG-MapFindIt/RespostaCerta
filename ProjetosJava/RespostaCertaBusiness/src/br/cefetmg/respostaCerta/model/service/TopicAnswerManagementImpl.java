@@ -16,10 +16,10 @@ import java.util.List;
  * @author adalbs
  */
 public class TopicAnswerManagementImpl implements TopicAnswerManagement{
-    private final TopicAnswerDAO answearDAO;
+    private final TopicAnswerDAO answerDAO;
     
     public TopicAnswerManagementImpl(TopicAnswerDAO answerDAO){
-        this.answearDAO=answerDAO;
+        this.answerDAO=answerDAO;
     }
     /**
      *
@@ -29,7 +29,7 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public Long registerTopic(TopicAnswer topicAnswer) throws BusinessException, PersistenceException {
+    public void registerTopicAnswer(TopicAnswer topicAnswer) throws BusinessException, PersistenceException {
         if(topicAnswer==null){
             throw new BusinessException("topicanswer não pode ser nulo");
         }
@@ -42,11 +42,7 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
         if(topicAnswer.getTxtMensagem()==null){
             throw new BusinessException("tesxto não pode ser nulo");
         }
-        answearDAO.insert(topicAnswer);
-        if(answearDAO.getTopicAnswerById(topicAnswer.getIdMensagemResposta())!=null){
-            return topicAnswer.getIdMensagemResposta();
-        }
-        throw new PersistenceException("Erro ao incerrir");
+        answerDAO.insert(topicAnswer);
     }
 
     /**
@@ -57,7 +53,7 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public void updateTopic(Long id, TopicAnswer topicAnswer) throws BusinessException, PersistenceException {
+    public void updateTopicAnswer(Long id, TopicAnswer topicAnswer) throws BusinessException, PersistenceException {
         if(id == null){
             throw new BusinessException("ID não pode ser nulo");
         }
@@ -74,8 +70,8 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
             throw new BusinessException("tesxto não pode ser nulo");
         }
         topicAnswer.setIdMensagemResposta(id);
-        answearDAO.update(topicAnswer);
-        if(!topicAnswer.equals(answearDAO.getTopicAnswerById(id))){
+        answerDAO.update(topicAnswer);
+        if(!topicAnswer.equals(answerDAO.getTopicAnswerById(id))){
             throw new PersistenceException("Erro de persistencia ao atualizar");
         }
     }
@@ -87,11 +83,11 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public void removeTopic(Long id) throws BusinessException, PersistenceException {
+    public void removeTopicAnswer(Long id) throws BusinessException, PersistenceException {
         if(id == null){
             throw new BusinessException("ID não pode ser nulo");
         }
-        answearDAO.delete(id);
+        answerDAO.delete(id);
     }
 
     /**
@@ -102,14 +98,14 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public TopicAnswer getTopicById(Long id) throws BusinessException, PersistenceException {
+    public TopicAnswer getTopicAnswerById(Long id) throws BusinessException, PersistenceException {
         if(id == null){
             throw new BusinessException("ID não pode ser nulo");
         }
-        return answearDAO.getTopicAnswerById(id);
+        return answerDAO.getTopicAnswerById(id);
         
     }
-
+    
     /**
      *
      * @param id
@@ -118,16 +114,11 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public List<TopicAnswer> getTopicAnswers(Long id) throws BusinessException, PersistenceException {
+    public List<TopicAnswer> getAnswersTopic(Long id) throws BusinessException, PersistenceException {
         if(id==null){
             throw new BusinessException("ID não pode ser nulo");
         }
-        List <TopicAnswer> temp = answearDAO.listAll();
-        for(TopicAnswer topic: temp){
-            if(topic.getIdMensagemResposta()!=id){
-                temp.remove(topic);
-            }
-        }
+        List <TopicAnswer> temp = answerDAO.getTopicAnswer(id);
         return temp;
     }
     

@@ -19,4 +19,5 @@ public interface TopicDAO {
     public Topic delete(Long topicoId) throws PersistenceException;
     public Topic  getTopicById(Long topicoId) throws PersistenceException;
     public List<Topic> listAll() throws PersistenceException;
+    public List<Topic> getForumTopic(Long forumID) throws PersistenceException;
 }

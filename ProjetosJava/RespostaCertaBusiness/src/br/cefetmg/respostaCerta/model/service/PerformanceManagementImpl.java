@@ -53,7 +53,6 @@ public class PerformanceManagementImpl implements PerformanceManagement{
      */
     @Override
     public Double calculateErrors(User user) throws BusinessException, PersistenceException {
-        double totalerros=0;
         if(user == null){
           throw new BusinessException("usuarionão pode ser nulo");  
         }
@@ -69,14 +68,13 @@ public class PerformanceManagementImpl implements PerformanceManagement{
         if(user.getSenhaUsuario() == null){
           throw new BusinessException("Senha do usuario não pode ser nulo");  
         }
-        List<ClosedAnswer> tempq=answer.listAll();
+        List<ClosedAnswer> tempq=answer.getClosedAnswerByUser(user.getIdUsuario());
         double totalquestoes=0;
+        double totalerros=0;
         for (ClosedAnswer q : tempq){
-            if(q.getAutor().equals(user)){
-                totalquestoes++;
-                if(q.getResposta()==quest.getClosedQuestionById(q.getQuestao().getIdQuestao()).getCorreta())
-                    totalerros++;
-            }
+            totalquestoes++;
+            if(!q.isCorreta())
+                totalerros++;
         }
         return (totalerros*100)/totalquestoes;
     }
@@ -119,13 +117,13 @@ public class PerformanceManagementImpl implements PerformanceManagement{
         if(modulo.getDescModulo()==null){
             throw new BusinessException("descrição do modulo não pode ser nulo");
         }
-        double totalerros=0;
+        List<ClosedAnswer> tempq=answer.getClosedAnswerByUser(user.getIdUsuario());
         double totalquestoes=0;
-        List<ClosedAnswer> tempq=answer.listAll();
+        double totalerros=0;
         for (ClosedAnswer q : tempq){
-            if(q.getAutor().equals(user)&&q.getQuestao().getModulo().equals(modulo)){
+            if(q.getQuestao().getModulo().getIdModulo()==modulo.getIdModulo()){      
                 totalquestoes++;
-                if(q.getResposta()==quest.getClosedQuestionById(q.getQuestao().getIdQuestao()).getCorreta())
+                if(!q.isCorreta())
                     totalerros++;
             }
         }
@@ -167,13 +165,13 @@ public class PerformanceManagementImpl implements PerformanceManagement{
         if(disciplina.getDescDominio()==null){
             throw new BusinessException("desc do dominio não pode ser nula");
         }
-        double totalerros=0;
+        List<ClosedAnswer> tempq=answer.getClosedAnswerByUser(user.getIdUsuario());
         double totalquestoes=0;
-        List<ClosedAnswer> tempq=answer.listAll();
+        double totalerros=0;
         for (ClosedAnswer q : tempq){
-            if(q.getAutor().equals(user)&&subject.getSubjectById(disciplina.getIdDominio()).equals(disciplina)){
+            if(q.getQuestao().getModulo().getDominio().getIdDominio()==disciplina.getIdDominio()){      
                 totalquestoes++;
-                if(q.getResposta()==quest.getClosedQuestionById(q.getQuestao().getIdQuestao()).getCorreta())
+                if(!q.isCorreta())
                     totalerros++;
             }
         }
