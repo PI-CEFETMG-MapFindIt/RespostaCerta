@@ -10,6 +10,7 @@ import br.cefetmg.respostaCerta.model.domain.Topic;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.dao.ForumDAO;
+import br.cefetmg.respostaCerta.model.dao.TopicDAO;
 import java.util.List;
 
 /**
@@ -114,7 +115,11 @@ public class ForumManagementImpl implements ForumManagement{
      */
     @Override
     public List<Topic> getTopicsForum(Long id) throws BusinessException, PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(id==null){
+            throw new BusinessException("");
+        }
+        List temp=forumDAO.getForumAnswer(id);
+        return temp;
     }
     
 }

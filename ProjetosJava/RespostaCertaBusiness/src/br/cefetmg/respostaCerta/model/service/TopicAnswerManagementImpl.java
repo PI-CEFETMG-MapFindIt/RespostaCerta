@@ -122,7 +122,13 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
         if(id==null){
             throw new BusinessException("ID não pode ser nulo");
         }
-        return answearDAO.listAll();
+        List <TopicAnswer> temp = answearDAO.listAll();
+        for(TopicAnswer topic: temp){
+            if(topic.getIdMensagemResposta()!=id){
+                temp.remove(topic);
+            }
+        }
+        return temp;
     }
     
 }
