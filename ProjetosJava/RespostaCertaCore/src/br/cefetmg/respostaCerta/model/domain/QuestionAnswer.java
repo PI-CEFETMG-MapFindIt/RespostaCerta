@@ -17,15 +17,17 @@ public class QuestionAnswer {
     private LocalDate dataResposta;
     private char idtResposta;
     private Long idResposta;
+    private boolean correta;
 
     public QuestionAnswer() {
     }
 
-    public QuestionAnswer(User autor, Question questao, LocalDate dataResposta, char idtResposta) {
+    public QuestionAnswer(User autor, Question questao, LocalDate dataResposta, char idtResposta, boolean correta) {
         this.autor = autor;
         this.questao = questao;
         this.dataResposta = dataResposta;
         this.idtResposta = idtResposta;
+        this.correta=correta;
     }
 
     public User getAutor() {
@@ -66,6 +68,14 @@ public class QuestionAnswer {
     
     public void setIdResposta(Long idResposta){
         this.idResposta=idResposta;
+    }
+
+    public boolean isCorreta() {
+        return correta;
+    }
+
+    public void setCorreta(boolean correta) {
+        this.correta = correta;
     }
     
     

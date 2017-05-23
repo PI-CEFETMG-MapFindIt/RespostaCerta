@@ -17,8 +17,8 @@ public class ClosedAnswer extends QuestionAnswer{
     public ClosedAnswer() {
     }
 
-    public ClosedAnswer(int resposta, User autor, Question questao, LocalDate dataResposta, char idtResposta) {
-        super(autor, questao, dataResposta, idtResposta);
+    public ClosedAnswer(int resposta, User autor, Question questao, LocalDate dataResposta, char idtResposta, boolean correta) {
+        super(autor, questao, dataResposta, idtResposta, correta);
         this.resposta = resposta;
     }
 

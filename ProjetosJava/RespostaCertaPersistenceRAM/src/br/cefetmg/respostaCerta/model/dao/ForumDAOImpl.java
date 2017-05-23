@@ -7,6 +7,7 @@ package br.cefetmg.respostaCerta.model.dao;
 
 import br.cefetmg.respostaCerta.model.domain.Forum;
 import br.cefetmg.respostaCerta.model.domain.Forum;
+import br.cefetmg.respostaCerta.model.domain.TopicAnswer;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import java.util.ArrayList;
 import java.util.HashMap;

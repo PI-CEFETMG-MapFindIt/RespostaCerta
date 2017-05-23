@@ -14,7 +14,7 @@ import br.cefetmg.respostaCerta.model.exception.PersistenceException;
  * @author umcan
  */
 public interface UserManagement {
-    public Long registerUser(User user) throws BusinessException, PersistenceException;
+    public void registerUser(User user) throws BusinessException, PersistenceException;
     public void updateUser(Long id, User user) throws BusinessException, PersistenceException;
     public void removeUser(Long id) throws BusinessException, PersistenceException;
     public User getUserById(Long id) throws BusinessException, PersistenceException;

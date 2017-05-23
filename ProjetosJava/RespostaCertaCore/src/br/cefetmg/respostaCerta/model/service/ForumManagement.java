@@ -16,9 +16,8 @@ import java.util.List;
  * @author umcan
  */
 public interface ForumManagement {
-    public Long registerForum(Forum forum) throws BusinessException, PersistenceException;
+    public void registerForum(Forum forum) throws BusinessException, PersistenceException;
     public void updateForum(Long id, Forum  forum) throws BusinessException, PersistenceException;
     public void removeForum(Long id) throws BusinessException, PersistenceException;
     public Forum getForumById(Long id) throws BusinessException, PersistenceException;
-    public List<Topic> getTopicsForum(Long id) throws BusinessException, PersistenceException;
 }

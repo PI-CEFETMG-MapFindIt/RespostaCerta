@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -134,5 +135,19 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
             openQuestionList.add(iterator.next());
         
         return openQuestionList;
+    }
+
+    @Override
+    public List<Question> getOpenQuestionsByUser(Long userId) throws PersistenceException {
+        List<Question> topicList = new ArrayList<>();
+        Iterator<Question> iterator = openQuestionDB.values().iterator();
+	Question item;
+        while (iterator.hasNext()){
+            item=iterator.next();
+            if(Objects.equals(item.getCriador().getIdUsuario(), userId)){
+                topicList.add(iterator.next());
+            }
+        }    
+        return topicList;
     }
 }

@@ -5,6 +5,7 @@
  */
 package br.cefetmg.respostaCerta.model.dao;
 
+import br.cefetmg.respostaCerta.model.domain.Topic;
 import br.cefetmg.respostaCerta.model.domain.TopicAnswer;
 import br.cefetmg.respostaCerta.model.domain.TopicAnswer;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -135,6 +137,21 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
 	while (iterator.hasNext())
             topicAnswerList.add(iterator.next());
         
+        return topicAnswerList;
+    }
+    
+    
+    @Override
+    public List<TopicAnswer> getTopicAnswer(Long mensagemID) throws PersistenceException {
+        List<TopicAnswer> topicAnswerList = new ArrayList<>();
+        Iterator<TopicAnswer> iterator = topicAnswerDB.values().iterator();
+	TopicAnswer item;
+        while (iterator.hasNext()){
+            item=iterator.next();
+            if(Objects.equals(item.getMensagem().getIdMensagem(), mensagemID)){
+                topicAnswerList.add(iterator.next());
+            }
+        }    
         return topicAnswerList;
     }
     

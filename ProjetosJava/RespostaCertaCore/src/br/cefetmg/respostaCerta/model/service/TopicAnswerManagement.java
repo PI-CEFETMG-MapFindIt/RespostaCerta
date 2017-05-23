@@ -16,9 +16,9 @@ import java.util.List;
  * @author umcan
  */
 public interface TopicAnswerManagement {
-    public Long registerTopic(TopicAnswer topicAnswer) throws BusinessException, PersistenceException;
-    public void updateTopic(Long id, TopicAnswer  topicAnswer) throws BusinessException, PersistenceException;
-    public void removeTopic(Long id) throws BusinessException, PersistenceException;
-    public TopicAnswer getTopicById(Long id) throws BusinessException, PersistenceException;
-    public List<TopicAnswer> getTopicAnswers(Long id) throws BusinessException, PersistenceException;
+    public void registerTopicAnswer(TopicAnswer topicAnswer) throws BusinessException, PersistenceException;
+    public void updateTopicAnswer(Long id, TopicAnswer  topicAnswer) throws BusinessException, PersistenceException;
+    public void removeTopicAnswer(Long id) throws BusinessException, PersistenceException;
+    public TopicAnswer getTopicAnswerById(Long id) throws BusinessException, PersistenceException;
+    public List<TopicAnswer> getAnswersTopic(Long id) throws BusinessException, PersistenceException;
 }

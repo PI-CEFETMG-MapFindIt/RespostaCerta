@@ -132,5 +132,22 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
         
         return closedList;
     }    
+
+    @Override
+    public List<ClosedAnswer> getClosedAnswerByUser(Long userId) throws PersistenceException {
+        List<ClosedAnswer> closedList = new ArrayList<>();
+        Iterator<ClosedAnswer> iterator = closedAnswerDB.values().iterator();
+	ClosedAnswer item;
+        while (iterator.hasNext()){
+            item=iterator.next();
+            if(item.getAutor().getIdUsuario()==userId){
+                closedList.add(iterator.next());
+            }
+            
+        }
+            
+        
+        return closedList;
+    }
     
 }

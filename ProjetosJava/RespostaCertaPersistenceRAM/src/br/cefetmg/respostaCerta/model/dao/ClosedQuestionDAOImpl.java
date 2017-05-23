@@ -6,11 +6,13 @@
 package br.cefetmg.respostaCerta.model.dao;
 
 import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
+import br.cefetmg.respostaCerta.model.domain.Topic;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -134,5 +136,19 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
             closedList.add(iterator.next());
         
         return closedList;
+    }
+
+    @Override
+    public List<ClosedQuestion> getClosedQuestionsByUser(Long userId) throws PersistenceException {
+        List<ClosedQuestion> topicList = new ArrayList<>();
+        Iterator<ClosedQuestion> iterator = closedQuestionDB.values().iterator();
+	ClosedQuestion item;
+        while (iterator.hasNext()){
+            item=iterator.next();
+            if(Objects.equals(item.getCriador().getIdUsuario(), userId)){
+                topicList.add(iterator.next());
+            }
+        }    
+        return topicList;
     }
 }

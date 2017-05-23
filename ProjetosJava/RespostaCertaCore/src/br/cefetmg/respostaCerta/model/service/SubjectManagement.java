@@ -15,7 +15,7 @@ import br.cefetmg.respostaCerta.model.exception.PersistenceException;
  * @author umcan
  */
 public interface SubjectManagement {
-    public Long registerSubject(Subject subject) throws BusinessException, PersistenceException;
+    public void registerSubject(Subject subject) throws BusinessException, PersistenceException;
     public void updateSubject(Long id, Subject  subject) throws BusinessException, PersistenceException;
     public void removeSubject(Long id) throws BusinessException, PersistenceException;
     public Subject getSubjectById(Long id) throws BusinessException, PersistenceException;

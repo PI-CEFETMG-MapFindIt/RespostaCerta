@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -134,6 +135,20 @@ public class ModuleDAOImpl implements ModuleDAO{
 	while (iterator.hasNext())
             moduleList.add(iterator.next());
         
+        return moduleList;
+    }
+
+    @Override
+    public List<Module> getModulesSubject(long subjectId) throws PersistenceException {
+        List<Module> moduleList = new ArrayList<>();
+        Iterator<Module> iterator = moduleDB.values().iterator();
+	Module item;
+        while (iterator.hasNext()){
+            item=iterator.next();
+            if(Objects.equals(item.getDominio().getIdDominio(), subjectId)){
+                moduleList.add(iterator.next());
+            }
+        }    
         return moduleList;
     }
     

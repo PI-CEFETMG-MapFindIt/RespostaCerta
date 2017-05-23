@@ -17,8 +17,8 @@ public class OpenAnswer extends QuestionAnswer{
     public OpenAnswer() {
     }
 
-    public OpenAnswer(String resposta, User autor, Question questao, LocalDate dataResposta, char idtResposta) {
-        super(autor, questao, dataResposta, idtResposta);
+    public OpenAnswer(String resposta, User autor, Question questao, LocalDate dataResposta, char idtResposta, boolean correta) {
+        super(autor, questao, dataResposta, idtResposta, correta);
         this.resposta = resposta;
     }
 
