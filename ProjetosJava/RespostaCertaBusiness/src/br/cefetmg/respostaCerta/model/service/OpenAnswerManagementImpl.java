@@ -29,7 +29,7 @@ public class OpenAnswerManagementImpl implements OpenAnswerManagement{
     @Override
     public void registerQuestionAnswer(OpenAnswer questionAnswer) throws BusinessException, PersistenceException {
         if(questionAnswer==null){
-            throw new BusinessException("A questão não pode ser nulo");
+            throw new BusinessException("A resposta não pode ser nula");
         }
         if(questionAnswer.getAutor()==null){
             throw new BusinessException("Autor não pode ser nulo");
@@ -51,7 +51,7 @@ public class OpenAnswerManagementImpl implements OpenAnswerManagement{
     @Override
     public void updateQuestionAnswer(Long id, OpenAnswer questionAnswer) throws BusinessException, PersistenceException {
         if(questionAnswer==null){
-            throw new BusinessException("A questão não pode ser nulo");
+            throw new BusinessException("A reposta não pode ser nula");
         }
         if(questionAnswer.getAutor()==null){
             throw new BusinessException("Autor não pode ser nulo");
