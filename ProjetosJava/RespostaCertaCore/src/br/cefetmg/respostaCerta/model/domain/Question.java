@@ -13,7 +13,6 @@ import java.time.LocalDate;
  * @author umcan
  */
 public class Question {
-    private Subject dominio;
     private Module modulo;
     private User criador;
     private Long idQuestao;
@@ -26,8 +25,7 @@ public class Question {
     public Question() {
     }
 
-    public Question(Subject dominio, Module modulo, User criador, Long idQuestao, String enunciadoQuestao, boolean idtQuestao, LocalDate dataCriacao, String tituloQuestao, Image questPhoto) {
-        this.dominio = dominio;
+    public Question(Module modulo, User criador, Long idQuestao, String enunciadoQuestao, boolean idtQuestao, LocalDate dataCriacao, String tituloQuestao, Image questPhoto) {
         this.modulo = modulo;
         this.criador = criador;
         this.idQuestao = idQuestao;
@@ -36,14 +34,6 @@ public class Question {
         this.dataCriacao = dataCriacao;
         this.tituloQuestao = tituloQuestao;
         this.questPhoto = questPhoto;
-    }
-
-    public Subject getDominio() {
-        return dominio;
-    }
-
-    public void setDominio(Subject dominio) {
-        this.dominio = dominio;
     }
 
     public Module getModulo() {

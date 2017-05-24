@@ -39,9 +39,6 @@ public class OpenQuestionManagementImpl implements OpenQuestionManagement{
         if(question.getDataCriacao()==null){
             throw new BusinessException("data de criação não pode ser nulo");
         }
-        if(question.getDominio()==null){
-            throw new BusinessException("dominio não pode ser nulo");
-        }
         if(question.getModulo()==null){
             throw new BusinessException("modulo não pode ser nulo");
         }
