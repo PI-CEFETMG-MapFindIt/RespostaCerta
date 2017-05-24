@@ -11,8 +11,6 @@ import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -141,17 +139,107 @@ public class UserManagementImplTest {
     }
 
     /**
-     * Test of updateUser method, of class UserManagementImpl.
+     * Test of registerUser method, of class UserManagementImpl.
      */
     @Test
     public void testUpdateUser1() throws Exception {
-        System.out.println("updateUser");
-        Long id = null;
+        System.out.println("updateUser1");
         User user = null;
-        UserManagementImpl instance = null;
-        instance.updateUser(id, user);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        try{
+            impl.updateUser(new Long(0), user);
+        }catch(BusinessException ex){
+            assertTrue(ex.getMessage().equals("Usuario não pode ser nulo"));
+            return;
+        }
+        fail("Aceitou usuario nulo");
+    }
+    
+    @Test
+    public void testUpdateUser2() throws Exception {
+        System.out.println("updateUser2");
+        User user = new User();
+        user.setLoginUsuario(null);
+        user.setNomeUsuario("Joao");
+        user.setSenhaUsuario("senha");
+        user.setIdtUsuario('p');
+        try{
+            impl.updateUser(new Long(0), user);
+        }catch(BusinessException ex){
+            assertTrue(ex.getMessage().equals("Login do usuario não pode ser null"));
+            return;
+        }
+        fail("Aceitou usuario com login nulo");
+    }
+    
+    @Test
+    public void testUpdateUser3() throws Exception {
+       System.out.println("updateUser3");
+        User user = new User();
+        user.setNomeUsuario("Joao");
+        user.setLoginUsuario("joao@oi.com");
+        user.setIdtUsuario('p');
+        user.setSenhaUsuario(null);
+        try{
+            impl.updateUser(new Long(0), user);
+        }catch(BusinessException ex){
+            assertTrue(ex.getMessage().equals("Senha não pode ser null"));
+            return;
+        }
+        fail("Aceitou usuario com senha nula");
+    }
+    
+    @Test
+    public void testUpdateUser4() throws Exception {
+        System.out.println("updateUser4");
+        User user = new User();
+        user.setLoginUsuario("joao@oi.com");
+        user.setSenhaUsuario("senha");
+        user.setIdtUsuario('p');
+        user.setNomeUsuario(null);
+        try{
+            impl.updateUser(new Long(0), user);
+        }catch(BusinessException ex){
+            assertTrue(ex.getMessage().equals("Nome usuario não pode ser null"));
+            return;
+        }
+        fail("Aceitou usuario com nome nulo");
+    }
+    
+    /**
+     * Test of updateUser method, of class UserManagementImpl.
+     */
+    @Test
+    public void testUpdateUser5() throws Exception {
+        System.out.println("updateUser5");
+        User user = new User();
+        user.setLoginUsuario("joao@oi.com");
+        user.setSenhaUsuario("senha");
+        user.setIdtUsuario('p');
+        user.setNomeUsuario("Joao");
+        try{
+            impl.updateUser(null, user);
+        }catch(BusinessException ex){
+            assertTrue(ex.getMessage().equals("ID não pode ser nulo"));
+            return;
+        }
+        fail("Aceitou ID nulo");
+    }
+    
+    /**
+     * Test of updateUser method, of class UserManagementImpl.
+     */
+    @Test
+    public void testUpdateUser6() throws Exception {
+        System.out.println("updateUser6");
+        User user = new User();
+        user.setLoginUsuario("joao@oi.com");
+        user.setSenhaUsuario("senha");
+        user.setIdtUsuario('p');
+        user.setNomeUsuario("Joao");
+        impl.registerUser(user);
+        User user2=new User("Maria", "maria@gmail.com", "senha", 'p');
+        impl.updateUser(user.getIdUsuario(), user2);
+        assertTrue(impl.getUserById(user.getIdUsuario())==user2);
     }
 
     /**
