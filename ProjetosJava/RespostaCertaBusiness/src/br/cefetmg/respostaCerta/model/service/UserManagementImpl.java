@@ -94,7 +94,7 @@ public class UserManagementImpl implements UserManagement {
     @Override
     public void removeUser(Long id) throws BusinessException, PersistenceException {
         if(id == null){
-            throw new PersistenceException ("ID de busca nulo");
+            throw new BusinessException("ID de busca nulo");
         }
         userDAO.delete(id);
     }
@@ -109,7 +109,7 @@ public class UserManagementImpl implements UserManagement {
     @Override
     public User getUserById(Long id) throws BusinessException, PersistenceException {
         if(id == null){
-            throw new BusinessException ("ID não pose ser nulo");
+            throw new BusinessException ("ID não pode ser nulo");
         }
         return userDAO.getUserById(id);
     }
