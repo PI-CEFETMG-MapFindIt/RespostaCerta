@@ -42,11 +42,17 @@ public class ClosedQuestionManagementImpl implements ClosedQuestionManagement{
         if(question.getDominio()==null){
             throw new BusinessException("dominio não pode ser nulo");
         }
+        if(question.getModulo()==null){
+            throw new BusinessException("modulo não pode ser nulo");
+        }
         if(question.getEnunciadoQuestao()==null){
             throw new BusinessException("enunciado não pode ser nulo");
         }
         if(question.getTituloQuestao()==null){
             throw new BusinessException("titulo não pode ser nulo");
+        }
+        if(question.getAlt1()==null || question.getAlt2()==null || question.getAlt3()==null || question.getAlt4()==null || question.getAlt5()==null){
+           throw new BusinessException("alternativas não podem ser nulas"); 
         }
         questC.insert(question);
     }

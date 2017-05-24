@@ -8,9 +8,7 @@ package br.cefetmg.respostaCerta.model.service;
 import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-import br.cefetmg.respostaCerta.model.dao.ClosedQuestionDAO;
 import br.cefetmg.respostaCerta.model.dao.OpenQuestionDAO;
-import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
 import java.util.List;
 /**
  *
@@ -43,6 +41,9 @@ public class OpenQuestionManagementImpl implements OpenQuestionManagement{
         }
         if(question.getDominio()==null){
             throw new BusinessException("dominio não pode ser nulo");
+        }
+        if(question.getModulo()==null){
+            throw new BusinessException("modulo não pode ser nulo");
         }
         if(question.getEnunciadoQuestao()==null){
             throw new BusinessException("enunciado não pode ser nulo");
