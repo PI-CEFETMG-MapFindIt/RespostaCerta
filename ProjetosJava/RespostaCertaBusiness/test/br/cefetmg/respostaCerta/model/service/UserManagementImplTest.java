@@ -127,7 +127,7 @@ public class UserManagementImplTest {
     
     @Test
     public void testRegisterUser5() throws Exception {
-        System.out.println("registerUser6");
+        System.out.println("registerUser5");
         User user = new User("Joao", "joao@oi.com", "senha", 'p');
         try{
             impl.registerUser(user);
@@ -282,7 +282,7 @@ public class UserManagementImplTest {
         System.out.println("removeUser3");
         try{
            impl.registerUser(new User("joao", "joao@gmail.com", "senha", 'p'));
-           impl.removeUser(new Long(0)); 
+           impl.removeUser(new Long(4)); 
         }catch(PersistenceException ex){
            return;
         }

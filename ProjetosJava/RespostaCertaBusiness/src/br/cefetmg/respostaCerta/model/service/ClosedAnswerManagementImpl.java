@@ -30,7 +30,7 @@ public class ClosedAnswerManagementImpl implements ClosedAnswerManagement{
     @Override
     public void registerQuestionAnswer(ClosedAnswer questionAnswer) throws BusinessException, PersistenceException {
         if(questionAnswer==null){
-            throw new BusinessException("A questão não pode ser nulo");
+            throw new BusinessException("A resposta não pode ser nula");
         }
         if(questionAnswer.getAutor()==null){
             throw new BusinessException("Autor não pode ser nulo");
@@ -52,7 +52,7 @@ public class ClosedAnswerManagementImpl implements ClosedAnswerManagement{
     @Override
     public void updateQuestionAnswer(Long id, ClosedAnswer questionAnswer) throws BusinessException, PersistenceException {
         if(questionAnswer==null){
-            throw new BusinessException("A questão não pode ser nulo");
+            throw new BusinessException("A resposta não pode ser nula");
         }
         if(questionAnswer.getAutor()==null){
             throw new BusinessException("Autor não pode ser nulo");
