@@ -52,13 +52,13 @@ public class ForumDAOImpl implements ForumDAO{
         if (forum == null)
             throw new PersistenceException("Entidade não pode ser nula.");                
         
-        Long forumId = forum.getQuestao().getIdQuestao();
+        Long forumId = forum.getIdForum();
         
         if ((forumId != null) && forumDB.containsKey(forumId))
             throw new PersistenceException("Duplicação de chave.");
         
         forumId = ++forumCount;
-        forum.getQuestao().setIdQuestao(forumId);
+        forum.setIdForum(forumId);
         forumDB.put(forumId, forum);
     }
     
@@ -73,7 +73,7 @@ public class ForumDAOImpl implements ForumDAO{
         if (forum == null)
             throw new PersistenceException("Entidade não pode ser nula.");              
         
-        Long forumId = forum.getQuestao().getIdQuestao();
+        Long forumId = forum.getIdForum();
 
         if (forumId == null)
             throw new PersistenceException("Chave da entidade não pode ser nulo.");        
