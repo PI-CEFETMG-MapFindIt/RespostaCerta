@@ -86,7 +86,7 @@ public class TopicAnswerManagementImplTest {
         try{
             impl.registerTopicAnswer(topic);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("Data da resposta não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Data da resposta não pode ser nula"));
             return;
         }
         fail("Aceitou mensagem com data de resposta nula");
@@ -193,7 +193,7 @@ public class TopicAnswerManagementImplTest {
         try{
             impl.updateTopicAnswer(new Long(1), topic);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("Data de resposta não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Data de resposta não pode ser nula"));
             return;
         }
         fail("Aceitou topico com data de postagem nula");
@@ -242,10 +242,12 @@ public class TopicAnswerManagementImplTest {
         topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
         topic.setDataResposta(LocalDate.now());
         topic.setMensagem(new Topic());
-        topic.setIdMensagemResposta(Long.MAX_VALUE);
         topic.setTxtMensagem("txt");
+        impl.registerTopicAnswer(topic);
+        topic.setMensagem(new Topic());
+        topic.setTxtMensagem("txt2");
         try{
-            impl.updateTopicAnswer(new Long(0), topic);
+            impl.updateTopicAnswer(topic.getIdMensagemResposta(), topic);
             assertEquals(topic, impl.getTopicAnswerById(topic.getIdMensagemResposta()));
         }catch(BusinessException ex){
             fail("Erro ao atualizar");
@@ -294,6 +296,7 @@ public class TopicAnswerManagementImplTest {
         topic.setDataResposta(LocalDate.now());
         topic.setMensagem(new Topic());
         topic.setIdMensagemResposta(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
            impl.registerTopicAnswer(topic);
            impl.removeTopicAnswer(new Long(3)); 
@@ -371,6 +374,7 @@ public class TopicAnswerManagementImplTest {
         topic.setDataResposta(LocalDate.now());
         topic.setMensagem(new Topic());
         topic.setIdMensagemResposta(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
            impl.registerTopicAnswer(topic);
            impl.getTopicAnswerById(new Long(4)); 
@@ -453,6 +457,7 @@ public class TopicAnswerManagementImplTest {
         topic.setDataResposta(LocalDate.now());
         topic.setMensagem(new Topic());
         topic.setIdMensagemResposta(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         impl.registerTopicAnswer(topic);
         
         TopicAnswer topic2 = new TopicAnswer();
@@ -460,6 +465,7 @@ public class TopicAnswerManagementImplTest {
         topic2.setDataResposta(LocalDate.now());
         topic2.setMensagem(new Topic());
         topic2.setIdMensagemResposta(Long.MAX_VALUE);
+        topic2.setTxtMensagem("txt");
         impl.registerTopicAnswer(topic2);
         try{
            List list = impl.getAnswersTopic(new Long(0));
@@ -488,6 +494,7 @@ public class TopicAnswerManagementImplTest {
         topic.setDataResposta(LocalDate.now());
         topic.setMensagem(new Topic());
         topic.setIdMensagemResposta(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         impl.registerTopicAnswer(topic);
         
         TopicAnswer topic2 = new TopicAnswer();
@@ -495,6 +502,7 @@ public class TopicAnswerManagementImplTest {
         topic2.setDataResposta(LocalDate.now());
         topic2.setMensagem(new Topic());
         topic2.setIdMensagemResposta(Long.MAX_VALUE);
+        topic2.setTxtMensagem("txt");
         impl.registerTopicAnswer(topic2);
         try{
            List list = impl.getAnswersTopic(new Long(0));
@@ -519,6 +527,7 @@ public class TopicAnswerManagementImplTest {
         topic.setDataResposta(LocalDate.now());
         topic.setMensagem(new Topic());
         topic.setIdMensagemResposta(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         impl.registerTopicAnswer(topic);
         
         TopicAnswer topic2 = new TopicAnswer();
@@ -526,6 +535,7 @@ public class TopicAnswerManagementImplTest {
         topic2.setDataResposta(LocalDate.now());
         topic2.setMensagem(new Topic());
         topic2.setIdMensagemResposta(Long.MAX_VALUE);
+        topic2.setTxtMensagem("txt");
         impl.registerTopicAnswer(topic2);
         try{
            List list = impl.getAnswersTopic(new Long(0));

@@ -5,6 +5,8 @@
  */
 package br.cefetmg.respostaCerta.model.service;
 
+import br.cefetmg.respostaCerta.model.dao.ForumDAO;
+import br.cefetmg.respostaCerta.model.dao.ForumDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.TopicDAO;
 import br.cefetmg.respostaCerta.model.dao.TopicDAOImpl;
 import br.cefetmg.respostaCerta.model.domain.Forum;
@@ -27,6 +29,7 @@ import static org.junit.Assert.*;
  */
 public class TopicManagementImplTest { 
     private static TopicDAO topicDAO;
+    private static ForumDAO forumDAO;
     private static TopicManagementImpl impl;
     
     public TopicManagementImplTest() {
@@ -35,6 +38,7 @@ public class TopicManagementImplTest {
     @BeforeClass
     public static void setUpClass() {
         topicDAO = TopicDAOImpl.getInstance();
+        forumDAO = ForumDAOImpl.getInstance();
         impl = new TopicManagementImpl(topicDAO);
     }
     
@@ -44,6 +48,10 @@ public class TopicManagementImplTest {
     
     @Before
     public void setUp() {
+    }
+    
+    @After
+    public void tearDown() {
         List<Topic> us;
         try {
             us = topicDAO.listAll();
@@ -53,10 +61,16 @@ public class TopicManagementImplTest {
         } catch (PersistenceException ex) {
             System.out.println("Erro!");
         }
-    }
-    
-    @After
-    public void tearDown() {
+        
+        List<Forum> fo;
+        try {
+            fo = forumDAO.listAll();
+            for(Forum u : fo){
+                forumDAO.delete(u.getIdForum());
+            }
+        } catch (PersistenceException ex) {
+            System.out.println("Erro!");
+        }
     }
 
     @Test
@@ -191,7 +205,7 @@ public class TopicManagementImplTest {
         try{
             impl.updateTopic(new Long(1), topic);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("Data de postagem não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Data da postagem não pode ser nulo"));
             return;
         }
         fail("Aceitou topico com data de postagem nula");
@@ -243,13 +257,17 @@ public class TopicManagementImplTest {
         topic.setForum(new Forum());
         topic.setTopicoId(Long.MAX_VALUE);
         topic.setTxtMensagem("txt");
+        impl.registerTopic(topic);
+        topic.setTxtMensagem("txt");
+        topic.setForum(new Forum());
         try{
-            impl.updateTopic(new Long(1), topic);
-        }catch(BusinessException ex){
+            impl.updateTopic(topic.getTopicoId(), topic);
             assertEquals(topic, impl.getTopicById(topic.getTopicoId()));
+        }catch(PersistenceException ex){
+            fail("Erro ao atualizar");
             return;
         }
-        fail("Aceitou id nulo");
+        
     }
    
     /**
@@ -292,16 +310,14 @@ public class TopicManagementImplTest {
         topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
         topic.setDataPostagem(LocalDate.now());
         topic.setForum(new Forum());
-        topic.setTopicoId(Long.MAX_VALUE);
         topic.setTxtMensagem("txt");
         try{
            impl.registerTopic(topic);
-           impl.removeTopic(new Long(3)); 
-           fail("Buscou topico inexistente");
+           impl.removeTopic(new Long(10)); 
+           fail("Removeu topico inexistente");
         }catch(PersistenceException ex){
            return;
         }
-        fail("Removeu topico inexistente");
     }
     
     /**
@@ -377,7 +393,7 @@ public class TopicManagementImplTest {
            impl.registerTopic(topic);
            impl.getTopicById(new Long(4)); 
            fail("Buscou topic inexistente");
-        }catch(PersistenceException ex){
+        }catch(PersistenceException | BusinessException ex){
            return;
         }
     }
@@ -410,9 +426,9 @@ public class TopicManagementImplTest {
         System.out.println("getTopicsForum1");
         Long id = null;
         try{
-            impl.getTopicById(id);
+            impl.getTopicsForum(id);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("Id do forum não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Id do forum nao pode ser nulo"));
         }
     }
     
@@ -421,17 +437,18 @@ public class TopicManagementImplTest {
      */
     @Test
     public void testGetTopicsForum2() throws Exception {
-        System.out.println("getTopicsByUser2");
+        System.out.println("getTopicsByTopicsForum2");
+        Forum f = new Forum();
+        forumDAO.insert(f);
         Topic topic = new Topic();
         topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
         topic.setDataPostagem(LocalDate.now());
-        Forum f = new Forum();
-        f.setIdForum(new Long(0));
         topic.setForum(f);
         topic.setTopicoId(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         impl.registerTopic(topic);
         try{
-           List list = impl.getTopicsForum(new Long(0));
+           List list = impl.getTopicsForum(f.getIdForum());
            if(list.size()!=1){
                fail("Lista errada ao retornar");
            }
@@ -451,12 +468,13 @@ public class TopicManagementImplTest {
     @Test
     public void testGetTopicsForum3() throws Exception {
         System.out.println("getQuestionsByUser3");
+        Forum f = new Forum();
+        forumDAO.insert(f);
+        
         User user = new User(new Long(0), "Joao", "joao@gmail.com", "senha", 'j');
         Topic topic = new Topic();
         topic.setAutor(user);
         topic.setDataPostagem(LocalDate.now());
-        Forum f = new Forum();
-        f.setIdForum(new Long(0));
         topic.setForum(f);
         topic.setTopicoId(Long.MAX_VALUE);
         topic.setTxtMensagem("txt");
@@ -470,7 +488,7 @@ public class TopicManagementImplTest {
         topic2.setTxtMensagem("txt");
         impl.registerTopic(topic2);
         try{
-           List list = impl.getTopicsForum(new Long(0));
+           List list = impl.getTopicsForum(f.getIdForum());
            if(list.size()!=2){
                fail("Lista errada ao retornar");
            }
@@ -490,14 +508,15 @@ public class TopicManagementImplTest {
     public void testGetTopicsForum4() throws Exception {
         System.out.println("getQuestionsByUser4");
         User user = new User(new Long(1), "Joao", "joao@gmail.com", "senha", 'j');
+        Forum f = new Forum();
+        forumDAO.insert(f);
         
         Topic topic = new Topic();
         topic.setAutor(user);
         topic.setDataPostagem(LocalDate.now());
-        Forum f = new Forum();
-        f.setIdForum(new Long(1));
         topic.setForum(f);
         topic.setTopicoId(Long.MAX_VALUE);
+        topic.setTxtMensagem("msg");
         impl.registerTopic(topic);
         
         Topic topic2 = new Topic();
@@ -505,9 +524,11 @@ public class TopicManagementImplTest {
         topic2.setDataPostagem(LocalDate.now());
         topic2.setForum(f);
         topic2.setTopicoId(Long.MAX_VALUE);
+        topic2.setTxtMensagem("msg");
         impl.registerTopic(topic2);
+        
         try{
-           List list = impl.getTopicsForum(new Long(0));
+           List list = impl.getTopicsForum(f.getIdForum());
            if(!list.isEmpty()){
                fail("Lista errada ao retornar");
            }
@@ -524,25 +545,26 @@ public class TopicManagementImplTest {
     @Test
     public void testGetTopicsForum5() throws Exception {
         System.out.println("getQuestionsByUser5");
+        Forum f2 = new Forum();
+        Forum f1 = new Forum();
+        forumDAO.insert(f1);
+        forumDAO.insert(f2);
         Topic topic = new Topic();
         topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
         topic.setDataPostagem(LocalDate.now());
-        Forum f1 = new Forum();
-        f1.setIdForum(new Long(0));
         topic.setForum(f1);
         topic.setTopicoId(Long.MAX_VALUE);
+        topic.setTxtMensagem("msg");
         impl.registerTopic(topic);
-        
         Topic topic2 = new Topic();
         topic2.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
         topic2.setDataPostagem(LocalDate.now());
-        Forum f2 = new Forum();
-        f2.setIdForum(new Long(1));
         topic2.setForum(f2);
         topic2.setTopicoId(Long.MAX_VALUE);
+        topic2.setTxtMensagem("msg");
         impl.registerTopic(topic2);
         try{
-           List list = impl.getTopicsForum(new Long(0));
+           List list = impl.getTopicsForum(f1.getIdForum());
            if(list.size()!=1){
                fail("Lista errada ao retornar");
            }
@@ -550,7 +572,7 @@ public class TopicManagementImplTest {
                fail("Objeto errado na lista");
            }
            
-           list = impl.getTopicsForum(new Long(1));
+           list = impl.getTopicsForum(f2.getIdForum());
            if(list.size()!=1){
                fail("Lista errada ao retornar");
            }
