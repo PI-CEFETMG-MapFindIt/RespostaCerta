@@ -31,25 +31,25 @@ public class ClosedQuestionManagementImpl implements ClosedQuestionManagement{
     @Override
     public void registerQuestion(ClosedQuestion question) throws BusinessException, PersistenceException {
         if(question==null){
-            throw new BusinessException("question não pode ser nulo");
+            throw new BusinessException("Question não pode ser nulo");
         }
         if(question.getCriador()==null){
-            throw new BusinessException("criador não pode ser nulo");
+            throw new BusinessException("Criador não pode ser nulo");
         }
         if(question.getDataCriacao()==null){
-            throw new BusinessException("data de criação não pode ser nulo");
+            throw new BusinessException("Data de criação não pode ser nulo");
         }
         if(question.getModulo()==null){
-            throw new BusinessException("modulo não pode ser nulo");
+            throw new BusinessException("Modulo não pode ser nulo");
         }
         if(question.getEnunciadoQuestao()==null){
-            throw new BusinessException("enunciado não pode ser nulo");
+            throw new BusinessException("Enunciado não pode ser nulo");
         }
         if(question.getTituloQuestao()==null){
-            throw new BusinessException("titulo não pode ser nulo");
+            throw new BusinessException("Titulo não pode ser nulo");
         }
         if(question.getAlt1()==null || question.getAlt2()==null || question.getAlt3()==null || question.getAlt4()==null || question.getAlt5()==null){
-           throw new BusinessException("alternativas não podem ser nulas"); 
+           throw new BusinessException("Alternativas não podem ser nulas"); 
         }
         questC.insert(question);
     }
@@ -64,25 +64,25 @@ public class ClosedQuestionManagementImpl implements ClosedQuestionManagement{
     @Override
     public void updateQuestion(Long id, ClosedQuestion question) throws BusinessException, PersistenceException {
         if(question==null){
-            throw new BusinessException("question não pode ser nulo");
+            throw new BusinessException("Question não pode ser nulo");
         }
         if(question.getCriador()==null){
-            throw new BusinessException("criador não pode ser nulo");
+            throw new BusinessException("Criador não pode ser nulo");
         }
         if(question.getDataCriacao()==null){
-            throw new BusinessException("data de criação não pode ser nulo");
+            throw new BusinessException("Data de criação não pode ser nulo");
         }
         if(question.getModulo()==null){
-            throw new BusinessException("modulo não pode ser nulo");
+            throw new BusinessException("Modulo não pode ser nulo");
         }
         if(question.getEnunciadoQuestao()==null){
-            throw new BusinessException("enunciado não pode ser nulo");
+            throw new BusinessException("Enunciado não pode ser nulo");
         }
         if(question.getTituloQuestao()==null){
-            throw new BusinessException("titulo não pode ser nulo");
+            throw new BusinessException("Titulo não pode ser nulo");
         }
         if(question.getAlt1()==null || question.getAlt2()==null || question.getAlt3()==null || question.getAlt4()==null || question.getAlt5()==null){
-           throw new BusinessException("alternativas não podem ser nulas"); 
+           throw new BusinessException("Alternativas não podem ser nulas"); 
         }
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");

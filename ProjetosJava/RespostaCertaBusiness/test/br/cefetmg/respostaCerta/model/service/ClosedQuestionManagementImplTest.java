@@ -70,7 +70,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("question não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Question não pode ser nulo"));
             return;
         }
         fail("Aceitou questão nula");
@@ -92,7 +92,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("criador não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Criador não pode ser nulo"));
             return;
         }
         fail("Aceitou criador nulo");
@@ -114,7 +114,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("data de criação não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Data de criação não pode ser nulo"));
             return;
         }
         fail("Aceitou data de criação nula");
@@ -137,7 +137,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("modulo não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Modulo não pode ser nulo"));
             return;
         }
         fail("Aceitou modulo nulo");
@@ -159,7 +159,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("enunciado não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Enunciado não pode ser nulo"));
             return;
         }
         fail("Aceitou enunciado nulo");
@@ -181,7 +181,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("titulo não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Titulo não pode ser nulo"));
             return;
         }
         fail("Aceitou título nulo");
@@ -203,7 +203,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("alternativas não podem ser nulas"));
+            assertTrue(ex.getMessage().equals("Alternativas não podem ser nulas"));
             return;
         }
         fail("Aceitou alternativa nula");
@@ -225,7 +225,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("alternativas não podem ser nulas"));
+            assertTrue(ex.getMessage().equals("Alternativas não podem ser nulas"));
             return;
         }
         fail("Aceitou alternativa nula");
@@ -247,7 +247,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("alternativas não podem ser nulas"));
+            assertTrue(ex.getMessage().equals("Alternativas não podem ser nulas"));
             return;
         }
         fail("Aceitou alternativa nula");
@@ -269,7 +269,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("alternativas não podem ser nulas"));
+            assertTrue(ex.getMessage().equals("Alternativas não podem ser nulas"));
             return;
         }
         fail("Aceitou alternativa nula");
@@ -291,7 +291,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("alternativas não podem ser nulas"));
+            assertTrue(ex.getMessage().equals("Alternativas não podem ser nulas"));
             return;
         }
         fail("Aceitou alternativa nula");
@@ -307,7 +307,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.updateQuestion(new Long(1),question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("question não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Question não pode ser nulo"));
             return;
         }
         fail("Aceitou questão nula");
@@ -329,7 +329,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.updateQuestion(new Long(1),question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("criador não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Criador não pode ser nulo"));
             return;
         }
         fail("Aceitou criador nulo");
@@ -351,7 +351,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.updateQuestion(new Long(1),question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("data de criação não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Data de criação não pode ser nulo"));
             return;
         }
         fail("Aceitou data de criação nula");
@@ -374,7 +374,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.updateQuestion(new Long(1),question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("modulo não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Modulo não pode ser nulo"));
             return;
         }
         fail("Aceitou modulo nulo");
@@ -396,7 +396,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.updateQuestion(new Long(1),question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("enunciado não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Enunciado não pode ser nulo"));
             return;
         }
         fail("Aceitou enunciado nulo");
@@ -418,7 +418,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.updateQuestion(new Long(1),question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("titulo não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Titulo não pode ser nulo"));
             return;
         }
         fail("Aceitou título nulo");
@@ -440,7 +440,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.updateQuestion(new Long(1),question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("alternativas não podem ser nulas"));
+            assertTrue(ex.getMessage().equals("Alternativas não podem ser nulas"));
             return;
         }
         fail("Aceitou alternativa nula");
@@ -462,7 +462,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.updateQuestion(new Long(1),question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("alternativas não podem ser nulas"));
+            assertTrue(ex.getMessage().equals("Alternativas não podem ser nulas"));
             return;
         }
         fail("Aceitou alternativa nula");
@@ -484,7 +484,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.updateQuestion(new Long(1),question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("alternativas não podem ser nulas"));
+            assertTrue(ex.getMessage().equals("Alternativas não podem ser nulas"));
             return;
         }
         fail("Aceitou alternativa nula");
@@ -506,7 +506,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.updateQuestion(new Long(1),question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("alternativas não podem ser nulas"));
+            assertTrue(ex.getMessage().equals("Alternativas não podem ser nulas"));
             return;
         }
         fail("Aceitou alternativa nula");
@@ -528,7 +528,7 @@ public class ClosedQuestionManagementImplTest {
         try{
             impl.updateQuestion(new Long(1),question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("alternativas não podem ser nulas"));
+            assertTrue(ex.getMessage().equals("Alternativas não podem ser nulas"));
             return;
         }
         fail("Aceitou alternativa nula");

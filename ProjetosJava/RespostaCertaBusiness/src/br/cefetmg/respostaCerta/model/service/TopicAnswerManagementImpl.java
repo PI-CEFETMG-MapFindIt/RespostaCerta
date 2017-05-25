@@ -31,7 +31,7 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
     @Override
     public void registerTopicAnswer(TopicAnswer topicAnswer) throws BusinessException, PersistenceException {
         if(topicAnswer==null){
-            throw new BusinessException("topicanswer não pode ser nulo");
+            throw new BusinessException("TopicAnswer não pode ser nulo");
         }
         if(topicAnswer.getAutor()==null){
             throw new BusinessException("Autor da resposta não pode ser nulo");
@@ -40,7 +40,7 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
             throw new BusinessException("Data da resposta não pode ser nula");
         }
         if(topicAnswer.getTxtMensagem()==null){
-            throw new BusinessException("tesxto não pode ser nulo");
+            throw new BusinessException("Texto não pode ser nulo");
         }
         answerDAO.insert(topicAnswer);
     }
@@ -58,7 +58,7 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
             throw new BusinessException("ID não pode ser nulo");
         }
         if(topicAnswer==null){
-            throw new BusinessException("topicanswer não pode ser nulo");
+            throw new BusinessException("TopicAnswer não pode ser nulo");
         }
         if(topicAnswer.getAutor()==null){
             throw new BusinessException("Autor da resposta não pode ser nulo");
@@ -67,7 +67,7 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
             throw new BusinessException("Data da resposta não pode ser nula");
         }
         if(topicAnswer.getTxtMensagem()==null){
-            throw new BusinessException("tesxto não pode ser nulo");
+            throw new BusinessException("Texto não pode ser nulo");
         }
         topicAnswer.setIdMensagemResposta(id);
         answerDAO.update(topicAnswer);

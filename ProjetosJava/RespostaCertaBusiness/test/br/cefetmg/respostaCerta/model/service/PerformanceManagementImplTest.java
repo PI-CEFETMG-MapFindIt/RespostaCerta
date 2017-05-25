@@ -111,7 +111,7 @@ public class PerformanceManagementImplTest {
         try{
             impl.calculateErrors(user);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("usuarionão pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Usuario não pode ser nulo"));
         }
     }
     
@@ -126,7 +126,7 @@ public class PerformanceManagementImplTest {
         try{
             impl.calculateErrors(user);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("ID dousuario não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("ID do usuario não pode ser nulo"));
         }
     }
     
@@ -277,7 +277,7 @@ public class PerformanceManagementImplTest {
         try{
             impl.calculateErrorsByModule(user, m);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("usuarionão pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Usuario não pode ser nulo"));
         }
     }
     
@@ -293,7 +293,7 @@ public class PerformanceManagementImplTest {
         try{
             impl.calculateErrorsByModule(user, m);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("ID dousuario não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("ID do usuario não pode ser nulo"));
         }
     }
     
@@ -405,7 +405,7 @@ public class PerformanceManagementImplTest {
         try{
             impl.calculateErrorsByModule(user, m);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("descrição do modulo não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Descrição do modulo não pode ser nulo"));
         }
     }
     
@@ -501,7 +501,7 @@ public class PerformanceManagementImplTest {
         try{
             impl.calculateErrorsBySubject(user, s);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("usuarionão pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Usuario não pode ser nulo"));
         }
     }
     
@@ -517,7 +517,7 @@ public class PerformanceManagementImplTest {
         try{
             impl.calculateErrorsBySubject(user, s);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("ID dousuario não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("ID do usuario não pode ser nulo"));
         }
     }
     
@@ -581,7 +581,7 @@ public class PerformanceManagementImplTest {
         try{
             impl.calculateErrorsBySubject(user, s);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("subject não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Subject não pode ser nulo"));
         }
     }
     
@@ -613,7 +613,7 @@ public class PerformanceManagementImplTest {
         try{
             impl.calculateErrorsBySubject(user, s);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("desc do dominio não pode ser nula"));
+            assertTrue(ex.getMessage().equals("Desc do dominio não pode ser nula"));
         }
     }
     
