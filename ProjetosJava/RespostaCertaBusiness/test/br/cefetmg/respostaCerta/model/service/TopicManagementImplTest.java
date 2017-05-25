@@ -28,8 +28,7 @@ import static org.junit.Assert.*;
  *
  * @author umcan
  */
-public class TopicManagementImplTest {
-    
+public class TopicManagementImplTest { 
     private static TopicDAO topicDAO;
     private static TopicManagementImpl impl;
     
@@ -38,7 +37,7 @@ public class TopicManagementImplTest {
     
     @BeforeClass
     public static void setUpClass() {
-        topicDAO = TopicDAO.getInstance();
+        topicDAO = TopicDAOImpl.getInstance();
         impl = new TopicManagementImpl(topicDAO);
     }
     

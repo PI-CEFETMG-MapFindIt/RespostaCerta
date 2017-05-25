@@ -6,6 +6,7 @@
 package br.cefetmg.respostaCerta.model.service;
 
 import br.cefetmg.respostaCerta.model.dao.TopicAnswerDAO;
+import br.cefetmg.respostaCerta.model.dao.TopicAnswerDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.TopicDAO;
 import br.cefetmg.respostaCerta.model.dao.TopicDAOImpl;
 import br.cefetmg.respostaCerta.model.domain.Forum;
@@ -40,7 +41,7 @@ public class TopicAnswerManagementImplTest {
     
     @BeforeClass
     public static void setUpClass() {
-        topicAnswerDAO = TopicAnswerDAO.getInstance();
+        topicAnswerDAO = TopicAnswerDAOImpl.getInstance();
         impl = new TopicAnswerManagementImpl(topicAnswerDAO);
     }
     

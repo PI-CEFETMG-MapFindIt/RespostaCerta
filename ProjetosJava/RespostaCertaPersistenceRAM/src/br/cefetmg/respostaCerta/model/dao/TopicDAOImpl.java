@@ -56,13 +56,13 @@ public class TopicDAOImpl implements TopicDAO{
         if (topic == null)
             throw new PersistenceException("Entidade não pode ser nula.");                
         
-        Long topicId = topic.getIdMensagem();
+        Long topicId = topic.getTopicoId();
         
         if ((topicId != null) && topicDB.containsKey(topicId))
             throw new PersistenceException("Duplicação de chave.");
         
         topicId = ++topicCount;
-        topic.setIdMensagem(topicId);
+        topic.setTopicoId(topicId);
         topicDB.put(topicId, topic);
     }
     
@@ -77,7 +77,7 @@ public class TopicDAOImpl implements TopicDAO{
         if (topic == null)
             throw new PersistenceException("Entidade não pode ser nula.");              
         
-        Long topicId = topic.getIdMensagem();
+        Long topicId = topic.getTopicoId();
 
         if (topicId == null)
             throw new PersistenceException("Chave da entidade não pode ser nulo.");        

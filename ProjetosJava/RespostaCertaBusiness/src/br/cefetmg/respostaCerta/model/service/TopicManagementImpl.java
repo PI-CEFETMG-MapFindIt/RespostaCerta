@@ -73,7 +73,7 @@ public class TopicManagementImpl implements TopicManagement{
         if(topic.getTxtMensagem()==null){
             throw new BusinessException ("texto da mensagem não pode ser nulo");
         }
-        topic.setIdMensagem(id);
+        topic.setTopicoId(id);
         topicDAO.update(topic);
         if(!topic.equals(topicDAO.getTopicById(id))){
             throw new PersistenceException("Erro de persistencia");
