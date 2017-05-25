@@ -7,7 +7,6 @@ package br.cefetmg.respostaCerta.model.service;
 
 import br.cefetmg.respostaCerta.model.dao.TopicAnswerDAO;
 import br.cefetmg.respostaCerta.model.dao.TopicAnswerDAOImpl;
->>>>>>> 11d96fc6577763f2110a95fa591a1c98fe6ccb48
 import br.cefetmg.respostaCerta.model.domain.Topic;
 import br.cefetmg.respostaCerta.model.domain.TopicAnswer;
 import br.cefetmg.respostaCerta.model.domain.User;
