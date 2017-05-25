@@ -184,7 +184,7 @@ public class ClosedAnswerManagementImplTest {
      * Test of updateUser method, of class UserManagementImpl.
      */
     @Test
-    public void testUpdateUser5() throws Exception {
+    public void testUpdateQuestionAnswer5() throws Exception {
         System.out.println("updateQuestionAnswer5");
         ClosedAnswer closedAnswer = new ClosedAnswer();
         closedAnswer.setAutor(new User("Joao", "jao", "senha", 'p'));
@@ -232,7 +232,7 @@ public class ClosedAnswerManagementImplTest {
      * Test of removeUser method, of class UserManagementImpl.
      */
     @Test
-    public void testRemoveUser3() throws Exception {
+    public void testRemoveQuestionAnswer3() throws Exception {
         System.out.println("removeQuestionAnswer3");
         ClosedAnswer closedAnswer = new ClosedAnswer();
         closedAnswer.setAutor(new User("Joao", "jao", "senha", 'p'));
