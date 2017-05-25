@@ -5,6 +5,7 @@
  */
 package br.cefetmg.respostaCerta.model.dao;
 
+import br.cefetmg.respostaCerta.model.domain.Forum;
 import br.cefetmg.respostaCerta.model.domain.Topic;
 import br.cefetmg.respostaCerta.model.domain.Topic;
 import br.cefetmg.respostaCerta.model.domain.TopicAnswer;
@@ -148,7 +149,7 @@ public class TopicDAOImpl implements TopicDAO{
 	Topic item;
         while (iterator.hasNext()){
             item=iterator.next();
-            if(Objects.equals(item.getForum().getQuestao().getIdQuestao(), forumID)){
+            if(Objects.equals(item.getForum().getIdForum(), forumID)){
                 topicList.add(item);
             }
         }    
