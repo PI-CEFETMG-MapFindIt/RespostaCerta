@@ -578,8 +578,8 @@ public class ClosedQuestionManagementImplTest {
       
         impl.registerQuestion(question);
         question.setCorreta(2);
-        impl.updateQuestion(new Long(0), question);
-        assertTrue(impl.getQuestionById(new Long(0)).getCorreta() == 2);        
+        impl.updateQuestion(new Long(1), question);
+        assertTrue(impl.getQuestionById(new Long(1)).getCorreta() == 2);        
     }
 
     /**
