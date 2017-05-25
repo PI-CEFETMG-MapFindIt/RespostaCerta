@@ -18,7 +18,15 @@ public class User {
 
     public User() {
     }
-
+    
+    public User(Long idUsuario, String nomeUsuario, String loginUsuario, String senhaUsuario, char idtUsuario) {
+        this.idUsuario = idUsuario;
+        this.nomeUsuario = nomeUsuario;
+        this.loginUsuario = loginUsuario;
+        this.senhaUsuario = senhaUsuario;
+        this.idtUsuario = idtUsuario;
+    }
+    
     public User(String nomeUsuario, String loginUsuario, String senhaUsuario, char idtUsuario) {
         this.nomeUsuario = nomeUsuario;
         this.loginUsuario = loginUsuario;

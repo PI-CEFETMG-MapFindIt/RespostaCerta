@@ -149,7 +149,7 @@ public class TopicDAOImpl implements TopicDAO{
         while (iterator.hasNext()){
             item=iterator.next();
             if(Objects.equals(item.getForum().getQuestao().getIdQuestao(), forumID)){
-                topicList.add(iterator.next());
+                topicList.add(item);
             }
         }    
         return topicList;

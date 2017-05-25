@@ -146,7 +146,7 @@ public class ModuleDAOImpl implements ModuleDAO{
         while (iterator.hasNext()){
             item=iterator.next();
             if(Objects.equals(item.getDominio().getIdDominio(), subjectId)){
-                moduleList.add(iterator.next());
+                moduleList.add(item);
             }
         }    
         return moduleList;

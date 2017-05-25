@@ -146,7 +146,7 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
         while (iterator.hasNext()){
             item=iterator.next();
             if(Objects.equals(item.getCriador().getIdUsuario(), userId)){
-                topicList.add(iterator.next());
+                topicList.add(item);
             }
         }    
         return topicList;

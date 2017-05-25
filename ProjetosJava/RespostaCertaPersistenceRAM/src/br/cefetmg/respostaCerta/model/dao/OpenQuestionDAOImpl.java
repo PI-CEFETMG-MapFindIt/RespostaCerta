@@ -145,7 +145,7 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
         while (iterator.hasNext()){
             item=iterator.next();
             if(Objects.equals(item.getCriador().getIdUsuario(), userId)){
-                topicList.add(iterator.next());
+                topicList.add(item);
             }
         }    
         return topicList;
