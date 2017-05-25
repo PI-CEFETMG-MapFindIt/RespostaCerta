@@ -185,9 +185,9 @@ public class PerformanceManagementImplTest {
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
         ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(0),"subject","desc"),new Long(0),"modulo","desc"), user, new Long(0), "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
+        resp1 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject","desc"), "modulo","desc"), user,   "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
         ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(1),"subject2","desc2"),new Long(1),"modulo2","desc2"), user, new Long(1), "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
+        resp2 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject2","desc2"), "modulo2","desc2"), user,   "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
         answer.insert(resp1);
         answer.insert(resp2);
         try{
@@ -209,9 +209,9 @@ public class PerformanceManagementImplTest {
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
         ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(0),"subject","desc"),new Long(0),"modulo","desc"), user, new Long(0), "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
+        resp1 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject","desc"), "modulo","desc"), user,   "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
         ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(1),"subject2","desc2"),new Long(1),"modulo2","desc2"), user, new Long(1), "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', true);
+        resp2 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject2","desc2"), "modulo2","desc2"), user,   "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', true);
         answer.insert(resp1);
         answer.insert(resp2);
         try{
@@ -233,11 +233,11 @@ public class PerformanceManagementImplTest {
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
         ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(0),"subject","desc"),new Long(0),"modulo","desc"), user, new Long(0), "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
+        resp1 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject","desc"), "modulo","desc"), user,   "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
         ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(1),"subject2","desc2"),new Long(1),"modulo2","desc2"), user, new Long(1), "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
+        resp2 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject2","desc2"), "modulo2","desc2"), user,   "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
         ClosedAnswer resp3;
-        resp3 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(2),"subject3","desc3"),new Long(2),"modulo3","desc3"), user, new Long(2), "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
+        resp3 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject3","desc3"), "modulo3","desc3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
         answer.insert(resp1);
         answer.insert(resp2);
         answer.insert(resp3);
@@ -273,7 +273,7 @@ public class PerformanceManagementImplTest {
     public void testCalculateErrorsByModule1() throws Exception {
         System.out.println("calculateErrorsByModule1");
         User user = null;
-        Module m = new Module(new Subject(new Long(0), "subject", "desc"), new Long(0), "modulo", "desc");
+        Module m = new Module(new Subject(  "subject", "desc"),   "modulo", "desc");
         try{
             impl.calculateErrorsByModule(user, m);
         }catch(BusinessException ex){
@@ -289,7 +289,7 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsByModule2");
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(null);
-        Module m = new Module(new Subject(new Long(0), "subject", "desc"), new Long(0), "modulo", "desc");
+        Module m = new Module(new Subject(  "subject", "desc"),   "modulo", "desc");
         try{
             impl.calculateErrorsByModule(user, m);
         }catch(BusinessException ex){
@@ -305,7 +305,7 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsByModule3");
         User user = new User("Joao", null, "senha", 'j');
         user.setIdUsuario(new Long(0));
-        Module m = new Module(new Subject(new Long(0), "subject", "desc"), new Long(0), "modulo", "desc");
+        Module m = new Module(new Subject(  "subject", "desc"),   "modulo", "desc");
         try{
             impl.calculateErrorsByModule(user, m);
         }catch(BusinessException ex){
@@ -321,7 +321,7 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsByModule4");
         User user = new User(null, "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
-        Module m = new Module(new Subject(new Long(0), "subject", "desc"), new Long(0), "modulo", "desc");
+        Module m = new Module(new Subject(  "subject", "desc"),   "modulo", "desc");
         try{
             impl.calculateErrorsByModule(user, m);
         }catch(BusinessException ex){
@@ -337,7 +337,7 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsByModule5");
         User user = new User("Joao", "joao@gmail.com", null, 'j');
         user.setIdUsuario(new Long(0));
-        Module m = new Module(new Subject(new Long(0), "subject", "desc"), new Long(0), "modulo", "desc");
+        Module m = new Module(new Subject(  "subject", "desc"),   "modulo", "desc");
         try{
             impl.calculateErrorsByModule(user, m);
         }catch(BusinessException ex){
@@ -369,7 +369,7 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsByModule7");
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
-        Module m = new Module(null, new Long(0), "modulo", "desc");
+        Module m = new Module(null,   "modulo", "desc");
         try{
             impl.calculateErrorsByModule(user, m);
         }catch(BusinessException ex){
@@ -385,7 +385,7 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsByModule8");
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
-        Module m = new Module(new Subject(new Long(0), "subject", "desc"), new Long(0), null, "desc");
+        Module m = new Module(new Subject(  "subject", "desc"),   null, "desc");
         try{
             impl.calculateErrorsByModule(user, m);
         }catch(BusinessException ex){
@@ -401,7 +401,7 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsByModule9");
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
-        Module m = new Module(new Subject(new Long(0), "subject", "desc"), new Long(0), "modulo", null);
+        Module m = new Module(new Subject(  "subject", "desc"),   "modulo", null);
         try{
             impl.calculateErrorsByModule(user, m);
         }catch(BusinessException ex){
@@ -417,13 +417,13 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsByModule10");
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
-        Module m = new Module(new Subject(new Long(0),"subject","desc"),new Long(0),"modulo","desc");
+        Module m = new Module(new Subject( "subject","desc"), "modulo","desc");
         ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new Question(m, user, new Long(0), "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
+        resp1 = new ClosedAnswer(0, user, new Question(m, user,   "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
         ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(1),"subject2","desc2"),new Long(1),"modulo2","desc2"), user, new Long(1), "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
+        resp2 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject2","desc2"), "modulo2","desc2"), user,   "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
         ClosedAnswer resp3;
-        resp3 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(2),"subject3","desc3"),new Long(2),"modulo3","desc3"), user, new Long(2), "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
+        resp3 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject3","desc3"), "modulo3","desc3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
         answer.insert(resp1);
         answer.insert(resp2);
         answer.insert(resp3);
@@ -445,13 +445,13 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsByModule11");
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
-        Module m = new Module(new Subject(new Long(0),"subject","desc"),new Long(0),"modulo","desc");
+        Module m = new Module(new Subject( "subject","desc"), "modulo","desc");
         ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new Question(m , user, new Long(0), "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
+        resp1 = new ClosedAnswer(0, user, new Question(m , user,   "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
         ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new Question(m , user, new Long(1), "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
+        resp2 = new ClosedAnswer(0, user, new Question(m , user,   "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
         ClosedAnswer resp3;
-        resp3 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(2),"subject3","desc3"),new Long(2),"modulo3","desc3"), user, new Long(2), "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
+        resp3 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject3","desc3"), "modulo3","desc3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
         answer.insert(resp1);
         answer.insert(resp2);
         answer.insert(resp3);
@@ -473,13 +473,13 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsByModule12");
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
-        Module m = new Module(new Subject(new Long(0),"subject","desc"),new Long(0),"modulo","desc");
+        Module m = new Module(new Subject( "subject","desc"), "modulo","desc");
         ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(2),"subject3","desc3"), new Long(2),"modulo3","desc3") , user, new Long(0), "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
+        resp1 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject3","desc3"),  "modulo3","desc3") , user,   "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
         ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(2),"subject3","desc3"), new Long(2),"modulo3","desc3") , user, new Long(1), "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
+        resp2 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject3","desc3"),  "modulo3","desc3") , user,   "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
         ClosedAnswer resp3;
-        resp3 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(2),"subject3","desc3"),new Long(2),"modulo3","desc3"), user, new Long(2), "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
+        resp3 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject3","desc3"), "modulo3","desc3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
         answer.insert(resp1);
         answer.insert(resp2);
         answer.insert(resp3);
@@ -497,7 +497,7 @@ public class PerformanceManagementImplTest {
     public void testCalculateErrorsBySubject1() throws Exception {
         System.out.println("calculateErrorsBySubject1");
         User user = null;
-        Subject s = new Subject(new Long(0), "subject", "desc");
+        Subject s = new Subject(  "subject", "desc");
         try{
             impl.calculateErrorsBySubject(user, s);
         }catch(BusinessException ex){
@@ -513,7 +513,7 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsBySubject2");
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(null);
-        Subject s = new Subject(new Long(0), "subject", "desc");
+        Subject s = new Subject(  "subject", "desc");
         try{
             impl.calculateErrorsBySubject(user, s);
         }catch(BusinessException ex){
@@ -529,7 +529,7 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsBySubject3");
         User user = new User("Joao", null, "senha", 'j');
         user.setIdUsuario(new Long(0));
-        Subject s = new Subject(new Long(0), "subject", "desc");
+        Subject s = new Subject(  "subject", "desc");
         try{
             impl.calculateErrorsBySubject(user, s);
         }catch(BusinessException ex){
@@ -545,7 +545,7 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsBySubject4");
         User user = new User(null, "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
-        Subject s = new Subject(new Long(0), "subject", "desc");
+        Subject s = new Subject(  "subject", "desc");
         try{
             impl.calculateErrorsBySubject(user, s);
         }catch(BusinessException ex){
@@ -561,7 +561,7 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsBySubject5");
         User user = new User("Joao", "joao@gmail.com", null, 'j');
         user.setIdUsuario(new Long(0));
-        Subject s = new Subject(new Long(0), "subject", "desc");
+        Subject s = new Subject(  "subject", "desc");
         try{
             impl.calculateErrorsBySubject(user, s);
         }catch(BusinessException ex){
@@ -593,7 +593,7 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsBySubject7");
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
-        Subject s = new Subject(new Long(0), null, "desc");
+        Subject s = new Subject(  null, "desc");
         try{
             impl.calculateErrorsBySubject(user, s);
         }catch(BusinessException ex){
@@ -609,7 +609,7 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsBySubject8");
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
-        Subject s = new Subject(new Long(0), "subject", null);
+        Subject s = new Subject(  "subject", null);
         try{
             impl.calculateErrorsBySubject(user, s);
         }catch(BusinessException ex){
@@ -625,13 +625,13 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsBySubject9");
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
-        Subject s = new Subject(new Long(0), "subject", "desc");
+        Subject s = new Subject(  "subject", "desc");
         ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new Question(new Module(s, new Long(0), "nome", "desc"), user, new Long(0), "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
+        resp1 = new ClosedAnswer(0, user, new Question(new Module(s,   "nome", "desc"), user,   "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
         ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(1),"subject2","desc2"),new Long(1),"modulo2","desc2"), user, new Long(1), "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
+        resp2 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject2","desc2"), "modulo2","desc2"), user,   "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
         ClosedAnswer resp3;
-        resp3 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(2),"subject3","desc3"),new Long(2),"modulo3","desc3"), user, new Long(2), "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
+        resp3 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject3","desc3"), "modulo3","desc3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
         answer.insert(resp1);
         answer.insert(resp2);
         answer.insert(resp3);
@@ -653,13 +653,13 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsBySubject10");
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
-        Subject s = new Subject(new Long(0), "subject", "desc");
+        Subject s = new Subject(  "subject", "desc");
         ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new Question(new Module(s, new Long(0), "nome", "desc") , user, new Long(0), "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
+        resp1 = new ClosedAnswer(0, user, new Question(new Module(s,   "nome", "desc") , user,   "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
         ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new Question(new Module(s, new Long(1), "nome2", "desc2") , user, new Long(1), "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
+        resp2 = new ClosedAnswer(0, user, new Question(new Module(s,   "nome2", "desc2") , user,   "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
         ClosedAnswer resp3;
-        resp3 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(2),"subject3","desc3"),new Long(2),"modulo3","desc3"), user, new Long(2), "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
+        resp3 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject3","desc3"), "modulo3","desc3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
         answer.insert(resp1);
         answer.insert(resp2);
         answer.insert(resp3);
@@ -681,13 +681,13 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsBySubject11");
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
-        Subject s = new Subject(new Long(0), "subject", "desc");
+        Subject s = new Subject(  "subject", "desc");
         ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(2),"subject3","desc3"), new Long(2),"modulo3","desc3") , user, new Long(0), "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
+        resp1 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject3","desc3"),  "modulo3","desc3") , user,   "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
         ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(2),"subject3","desc3"), new Long(2),"modulo3","desc3") , user, new Long(1), "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
+        resp2 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject3","desc3"),  "modulo3","desc3") , user,   "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
         ClosedAnswer resp3;
-        resp3 = new ClosedAnswer(0, user, new Question(new Module(new Subject(new Long(2),"subject3","desc3"),new Long(2),"modulo3","desc3"), user, new Long(2), "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
+        resp3 = new ClosedAnswer(0, user, new Question(new Module(new Subject( "subject3","desc3"), "modulo3","desc3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
         answer.insert(resp1);
         answer.insert(resp2);
         answer.insert(resp3);

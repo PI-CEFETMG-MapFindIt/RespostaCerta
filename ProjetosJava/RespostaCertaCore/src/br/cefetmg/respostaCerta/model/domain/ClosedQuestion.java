@@ -23,7 +23,7 @@ public class ClosedQuestion extends Question{
     public ClosedQuestion() {
     }
     
-    public ClosedQuestion(String alt1, String alt2, String alt3, String alt4, String alt5, int correta, Module modulo, User criador, Long idQuestao, String enunciadoQuestao, boolean idtQuestao, LocalDate dataCriacao, String tituloQuestao, Image questPhoto) {
+    public ClosedQuestion(String alt1, String alt2, String alt3, String alt4, String alt5, int correta, Module modulo, User criador, String enunciadoQuestao, boolean idtQuestao, LocalDate dataCriacao, String tituloQuestao, Image questPhoto) {
         super(modulo, criador, enunciadoQuestao, idtQuestao, dataCriacao, tituloQuestao, questPhoto);
         this.alt1 = alt1;
         this.alt2 = alt2;

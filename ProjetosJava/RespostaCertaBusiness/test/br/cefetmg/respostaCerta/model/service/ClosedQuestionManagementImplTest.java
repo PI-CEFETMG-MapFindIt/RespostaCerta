@@ -574,7 +574,7 @@ public class ClosedQuestionManagementImplTest {
     public void testUpdateQuestion13() throws Exception {
         System.out.println("UpdateQuestion13");
         ClosedQuestion question = new ClosedQuestion("1", "2", "3", "4", "5", 1, new Module(), 
-        new User(), new Long(0), "Test", true, LocalDate.MIN, "Test", null);
+        new User(), "Test", true, LocalDate.MIN, "Test", null);
       
         impl.registerQuestion(question);
         question.setCorreta(2);
