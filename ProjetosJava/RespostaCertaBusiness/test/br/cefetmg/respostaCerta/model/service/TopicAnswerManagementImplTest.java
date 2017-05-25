@@ -6,12 +6,7 @@
 package br.cefetmg.respostaCerta.model.service;
 
 import br.cefetmg.respostaCerta.model.dao.TopicAnswerDAO;
-import br.cefetmg.respostaCerta.model.dao.TopicDAO;
-import br.cefetmg.respostaCerta.model.dao.TopicDAOImpl;
-import br.cefetmg.respostaCerta.model.domain.Forum;
-import br.cefetmg.respostaCerta.model.domain.Module;
-import br.cefetmg.respostaCerta.model.domain.Question;
-import br.cefetmg.respostaCerta.model.domain.Subject;
+import br.cefetmg.respostaCerta.model.dao.TopicAnswerDAOImpl;
 import br.cefetmg.respostaCerta.model.domain.Topic;
 import br.cefetmg.respostaCerta.model.domain.TopicAnswer;
 import br.cefetmg.respostaCerta.model.domain.User;
@@ -40,7 +35,7 @@ public class TopicAnswerManagementImplTest {
     
     @BeforeClass
     public static void setUpClass() {
-        topicAnswerDAO = TopicAnswerDAO.getInstance();
+        topicAnswerDAO = TopicAnswerDAOImpl.getInstance();
         impl = new TopicAnswerManagementImpl(topicAnswerDAO);
     }
     
@@ -72,7 +67,7 @@ public class TopicAnswerManagementImplTest {
         try{
             impl.registerTopicAnswer(topic);
         }catch(BusinessException ex){
-            assertTrue("topicanswer não pode ser nulo".equals(ex.getMessage()));
+            assertTrue("TopicAnswer não pode ser nulo".equals(ex.getMessage()));
             return;
         }
         fail("Aceitou topico nulo");
@@ -82,7 +77,11 @@ public class TopicAnswerManagementImplTest {
     public void testRegisterTopicAnswer2() throws Exception {
         System.out.println("registerTopicAnswer2");
         TopicAnswer topic = new TopicAnswer();
+        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
         topic.setDataResposta(null);
+        topic.setMensagem(new Topic());
+        topic.setIdMensagemResposta(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
           
         try{
             impl.registerTopicAnswer(topic);
@@ -98,7 +97,10 @@ public class TopicAnswerManagementImplTest {
         System.out.println("registerTopicAnswer3");
         TopicAnswer topic = new TopicAnswer();
         topic.setAutor(null);
-        
+        topic.setDataResposta(LocalDate.now());
+        topic.setMensagem(new Topic());
+        topic.setIdMensagemResposta(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
             impl.registerTopicAnswer(topic);
         }catch(BusinessException ex){
@@ -112,12 +114,16 @@ public class TopicAnswerManagementImplTest {
     public void testRegisterTopicAnswer4() throws Exception {
         System.out.println("registerTopicAnswer4");
         TopicAnswer topic = new TopicAnswer();
+        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
+        topic.setDataResposta(LocalDate.now());
+        topic.setMensagem(new Topic());
+        topic.setIdMensagemResposta(Long.MAX_VALUE);
         topic.setTxtMensagem(null);
         
         try{
             impl.registerTopicAnswer(topic);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("texto não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Texto não pode ser nulo"));
             return;
         }
         fail("Aceitou topico com mensagem nula");
@@ -131,6 +137,7 @@ public class TopicAnswerManagementImplTest {
         topic.setDataResposta(LocalDate.now());
         topic.setMensagem(new Topic());
         topic.setIdMensagemResposta(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
             impl.registerTopicAnswer(topic);
             assertEquals(topic, impl.getTopicAnswerById(topic.getIdMensagemResposta()));
@@ -146,6 +153,11 @@ public class TopicAnswerManagementImplTest {
     public void testUpdateTopicAnswer1() throws Exception {
         System.out.println("updateTopicAnswer1");
         TopicAnswer topic = new TopicAnswer();
+        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
+        topic.setDataResposta(LocalDate.now());
+        topic.setMensagem(new Topic());
+        topic.setIdMensagemResposta(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
             impl.updateTopicAnswer(null, topic);
         }catch(BusinessException ex){
@@ -163,7 +175,7 @@ public class TopicAnswerManagementImplTest {
         try{
             impl.updateTopicAnswer(new Long(1), topic);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("topicanswer não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("TopicAnswer não pode ser nulo"));
             return;
         }
         fail("Aceitou topico nulo");
@@ -173,7 +185,11 @@ public class TopicAnswerManagementImplTest {
     public void testUpdateTopicAnswer3() throws Exception {
         System.out.println("updateTopicAnswer3");
         TopicAnswer topic = new TopicAnswer();
+        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
         topic.setDataResposta(null);
+        topic.setMensagem(new Topic());
+        topic.setIdMensagemResposta(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
             impl.updateTopicAnswer(new Long(1), topic);
         }catch(BusinessException ex){
@@ -188,6 +204,10 @@ public class TopicAnswerManagementImplTest {
         System.out.println("updateTopicAnswer4");
         TopicAnswer topic = new TopicAnswer();
         topic.setAutor(null);
+        topic.setDataResposta(LocalDate.now());
+        topic.setMensagem(new Topic());
+        topic.setIdMensagemResposta(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
             impl.updateTopicAnswer(new Long(0), topic);
         }catch(BusinessException ex){
@@ -201,12 +221,15 @@ public class TopicAnswerManagementImplTest {
     public void testUpdateTopicAnswer5() throws Exception {
         System.out.println("updateTopicAnswer5");
         TopicAnswer topic = new TopicAnswer();
+        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
+        topic.setDataResposta(LocalDate.now());
+        topic.setMensagem(new Topic());
+        topic.setIdMensagemResposta(Long.MAX_VALUE);
         topic.setTxtMensagem(null);
-        
         try{
             impl.updateTopicAnswer(new Long(0), topic);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("texto não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Texto não pode ser nulo"));
             return;
         }
         fail("Aceitou topico com texto nulo");
@@ -220,11 +243,12 @@ public class TopicAnswerManagementImplTest {
         topic.setDataResposta(LocalDate.now());
         topic.setMensagem(new Topic());
         topic.setIdMensagemResposta(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
-            impl.updateTopicAnswer(new Long(1), topic);
-        }catch(BusinessException ex){
+            impl.updateTopicAnswer(new Long(0), topic);
             assertEquals(topic, impl.getTopicAnswerById(topic.getIdMensagemResposta()));
-            return;
+        }catch(BusinessException ex){
+            fail("Erro ao atualizar");
         }
         fail("Aceitou id nulo");
     }
@@ -273,11 +297,11 @@ public class TopicAnswerManagementImplTest {
         try{
            impl.registerTopicAnswer(topic);
            impl.removeTopicAnswer(new Long(3)); 
-           fail("Buscou topic inexistente");
+           fail("Removeu topic inexistente");
         }catch(PersistenceException ex){
            return;
         }
-        fail("Removeu topico inexistente");
+        fail("Removeu topic inexistente");
     }
     
     /**
@@ -333,7 +357,7 @@ public class TopicAnswerManagementImplTest {
         }catch(PersistenceException ex){
            return;
         }
-        fail("Buscou resposta inexistente");
+        fail("Buscou topico inexistente");
     }
     
     /**
@@ -350,7 +374,7 @@ public class TopicAnswerManagementImplTest {
         try{
            impl.registerTopicAnswer(topic);
            impl.getTopicAnswerById(new Long(4)); 
-           fail("Buscou topic inexistente");
+           fail("Buscou topico inexistente");
         }catch(PersistenceException ex){
            return;
         }
@@ -371,7 +395,7 @@ public class TopicAnswerManagementImplTest {
            impl.registerTopicAnswer(topic);
            assertTrue(impl.getTopicAnswerById(topic.getIdMensagemResposta())==topic);
         }catch(PersistenceException|BusinessException ex){
-           fail("Erro ao obter o topic");
+           fail("Erro ao obter o topico");
         }
     }
 
@@ -400,6 +424,7 @@ public class TopicAnswerManagementImplTest {
         topic.setDataResposta(LocalDate.now());
         topic.setMensagem(new Topic());
         topic.setIdMensagemResposta(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         impl.registerTopicAnswer(topic);
         try{
            List list = impl.getAnswersTopic(new Long(0));
@@ -490,14 +515,14 @@ public class TopicAnswerManagementImplTest {
     public void testGetAnswersTopic5() throws Exception {
         System.out.println("getAnswersTopic5");
         TopicAnswer topic = new TopicAnswer();
-        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
+        topic.setAutor(new User(new Long(0), "Joao", "joao@gmail.com", "senha", 'j'));
         topic.setDataResposta(LocalDate.now());
         topic.setMensagem(new Topic());
         topic.setIdMensagemResposta(Long.MAX_VALUE);
         impl.registerTopicAnswer(topic);
         
         TopicAnswer topic2 = new TopicAnswer();
-        topic2.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
+        topic2.setAutor(new User(new Long(1), "Joao", "joao@gmail.com", "senha", 'j'));
         topic2.setDataResposta(LocalDate.now());
         topic2.setMensagem(new Topic());
         topic2.setIdMensagemResposta(Long.MAX_VALUE);

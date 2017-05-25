@@ -312,7 +312,7 @@ public class OpenQuestionManagementImplTest {
      * Test of updateUser method, of class UserManagementImpl.
      */
     @Test
-    public void testUpdateUser8() throws Exception {
+    public void testUpdateOpenQuestion8() throws Exception {
         System.out.println("updateOpenQuestion8");
         Question question = new Question();
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));

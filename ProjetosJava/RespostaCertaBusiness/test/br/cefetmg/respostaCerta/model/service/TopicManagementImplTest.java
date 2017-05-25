@@ -38,7 +38,7 @@ public class TopicManagementImplTest {
     
     @BeforeClass
     public static void setUpClass() {
-        topicDAO = TopicDAO.getInstance();
+        topicDAO = TopicDAOImpl.getInstance();
         impl = new TopicManagementImpl(topicDAO);
     }
     
@@ -70,7 +70,7 @@ public class TopicManagementImplTest {
         try{
             impl.registerTopic(topic);
         }catch(BusinessException ex){
-            assertTrue("topico não pode ser nulo".equals(ex.getMessage()));
+            assertTrue("Topico não pode ser nulo".equals(ex.getMessage()));
             return;
         }
         fail("Aceitou topico nulo");
@@ -81,6 +81,10 @@ public class TopicManagementImplTest {
         System.out.println("registerTopic2");
         Topic topic = new Topic();
         topic.setDataPostagem(null);
+        topic.setForum(new Forum());
+        topic.setIdMensagem(Long.MAX_VALUE);
+        topic.setAutor(new User("joao", "joaoteste@gmail.com", "senha", 'p'));
+        topic.setTxtMensagem("txt");
           
         try{
             impl.registerTopic(topic);
@@ -95,8 +99,11 @@ public class TopicManagementImplTest {
     public void testRegisterTopic3() throws Exception {
         System.out.println("registerTopic3");
         Topic topic = new Topic();
+        topic.setDataPostagem(LocalDate.now());
+        topic.setForum(new Forum());
+        topic.setIdMensagem(Long.MAX_VALUE);
         topic.setAutor(null);
-        
+        topic.setTxtMensagem("txt");
         try{
             impl.registerTopic(topic);
         }catch(BusinessException ex){
@@ -110,12 +117,15 @@ public class TopicManagementImplTest {
     public void testRegisterTopic4() throws Exception {
         System.out.println("registerTopic4");
         Topic topic = new Topic();
+        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
+        topic.setDataPostagem(LocalDate.now());
+        topic.setForum(new Forum());
+        topic.setIdMensagem(Long.MAX_VALUE);
         topic.setTxtMensagem(null);
-        
         try{
             impl.registerTopic(topic);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("texto da mensagem não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Texto da mensagem não pode ser nulo"));
             return;
         }
         fail("Aceitou topico com mensagem nula");
@@ -129,6 +139,7 @@ public class TopicManagementImplTest {
         topic.setDataPostagem(LocalDate.now());
         topic.setForum(new Forum());
         topic.setIdMensagem(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
             impl.registerTopic(topic);
             assertEquals(topic, impl.getTopicById(topic.getIdMensagem()));
@@ -144,6 +155,11 @@ public class TopicManagementImplTest {
     public void testUpdateTopic1() throws Exception {
         System.out.println("updateTopic1");
         Topic topic = new Topic();
+        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
+        topic.setDataPostagem(LocalDate.now());
+        topic.setForum(new Forum());
+        topic.setIdMensagem(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
             impl.updateTopic(null, topic);
         }catch(BusinessException ex){
@@ -161,7 +177,7 @@ public class TopicManagementImplTest {
         try{
             impl.updateTopic(new Long(1), topic);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("topico não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Topico não pode ser nulo"));
             return;
         }
         fail("Aceitou topico nulo");
@@ -171,7 +187,11 @@ public class TopicManagementImplTest {
     public void testUpdateTopic3() throws Exception {
         System.out.println("updateTopic3");
         Topic topic = new Topic();
+        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
         topic.setDataPostagem(null);
+        topic.setForum(new Forum());
+        topic.setIdMensagem(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
             impl.updateTopic(new Long(1), topic);
         }catch(BusinessException ex){
@@ -186,6 +206,10 @@ public class TopicManagementImplTest {
         System.out.println("updateTopic4");
         Topic topic = new Topic();
         topic.setAutor(null);
+        topic.setDataPostagem(LocalDate.now());
+        topic.setForum(new Forum());
+        topic.setIdMensagem(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
             impl.updateTopic(new Long(0), topic);
         }catch(BusinessException ex){
@@ -199,12 +223,16 @@ public class TopicManagementImplTest {
     public void testUpdateTopic5() throws Exception {
         System.out.println("updateTopic5");
         Topic topic = new Topic();
+        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
+        topic.setDataPostagem(LocalDate.now());
+        topic.setForum(new Forum());
+        topic.setIdMensagem(Long.MAX_VALUE);
         topic.setTxtMensagem(null);
         
         try{
             impl.updateTopic(new Long(0), topic);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("texto da mensagem não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Texto da mensagem não pode ser nulo"));
             return;
         }
         fail("Aceitou topico com texto nulo");
@@ -218,6 +246,7 @@ public class TopicManagementImplTest {
         topic.setDataPostagem(LocalDate.now());
         topic.setForum(new Forum());
         topic.setIdMensagem(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
             impl.updateTopic(new Long(1), topic);
         }catch(BusinessException ex){
@@ -268,10 +297,11 @@ public class TopicManagementImplTest {
         topic.setDataPostagem(LocalDate.now());
         topic.setForum(new Forum());
         topic.setIdMensagem(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
            impl.registerTopic(topic);
            impl.removeTopic(new Long(3)); 
-           fail("Buscou topic inexistente");
+           fail("Buscou topico inexistente");
         }catch(PersistenceException ex){
            return;
         }
@@ -289,6 +319,7 @@ public class TopicManagementImplTest {
         topic.setDataPostagem(LocalDate.now());
         topic.setForum(new Forum());
         topic.setIdMensagem(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
            impl.registerTopic(topic);
            impl.removeTopic(topic.getIdMensagem());
@@ -345,6 +376,7 @@ public class TopicManagementImplTest {
         topic.setDataPostagem(LocalDate.now());
         topic.setForum(new Forum());
         topic.setIdMensagem(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
            impl.registerTopic(topic);
            impl.getTopicById(new Long(4)); 
@@ -365,11 +397,12 @@ public class TopicManagementImplTest {
         topic.setDataPostagem(LocalDate.now());
         topic.setForum(new Forum());
         topic.setIdMensagem(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         try{
            impl.registerTopic(topic);
            assertTrue(impl.getTopicById(topic.getIdMensagem())==topic);
         }catch(PersistenceException|BusinessException ex){
-           fail("Erro ao obter o topic");
+           fail("Erro ao obter o topico");
         }
     }
 
@@ -396,7 +429,9 @@ public class TopicManagementImplTest {
         Topic topic = new Topic();
         topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
         topic.setDataPostagem(LocalDate.now());
-        topic.setForum(new Forum());
+        Forum f = new Forum();
+        f.setIdForum(new Long(0));
+        topic.setForum(f);
         topic.setIdMensagem(Long.MAX_VALUE);
         impl.registerTopic(topic);
         try{
@@ -424,15 +459,19 @@ public class TopicManagementImplTest {
         Topic topic = new Topic();
         topic.setAutor(user);
         topic.setDataPostagem(LocalDate.now());
-        topic.setForum(new Forum());
+        Forum f = new Forum();
+        f.setIdForum(new Long(0));
+        topic.setForum(f);
         topic.setIdMensagem(Long.MAX_VALUE);
+        topic.setTxtMensagem("txt");
         impl.registerTopic(topic);
         
         Topic topic2 = new Topic();
         topic2.setAutor(user);
         topic2.setDataPostagem(LocalDate.now());
-        topic2.setForum(new Forum());
+        topic2.setForum(f);
         topic2.setIdMensagem(Long.MAX_VALUE);
+        topic2.setTxtMensagem("txt");
         impl.registerTopic(topic2);
         try{
            List list = impl.getTopicsForum(new Long(0));
@@ -459,14 +498,16 @@ public class TopicManagementImplTest {
         Topic topic = new Topic();
         topic.setAutor(user);
         topic.setDataPostagem(LocalDate.now());
-        topic.setForum(new Forum());
+        Forum f = new Forum();
+        f.setIdForum(new Long(1));
+        topic.setForum(f);
         topic.setIdMensagem(Long.MAX_VALUE);
         impl.registerTopic(topic);
         
         Topic topic2 = new Topic();
         topic2.setAutor(user);
         topic2.setDataPostagem(LocalDate.now());
-        topic2.setForum(new Forum());
+        topic2.setForum(f);
         topic2.setIdMensagem(Long.MAX_VALUE);
         impl.registerTopic(topic2);
         try{
@@ -490,14 +531,18 @@ public class TopicManagementImplTest {
         Topic topic = new Topic();
         topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
         topic.setDataPostagem(LocalDate.now());
-        topic.setForum(new Forum());
+        Forum f1 = new Forum();
+        f1.setIdForum(new Long(0));
+        topic.setForum(f1);
         topic.setIdMensagem(Long.MAX_VALUE);
         impl.registerTopic(topic);
         
         Topic topic2 = new Topic();
         topic2.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
         topic2.setDataPostagem(LocalDate.now());
-        topic2.setForum(new Forum());
+        Forum f2 = new Forum();
+        f2.setIdForum(new Long(1));
+        topic2.setForum(f2);
         topic2.setIdMensagem(Long.MAX_VALUE);
         impl.registerTopic(topic2);
         try{
