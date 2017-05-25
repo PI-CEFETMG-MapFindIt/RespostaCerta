@@ -7,8 +7,6 @@ package br.cefetmg.respostaCerta.model.service;
 
 import br.cefetmg.respostaCerta.model.dao.OpenAnswerDAO;
 import br.cefetmg.respostaCerta.model.dao.OpenAnswerDAOImpl;
-import br.cefetmg.respostaCerta.model.dao.UserDAO;
-import br.cefetmg.respostaCerta.model.dao.UserDAOImpl;
 import br.cefetmg.respostaCerta.model.domain.OpenAnswer;
 import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.domain.User;
@@ -109,7 +107,7 @@ public class OpenAnswerManagementImplTest {
     public void testRegisterQuestionAnswer4() throws Exception {
         System.out.println("registerOpenAnswer4");
         User us = new User("Joao", "joao@oi.com", "senha", 'p');
-        Question q = new Question(null, null, null, new Long(0), "enunciado", true, LocalDate.now(), "titulo", null);
+        Question q = new Question(null, null, new Long(0), "enunciado", true, LocalDate.now(), "titulo", null);
         OpenAnswer open = new OpenAnswer("a", us, q, LocalDate.now(), 'f', true);
         try{
             impl.registerQuestionAnswer(open);
@@ -130,7 +128,7 @@ public class OpenAnswerManagementImplTest {
             impl.updateQuestionAnswer(new Long(0), open);
         }catch(BusinessException ex){
             System.out.println(ex);
-            assertTrue(ex.getMessage().equals("A reposta não pode ser nula"));
+            assertTrue(ex.getMessage().equals("A resposta não pode ser nula"));
             return;
         }
         fail("Aceitou resposta nula");
@@ -332,7 +330,7 @@ public class OpenAnswerManagementImplTest {
            impl.registerQuestionAnswer(openAnswer);
            assertTrue(impl.getQuestionAnswerById(openAnswer.getIdResposta())==openAnswer);
         }catch(PersistenceException|BusinessException ex){
-           fail("Erro ao obter o usuario");
+           fail("Erro ao obter a resposta");
         }
     }
     
