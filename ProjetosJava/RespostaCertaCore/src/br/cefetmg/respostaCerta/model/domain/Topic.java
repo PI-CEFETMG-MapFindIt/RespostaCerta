@@ -14,7 +14,6 @@ import java.time.LocalDate;
  */
 public class Topic {
     private Question questao;
-    private Long idMensagem;
     private User autor;
     private String txtMensagem;
     private LocalDate dataPostagem;
@@ -40,14 +39,6 @@ public class Topic {
 
     public void setQuestao(Question questao) {
         this.questao = questao;
-    }
-
-    public Long getIdMensagem() {
-        return idMensagem;
-    }
-
-    public void setIdMensagem(Long idMensagem) {
-        this.idMensagem = idMensagem;
     }
 
     public User getAutor() {

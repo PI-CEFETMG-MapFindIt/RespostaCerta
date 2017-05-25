@@ -148,7 +148,7 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
 	TopicAnswer item;
         while (iterator.hasNext()){
             item=iterator.next();
-            if(Objects.equals(item.getMensagem().getIdMensagem(), mensagemID)){
+            if(Objects.equals(item.getMensagem().getTopicoId(), mensagemID)){
                 topicAnswerList.add(item);
             }
         }    
