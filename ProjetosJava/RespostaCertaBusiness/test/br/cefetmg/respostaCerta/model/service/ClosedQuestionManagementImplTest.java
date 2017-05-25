@@ -14,6 +14,8 @@ import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -48,11 +50,12 @@ public class ClosedQuestionManagementImplTest {
         List<ClosedQuestion> us;
         try {
             us = closedQuestionDAO.listAll();
+            System.out.println(us);
             for(ClosedQuestion a : us){
                 closedQuestionDAO.delete(a.getIdQuestao());
             }
         } catch (PersistenceException ex) {
-            System.out.println("Erro!");
+            System.out.println(ex);
         }
     }
     
@@ -297,6 +300,16 @@ public class ClosedQuestionManagementImplTest {
         fail("Aceitou alternativa nula");
     }
     
+    @Test
+    public void testRegisterQuestion12() throws Exception {
+        System.out.println("RegisterQuestion12");
+        ClosedQuestion question = new ClosedQuestion("1", "2", "3", "4", "5", 1, new Module(), 
+        new User(), "Test", true, LocalDate.MIN, "Test", null);
+        
+        impl.registerQuestion(question);
+        assertTrue(impl.getQuestionById(question.getIdQuestao()) == question);
+    }
+
     /**
      * Test of updateQuestion method, of class ClosedQuestionManagementImpl.
      */
@@ -555,6 +568,18 @@ public class ClosedQuestionManagementImplTest {
             return;
         }
         fail("Aceitou Id nulo");
+    }
+    
+    @Test
+    public void testUpdateQuestion13() throws Exception {
+        System.out.println("UpdateQuestion13");
+        ClosedQuestion question = new ClosedQuestion("1", "2", "3", "4", "5", 1, new Module(), 
+        new User(), "Test", true, LocalDate.MIN, "Test", null);
+      
+        impl.registerQuestion(question);
+        question.setCorreta(2);
+        impl.updateQuestion(new Long(0), question);
+        assertTrue(impl.getQuestionById(new Long(0)).getCorreta() == 2);        
     }
 
     /**

@@ -107,7 +107,7 @@ public class OpenAnswerManagementImplTest {
     public void testRegisterQuestionAnswer4() throws Exception {
         System.out.println("registerOpenAnswer4");
         User us = new User("Joao", "joao@oi.com", "senha", 'p');
-        Question q = new Question(null, null, new Long(0), "enunciado", true, LocalDate.now(), "titulo", null);
+        Question q = new Question(null, null, "enunciado", true, LocalDate.now(), "titulo", null);
         OpenAnswer open = new OpenAnswer("a", us, q, LocalDate.now(), 'f', true);
         try{
             impl.registerQuestionAnswer(open);
