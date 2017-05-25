@@ -15,6 +15,7 @@ public class Forum {
     private Question questao;
     private LocalDate dataCriacao;
     private boolean status;
+    private Long idForum;
 
     public Forum() {
     }
@@ -48,6 +49,12 @@ public class Forum {
     public void setStatus(boolean status) {
         this.status = status;
     }
-    
-    
+
+    public Long getIdForum() {
+        return idForum;
+    }
+
+    public void setIdForum(Long idForum) {
+        this.idForum = idForum;
+    }  
 }

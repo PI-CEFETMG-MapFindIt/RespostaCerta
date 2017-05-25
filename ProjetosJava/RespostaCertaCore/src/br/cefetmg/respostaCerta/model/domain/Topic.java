@@ -20,6 +20,7 @@ public class Topic {
     private LocalDate dataPostagem;
     private Image msgPhoto;
     private Forum forum;
+    private Long topicoId;
 
     public Topic() {
     }
@@ -88,6 +89,12 @@ public class Topic {
     public void setForum(Forum forum) {
         this.forum = forum;
     }
-    
-    
+
+    public Long getTopicoId() {
+        return topicoId;
+    }
+
+    public void setTopicoId(Long topicoId) {
+        this.topicoId = topicoId;
+    } 
 }
