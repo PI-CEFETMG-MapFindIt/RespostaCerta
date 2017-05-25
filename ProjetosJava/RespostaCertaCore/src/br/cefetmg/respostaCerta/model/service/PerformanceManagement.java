@@ -18,5 +18,5 @@ import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 public interface PerformanceManagement {
     public Double calculateErrors(User usuario) throws BusinessException, PersistenceException;
     public Double calculateErrorsByModule(User usuario, Module modulo) throws BusinessException, PersistenceException;
-    public Double calculateErrosBySubject(User usuario, Subject disciplina) throws BusinessException, PersistenceException;
+    public Double calculateErrorsBySubject(User usuario, Subject disciplina) throws BusinessException, PersistenceException;
 }

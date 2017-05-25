@@ -9,7 +9,6 @@ import br.cefetmg.respostaCerta.model.dao.OpenQuestionDAO;
 import br.cefetmg.respostaCerta.model.dao.OpenQuestionDAOImpl;
 import br.cefetmg.respostaCerta.model.domain.Module;
 import br.cefetmg.respostaCerta.model.domain.Question;
-import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.domain.Subject;
 import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
@@ -37,7 +36,7 @@ public class OpenQuestionManagementImplTest {
     
     @BeforeClass
     public static void setUpClass() {
-        openQuestionDAO = new OpenQuestionDAOImpl();
+        openQuestionDAO = OpenQuestionDAOImpl.getInstance();
         impl = new OpenQuestionManagementImpl(openQuestionDAO);
     }
     
@@ -303,7 +302,7 @@ public class OpenQuestionManagementImplTest {
         try{
             impl.updateQuestion(null, question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("ID não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Id não pode ser nulo"));
             return;
         }
         fail("Aceitou id nulo");
@@ -367,7 +366,7 @@ public class OpenQuestionManagementImplTest {
      * Test of removeUser method, of class UserManagementImpl.
      */
     @Test
-    public void testRemoveUser3() throws Exception {
+    public void testRemoveOpenQuestion3() throws Exception {
         System.out.println("removeOpenQuestion3");
         Question question = new Question();
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
@@ -378,6 +377,7 @@ public class OpenQuestionManagementImplTest {
         try{
            impl.registerQuestion(question);
            impl.removeQuestion(new Long(3)); 
+           fail("Buscou question inexistente");
         }catch(PersistenceException ex){
            return;
         }
@@ -455,11 +455,11 @@ public class OpenQuestionManagementImplTest {
         question.setTituloQuestao("Titulo");
         try{
            impl.registerQuestion(question);
-           impl.removeQuestion(new Long(4)); 
+           impl.getQuestionById(new Long(4)); 
+           fail("Buscou question inexistente");
         }catch(PersistenceException ex){
            return;
         }
-        fail("Buscou question inexistente");
     }
     
     /**

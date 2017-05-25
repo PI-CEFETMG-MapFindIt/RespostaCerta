@@ -76,7 +76,10 @@ public class PerformanceManagementImpl implements PerformanceManagement{
             if(!q.isCorreta())
                 totalerros++;
         }
-        return (totalerros*100)/totalquestoes;
+        if(totalquestoes>0)
+            return (totalerros*100)/totalquestoes;
+        else
+            throw new BusinessException("O usuario não respondeu nenhuma questão");
     }
 
     /**
@@ -127,7 +130,10 @@ public class PerformanceManagementImpl implements PerformanceManagement{
                     totalerros++;
             }
         }
-        return (totalerros*100)/totalquestoes;
+        if(totalquestoes>0)
+            return (totalerros*100)/totalquestoes;
+        else
+            throw new BusinessException("O usuario não respondeu nenhuma questão desse módulo");
     }
 
     /**
@@ -140,7 +146,7 @@ public class PerformanceManagementImpl implements PerformanceManagement{
      * retorna o percentual de erros por disciplina
      */
     @Override
-    public Double calculateErrosBySubject(User user, Subject disciplina) throws BusinessException, PersistenceException {
+    public Double calculateErrorsBySubject(User user, Subject disciplina) throws BusinessException, PersistenceException {
         if(user == null){
           throw new BusinessException("usuarionão pode ser nulo");  
         }
@@ -175,8 +181,10 @@ public class PerformanceManagementImpl implements PerformanceManagement{
                     totalerros++;
             }
         }
-        return (totalerros*100)/totalquestoes;
-        
+        if(totalquestoes>0)
+            return (totalerros*100)/totalquestoes;
+        else
+            throw new BusinessException("O usuario não respondeu nenhuma questão desse dominio");
     }
     
 }
