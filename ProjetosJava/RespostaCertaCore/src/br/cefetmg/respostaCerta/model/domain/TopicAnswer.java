@@ -66,7 +66,5 @@ public class TopicAnswer {
 
     public void setDataResposta(LocalDate dataResposta) {
         this.dataResposta = dataResposta;
-    }
-    
-    
+    } 
 }

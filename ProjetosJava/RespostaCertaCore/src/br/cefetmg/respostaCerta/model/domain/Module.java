@@ -18,9 +18,8 @@ public class Module {
     public Module() {
     }
 
-    public Module(Subject dominio, Long idModulo, String nomeModulo, String descModulo) {
+    public Module(Subject dominio, String nomeModulo, String descModulo) {
         this.dominio = dominio;
-        this.idModulo = idModulo;
         this.nomeModulo = nomeModulo;
         this.descModulo = descModulo;
     }

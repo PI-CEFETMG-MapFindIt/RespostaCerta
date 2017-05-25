@@ -72,6 +72,5 @@ public class User {
 
     public void setIdtUsuario(char idtUsuario) {
         this.idtUsuario = idtUsuario;
-    }
-    
+    }  
 }

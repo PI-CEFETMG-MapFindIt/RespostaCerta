@@ -76,7 +76,5 @@ public class QuestionAnswer {
 
     public void setCorreta(boolean correta) {
         this.correta = correta;
-    }
-    
-    
+    }  
 }

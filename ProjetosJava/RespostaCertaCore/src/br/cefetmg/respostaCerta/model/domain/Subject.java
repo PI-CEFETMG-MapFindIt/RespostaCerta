@@ -17,8 +17,7 @@ public class Subject {
     public Subject() {
     }
 
-    public Subject(Long idDominio, String nomeDominio, String descDominio) {
-        this.idDominio = idDominio;
+    public Subject(String nomeDominio, String descDominio) {
         this.nomeDominio = nomeDominio;
         this.descDominio = descDominio;
     }
@@ -45,7 +44,5 @@ public class Subject {
 
     public void setDescDominio(String descDominio) {
         this.descDominio = descDominio;
-    }
-    
-    
+    }  
 }

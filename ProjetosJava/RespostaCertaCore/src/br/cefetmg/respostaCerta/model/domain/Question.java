@@ -25,10 +25,9 @@ public class Question {
     public Question() {
     }
 
-    public Question(Module modulo, User criador, Long idQuestao, String enunciadoQuestao, boolean idtQuestao, LocalDate dataCriacao, String tituloQuestao, Image questPhoto) {
+    public Question(Module modulo, User criador, String enunciadoQuestao, boolean idtQuestao, LocalDate dataCriacao, String tituloQuestao, Image questPhoto) {
         this.modulo = modulo;
         this.criador = criador;
-        this.idQuestao = idQuestao;
         this.enunciadoQuestao = enunciadoQuestao;
         this.idtQuestao = idtQuestao;
         this.dataCriacao = dataCriacao;
