@@ -68,7 +68,7 @@ public class OpenQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue("question não pode ser nulo".equals(ex.getMessage()));
+            assertTrue("Question não pode ser nulo".equals(ex.getMessage()));
             return;
         }
         fail("Aceitou question nula");
@@ -86,7 +86,7 @@ public class OpenQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("criador não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Criador não pode ser nulo"));
             return;
         }
         fail("Aceitou questao com criador nulo");
@@ -104,7 +104,7 @@ public class OpenQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("data de criação não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Data de criação não pode ser nulo"));
             return;
         }
         fail("Aceitou questao com data nula");
@@ -122,7 +122,7 @@ public class OpenQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("modulo não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Modulo não pode ser nulo"));
             return;
         }
         fail("Aceitou questao com modulo nulo");
@@ -140,7 +140,7 @@ public class OpenQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("enunciado não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Enunciado não pode ser nulo"));
             return;
         }
         fail("Aceitou questao com enunciado nulo");
@@ -158,7 +158,7 @@ public class OpenQuestionManagementImplTest {
         try{
             impl.registerQuestion(question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("titulo não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Titulo não pode ser nulo"));
             return;
         }
         fail("Aceitou questao com titulo nulo");
@@ -192,7 +192,7 @@ public class OpenQuestionManagementImplTest {
             impl.updateQuestion(new Long(0), open);
         }catch(BusinessException ex){
             System.out.println(ex);
-            assertTrue(ex.getMessage().equals("question não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Question não pode ser nulo"));
             return;
         }
         fail("Aceitou question nula");
@@ -210,7 +210,7 @@ public class OpenQuestionManagementImplTest {
         try{
             impl.updateQuestion(new Long(0), question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("criador não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Criador não pode ser nulo"));
             return;
         }
         fail("Aceitou question com criador nulo");
@@ -228,7 +228,7 @@ public class OpenQuestionManagementImplTest {
         try{
             impl.updateQuestion(new Long(0), question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("data de criação não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Data de criação não pode ser nulo"));
             return;
         }
         fail("Aceitou question com data nula");
@@ -246,7 +246,7 @@ public class OpenQuestionManagementImplTest {
         try{
             impl.updateQuestion(new Long(0), question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("modulo não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Modulo não pode ser nulo"));
             return;
         }
         fail("Aceitou question com modulo nulo");
@@ -264,7 +264,7 @@ public class OpenQuestionManagementImplTest {
         try{
             impl.updateQuestion(new Long(0), question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("enunciado não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Enunciado não pode ser nulo"));
             return;
         }
         fail("Aceitou question com enunciado nulo");
@@ -282,7 +282,7 @@ public class OpenQuestionManagementImplTest {
         try{
             impl.updateQuestion(new Long(0), question);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("titulo não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Titulo não pode ser nulo"));
             return;
         }
         fail("Aceitou question com titulo nulo");

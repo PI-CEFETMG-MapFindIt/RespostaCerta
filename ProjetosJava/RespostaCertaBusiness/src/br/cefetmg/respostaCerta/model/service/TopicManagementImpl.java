@@ -35,7 +35,7 @@ public class TopicManagementImpl implements TopicManagement{
     @Override
     public void registerTopic(Topic topic) throws BusinessException, PersistenceException {
         if(topic == null){
-            throw new BusinessException ("topico não pode ser nulo");
+            throw new BusinessException ("Topico não pode ser nulo");
         }
         if(topic.getDataPostagem() == null){
             throw new BusinessException ("Data da postagem não pode ser nulo");
@@ -44,7 +44,7 @@ public class TopicManagementImpl implements TopicManagement{
             throw new BusinessException ("Autor não pode ser nulo");
         }
         if(topic.getTxtMensagem()==null){
-            throw new BusinessException ("texto da mensagem não pode ser nulo");
+            throw new BusinessException ("Texto da mensagem não pode ser nulo");
         }
         topicDAO.insert(topic);
     }
@@ -62,7 +62,7 @@ public class TopicManagementImpl implements TopicManagement{
             throw new BusinessException("Id não pode ser nulo");
         }
         if(topic == null){
-            throw new BusinessException ("topico não pode ser nulo");
+            throw new BusinessException ("Topico não pode ser nulo");
         }
         if(topic.getDataPostagem() == null){
             throw new BusinessException ("Data da postagem não pode ser nulo");
@@ -71,7 +71,7 @@ public class TopicManagementImpl implements TopicManagement{
             throw new BusinessException ("Autor não pode ser nulo");
         }
         if(topic.getTxtMensagem()==null){
-            throw new BusinessException ("texto da mensagem não pode ser nulo");
+            throw new BusinessException ("Texto da mensagem não pode ser nulo");
         }
         topic.setIdMensagem(id);
         topicDAO.update(topic);

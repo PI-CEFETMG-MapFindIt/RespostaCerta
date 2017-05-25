@@ -54,10 +54,10 @@ public class PerformanceManagementImpl implements PerformanceManagement{
     @Override
     public Double calculateErrors(User user) throws BusinessException, PersistenceException {
         if(user == null){
-          throw new BusinessException("usuarionão pode ser nulo");  
+          throw new BusinessException("Usuario não pode ser nulo");  
         }
         if(user.getIdUsuario()==null){
-            throw new BusinessException("ID dousuario não pode ser nulo"); 
+            throw new BusinessException("ID do usuario não pode ser nulo"); 
         }
         if(user.getLoginUsuario() == null){
           throw new BusinessException("Login do usuario não pode ser nulo");  
@@ -94,10 +94,10 @@ public class PerformanceManagementImpl implements PerformanceManagement{
     @Override
     public Double calculateErrorsByModule(User user, Module modulo) throws BusinessException, PersistenceException {
         if(user == null){
-          throw new BusinessException("usuarionão pode ser nulo");  
+          throw new BusinessException("Usuario não pode ser nulo");  
         }
         if(user.getIdUsuario()==null){
-            throw new BusinessException("ID dousuario não pode ser nulo"); 
+            throw new BusinessException("ID do usuario não pode ser nulo"); 
         }
         if(user.getLoginUsuario() == null){
           throw new BusinessException("Login do usuario não pode ser nulo");  
@@ -118,7 +118,7 @@ public class PerformanceManagementImpl implements PerformanceManagement{
             throw new BusinessException("Nome do modulo não pode ser nulo");
         }
         if(modulo.getDescModulo()==null){
-            throw new BusinessException("descrição do modulo não pode ser nulo");
+            throw new BusinessException("Descrição do modulo não pode ser nulo");
         }
         List<ClosedAnswer> tempq=answer.getClosedAnswerByUser(user.getIdUsuario());
         double totalquestoes=0;
@@ -148,10 +148,10 @@ public class PerformanceManagementImpl implements PerformanceManagement{
     @Override
     public Double calculateErrorsBySubject(User user, Subject disciplina) throws BusinessException, PersistenceException {
         if(user == null){
-          throw new BusinessException("usuarionão pode ser nulo");  
+          throw new BusinessException("Usuario não pode ser nulo");  
         }
         if(user.getIdUsuario()==null){
-            throw new BusinessException("ID dousuario não pode ser nulo"); 
+            throw new BusinessException("ID do usuario não pode ser nulo"); 
         }
         if(user.getLoginUsuario() == null){
           throw new BusinessException("Login do usuario não pode ser nulo");  
@@ -163,13 +163,13 @@ public class PerformanceManagementImpl implements PerformanceManagement{
           throw new BusinessException("Senha do usuario não pode ser nulo");  
         }
         if(disciplina==null){
-            throw new BusinessException("subject não pode ser nulo");
+            throw new BusinessException("Subject não pode ser nulo");
         }
         if(disciplina.getNomeDominio()==null){
             throw new BusinessException("Nome do dominio não pode ser nulo");
         }
         if(disciplina.getDescDominio()==null){
-            throw new BusinessException("desc do dominio não pode ser nula");
+            throw new BusinessException("Desc do dominio não pode ser nula");
         }
         List<ClosedAnswer> tempq=answer.getClosedAnswerByUser(user.getIdUsuario());
         double totalquestoes=0;

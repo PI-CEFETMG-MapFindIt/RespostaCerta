@@ -114,7 +114,7 @@ public class ModuleManagementImplTest {
         try{
             impl.registerModule(modulo);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("descrição do modulo não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Descrição do modulo não pode ser nulo"));
             return;
         }
         fail("Aceitou descrição nula");
@@ -177,7 +177,7 @@ public class ModuleManagementImplTest {
         try{
             impl.updateModule(new Long(1),modulo);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("descrição do modulo não pode ser nulo"));
+            assertTrue(ex.getMessage().equals("Descrição do modulo não pode ser nulo"));
             return;
         }
         fail("Aceitou descrição nula");

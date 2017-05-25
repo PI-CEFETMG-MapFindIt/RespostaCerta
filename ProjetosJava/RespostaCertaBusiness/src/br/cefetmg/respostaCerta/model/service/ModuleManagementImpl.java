@@ -40,7 +40,7 @@ public class ModuleManagementImpl implements ModuleManagement{
             throw new BusinessException("Nome do modulo não pode ser nulo");
         }
         if(module.getDescModulo()==null){
-            throw new BusinessException("descrição do modulo não pode ser nulo");
+            throw new BusinessException("Descrição do modulo não pode ser nulo");
         }
         moduleDAO.insert(module);
     }
@@ -64,7 +64,7 @@ public class ModuleManagementImpl implements ModuleManagement{
             throw new BusinessException("Nome do modulo não pode ser nulo");
         }
         if(module.getDescModulo()==null){
-            throw new BusinessException("descrição do modulo não pode ser nulo");
+            throw new BusinessException("Descrição do modulo não pode ser nulo");
         }
         if(id==null){
             throw new BusinessException("ID não pode ser nulo");

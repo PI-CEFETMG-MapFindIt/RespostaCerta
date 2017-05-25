@@ -31,22 +31,22 @@ public class OpenQuestionManagementImpl implements OpenQuestionManagement{
     @Override
     public void registerQuestion(Question question) throws BusinessException, PersistenceException {
         if(question==null){
-            throw new BusinessException("question não pode ser nulo");
+            throw new BusinessException("Question não pode ser nulo");
         }
         if(question.getCriador()==null){
-            throw new BusinessException("criador não pode ser nulo");
+            throw new BusinessException("Criador não pode ser nulo");
         }
         if(question.getDataCriacao()==null){
-            throw new BusinessException("data de criação não pode ser nulo");
+            throw new BusinessException("Data de criação não pode ser nulo");
         }
         if(question.getModulo()==null){
-            throw new BusinessException("modulo não pode ser nulo");
+            throw new BusinessException("Modulo não pode ser nulo");
         }
         if(question.getEnunciadoQuestao()==null){
-            throw new BusinessException("enunciado não pode ser nulo");
+            throw new BusinessException("Enunciado não pode ser nulo");
         }
         if(question.getTituloQuestao()==null){
-            throw new BusinessException("titulo não pode ser nulo");
+            throw new BusinessException("Titulo não pode ser nulo");
         }
         questO.insert(question);
     }
@@ -61,22 +61,22 @@ public class OpenQuestionManagementImpl implements OpenQuestionManagement{
     @Override
     public void updateQuestion(Long id, Question question) throws BusinessException, PersistenceException {
         if(question==null){
-            throw new BusinessException("question não pode ser nulo");
+            throw new BusinessException("Question não pode ser nulo");
         }
         if(question.getCriador()==null){
-            throw new BusinessException("criador não pode ser nulo");
+            throw new BusinessException("Criador não pode ser nulo");
         }
         if(question.getDataCriacao()==null){
-            throw new BusinessException("data de criação não pode ser nulo");
+            throw new BusinessException("Data de criação não pode ser nulo");
         }
         if(question.getModulo()==null){
-            throw new BusinessException("modulo não pode ser nulo");
+            throw new BusinessException("Modulo não pode ser nulo");
         }
         if(question.getEnunciadoQuestao()==null){
-            throw new BusinessException("enunciado não pode ser nulo");
+            throw new BusinessException("Enunciado não pode ser nulo");
         }
         if(question.getTituloQuestao()==null){
-            throw new BusinessException("titulo não pode ser nulo");
+            throw new BusinessException("Titulo não pode ser nulo");
         }
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");
