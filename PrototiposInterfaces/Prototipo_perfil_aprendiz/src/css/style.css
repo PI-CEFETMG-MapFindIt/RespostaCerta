@@ -133,13 +133,18 @@
 }
 
 .button {
-    background-color: gray;
+    background-color: black;
     border: none;
     color: white;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 17px;
+}
+
+.button:hover {
+    background-color: dimgray;
+    color: white;
 }
 
 .texto {
