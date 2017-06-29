@@ -139,8 +139,7 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
             pstmt.close();
             connection.close();
             return resposta;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (PersistenceException | ClassNotFoundException | SQLException e) {
             throw new PersistenceException(e.getMessage());
         }
     }

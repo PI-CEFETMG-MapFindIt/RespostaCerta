@@ -37,7 +37,6 @@ import javax.imageio.ImageIO;
 public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
     private static ClosedQuestionDAOImpl closedDAO = null;        
 
-    private static final HashMap<Long, ClosedQuestion> closedQuestionDB = new HashMap<>();    
     private static long closedCount;
     
     /**
@@ -84,7 +83,7 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
     synchronized public void insert(ClosedQuestion questaoFechada) throws PersistenceException {
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "INSERT INTO questao (idModulo, idUsuarioCriador, enunciadoQuestao, idtQuestao, dataCriacao, tituloQuestao, questPhoto) VALUES(?, ?, ?, ?, ?, ?, ?) RETURNING idResposta";
+            String sql = "INSERT INTO questao (idModulo, idUsuarioCriador, enunciadoQuestao, idtQuestao, dataCriacao, tituloQuestao, questPhoto) VALUES(?, ?, ?, ?, ?, ?, ?) RETURNING idQuestao";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, questaoFechada.getModulo().getIdModulo());
             pstmt.setLong(2, questaoFechada.getCriador().getIdUsuario());
@@ -181,8 +180,7 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
             pstmt.close();
             connection.close();
             return questao;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (PersistenceException | ClassNotFoundException | SQLException e) {
             throw new PersistenceException(e.getMessage());
         }
     }
@@ -313,6 +311,7 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
                 questao.setAlt4(rs.getString("alt4"));
                 questao.setAlt5(rs.getString("alt5"));
                 questao.setCorreta(rs.getInt("altCorreta"));
+                lista.add(questao);
             }
             rs.close();
             pstmt.close();
@@ -377,6 +376,7 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
                 questao.setAlt4(rs.getString("alt4"));
                 questao.setAlt5(rs.getString("alt5"));
                 questao.setCorreta(rs.getInt("altCorreta"));
+                lista.add(questao);
             }
             rs.close();
             pstmt.close();
