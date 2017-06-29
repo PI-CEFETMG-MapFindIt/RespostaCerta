@@ -1,4 +1,4 @@
-package br.cefetmg.inf.util.db;
+package br.cefetmg.util.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

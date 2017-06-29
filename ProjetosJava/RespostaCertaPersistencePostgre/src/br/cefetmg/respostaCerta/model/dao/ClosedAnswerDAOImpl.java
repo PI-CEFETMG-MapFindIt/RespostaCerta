@@ -5,7 +5,7 @@
  */
 package br.cefetmg.respostaCerta.model.dao;
 
-import br.cefetmg.inf.util.db.ConnectionManager;
+import br.cefetmg.util.db.ConnectionManager;
 import br.cefetmg.respostaCerta.model.domain.ClosedAnswer;
 import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
 import br.cefetmg.respostaCerta.model.domain.Module;
@@ -13,6 +13,7 @@ import br.cefetmg.respostaCerta.model.domain.Subject;
 import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -94,7 +95,7 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
      */
     @Override
     synchronized public void update(ClosedAnswer closedAnswer) throws PersistenceException {
-        try {
+        try{
             Connection connection = ConnectionManager.getInstance().getConnection();
             String sql = "UPDATE resposta SET idUsuario = ?, idQuestao = ?, idtResposta = ?, dataResposta = ? WHERE idResposta = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -111,7 +112,7 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
             pstmt.executeUpdate();
             pstmt.close();
             connection.close(); 
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
             throw new PersistenceException(e.getMessage());
         }
     }
@@ -235,7 +236,7 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
             pstmt.close();
             connection.close();
             return closed;
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException | IOException e) {
             throw new PersistenceException(e.getMessage());
         }       
     }
@@ -268,13 +269,13 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
             ArrayList<ClosedAnswer> lista = new ArrayList<>();
             PreparedStatement pstmt = connection.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
-            ClosedAnswer closed = new ClosedAnswer();
-            User autor = new User();
-            User autorQuestao = new User();
-            Subject sub = new Subject();
-            Module mod = new Module();
-            ClosedQuestion questao = new ClosedQuestion();
             while (rs.next()) {
+                ClosedAnswer closed = new ClosedAnswer();
+                User autor = new User();
+                User autorQuestao = new User();
+                Subject sub = new Subject();
+                Module mod = new Module();
+                ClosedQuestion questao = new ClosedQuestion();
                 autor.setIdUsuario(rs.getLong("idUsuario"));
                 autor.setNomeUsuario(rs.getString("nomeUsuario"));
                 autor.setLoginUsuario(rs.getString("loginUsuario"));
@@ -330,7 +331,7 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
             pstmt.close();
             connection.close();
             return lista;
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException | IOException e) {
             throw new PersistenceException(e.getMessage());
         } 
     }    
@@ -360,13 +361,13 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, userId);
             ResultSet rs = pstmt.executeQuery();
-            ClosedAnswer closed = new ClosedAnswer();
-            User autor = new User();
-            User autorQuestao = new User();
-            Subject sub = new Subject();
-            Module mod = new Module();
-            ClosedQuestion questao = new ClosedQuestion();
             while (rs.next()) {
+                ClosedAnswer closed = new ClosedAnswer();
+                User autor = new User();
+                User autorQuestao = new User();
+                Subject sub = new Subject();
+                Module mod = new Module();
+                ClosedQuestion questao = new ClosedQuestion();
                 autor.setIdUsuario(rs.getLong("idUsuario"));
                 autor.setNomeUsuario(rs.getString("nomeUsuario"));
                 autor.setLoginUsuario(rs.getString("loginUsuario"));
@@ -422,7 +423,7 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
             pstmt.close();
             connection.close();
             return lista;
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException | IOException e) {
             throw new PersistenceException(e.getMessage());
         } 
     }
