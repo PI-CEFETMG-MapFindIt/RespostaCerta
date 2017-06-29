@@ -7,16 +7,21 @@ package br.cefetmg.respostaCerta.model.dao;
 
 import br.cefetmg.inf.util.db.ConnectionManager;
 import br.cefetmg.respostaCerta.model.domain.ClosedAnswer;
+import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
+import br.cefetmg.respostaCerta.model.domain.Module;
+import br.cefetmg.respostaCerta.model.domain.Subject;
+import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -40,45 +45,7 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
             closedDAO = new ClosedAnswerDAOImpl();
         
         return  closedDAO;
-    }
-
-    @Override
-    public Livro obterPorISBN(Long isbn) throws PersistenciaException{
-        
-    }
-
-    @Override
-    public List<Livro> obterTodosLivros() throws PersistenciaException{
-        try {
-            Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "SELECT * FROM livro ORDER BY autor";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
-            ResultSet rs = pstmt.executeQuery();
-
-            ArrayList<Livro> todosLivros = new ArrayList<>();
-            if (rs.next()) {
-                do {
-                    Livro livro = new Livro();
-                    livro.setIsbn(rs.getLong("isbn"));
-                    livro.setNome(rs.getString("nome"));
-                    livro.setAutor(rs.getString("autor"));
-                    livro.setData(rs.getDate("data"));
-                    livro.setEditora(rs.getString("editora"));
-                    livro.setNumPaginas(rs.getInt("numpaginas"));
-                    livro.setVolume(rs.getInt("volume"));
-                    todosLivros.add(livro);
-                } while (rs.next());
-            }
-            rs.close();
-            pstmt.close();
-            connection.close();
-            return todosLivros;
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new PersistenciaException(e.getMessage(), e);
-        }
-    }
-    
+    }  
     /**
      *
      * @param respostaFechada
@@ -170,6 +137,7 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
             pstmt.executeUpdate();
             pstmt.close();
             connection.close();
+            return resposta;
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistenceException(e.getMessage());
@@ -187,33 +155,89 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
         try {
             Connection connection = ConnectionManager.getInstance().getConnection();
 
-            String sql = "SELECT * FROM respostaFechada a JOIN resposta b ON a.idResposta=b.idResposta WHERE a.idResposta = ?";
+            String sql = "SELECT a.resposta resposta, b.idResposta idResposta, b.idtResposta idtResposta, b.dataResposta dataResposta, "
+                    + "c.idUsuario idUsuario, c.nomeUsuario nomeUsuario, c.loginUsuario loginUsuario, c.senhaUsuario senhaUsuario, c.idtUsuario idtUsuario, "
+                    + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao"
+                    + "d.tituloQuestao tituloQuestao, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo"
+                    + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio"
+                    + "g.idUsuario idUsuarioQuestao, g.nomeUsuario nomeUsuarioQuestao, g.loginUsuario loginUsuarioQuestao, g.senhaUsuario senhaUsuarioQuestao, "
+                    + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao, "
+                    + "h.alt1 alt1, h.alt2 alt2, h.alt3 alt3, h.alt4 alt4, h.alt5 alt5, h.altCorreta altCorreta FROM respostaFechada a "
+                    + "JOIN resposta b ON a.idResposta=b.idResposta "
+                    + "JOIN Usuario c ON c.idUsuario=b.idUsuario "
+                    + "JOIN Questao d ON d.idQuestao=b.idQuestao "
+                    + "JOIN Modulo e ON e.idModulo=d.idModulo "
+                    + "JOIN Dominio f ON f.idDominio=e.idDominio"
+                    + "JOIN Usuario g ON g.idUsuario=d.idUsuarioCriador "
+                    + "JOIN QuestaoFechada h ON d.idQuestao=h.idQuestao"
+                    + "WHERE a.idResposta = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, closedId);
             ResultSet rs = pstmt.executeQuery();
             ClosedAnswer closed = new ClosedAnswer();
-            /* TO DO */
+            User autor = new User();
+            User autorQuestao = new User();
+            Subject sub = new Subject();
+            Module mod = new Module();
+            ClosedQuestion questao = new ClosedQuestion();
             if (rs.next()) {
-                
-                livro.setIsbn(rs.getLong("isbn"));
-                livro.setNome(rs.getString("nome"));
-                livro.setAutor(rs.getString("autor"));
-                livro.setData(rs.getDate("data"));
-                livro.setEditora(rs.getString("editora"));
-                livro.setNumPaginas(rs.getInt("numpaginas"));
-                livro.setVolume(rs.getInt("volume"));
+                autor.setIdUsuario(rs.getLong("idUsuario"));
+                autor.setNomeUsuario(rs.getString("nomeUsuario"));
+                autor.setLoginUsuario(rs.getString("loginUsuario"));
+                autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
+                autor.setSenhaUsuario(rs.getString("senhaUsuario"));
+                Blob blob = rs.getBlob("userPhoto");  
+                InputStream in = blob.getBinaryStream();  
+                BufferedImage image = ImageIO.read(in);
+                autor.setFotoUsuario(image);
+                closed.setAutor(autor);
+                closed.setDataResposta(rs.getDate("dataRespostaQuestao").toLocalDate());
+                closed.setIdResposta(rs.getLong("idRespostaQuestao"));
+                closed.setIdtResposta(rs.getString("idtRespostaQuestao").charAt(0));
+                autorQuestao.setIdUsuario(rs.getLong("idUsuarioQuestao"));
+                autorQuestao.setNomeUsuario(rs.getString("nomeUsuarioQuestao"));
+                autorQuestao.setLoginUsuario(rs.getString("loginUsuarioQuestao"));
+                autorQuestao.setIdtUsuario(rs.getString("idtUsuarioQuestao").charAt(0));
+                autorQuestao.setSenhaUsuario(rs.getString("senhaUsuarioQuestao"));
+                blob = rs.getBlob("userPhotoQuestao");  
+                in = blob.getBinaryStream();  
+                image = ImageIO.read(in);
+                autorQuestao.setFotoUsuario(image);
+                questao.setCriador(autorQuestao);
+                questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
+                questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
+                questao.setIdQuestao(rs.getLong("idQuestao"));
+                questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
+                mod.setDescModulo(rs.getString("descModulo"));
+                mod.setIdModulo(rs.getLong("idModulo"));
+                mod.setNomeModulo(rs.getString("nomeModulo"));
+                sub.setDescDominio(rs.getString("descDominio"));
+                sub.setIdDominio(rs.getLong("idDominio"));
+                sub.setNomeDominio(rs.getString("nomeDominio"));
+                mod.setDominio(sub);
+                questao.setModulo(mod);
+                blob = rs.getBlob("questPhoto");  
+                in = blob.getBinaryStream();  
+                image = ImageIO.read(in);
+                questao.setQuestPhoto(image);
+                questao.setTituloQuestao(rs.getString("tituloQuestao"));
+                questao.setAlt1(rs.getString("alt1"));
+                questao.setAlt2(rs.getString("alt2"));
+                questao.setAlt3(rs.getString("alt3"));
+                questao.setAlt4(rs.getString("alt4"));
+                questao.setAlt5(rs.getString("alt5"));
+                questao.setCorreta(rs.getInt("altCorreta"));
+                closed.setQuestao(questao);
+                closed.setResposta(rs.getInt("resposta"));
+                closed.setCorreta(closed.getResposta()==closed.getQuestao().getCorreta());
             }
-
             rs.close();
             pstmt.close();
             connection.close();
-            
-            return livro;
+            return closed;
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new PersistenciaException(e.getMessage(), e);
+            throw new PersistenceException(e.getMessage());
         }       
-        
     }
 
     /**
@@ -223,29 +247,183 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
      */
     @Override
     public List<ClosedAnswer> listAll() throws PersistenceException {
-        List<ClosedAnswer> closedList = new ArrayList<>();
-        
-        Iterator<ClosedAnswer> iterator = closedAnswerDB.values().iterator();
-	while (iterator.hasNext())
-            closedList.add(iterator.next());
-        
-        return closedList;
+        try {
+            Connection connection = ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT a.resposta resposta, b.idResposta idResposta, b.idtResposta idtResposta, b.dataResposta dataResposta, "
+                    + "c.idUsuario idUsuario, c.nomeUsuario nomeUsuario, c.loginUsuario loginUsuario, c.senhaUsuario senhaUsuario, c.idtUsuario idtUsuario, "
+                    + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao"
+                    + "d.tituloQuestao tituloQuestao, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo"
+                    + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio"
+                    + "g.idUsuario idUsuarioQuestao, g.nomeUsuario nomeUsuarioQuestao, g.loginUsuario loginUsuarioQuestao, g.senhaUsuario senhaUsuarioQuestao, "
+                    + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao, "
+                    + "h.alt1 alt1, h.alt2 alt2, h.alt3 alt3, h.alt4 alt4, h.alt5 alt5, h.altCorreta altCorreta FROM respostaFechada a "
+                    + "JOIN resposta b ON a.idResposta=b.idResposta "
+                    + "JOIN Usuario c ON c.idUsuario=b.idUsuario "
+                    + "JOIN Questao d ON d.idQuestao=b.idQuestao "
+                    + "JOIN Modulo e ON e.idModulo=d.idModulo "
+                    + "JOIN Dominio f ON f.idDominio=e.idDominio"
+                    + "JOIN Usuario g ON g.idUsuario=d.idUsuarioCriador "
+                    + "JOIN QuestaoFechada h ON d.idQuestao=h.idQuestao";
+            ArrayList<ClosedAnswer> lista = new ArrayList<>();
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            ClosedAnswer closed = new ClosedAnswer();
+            User autor = new User();
+            User autorQuestao = new User();
+            Subject sub = new Subject();
+            Module mod = new Module();
+            ClosedQuestion questao = new ClosedQuestion();
+            while (rs.next()) {
+                autor.setIdUsuario(rs.getLong("idUsuario"));
+                autor.setNomeUsuario(rs.getString("nomeUsuario"));
+                autor.setLoginUsuario(rs.getString("loginUsuario"));
+                autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
+                autor.setSenhaUsuario(rs.getString("senhaUsuario"));
+                Blob blob = rs.getBlob("userPhoto");  
+                InputStream in = blob.getBinaryStream();  
+                BufferedImage image = ImageIO.read(in);
+                autor.setFotoUsuario(image);
+                closed.setAutor(autor);
+                closed.setDataResposta(rs.getDate("dataRespostaQuestao").toLocalDate());
+                closed.setIdResposta(rs.getLong("idRespostaQuestao"));
+                closed.setIdtResposta(rs.getString("idtRespostaQuestao").charAt(0));
+                autorQuestao.setIdUsuario(rs.getLong("idUsuarioQuestao"));
+                autorQuestao.setNomeUsuario(rs.getString("nomeUsuarioQuestao"));
+                autorQuestao.setLoginUsuario(rs.getString("loginUsuarioQuestao"));
+                autorQuestao.setIdtUsuario(rs.getString("idtUsuarioQuestao").charAt(0));
+                autorQuestao.setSenhaUsuario(rs.getString("senhaUsuarioQuestao"));
+                blob = rs.getBlob("userPhotoQuestao");  
+                in = blob.getBinaryStream();  
+                image = ImageIO.read(in);
+                autorQuestao.setFotoUsuario(image);
+                questao.setCriador(autorQuestao);
+                questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
+                questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
+                questao.setIdQuestao(rs.getLong("idQuestao"));
+                questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
+                mod.setDescModulo(rs.getString("descModulo"));
+                mod.setIdModulo(rs.getLong("idModulo"));
+                mod.setNomeModulo(rs.getString("nomeModulo"));
+                sub.setDescDominio(rs.getString("descDominio"));
+                sub.setIdDominio(rs.getLong("idDominio"));
+                sub.setNomeDominio(rs.getString("nomeDominio"));
+                mod.setDominio(sub);
+                questao.setModulo(mod);
+                blob = rs.getBlob("questPhoto");  
+                in = blob.getBinaryStream();  
+                image = ImageIO.read(in);
+                questao.setQuestPhoto(image);
+                questao.setTituloQuestao(rs.getString("tituloQuestao"));
+                questao.setAlt1(rs.getString("alt1"));
+                questao.setAlt2(rs.getString("alt2"));
+                questao.setAlt3(rs.getString("alt3"));
+                questao.setAlt4(rs.getString("alt4"));
+                questao.setAlt5(rs.getString("alt5"));
+                questao.setCorreta(rs.getInt("altCorreta"));
+                closed.setQuestao(questao);
+                closed.setResposta(rs.getInt("resposta"));
+                closed.setCorreta(closed.getResposta()==closed.getQuestao().getCorreta());
+                lista.add(closed);
+            }
+            rs.close();
+            pstmt.close();
+            connection.close();
+            return lista;
+        } catch (Exception e) {
+            throw new PersistenceException(e.getMessage());
+        } 
     }    
 
     @Override
     public List<ClosedAnswer> getClosedAnswerByUser(Long userId) throws PersistenceException {
-        List<ClosedAnswer> closedList = new ArrayList<>();
-        Iterator<ClosedAnswer> iterator = closedAnswerDB.values().iterator();
-	ClosedAnswer item;
-        while (iterator.hasNext()){
-            item=iterator.next();
-            if(Objects.equals(item.getAutor().getIdUsuario(), userId)){
-                closedList.add(item);
+        try {
+            Connection connection = ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT a.resposta resposta, b.idResposta idResposta, b.idtResposta idtResposta, b.dataResposta dataResposta, "
+                    + "c.idUsuario idUsuario, c.nomeUsuario nomeUsuario, c.loginUsuario loginUsuario, c.senhaUsuario senhaUsuario, c.idtUsuario idtUsuario, "
+                    + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao"
+                    + "d.tituloQuestao tituloQuestao, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo"
+                    + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio"
+                    + "g.idUsuario idUsuarioQuestao, g.nomeUsuario nomeUsuarioQuestao, g.loginUsuario loginUsuarioQuestao, g.senhaUsuario senhaUsuarioQuestao, "
+                    + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao, "
+                    + "h.alt1 alt1, h.alt2 alt2, h.alt3 alt3, h.alt4 alt4, h.alt5 alt5, h.altCorreta altCorreta FROM respostaFechada a "
+                    + "JOIN resposta b ON a.idResposta=b.idResposta "
+                    + "JOIN Usuario c ON c.idUsuario=b.idUsuario "
+                    + "JOIN Questao d ON d.idQuestao=b.idQuestao "
+                    + "JOIN Modulo e ON e.idModulo=d.idModulo "
+                    + "JOIN Dominio f ON f.idDominio=e.idDominio"
+                    + "JOIN Usuario g ON g.idUsuario=d.idUsuarioCriador "
+                    + "JOIN QuestaoFechada h ON d.idQuestao=h.idQuestao"
+                    + "WHERE c.idUsuario=?";
+            ArrayList<ClosedAnswer> lista = new ArrayList<>();
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setLong(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+            ClosedAnswer closed = new ClosedAnswer();
+            User autor = new User();
+            User autorQuestao = new User();
+            Subject sub = new Subject();
+            Module mod = new Module();
+            ClosedQuestion questao = new ClosedQuestion();
+            while (rs.next()) {
+                autor.setIdUsuario(rs.getLong("idUsuario"));
+                autor.setNomeUsuario(rs.getString("nomeUsuario"));
+                autor.setLoginUsuario(rs.getString("loginUsuario"));
+                autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
+                autor.setSenhaUsuario(rs.getString("senhaUsuario"));
+                Blob blob = rs.getBlob("userPhoto");  
+                InputStream in = blob.getBinaryStream();  
+                BufferedImage image = ImageIO.read(in);
+                autor.setFotoUsuario(image);
+                closed.setAutor(autor);
+                closed.setDataResposta(rs.getDate("dataRespostaQuestao").toLocalDate());
+                closed.setIdResposta(rs.getLong("idRespostaQuestao"));
+                closed.setIdtResposta(rs.getString("idtRespostaQuestao").charAt(0));
+                autorQuestao.setIdUsuario(rs.getLong("idUsuarioQuestao"));
+                autorQuestao.setNomeUsuario(rs.getString("nomeUsuarioQuestao"));
+                autorQuestao.setLoginUsuario(rs.getString("loginUsuarioQuestao"));
+                autorQuestao.setIdtUsuario(rs.getString("idtUsuarioQuestao").charAt(0));
+                autorQuestao.setSenhaUsuario(rs.getString("senhaUsuarioQuestao"));
+                blob = rs.getBlob("userPhotoQuestao");  
+                in = blob.getBinaryStream();  
+                image = ImageIO.read(in);
+                autorQuestao.setFotoUsuario(image);
+                questao.setCriador(autorQuestao);
+                questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
+                questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
+                questao.setIdQuestao(rs.getLong("idQuestao"));
+                questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
+                mod.setDescModulo(rs.getString("descModulo"));
+                mod.setIdModulo(rs.getLong("idModulo"));
+                mod.setNomeModulo(rs.getString("nomeModulo"));
+                sub.setDescDominio(rs.getString("descDominio"));
+                sub.setIdDominio(rs.getLong("idDominio"));
+                sub.setNomeDominio(rs.getString("nomeDominio"));
+                mod.setDominio(sub);
+                questao.setModulo(mod);
+                blob = rs.getBlob("questPhoto");  
+                in = blob.getBinaryStream();  
+                image = ImageIO.read(in);
+                questao.setQuestPhoto(image);
+                questao.setTituloQuestao(rs.getString("tituloQuestao"));
+                questao.setAlt1(rs.getString("alt1"));
+                questao.setAlt2(rs.getString("alt2"));
+                questao.setAlt3(rs.getString("alt3"));
+                questao.setAlt4(rs.getString("alt4"));
+                questao.setAlt5(rs.getString("alt5"));
+                questao.setCorreta(rs.getInt("altCorreta"));
+                closed.setQuestao(questao);
+                closed.setResposta(rs.getInt("resposta"));
+                closed.setCorreta(closed.getResposta()==closed.getQuestao().getCorreta());
+                lista.add(closed);
             }
-        }
-            
-        
-        return closedList;
+            rs.close();
+            pstmt.close();
+            connection.close();
+            return lista;
+        } catch (Exception e) {
+            throw new PersistenceException(e.getMessage());
+        } 
     }
-    
 }

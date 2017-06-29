@@ -13,12 +13,13 @@ import java.time.LocalDate;
  */
 public class OpenAnswer extends QuestionAnswer{
     private String resposta;
-    
+    private Question questao;
     public OpenAnswer() {
     }
 
     public OpenAnswer(String resposta, User autor, Question questao, LocalDate dataResposta, char idtResposta, boolean correta) {
-        super(autor, questao, dataResposta, idtResposta, correta);
+        super(autor, dataResposta, idtResposta, correta);
+        this.questao=questao;
         this.resposta = resposta;
     }
 
@@ -29,4 +30,14 @@ public class OpenAnswer extends QuestionAnswer{
     public void setResposta(String resposta) {
         this.resposta = resposta;
     }
+
+    public Question getQuestao() {
+        return questao;
+    }
+
+    public void setQuestao(Question questao) {
+        this.questao = questao;
+    }
+    
+    
 }

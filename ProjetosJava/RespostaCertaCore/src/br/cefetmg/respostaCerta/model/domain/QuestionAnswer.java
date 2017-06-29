@@ -13,7 +13,6 @@ import java.time.LocalDate;
  */
 public class QuestionAnswer {
     private User autor;
-    private Question questao;
     private LocalDate dataResposta;
     private char idtResposta;
     private Long idResposta;
@@ -22,9 +21,8 @@ public class QuestionAnswer {
     public QuestionAnswer() {
     }
 
-    public QuestionAnswer(User autor, Question questao, LocalDate dataResposta, char idtResposta, boolean correta) {
+    public QuestionAnswer(User autor, LocalDate dataResposta, char idtResposta, boolean correta) {
         this.autor = autor;
-        this.questao = questao;
         this.dataResposta = dataResposta;
         this.idtResposta = idtResposta;
         this.correta=correta;
@@ -36,14 +34,6 @@ public class QuestionAnswer {
 
     public void setAutor(User autor) {
         this.autor = autor;
-    }
-
-    public Question getQuestao() {
-        return questao;
-    }
-
-    public void setQuestao(Question questao) {
-        this.questao = questao;
     }
 
     public LocalDate getDataResposta() {

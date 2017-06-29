@@ -5,6 +5,8 @@
  */
 package br.cefetmg.respostaCerta.model.domain;
 
+import java.awt.Image;
+
 /**
  *
  * @author umcan
@@ -15,16 +17,18 @@ public class User {
     private String loginUsuario;
     private String senhaUsuario;
     private char idtUsuario;
+    private Image fotoUsuario;
 
     public User() {
     }
     
-    public User(Long idUsuario, String nomeUsuario, String loginUsuario, String senhaUsuario, char idtUsuario) {
+    public User(Long idUsuario, String nomeUsuario, String loginUsuario, String senhaUsuario, char idtUsuario, Image fotoUsuario) {
         this.idUsuario = idUsuario;
         this.nomeUsuario = nomeUsuario;
         this.loginUsuario = loginUsuario;
         this.senhaUsuario = senhaUsuario;
         this.idtUsuario = idtUsuario;
+        this.fotoUsuario=fotoUsuario;
     }
     
     public User(String nomeUsuario, String loginUsuario, String senhaUsuario, char idtUsuario) {
@@ -73,4 +77,13 @@ public class User {
     public void setIdtUsuario(char idtUsuario) {
         this.idtUsuario = idtUsuario;
     }  
+
+    public Image getFotoUsuario() {
+        return fotoUsuario;
+    }
+
+    public void setFotoUsuario(Image fotoUsuario) {
+        this.fotoUsuario = fotoUsuario;
+    }
+    
 }
