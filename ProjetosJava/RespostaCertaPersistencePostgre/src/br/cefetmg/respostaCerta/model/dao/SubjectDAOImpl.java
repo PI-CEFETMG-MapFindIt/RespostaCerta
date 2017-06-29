@@ -7,6 +7,11 @@ package br.cefetmg.respostaCerta.model.dao;
 
 import br.cefetmg.respostaCerta.model.domain.Subject;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
+import br.cefetmg.util.db.ConnectionManager;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -19,8 +24,7 @@ import java.util.List;
 public class SubjectDAOImpl implements SubjectDAO{
 
     private static SubjectDAOImpl subjectDAO = null;        
-
-    private static final HashMap<Long, Subject> subjectDB = new HashMap<>();    
+  
     private static long subjectCount;
     
     /**
@@ -49,18 +53,18 @@ public class SubjectDAOImpl implements SubjectDAO{
      */
     @Override
     synchronized public void insert(Subject subject) throws PersistenceException {
-
-        if (subject == null)
-            throw new PersistenceException("Entidade não pode ser nula.");                
-        
-        Long subjectId = subject.getIdDominio();
-        
-        if ((subjectId != null) && subjectDB.containsKey(subjectId))
-            throw new PersistenceException("Duplicação de chave.");
-        
-        subjectId = ++subjectCount;
-        subject.setIdDominio(subjectId);
-        subjectDB.put(subjectId, subject);
+        try{
+            Connection connection = ConnectionManager.getInstance().getConnection();
+            String sql = "INSERT INTO Dominio(nomeDominio, descDominio) VALUES(?, ?)";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, subject.getNomeDominio());
+            pstmt.setString(2, subject.getDescDominio());
+            pstmt.executeQuery();
+            pstmt.close();
+            connection.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new PersistenceException(e.getMessage());
+        }
     }
     
     /**
@@ -70,19 +74,19 @@ public class SubjectDAOImpl implements SubjectDAO{
      */
     @Override
     synchronized public void update(Subject subject) throws PersistenceException {
-
-        if (subject == null)
-            throw new PersistenceException("Entidade não pode ser nula.");              
-        
-        Long subjectId = subject.getIdDominio();
-
-        if (subjectId == null)
-            throw new PersistenceException("Chave da entidade não pode ser nulo.");        
-        
-        if (!subjectDB.containsKey(subjectId))
-            throw new PersistenceException("Não existe entidade com a chave " + subjectId + ".");
-        
-        subjectDB.replace(subjectId, subject);
+        try{
+            Connection connection = ConnectionManager.getInstance().getConnection();
+            String sql = "UPDATE Dominio SET nomeDominio = ?, descDominio = ? WHERE idDominio = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setLong(3, subject.getIdDominio());
+            pstmt.setString(1, subject.getNomeDominio());
+            pstmt.setString(2, subject.getDescDominio());
+            pstmt.executeUpdate();
+            pstmt.close();
+            connection.close(); 
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new PersistenceException(e.getMessage());
+        }
     }
 
     /**
@@ -93,13 +97,19 @@ public class SubjectDAOImpl implements SubjectDAO{
      */
     @Override
     synchronized public Subject delete(Long subjectId) throws PersistenceException {
-        if (subjectId == null)
-            throw new PersistenceException("Chave da entidade não pode ser nulo.");
-        
-        if (!subjectDB.containsKey(subjectId))
-            throw new PersistenceException("Não existe entidade com a chave " + subjectId + ".");
-        
-        return subjectDB.remove(subjectId);
+        try {
+            Subject dominio= this.getSubjectById(subjectId);
+            Connection connection = ConnectionManager.getInstance().getConnection();
+            String sql = "DELETE FROM Dominio WHERE idDominio = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setLong(1, subjectId);
+            pstmt.executeUpdate();
+            pstmt.close();
+            connection.close();
+            return dominio;
+        } catch (PersistenceException | ClassNotFoundException | SQLException e) {
+            throw new PersistenceException(e.getMessage());
+        }
     }
 
     /**
@@ -110,15 +120,27 @@ public class SubjectDAOImpl implements SubjectDAO{
      */
     @Override
     public Subject getSubjectById(Long subjectId) throws PersistenceException {
-        
-        if (subjectId == null)
-            throw new PersistenceException("Chave da entidade não pode ser nulo.");
-        
-        if (!subjectDB.containsKey(subjectId))
-            throw new PersistenceException("Não existe entidade com a chave " + subjectId + ".");
-        
-        return subjectDB.get(subjectId);        
-        
+        try {
+            Connection connection = ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT * FROM Dominio WHERE idDominio = ?";
+            
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setLong(1, subjectId);
+            ResultSet rs = pstmt.executeQuery(); 
+            Subject sub = new Subject();
+            if (rs.next()) {
+                sub.setDescDominio(rs.getString("descDominio"));
+                sub.setIdDominio(rs.getLong("idDominio"));
+                sub.setNomeDominio(rs.getString("nomeDominio"));
+            }
+            rs.close();
+            pstmt.close();
+            connection.close();
+            return sub;
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new PersistenceException(e.getMessage());
+        }
     }
 
     /**
@@ -128,13 +150,27 @@ public class SubjectDAOImpl implements SubjectDAO{
      */
     @Override
     public List<Subject> listAll() throws PersistenceException {
-        List<Subject> subjectList = new ArrayList<>();
-        
-        Iterator<Subject> iterator = subjectDB.values().iterator();
-	while (iterator.hasNext())
-            subjectList.add(iterator.next());
-        
-        return subjectList;
+        try {
+            Connection connection = ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT * FROM Dominio";
+            
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery(); 
+            ArrayList<Subject> lista = new ArrayList<>();
+            while (rs.next()) {
+                Subject sub = new Subject();
+                sub.setDescDominio(rs.getString("descDominio"));
+                sub.setIdDominio(rs.getLong("idDominio"));
+                sub.setNomeDominio(rs.getString("nomeDominio"));
+            }
+            rs.close();
+            pstmt.close();
+            connection.close();
+            return lista;
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new PersistenceException(e.getMessage());
+        }
     }
     
 }
