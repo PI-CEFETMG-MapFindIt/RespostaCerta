@@ -6,7 +6,14 @@
 package br.cefetmg.respostaCerta.model.dao;
 
 import br.cefetmg.respostaCerta.model.domain.Module;
+import br.cefetmg.respostaCerta.model.domain.Subject;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
+import br.cefetmg.util.db.ConnectionManager;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,8 +27,7 @@ import java.util.Objects;
 public class ModuleDAOImpl implements ModuleDAO{
 
     private static ModuleDAOImpl moduleDAO = null;        
-
-    private static final HashMap<Long, Module> moduleDB = new HashMap<>();    
+  
     private static long moduleCount;
     
     /**
@@ -50,18 +56,19 @@ public class ModuleDAOImpl implements ModuleDAO{
      */
     @Override
     synchronized public void insert(Module module) throws PersistenceException {
-
-        if (module == null)
-            throw new PersistenceException("Entidade não pode ser nula.");                
-        
-        Long moduleId = module.getIdModulo();
-        
-        if ((moduleId != null) && moduleDB.containsKey(moduleId))
-            throw new PersistenceException("Duplicação de chave.");
-        
-        moduleId = ++moduleCount;
-        module.setIdModulo(moduleId);
-        moduleDB.put(moduleId, module);
+        try{
+            Connection connection = ConnectionManager.getInstance().getConnection();
+            String sql = "INSERT INTO Modulo (idDominio, nomeModulo, descModulo) VALUES(?, ?, ?)";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setLong(1, module.getDominio().getIdDominio());
+            pstmt.setString(2, module.getNomeModulo());
+            pstmt.setString(3, module.getDescModulo());
+            pstmt.executeQuery();
+            pstmt.close();
+            connection.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new PersistenceException(e.getMessage());
+        }
     }
     
     /**
@@ -71,19 +78,20 @@ public class ModuleDAOImpl implements ModuleDAO{
      */
     @Override
     synchronized public void update(Module module) throws PersistenceException {
-
-        if (module == null)
-            throw new PersistenceException("Entidade não pode ser nula.");              
-        
-        Long moduleId = module.getIdModulo();
-
-        if (moduleId == null)
-            throw new PersistenceException("Chave da entidade não pode ser nulo.");        
-        
-        if (!moduleDB.containsKey(moduleId))
-            throw new PersistenceException("Não existe entidade com a chave " + moduleId + ".");
-        
-        moduleDB.replace(moduleId, module);
+        try{
+            Connection connection = ConnectionManager.getInstance().getConnection();
+            String sql = "UPDATE forum SET idDominio = ?, nomeModulo = ?, descModulo = ? WHERE idModulo = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setLong(1, module.getDominio().getIdDominio());
+            pstmt.setString(2, module.getNomeModulo());
+            pstmt.setString(3, module.getDescModulo());
+            pstmt.setLong(1, module.getIdModulo());
+            pstmt.executeUpdate();
+            pstmt.close();
+            connection.close(); 
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new PersistenceException(e.getMessage());
+        }
     }
 
     /**
@@ -94,13 +102,19 @@ public class ModuleDAOImpl implements ModuleDAO{
      */
     @Override
     synchronized public Module delete(Long moduleId) throws PersistenceException {
-        if (moduleId == null)
-            throw new PersistenceException("Chave da entidade não pode ser nulo.");
-        
-        if (!moduleDB.containsKey(moduleId))
-            throw new PersistenceException("Não existe entidade com a chave " + moduleId + ".");
-        
-        return moduleDB.remove(moduleId);
+        try {
+            Module modulo= this.getModuleById(moduleId);
+            Connection connection = ConnectionManager.getInstance().getConnection();
+            String sql = "DELETE FROM modulo WHERE idModulo = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setLong(1, moduleId);
+            pstmt.executeUpdate();
+            pstmt.close();
+            connection.close();
+            return modulo;
+        } catch (PersistenceException | ClassNotFoundException | SQLException e) {
+            throw new PersistenceException(e.getMessage());
+        }
     }
 
     /**
@@ -111,15 +125,34 @@ public class ModuleDAOImpl implements ModuleDAO{
      */
     @Override
     public Module getModuleById(Long moduleId) throws PersistenceException {
-        
-        if (moduleId == null)
-            throw new PersistenceException("Chave da entidade não pode ser nulo.");
-        
-        if (!moduleDB.containsKey(moduleId))
-            throw new PersistenceException("Não existe entidade com a chave " + moduleId + ".");
-        
-        return moduleDB.get(moduleId);        
-        
+        try {
+            Connection connection = ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT * "
+                    + "FROM modulo a "
+                    + "JOIN dominio b ON a.idDominio=b.idDominio "
+                    + "WHERE a.idModulo = ? ";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setLong(1, moduleId);
+            ResultSet rs = pstmt.executeQuery();
+            Subject sub = new Subject();
+            Module mod = new Module();
+            if (rs.next()) {
+                mod.setDescModulo(rs.getString("descModulo"));
+                mod.setIdModulo(rs.getLong("idModulo"));
+                mod.setNomeModulo(rs.getString("nomeModulo"));
+                sub.setDescDominio(rs.getString("descDominio"));
+                sub.setIdDominio(rs.getLong("idDominio"));
+                sub.setNomeDominio(rs.getString("nomeDominio"));
+                mod.setDominio(sub);
+            }
+            rs.close();
+            pstmt.close();
+            connection.close();
+            return mod;
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new PersistenceException(e.getMessage());
+        }
     }
 
     /**
@@ -129,27 +162,68 @@ public class ModuleDAOImpl implements ModuleDAO{
      */
     @Override
     public List<Module> listAll() throws PersistenceException {
-        List<Module> moduleList = new ArrayList<>();
-        
-        Iterator<Module> iterator = moduleDB.values().iterator();
-	while (iterator.hasNext())
-            moduleList.add(iterator.next());
-        
-        return moduleList;
+        try {
+            Connection connection = ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT * "
+                    + "FROM modulo a "
+                    + "JOIN dominio b ON a.idDominio=b.idDominio";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Module> lista = new ArrayList<>();
+            while(rs.next()) {
+                Subject sub = new Subject();
+                Module mod = new Module();
+                mod.setDescModulo(rs.getString("descModulo"));
+                mod.setIdModulo(rs.getLong("idModulo"));
+                mod.setNomeModulo(rs.getString("nomeModulo"));
+                sub.setDescDominio(rs.getString("descDominio"));
+                sub.setIdDominio(rs.getLong("idDominio"));
+                sub.setNomeDominio(rs.getString("nomeDominio"));
+                mod.setDominio(sub);
+                lista.add(mod);
+            }
+            rs.close();
+            pstmt.close();
+            connection.close();
+            return lista;
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new PersistenceException(e.getMessage());
+        }
     }
 
     @Override
     public List<Module> getModulesSubject(long subjectId) throws PersistenceException {
-        List<Module> moduleList = new ArrayList<>();
-        Iterator<Module> iterator = moduleDB.values().iterator();
-	Module item;
-        while (iterator.hasNext()){
-            item=iterator.next();
-            if(Objects.equals(item.getDominio().getIdDominio(), subjectId)){
-                moduleList.add(item);
+        try {
+            Connection connection = ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT * "
+                    + "FROM modulo a "
+                    + "JOIN dominio b ON a.idDominio=b.idDominio "
+                    + "WHERE b.idDominio = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setLong(1, subjectId);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Module> lista = new ArrayList<>();
+            while(rs.next()) {
+                Subject sub = new Subject();
+                Module mod = new Module();
+                mod.setDescModulo(rs.getString("descModulo"));
+                mod.setIdModulo(rs.getLong("idModulo"));
+                mod.setNomeModulo(rs.getString("nomeModulo"));
+                sub.setDescDominio(rs.getString("descDominio"));
+                sub.setIdDominio(rs.getLong("idDominio"));
+                sub.setNomeDominio(rs.getString("nomeDominio"));
+                mod.setDominio(sub);
+                lista.add(mod);
             }
-        }    
-        return moduleList;
+            rs.close();
+            pstmt.close();
+            connection.close();
+            return lista;
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new PersistenceException(e.getMessage());
+        }
     }
     
 }

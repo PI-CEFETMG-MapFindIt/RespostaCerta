@@ -198,10 +198,10 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
 
             String sql = "SELECT * "
                     + "FROM questaoFechada a "
-                    + "JOIN questao b ON a.idQuestao=b.idQuestao"
-                    + "JOIN modulo c ON b.idModulo=c.idModulo"
-                    + "JOIN dominio d ON c.idDominio=d.idDominio"
-                    + "JOIN usuario e ON b.idUsuarioCriador=e.idUsuario"
+                    + "JOIN questao b ON a.idQuestao=b.idQuestao "
+                    + "JOIN modulo c ON b.idModulo=c.idModulo "
+                    + "JOIN dominio d ON c.idDominio=d.idDominio "
+                    + "JOIN usuario e ON b.idUsuarioCriador=e.idUsuario "
                     + "WHERE a.idQuestao = ? ";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, closedId);
@@ -266,10 +266,10 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
 
             String sql = "SELECT * "
                     + "FROM questaoFechada a "
-                    + "JOIN questao b ON a.idQuestao=b.idQuestao"
-                    + "JOIN modulo c ON b.idModulo=c.idModulo"
-                    + "JOIN dominio d ON c.idDominio=d.idDominio"
-                    + "JOIN usuario e ON b.idUsuarioCriador=e.idUsuario";
+                    + "JOIN questao b ON a.idQuestao=b.idQuestao "
+                    + "JOIN modulo c ON b.idModulo=c.idModulo "
+                    + "JOIN dominio d ON c.idDominio=d.idDominio "
+                    + "JOIN usuario e ON b.idUsuarioCriador=e.idUsuario ";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<ClosedQuestion> lista = new ArrayList<>();
@@ -329,10 +329,10 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
 
             String sql = "SELECT * "
                     + "FROM questaoFechada a "
-                    + "JOIN questao b ON a.idQuestao=b.idQuestao"
-                    + "JOIN modulo c ON b.idModulo=c.idModulo"
-                    + "JOIN dominio d ON c.idDominio=d.idDominio"
-                    + "JOIN usuario e ON b.idUsuarioCriador=e.idUsuario"
+                    + "JOIN questao b ON a.idQuestao=b.idQuestao "
+                    + "JOIN modulo c ON b.idModulo=c.idModulo "
+                    + "JOIN dominio d ON c.idDominio=d.idDominio "
+                    + "JOIN usuario e ON b.idUsuarioCriador=e.idUsuario "
                     + "WHERE b.idUsuarioCriador = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, userId);

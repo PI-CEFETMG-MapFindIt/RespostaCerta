@@ -130,10 +130,10 @@ public class ForumDAOImpl implements ForumDAO{
 
             String sql = "SELECT * "
                     + "FROM forum a "
-                    + "JOIN questao b ON a.idQuestao=b.idQuestao"
-                    + "JOIN modulo c ON b.idModulo=c.idModulo"
-                    + "JOIN dominio d ON c.idDominio=d.idDominio"
-                    + "JOIN usuario e ON b.idUsuarioCriador=e.idUsuario"
+                    + "JOIN questao b ON a.idQuestao=b.idQuestao "
+                    + "JOIN modulo c ON b.idModulo=c.idModulo "
+                    + "JOIN dominio d ON c.idDominio=d.idDominio "
+                    + "JOIN usuario e ON b.idUsuarioCriador=e.idUsuario "
                     + "WHERE a.idQuestao = ? ";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, forumId);
@@ -197,10 +197,10 @@ public class ForumDAOImpl implements ForumDAO{
 
             String sql = "SELECT * "
                     + "FROM forum a "
-                    + "JOIN questao b ON a.idQuestao=b.idQuestao"
-                    + "JOIN modulo c ON b.idModulo=c.idModulo"
-                    + "JOIN dominio d ON c.idDominio=d.idDominio"
-                    + "JOIN usuario e ON b.idUsuarioCriador=e.idUsuario";
+                    + "JOIN questao b ON a.idQuestao=b.idQuestao "
+                    + "JOIN modulo c ON b.idModulo=c.idModulo "
+                    + "JOIN dominio d ON c.idDominio=d.idDominio "
+                    + "JOIN usuario e ON b.idUsuarioCriador=e.idUsuario ";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Forum> lista = new ArrayList<>();
