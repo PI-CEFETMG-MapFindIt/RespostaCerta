@@ -10,6 +10,7 @@ import br.cefetmg.respostaCerta.model.dao.ClosedAnswerDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.UserDAO;
 import br.cefetmg.respostaCerta.model.dao.UserDAOImpl;
 import br.cefetmg.respostaCerta.model.domain.ClosedAnswer;
+import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
 import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
@@ -109,7 +110,7 @@ public class ClosedAnswerManagementImplTest {
     public void testRegisterQuestionAnswer4() throws Exception {
         System.out.println("registerClosedAnswer4");
         User us = new User("Joao", "joao@oi.com", "senha", 'p');
-        Question q = new Question(null, null, "enunciado", true, LocalDate.now(), "titulo", null);
+        ClosedQuestion q = new ClosedQuestion(null, null, null, null, null, 0, null, null, "enunciado", true, LocalDate.now(), "titulo", null);
         ClosedAnswer closed = new ClosedAnswer(0, us, q, LocalDate.now(), 'f', true);
         try{
             impl.registerQuestionAnswer(closed);

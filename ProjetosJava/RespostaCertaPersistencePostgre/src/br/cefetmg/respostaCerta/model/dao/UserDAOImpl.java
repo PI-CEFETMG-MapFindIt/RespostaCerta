@@ -7,10 +7,24 @@ package br.cefetmg.respostaCerta.model.dao;
 
 import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
+import br.cefetmg.util.db.ConnectionManager;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -20,7 +34,6 @@ public class UserDAOImpl implements UserDAO{
 
     private static UserDAOImpl userDAO = null;        
 
-    private static final HashMap<Long, User> userDB = new HashMap<>();    
     private static long userCount;
     
     /**
@@ -42,6 +55,22 @@ public class UserDAOImpl implements UserDAO{
         return  userDAO;
     }
     
+    private ByteArrayInputStream imageToBlob(Image img) throws IOException{
+        BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = bi.createGraphics();
+        g2d.drawImage(img, 0, 0, null);
+        g2d.dispose();
+        ByteArrayOutputStream baos = null;
+        try {
+            baos = new ByteArrayOutputStream();
+            ImageIO.write(bi, "png", baos);
+        } finally {
+            baos.close();
+        }
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        return bais;
+    }
+    
     /**
      *
      * @param user
@@ -49,18 +78,21 @@ public class UserDAOImpl implements UserDAO{
      */
     @Override
     synchronized public void insert(User user) throws PersistenceException {
-
-        if (user == null)
-            throw new PersistenceException("Entidade não pode ser nula.");                
-        
-        Long userId = user.getIdUsuario();
-        
-        if ((userId != null) && userDB.containsKey(userId))
-            throw new PersistenceException("Duplicação de chave.");
-        
-        userId = ++userCount;
-        user.setIdUsuario(userId);
-        userDB.put(userId, user);
+        try{
+            Connection connection = ConnectionManager.getInstance().getConnection();
+            String sql = "INSERT INTO Usuario (nomeUsuario, loginUsuario, senhaUsuario, idtUsuario, userPhoto) VALUES(?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, user.getNomeUsuario());
+            pstmt.setString(2, user.getLoginUsuario());
+            pstmt.setString(3, user.getSenhaUsuario());
+            pstmt.setString(4, String.valueOf(user.getIdtUsuario()));
+            pstmt.setBlob(5, imageToBlob(user.getFotoUsuario()));
+            pstmt.executeQuery();
+            pstmt.close();
+            connection.close();
+        } catch (ClassNotFoundException | SQLException | IOException e) {
+            throw new PersistenceException(e.getMessage());
+        }
     }
     
     /**
@@ -70,19 +102,22 @@ public class UserDAOImpl implements UserDAO{
      */
     @Override
     synchronized public void update(User user) throws PersistenceException {
-
-        if (user == null)
-            throw new PersistenceException("Entidade não pode ser nula.");              
-        
-        Long userId = user.getIdUsuario();
-
-        if (userId == null)
-            throw new PersistenceException("Chave da entidade não pode ser nulo.");        
-        
-        if (!userDB.containsKey(userId))
-            throw new PersistenceException("Não existe entidade com a chave " + userId + ".");
-        
-        userDB.replace(userId, user);
+        try{
+            Connection connection = ConnectionManager.getInstance().getConnection();
+            String sql = "UPDATE Usuario SET nomeUsuario = ?, loginUsuario = ?, senhaUsuario = ?, idtUsuario = ?, userPhoto = ? WHERE idUsuario = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, user.getNomeUsuario());
+            pstmt.setString(2, user.getLoginUsuario());
+            pstmt.setString(3, user.getSenhaUsuario());
+            pstmt.setString(4, String.valueOf(user.getIdtUsuario()));
+            pstmt.setBlob(5, imageToBlob(user.getFotoUsuario()));
+            pstmt.setLong(6, user.getIdUsuario());
+            pstmt.executeUpdate();
+            pstmt.close();
+            connection.close(); 
+        } catch (ClassNotFoundException | SQLException | IOException e) {
+            throw new PersistenceException(e.getMessage());
+        }
     }
 
     /**
@@ -93,13 +128,19 @@ public class UserDAOImpl implements UserDAO{
      */
     @Override
     synchronized public User delete(Long userId) throws PersistenceException {
-        if (userId == null)
-            throw new PersistenceException("Chave da entidade não pode ser nulo.");
-        
-        if (!userDB.containsKey(userId))
-            throw new PersistenceException("Não existe entidade com a chave " + userId + ".");
-        
-        return userDB.remove(userId);
+        try {
+            User usuario= this.getUserById(userId);
+            Connection connection = ConnectionManager.getInstance().getConnection();
+            String sql = "DELETE FROM Usuario WHERE idUsuario = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setLong(1, userId);
+            pstmt.executeUpdate();
+            pstmt.close();
+            connection.close();
+            return usuario;
+        } catch (PersistenceException | ClassNotFoundException | SQLException e) {
+            throw new PersistenceException(e.getMessage());
+        }
     }
 
     /**
@@ -110,15 +151,33 @@ public class UserDAOImpl implements UserDAO{
      */
     @Override
     public User getUserById(Long userId) throws PersistenceException {
-        
-        if (userId == null)
-            throw new PersistenceException("Chave da entidade não pode ser nulo.");
-        
-        if (!userDB.containsKey(userId))
-            throw new PersistenceException("Não existe entidade com a chave " + userId + ".");
-        
-        return userDB.get(userId);        
-        
+        try {
+            Connection connection = ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT * FROM Usuario WHERE idUsuario = ?";
+            
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setLong(1, userId);
+            ResultSet rs = pstmt.executeQuery(); 
+            User usuario = new User();
+            if (rs.next()) {
+                usuario.setIdUsuario(rs.getLong("idUsuario"));
+                usuario.setNomeUsuario(rs.getString("nomeUsuario"));
+                usuario.setLoginUsuario(rs.getString("loginUsuario"));
+                usuario.setSenhaUsuario(rs.getString("senhaUsuario"));
+                usuario.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
+                Blob blob = rs.getBlob("userPhoto");  
+                InputStream in = blob.getBinaryStream();  
+                BufferedImage image = ImageIO.read(in);
+                usuario.setFotoUsuario(image);
+            }
+            rs.close();
+            pstmt.close();
+            connection.close();
+            return usuario;
+        } catch (ClassNotFoundException | SQLException | IOException e) {
+            throw new PersistenceException(e.getMessage());
+        }
     }
 
     /**
@@ -128,13 +187,34 @@ public class UserDAOImpl implements UserDAO{
      */
     @Override
     public List<User> listAll() throws PersistenceException {
-        List<User> userList = new ArrayList<>();
-        
-        Iterator<User> iterator = userDB.values().iterator();
-	while (iterator.hasNext())
-            userList.add(iterator.next());
-        
-        return userList;
+        try {
+            Connection connection = ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT * FROM Usuario";
+            
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery(); 
+            ArrayList<User> lista = new ArrayList<>();
+            while(rs.next()) {
+                User usuario = new User();
+                usuario.setIdUsuario(rs.getLong("idUsuario"));
+                usuario.setNomeUsuario(rs.getString("nomeUsuario"));
+                usuario.setLoginUsuario(rs.getString("loginUsuario"));
+                usuario.setSenhaUsuario(rs.getString("senhaUsuario"));
+                usuario.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
+                Blob blob = rs.getBlob("userPhoto");  
+                InputStream in = blob.getBinaryStream();  
+                BufferedImage image = ImageIO.read(in);
+                usuario.setFotoUsuario(image);
+                lista.add(usuario);
+            }
+            rs.close();
+            pstmt.close();
+            connection.close();
+            return lista;
+        } catch (ClassNotFoundException | SQLException | IOException e) {
+            throw new PersistenceException(e.getMessage());
+        }
     }
     
 }

@@ -13,8 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -55,7 +53,7 @@ public class SubjectDAOImpl implements SubjectDAO{
     synchronized public void insert(Subject subject) throws PersistenceException {
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "INSERT INTO Dominio(nomeDominio, descDominio) VALUES(?, ?)";
+            String sql = "INSERT INTO Dominio (nomeDominio, descDominio) VALUES(?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, subject.getNomeDominio());
             pstmt.setString(2, subject.getDescDominio());

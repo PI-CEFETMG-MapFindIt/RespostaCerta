@@ -471,7 +471,8 @@ public class TopicManagementImplTest {
         Forum f = new Forum();
         forumDAO.insert(f);
         
-        User user = new User(new Long(0), "Joao", "joao@gmail.com", "senha", 'j');
+        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
+        user.setIdUsuario(new Long(0));
         Topic topic = new Topic();
         topic.setAutor(user);
         topic.setDataPostagem(LocalDate.now());
@@ -507,7 +508,8 @@ public class TopicManagementImplTest {
     @Test
     public void testGetTopicsForum4() throws Exception {
         System.out.println("getQuestionsByUser4");
-        User user = new User(new Long(1), "Joao", "joao@gmail.com", "senha", 'j');
+        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
+        user.setIdUsuario(new Long(1));
         Forum f = new Forum();
         forumDAO.insert(f);
         

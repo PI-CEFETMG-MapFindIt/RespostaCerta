@@ -503,7 +503,8 @@ public class OpenQuestionManagementImplTest {
     public void testGetQuestionsByUser2() throws Exception {
         System.out.println("getQuestionsByUser2");
         Question question = new Question();
-        question.setCriador(new User(new Long(0), "Joao", "joao@gmail.com", "senha", 'j'));
+        question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
+        question.getCriador().setIdUsuario(new Long(0));
         question.setDataCriacao(LocalDate.now());
         question.setModulo(new Module(new Subject("dominio", "desc"),"modulo", "desc"));
         question.setEnunciadoQuestao("Enunciado");
@@ -530,7 +531,8 @@ public class OpenQuestionManagementImplTest {
     @Test
     public void testGetQuestionsByUser3() throws Exception {
         System.out.println("getQuestionsByUser3");
-        User user = new User(new Long(0), "Joao", "joao@gmail.com", "senha", 'j');
+        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
+        user.setIdUsuario(new Long(0));
         Question question = new Question();
         question.setCriador(user);
         question.setDataCriacao(LocalDate.now());
@@ -565,7 +567,8 @@ public class OpenQuestionManagementImplTest {
     @Test
     public void testGetQuestionsByUser4() throws Exception {
         System.out.println("getQuestionsByUser4");
-        User user = new User(new Long(1), "Joao", "joao@gmail.com", "senha", 'j');
+        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
+        user.setIdUsuario(new Long(1));
         Question question = new Question();
         question.setCriador(user);
         question.setDataCriacao(LocalDate.now());
@@ -599,14 +602,16 @@ public class OpenQuestionManagementImplTest {
     public void testGetQuestionsByUser5() throws Exception {
         System.out.println("getQuestionsByUser5");
         Question question = new Question();
-        question.setCriador(new User(new Long(0), "Joao", "joao@gmail.com", "senha", 'j'));
+        question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
+        question.getCriador().setIdUsuario(new Long(0));
         question.setDataCriacao(LocalDate.now());
         question.setModulo(new Module(new Subject("dominio", "desc"), "modulo", "desc"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao("Titulo");
         impl.registerQuestion(question);
         Question question2 = new Question();
-        question2.setCriador(new User(new Long(1), "Maria", "maria@gmail.com", "senha", 'j'));
+        question.setCriador(new User("Maria", "maria@gmail.com", "senha", 'j'));
+        question.getCriador().setIdUsuario(new Long(1));
         question2.setDataCriacao(LocalDate.now());
         question2.setModulo(new Module(new Subject("dominio2", "desc2"), "modulo2", "desc2"));
         question2.setEnunciadoQuestao("Enunciado2");

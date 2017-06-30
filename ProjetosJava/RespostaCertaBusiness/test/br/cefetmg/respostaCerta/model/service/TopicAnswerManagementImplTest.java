@@ -451,7 +451,8 @@ public class TopicAnswerManagementImplTest {
     @Test
     public void testGetAnswersTopic3() throws Exception {
         System.out.println("getAnswersTopic3");
-        User user = new User(new Long(0), "Joao", "joao@gmail.com", "senha", 'j');
+        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
+        user.setIdUsuario(new Long(0));
         TopicAnswer topic = new TopicAnswer();
         topic.setAutor(user);
         topic.setDataResposta(LocalDate.now());
@@ -487,8 +488,8 @@ public class TopicAnswerManagementImplTest {
     @Test
     public void testGetAnswersTopic4() throws Exception {
         System.out.println("getAnswersTopic4");
-        User user = new User(new Long(1), "Joao", "joao@gmail.com", "senha", 'j');
-        
+        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
+        user.setIdUsuario(new Long(1));
         TopicAnswer topic = new TopicAnswer();
         topic.setAutor(user);
         topic.setDataResposta(LocalDate.now());
@@ -523,7 +524,8 @@ public class TopicAnswerManagementImplTest {
     public void testGetAnswersTopic5() throws Exception {
         System.out.println("getAnswersTopic5");
         TopicAnswer topic = new TopicAnswer();
-        topic.setAutor(new User(new Long(0), "Joao", "joao@gmail.com", "senha", 'j'));
+        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
+        topic.getAutor().setIdUsuario(new Long(0));
         topic.setDataResposta(LocalDate.now());
         topic.setMensagem(new Topic());
         topic.setIdMensagemResposta(Long.MAX_VALUE);
@@ -531,7 +533,8 @@ public class TopicAnswerManagementImplTest {
         impl.registerTopicAnswer(topic);
         
         TopicAnswer topic2 = new TopicAnswer();
-        topic2.setAutor(new User(new Long(1), "Joao", "joao@gmail.com", "senha", 'j'));
+        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
+        topic.getAutor().setIdUsuario(new Long(1));
         topic2.setDataResposta(LocalDate.now());
         topic2.setMensagem(new Topic());
         topic2.setIdMensagemResposta(Long.MAX_VALUE);
