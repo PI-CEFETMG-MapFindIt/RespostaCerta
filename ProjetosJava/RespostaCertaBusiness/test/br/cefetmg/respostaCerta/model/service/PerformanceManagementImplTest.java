@@ -418,12 +418,15 @@ public class PerformanceManagementImplTest {
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
         Module m = new Module(new Subject( "subject","desc"), "modulo","desc");
+        m.setIdModulo(new Long(0));
         ClosedAnswer resp1;
         resp1 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, m, user,   "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
         ClosedAnswer resp2;
         resp2 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject2","desc2"), "modulo2","desc2"), user,   "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
         ClosedAnswer resp3;
         resp3 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject3","desc3"), "modulo3","desc3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
+        resp2.getQuestao().getModulo().setIdModulo(new Long(1));
+        resp3.getQuestao().getModulo().setIdModulo(new Long(1));
         answer.insert(resp1);
         answer.insert(resp2);
         answer.insert(resp3);
@@ -446,12 +449,14 @@ public class PerformanceManagementImplTest {
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
         Module m = new Module(new Subject( "subject","desc"), "modulo","desc");
+        m.setIdModulo(new Long(0));
         ClosedAnswer resp1;
         resp1 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, m , user,   "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
         ClosedAnswer resp2;
         resp2 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, m , user,   "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
         ClosedAnswer resp3;
         resp3 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject3","desc3"), "modulo3","desc3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
+        resp3.getQuestao().getModulo().setIdModulo(new Long(1));
         answer.insert(resp1);
         answer.insert(resp2);
         answer.insert(resp3);
@@ -626,16 +631,20 @@ public class PerformanceManagementImplTest {
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
         Subject s = new Subject(  "subject", "desc");
+        s.setIdDominio(new Long(0));
         ClosedAnswer resp1;
         resp1 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(s,   "nome", "desc"), user,   "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
         ClosedAnswer resp2;
         resp2 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject2","desc2"), "modulo2","desc2"), user,   "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
         ClosedAnswer resp3;
         resp3 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject3","desc3"), "modulo3","desc3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
+        resp2.getQuestao().getModulo().getDominio().setIdDominio(new Long(1));
+        resp3.getQuestao().getModulo().getDominio().setIdDominio(new Long(1));
         answer.insert(resp1);
         answer.insert(resp2);
         answer.insert(resp3);
         try{
+            System.out.println(impl.calculateErrorsBySubject(user, s));
             if(impl.calculateErrorsBySubject(user, s)!=0){
                 fail("Valor errado");
             }
@@ -653,13 +662,15 @@ public class PerformanceManagementImplTest {
         System.out.println("calculateErrorsBySubject10");
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
-        Subject s = new Subject(  "subject", "desc");
+        Subject s = new Subject("subject", "desc");
+        s.setIdDominio(new Long(0));
         ClosedAnswer resp1;
         resp1 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(s,   "nome", "desc") , user,   "enunciado", true, LocalDate.now(), "titulo", null), LocalDate.now(), 'f', true);
         ClosedAnswer resp2;
         resp2 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(s,   "nome2", "desc2") , user,   "enunciado2", true, LocalDate.now(), "titulo2", null), LocalDate.now(), 'f', false);
         ClosedAnswer resp3;
         resp3 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject3","desc3"), "modulo3","desc3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null), LocalDate.now(), 'f', false);
+        resp3.getQuestao().getModulo().getDominio().setIdDominio(new Long(1));
         answer.insert(resp1);
         answer.insert(resp2);
         answer.insert(resp3);

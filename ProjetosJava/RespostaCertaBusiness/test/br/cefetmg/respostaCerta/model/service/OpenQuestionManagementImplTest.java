@@ -610,8 +610,8 @@ public class OpenQuestionManagementImplTest {
         question.setTituloQuestao("Titulo");
         impl.registerQuestion(question);
         Question question2 = new Question();
-        question.setCriador(new User("Maria", "maria@gmail.com", "senha", 'j'));
-        question.getCriador().setIdUsuario(new Long(1));
+        question2.setCriador(new User("Maria", "maria@gmail.com", "senha", 'j'));
+        question2.getCriador().setIdUsuario(new Long(1));
         question2.setDataCriacao(LocalDate.now());
         question2.setModulo(new Module(new Subject("dominio2", "desc2"), "modulo2", "desc2"));
         question2.setEnunciadoQuestao("Enunciado2");

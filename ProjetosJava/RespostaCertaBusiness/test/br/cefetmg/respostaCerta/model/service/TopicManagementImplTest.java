@@ -511,7 +511,7 @@ public class TopicManagementImplTest {
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(1));
         Forum f = new Forum();
-        forumDAO.insert(f);
+        f.setIdForum(new Long(0));
         
         Topic topic = new Topic();
         topic.setAutor(user);
@@ -530,8 +530,8 @@ public class TopicManagementImplTest {
         impl.registerTopic(topic2);
         
         try{
-           List list = impl.getTopicsForum(f.getIdForum());
-           if(!list.isEmpty()){
+           List list = impl.getTopicsForum(new Long(0));
+           if(list.isEmpty()){
                fail("Lista errada ao retornar");
            }
            

@@ -193,7 +193,7 @@ public class TopicAnswerManagementImplTest {
         try{
             impl.updateTopicAnswer(new Long(1), topic);
         }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("Data de resposta não pode ser nula"));
+            assertTrue(ex.getMessage().equals("Data da resposta não pode ser nula"));
             return;
         }
         fail("Aceitou topico com data de postagem nula");
@@ -252,7 +252,6 @@ public class TopicAnswerManagementImplTest {
         }catch(BusinessException ex){
             fail("Erro ao atualizar");
         }
-        fail("Aceitou id nulo");
     }
    
     /**
@@ -318,6 +317,7 @@ public class TopicAnswerManagementImplTest {
         topic.setDataResposta(LocalDate.now());
         topic.setMensagem(new Topic());
         topic.setIdMensagemResposta(Long.MAX_VALUE);
+        topic.setTxtMensagem("Texto");
         try{
            impl.registerTopicAnswer(topic);
            impl.removeTopicAnswer(topic.getIdMensagemResposta());
@@ -395,6 +395,7 @@ public class TopicAnswerManagementImplTest {
         topic.setDataResposta(LocalDate.now());
         topic.setMensagem(new Topic());
         topic.setIdMensagemResposta(Long.MAX_VALUE);
+        topic.setTxtMensagem("Texto");
         try{
            impl.registerTopicAnswer(topic);
            assertTrue(impl.getTopicAnswerById(topic.getIdMensagemResposta())==topic);
@@ -426,12 +427,13 @@ public class TopicAnswerManagementImplTest {
         TopicAnswer topic = new TopicAnswer();
         topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
         topic.setDataResposta(LocalDate.now());
-        topic.setMensagem(new Topic());
-        topic.setIdMensagemResposta(Long.MAX_VALUE);
         topic.setTxtMensagem("txt");
+        Topic top = new Topic();
+        top.setTopicoId(new Long(1));
+        topic.setMensagem(top);
         impl.registerTopicAnswer(topic);
         try{
-           List list = impl.getAnswersTopic(new Long(0));
+           List list = impl.getAnswersTopic(new Long(1));
            if(list.size()!=1){
                fail("Lista errada ao retornar");
            }
@@ -453,10 +455,12 @@ public class TopicAnswerManagementImplTest {
         System.out.println("getAnswersTopic3");
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
+        Topic top = new Topic();
+        top.setTopicoId(new Long(0));
         TopicAnswer topic = new TopicAnswer();
         topic.setAutor(user);
         topic.setDataResposta(LocalDate.now());
-        topic.setMensagem(new Topic());
+        topic.setMensagem(top);
         topic.setIdMensagemResposta(Long.MAX_VALUE);
         topic.setTxtMensagem("txt");
         impl.registerTopicAnswer(topic);
@@ -464,7 +468,7 @@ public class TopicAnswerManagementImplTest {
         TopicAnswer topic2 = new TopicAnswer();
         topic2.setAutor(user);
         topic2.setDataResposta(LocalDate.now());
-        topic2.setMensagem(new Topic());
+        topic2.setMensagem(top);
         topic2.setIdMensagemResposta(Long.MAX_VALUE);
         topic2.setTxtMensagem("txt");
         impl.registerTopicAnswer(topic2);
@@ -523,20 +527,24 @@ public class TopicAnswerManagementImplTest {
     @Test
     public void testGetAnswersTopic5() throws Exception {
         System.out.println("getAnswersTopic5");
+        Topic top1 = new Topic();
+        Topic top2 = new Topic();
+        top1.setTopicoId(new Long(0));
+        top2.setTopicoId(new Long(1));
         TopicAnswer topic = new TopicAnswer();
         topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
         topic.getAutor().setIdUsuario(new Long(0));
         topic.setDataResposta(LocalDate.now());
-        topic.setMensagem(new Topic());
+        topic.setMensagem(top1);
         topic.setIdMensagemResposta(Long.MAX_VALUE);
         topic.setTxtMensagem("txt");
         impl.registerTopicAnswer(topic);
         
         TopicAnswer topic2 = new TopicAnswer();
-        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
-        topic.getAutor().setIdUsuario(new Long(1));
+        topic2.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
+        topic2.getAutor().setIdUsuario(new Long(1));
         topic2.setDataResposta(LocalDate.now());
-        topic2.setMensagem(new Topic());
+        topic2.setMensagem(top2);
         topic2.setIdMensagemResposta(Long.MAX_VALUE);
         topic2.setTxtMensagem("txt");
         impl.registerTopicAnswer(topic2);
