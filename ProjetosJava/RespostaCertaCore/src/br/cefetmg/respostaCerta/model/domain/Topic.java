@@ -13,7 +13,6 @@ import java.time.LocalDate;
  * @author umcan
  */
 public class Topic {
-    private Question questao;
     private User autor;
     private String txtMensagem;
     private LocalDate dataPostagem;
@@ -24,21 +23,12 @@ public class Topic {
     public Topic() {
     }
     
-    public Topic(Question questao, User autor, String txtMensagem, LocalDate dataPostagem, Image msgPhoto, Forum forum) {
-        this.questao = questao;
+    public Topic(User autor, String txtMensagem, LocalDate dataPostagem, Image msgPhoto, Forum forum) {
         this.autor = autor;
         this.txtMensagem = txtMensagem;
         this.dataPostagem = dataPostagem;
         this.msgPhoto = msgPhoto;
         this.forum = forum;
-    }
-
-    public Question getQuestao() {
-        return questao;
-    }
-
-    public void setQuestao(Question questao) {
-        this.questao = questao;
     }
 
     public User getAutor() {
