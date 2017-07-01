@@ -14,5 +14,5 @@ import br.cefetmg.respostaCerta.model.exception.PersistenceException;
  * @author umcan
  */
 public interface LoginManagement {
-    public User loginUser(String username, String password) throws BusinessException, PersistenceException;
+    public User loginUser(String email, String password) throws BusinessException, PersistenceException;
 }

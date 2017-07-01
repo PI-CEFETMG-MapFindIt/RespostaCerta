@@ -136,5 +136,16 @@ public class UserDAOImpl implements UserDAO{
         
         return userList;
     }
+
+    @Override
+    public User getUserByLogin(String email, String senha) throws PersistenceException {
+        List<User> userList = this.listAll();
+        for(User us:userList){
+            if(us.getLoginUsuario()==email && us.getSenhaUsuario()==senha){
+                return us;
+            }
+        }
+        throw new PersistenceException("Usuário não encontrado");
+    }
     
 }

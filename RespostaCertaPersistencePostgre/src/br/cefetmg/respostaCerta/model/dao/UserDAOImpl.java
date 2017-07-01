@@ -216,5 +216,38 @@ public class UserDAOImpl implements UserDAO{
             throw new PersistenceException(e.getMessage());
         }
     }
+
+    @Override
+    public User getUserByLogin(String email, String senha) throws PersistenceException {
+        try {
+            Connection connection = ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT * FROM Usuario WHERE loginUsuario = ? AND senhaUsuario = ?";
+            
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, email);
+            pstmt.setString(2, "senha");
+            ResultSet rs = pstmt.executeQuery(); 
+            User usuario = null;
+            if(rs.next()) {
+                usuario = new User();
+                usuario.setIdUsuario(rs.getLong("idUsuario"));
+                usuario.setNomeUsuario(rs.getString("nomeUsuario"));
+                usuario.setLoginUsuario(rs.getString("loginUsuario"));
+                usuario.setSenhaUsuario(rs.getString("senhaUsuario"));
+                usuario.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
+                Blob blob = rs.getBlob("userPhoto");  
+                InputStream in = blob.getBinaryStream();  
+                BufferedImage image = ImageIO.read(in);
+                usuario.setFotoUsuario(image);
+            }
+            rs.close();
+            pstmt.close();
+            connection.close();
+            return usuario;
+        } catch (ClassNotFoundException | SQLException | IOException e) {
+            throw new PersistenceException(e.getMessage());
+        }
+    }
     
 }

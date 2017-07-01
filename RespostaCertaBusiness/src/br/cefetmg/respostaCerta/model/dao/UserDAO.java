@@ -19,4 +19,5 @@ public interface UserDAO {
     public User delete(Long usuarioId) throws PersistenceException;
     public User  getUserById(Long usuarioId) throws PersistenceException;
     public List<User> listAll() throws PersistenceException;
+    public User getUserByLogin(String email, String senha) throws PersistenceException;
 }

@@ -31,18 +31,11 @@ public class LoginManagementImpl implements LoginManagement{
      * @throws PersistenceException
      */
     @Override
-    public User loginUser(String username, String password) throws BusinessException, PersistenceException {
-        if(username == null || password == null || username.equals("") || password.equals("")){
+    public User loginUser(String email, String password) throws BusinessException, PersistenceException {
+        if(email == null || password == null || email.equals("") || password.equals("")){
             throw new BusinessException("Dados de login não podem ser vazios");
         }
-        List<User> li ;
-        li = userDAO.listAll();
-        for(User user: li){
-            if (user.getLoginUsuario().equals(username) && user.getSenhaUsuario().equals(password)){
-                return user;
-            }
-        }
-        throw new BusinessException("Usuario inexistente");
+        return userDAO.getUserByLogin(email, password);
     }
     
 }

@@ -7,11 +7,8 @@ package br.cefetmg.respostaCerta.model.service;
 
 import br.cefetmg.respostaCerta.model.dao.ClosedAnswerDAO;
 import br.cefetmg.respostaCerta.model.dao.ClosedAnswerDAOImpl;
-import br.cefetmg.respostaCerta.model.dao.UserDAO;
-import br.cefetmg.respostaCerta.model.dao.UserDAOImpl;
 import br.cefetmg.respostaCerta.model.domain.ClosedAnswer;
 import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
-import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
