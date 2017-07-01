@@ -186,9 +186,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 autor.setLoginUsuario(rs.getString("loginUsuario"));
                 autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
                 autor.setSenhaUsuario(rs.getString("senhaUsuario"));
-                Blob blob = rs.getBlob("userPhoto");  
-                InputStream in = blob.getBinaryStream();  
-                BufferedImage image = ImageIO.read(in);
+                InputStream blob = rs.getBinaryStream("userPhoto");  
+                  
+                BufferedImage image = ImageIO.read(blob);
                 autor.setFotoUsuario(image);
                 closed.setAutor(autor);
                 closed.setDataResposta(rs.getDate("dataRespostaQuestao").toLocalDate());
@@ -199,9 +199,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 autorQuestao.setLoginUsuario(rs.getString("loginUsuarioQuestao"));
                 autorQuestao.setIdtUsuario(rs.getString("idtUsuarioQuestao").charAt(0));
                 autorQuestao.setSenhaUsuario(rs.getString("senhaUsuarioQuestao"));
-                blob = rs.getBlob("userPhotoQuestao");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("userPhotoQuestao");  
+                  
+                image = ImageIO.read(blob);
                 autorQuestao.setFotoUsuario(image);
                 questao.setCriador(autorQuestao);
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
@@ -216,9 +216,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);
                 questao.setModulo(mod);
-                blob = rs.getBlob("questPhoto");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("questPhoto");  
+                  
+                image = ImageIO.read(blob);
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 questao.setAlt1(rs.getString("alt1"));
@@ -280,9 +280,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 autor.setLoginUsuario(rs.getString("loginUsuario"));
                 autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
                 autor.setSenhaUsuario(rs.getString("senhaUsuario"));
-                Blob blob = rs.getBlob("userPhoto");  
-                InputStream in = blob.getBinaryStream();  
-                BufferedImage image = ImageIO.read(in);
+                InputStream blob = rs.getBinaryStream("userPhoto");  
+                  
+                BufferedImage image = ImageIO.read(blob);
                 autor.setFotoUsuario(image);
                 closed.setAutor(autor);
                 closed.setDataResposta(rs.getDate("dataRespostaQuestao").toLocalDate());
@@ -293,9 +293,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 autorQuestao.setLoginUsuario(rs.getString("loginUsuarioQuestao"));
                 autorQuestao.setIdtUsuario(rs.getString("idtUsuarioQuestao").charAt(0));
                 autorQuestao.setSenhaUsuario(rs.getString("senhaUsuarioQuestao"));
-                blob = rs.getBlob("userPhotoQuestao");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("userPhotoQuestao");  
+                  
+                image = ImageIO.read(blob);
                 autorQuestao.setFotoUsuario(image);
                 questao.setCriador(autorQuestao);
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
@@ -310,9 +310,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);
                 questao.setModulo(mod);
-                blob = rs.getBlob("questPhoto");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("questPhoto");  
+                  
+                image = ImageIO.read(blob);
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 questao.setAlt1(rs.getString("alt1"));
@@ -372,9 +372,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 autor.setLoginUsuario(rs.getString("loginUsuario"));
                 autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
                 autor.setSenhaUsuario(rs.getString("senhaUsuario"));
-                Blob blob = rs.getBlob("userPhoto");  
-                InputStream in = blob.getBinaryStream();  
-                BufferedImage image = ImageIO.read(in);
+                InputStream blob = rs.getBinaryStream("userPhoto");  
+                  
+                BufferedImage image = ImageIO.read(blob);
                 autor.setFotoUsuario(image);
                 closed.setAutor(autor);
                 closed.setDataResposta(rs.getDate("dataRespostaQuestao").toLocalDate());
@@ -385,9 +385,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 autorQuestao.setLoginUsuario(rs.getString("loginUsuarioQuestao"));
                 autorQuestao.setIdtUsuario(rs.getString("idtUsuarioQuestao").charAt(0));
                 autorQuestao.setSenhaUsuario(rs.getString("senhaUsuarioQuestao"));
-                blob = rs.getBlob("userPhotoQuestao");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("userPhotoQuestao");  
+                  
+                image = ImageIO.read(blob);
                 autorQuestao.setFotoUsuario(image);
                 questao.setCriador(autorQuestao);
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
@@ -402,9 +402,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);
                 questao.setModulo(mod);
-                blob = rs.getBlob("questPhoto");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("questPhoto");  
+                  
+                image = ImageIO.read(blob);
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 questao.setAlt1(rs.getString("alt1"));

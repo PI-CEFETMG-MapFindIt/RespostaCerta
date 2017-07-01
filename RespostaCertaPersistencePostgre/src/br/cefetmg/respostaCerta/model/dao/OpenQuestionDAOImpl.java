@@ -88,7 +88,7 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
             pstmt.setBoolean(4, openQuestion.isIdtQuestao());
             pstmt.setDate(5, java.sql.Date.valueOf(openQuestion.getDataCriacao()));
             pstmt.setString(6, openQuestion.getTituloQuestao());   
-            pstmt.setBlob(7, imageToBlob(openQuestion.getQuestPhoto()));
+            pstmt.setBinaryStream(7, imageToBlob(openQuestion.getQuestPhoto()));
             pstmt.executeQuery();
             pstmt.close();
             connection.close();
@@ -114,7 +114,7 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
             pstmt.setDate(4, java.sql.Date.valueOf(openQuestion.getDataCriacao()));
             pstmt.setString(5, openQuestion.getEnunciadoQuestao());
             pstmt.setString(6, openQuestion.getTituloQuestao());
-            pstmt.setBlob(7, imageToBlob(openQuestion.getQuestPhoto()));
+            pstmt.setBinaryStream(7, imageToBlob(openQuestion.getQuestPhoto()));
             pstmt.setLong(8, openQuestion.getIdQuestao());
             pstmt.executeUpdate();
             pstmt.close();
@@ -177,9 +177,9 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 autor.setLoginUsuario(rs.getString("loginUsuario"));
                 autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
                 autor.setSenhaUsuario(rs.getString("senhaUsuario"));
-                Blob blob = rs.getBlob("userPhoto");  
-                InputStream in = blob.getBinaryStream();  
-                BufferedImage image = ImageIO.read(in);
+                InputStream blob = rs.getBinaryStream("userPhoto");  
+                  
+                BufferedImage image = ImageIO.read(blob);
                 autor.setFotoUsuario(image);
                 questao.setCriador(autor);
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
@@ -194,9 +194,9 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);
                 questao.setModulo(mod);
-                blob = rs.getBlob("questPhoto");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("questPhoto");  
+                  
+                image = ImageIO.read(blob);
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
             }
@@ -237,9 +237,9 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 autor.setLoginUsuario(rs.getString("loginUsuario"));
                 autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
                 autor.setSenhaUsuario(rs.getString("senhaUsuario"));
-                Blob blob = rs.getBlob("userPhoto");  
-                InputStream in = blob.getBinaryStream();  
-                BufferedImage image = ImageIO.read(in);
+                InputStream blob = rs.getBinaryStream("userPhoto");  
+                  
+                BufferedImage image = ImageIO.read(blob);
                 autor.setFotoUsuario(image);
                 questao.setCriador(autor);
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
@@ -254,9 +254,9 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);
                 questao.setModulo(mod);
-                blob = rs.getBlob("questPhoto");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("questPhoto");  
+                  
+                image = ImageIO.read(blob);
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 lista.add(questao);
@@ -295,9 +295,9 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 autor.setLoginUsuario(rs.getString("loginUsuario"));
                 autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
                 autor.setSenhaUsuario(rs.getString("senhaUsuario"));
-                Blob blob = rs.getBlob("userPhoto");  
-                InputStream in = blob.getBinaryStream();  
-                BufferedImage image = ImageIO.read(in);
+                InputStream blob = rs.getBinaryStream("userPhoto");  
+                  
+                BufferedImage image = ImageIO.read(blob);
                 autor.setFotoUsuario(image);
                 questao.setCriador(autor);
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
@@ -312,9 +312,9 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);
                 questao.setModulo(mod);
-                blob = rs.getBlob("questPhoto");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("questPhoto");  
+                  
+                image = ImageIO.read(blob);
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 lista.add(questao);

@@ -47,10 +47,11 @@ public class Login {
             return resposta;
         }
         if(usuario==null){
-            resposta="falhaLogin.jsp";
+            resposta="Erro.jsp";
+            request.setAttribute("erro", "Falha no Login");
         }else{
             request.getSession().setAttribute("usuario", usuario.getIdUsuario());
-            resposta="home.jsp";
+            resposta="index.jsp";
         }
         return resposta;
     }

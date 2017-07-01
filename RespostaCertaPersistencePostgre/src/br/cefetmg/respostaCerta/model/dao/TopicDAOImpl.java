@@ -92,7 +92,7 @@ public class TopicDAOImpl implements TopicDAO{
             pstmt.setLong(2, topic.getAutor().getIdUsuario());
             pstmt.setString(3, topic.getTxtMensagem());
             pstmt.setDate(4, java.sql.Date.valueOf(topic.getDataPostagem()));
-            pstmt.setBlob(5, imageToBlob(topic.getMsgPhoto()));
+            pstmt.setBinaryStream(5, imageToBlob(topic.getMsgPhoto()));
             pstmt.executeQuery();
             pstmt.close();
             connection.close();
@@ -116,7 +116,7 @@ public class TopicDAOImpl implements TopicDAO{
             pstmt.setLong(2, topic.getAutor().getIdUsuario());
             pstmt.setString(3, topic.getTxtMensagem());
             pstmt.setDate(4, java.sql.Date.valueOf(topic.getDataPostagem()));
-            pstmt.setBlob(5, imageToBlob(topic.getMsgPhoto()));
+            pstmt.setBinaryStream(5, imageToBlob(topic.getMsgPhoto()));
             pstmt.setLong(6, topic.getTopicoId());
             pstmt.executeUpdate();
             pstmt.close();
@@ -191,9 +191,9 @@ public class TopicDAOImpl implements TopicDAO{
                 autorTopico.setLoginUsuario(rs.getString("loginUsuarioM"));
                 autorTopico.setSenhaUsuario(rs.getString("senhaUsuarioM"));
                 autorTopico.setIdtUsuario(rs.getString("idtUsuarioM").charAt(0));
-                Blob blob = rs.getBlob("userPhotoM");  
-                InputStream in = blob.getBinaryStream();  
-                BufferedImage image = ImageIO.read(in);
+                InputStream blob = rs.getBinaryStream("userPhotoM");  
+                  
+                BufferedImage image = ImageIO.read(blob);
                 autorTopico.setFotoUsuario(image);
                 
                 autorQuestao.setIdUsuario(rs.getLong("idUsuarioQ"));
@@ -201,9 +201,9 @@ public class TopicDAOImpl implements TopicDAO{
                 autorQuestao.setLoginUsuario(rs.getString("loginUsuarioQ"));
                 autorQuestao.setSenhaUsuario(rs.getString("senhaUsuarioQ"));
                 autorQuestao.setIdtUsuario(rs.getString("idtUsuarioQ").charAt(0));
-                blob = rs.getBlob("userPhotoQ");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("userPhotoQ");  
+                  
+                image = ImageIO.read(blob);
                 autorQuestao.setFotoUsuario(image);
                 
                 sub.setDescDominio(rs.getString("descDominio"));
@@ -221,9 +221,9 @@ public class TopicDAOImpl implements TopicDAO{
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
-                blob = rs.getBlob("questPhoto");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("questPhoto");  
+                  
+                image = ImageIO.read(blob);
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 
@@ -235,9 +235,9 @@ public class TopicDAOImpl implements TopicDAO{
                 topico.setAutor(autorTopico);
                 topico.setDataPostagem(rs.getDate("dataPost").toLocalDate());
                 topico.setForum(forum);
-                blob = rs.getBlob("topicImage");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("topicImage");  
+                  
+                image = ImageIO.read(blob);
                 topico.setMsgPhoto(image);
                 topico.setTopicoId(rs.getLong("idTopic"));
                 topico.setTxtMensagem(rs.getString("topicMensagem"));
@@ -291,9 +291,9 @@ public class TopicDAOImpl implements TopicDAO{
                 autorTopico.setLoginUsuario(rs.getString("loginUsuarioM"));
                 autorTopico.setSenhaUsuario(rs.getString("senhaUsuarioM"));
                 autorTopico.setIdtUsuario(rs.getString("idtUsuarioM").charAt(0));
-                Blob blob = rs.getBlob("userPhotoM");  
-                InputStream in = blob.getBinaryStream();  
-                BufferedImage image = ImageIO.read(in);
+                InputStream blob = rs.getBinaryStream("userPhotoM");  
+                  
+                BufferedImage image = ImageIO.read(blob);
                 autorTopico.setFotoUsuario(image);
                 
                 autorQuestao.setIdUsuario(rs.getLong("idUsuarioQ"));
@@ -301,9 +301,9 @@ public class TopicDAOImpl implements TopicDAO{
                 autorQuestao.setLoginUsuario(rs.getString("loginUsuarioQ"));
                 autorQuestao.setSenhaUsuario(rs.getString("senhaUsuarioQ"));
                 autorQuestao.setIdtUsuario(rs.getString("idtUsuarioQ").charAt(0));
-                blob = rs.getBlob("userPhotoQ");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("userPhotoQ");  
+                  
+                image = ImageIO.read(blob);
                 autorQuestao.setFotoUsuario(image);
                 
                 sub.setDescDominio(rs.getString("descDominio"));
@@ -321,9 +321,9 @@ public class TopicDAOImpl implements TopicDAO{
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
-                blob = rs.getBlob("questPhoto");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("questPhoto");  
+                  
+                image = ImageIO.read(blob);
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 
@@ -335,9 +335,9 @@ public class TopicDAOImpl implements TopicDAO{
                 topico.setAutor(autorTopico);
                 topico.setDataPostagem(rs.getDate("dataPost").toLocalDate());
                 topico.setForum(forum);
-                blob = rs.getBlob("topicImage");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("topicImage");  
+                  
+                image = ImageIO.read(blob);
                 topico.setMsgPhoto(image);
                 topico.setTopicoId(rs.getLong("idTopic"));
                 topico.setTxtMensagem(rs.getString("topicMensagem"));
@@ -391,9 +391,9 @@ public class TopicDAOImpl implements TopicDAO{
                 autorTopico.setLoginUsuario(rs.getString("loginUsuarioM"));
                 autorTopico.setSenhaUsuario(rs.getString("senhaUsuarioM"));
                 autorTopico.setIdtUsuario(rs.getString("idtUsuarioM").charAt(0));
-                Blob blob = rs.getBlob("userPhotoM");  
-                InputStream in = blob.getBinaryStream();  
-                BufferedImage image = ImageIO.read(in);
+                InputStream blob = rs.getBinaryStream("userPhotoM");  
+                  
+                BufferedImage image = ImageIO.read(blob);
                 autorTopico.setFotoUsuario(image);
                 
                 autorQuestao.setIdUsuario(rs.getLong("idUsuarioQ"));
@@ -401,9 +401,9 @@ public class TopicDAOImpl implements TopicDAO{
                 autorQuestao.setLoginUsuario(rs.getString("loginUsuarioQ"));
                 autorQuestao.setSenhaUsuario(rs.getString("senhaUsuarioQ"));
                 autorQuestao.setIdtUsuario(rs.getString("idtUsuarioQ").charAt(0));
-                blob = rs.getBlob("userPhotoQ");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("userPhotoQ");  
+                  
+                image = ImageIO.read(blob);
                 autorQuestao.setFotoUsuario(image);
                 
                 sub.setDescDominio(rs.getString("descDominio"));
@@ -421,9 +421,9 @@ public class TopicDAOImpl implements TopicDAO{
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
-                blob = rs.getBlob("questPhoto");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("questPhoto");  
+                  
+                image = ImageIO.read(blob);
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 
@@ -435,9 +435,9 @@ public class TopicDAOImpl implements TopicDAO{
                 topico.setAutor(autorTopico);
                 topico.setDataPostagem(rs.getDate("dataPost").toLocalDate());
                 topico.setForum(forum);
-                blob = rs.getBlob("topicImage");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("topicImage");  
+                  
+                image = ImageIO.read(blob);
                 topico.setMsgPhoto(image);
                 topico.setTopicoId(rs.getLong("idTopic"));
                 topico.setTxtMensagem(rs.getString("topicMensagem"));

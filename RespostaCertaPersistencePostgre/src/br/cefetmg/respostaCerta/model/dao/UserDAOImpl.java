@@ -81,27 +81,13 @@ public class UserDAOImpl implements UserDAO{
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
             String sql = "INSERT INTO Usuario (nomeUsuario, loginUsuario, senhaUsuario, idtUsuario, userPhoto) VALUES(?, ?, ?, ?, ?) RETURNING idUsuario";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
+            PreparedStatement pstmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, user.getNomeUsuario());
             pstmt.setString(2, user.getLoginUsuario());
             pstmt.setString(3, user.getSenhaUsuario());
             pstmt.setString(4, String.valueOf(user.getIdtUsuario()));
-            pstmt.setBlob(5, imageToBlob(user.getFotoUsuario()));
-            connection.setAutoCommit(false);
-            int linhasAfetadas = pstmt.executeUpdate();
-            connection.commit();
-            if (linhasAfetadas == 0) {
-                throw new PersistenceException("Criação da Resposta Falhou");
-            }
-
-            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    user.setIdUsuario(generatedKeys.getLong(1));
-                }
-                else {
-                    throw new PersistenceException("Criação falhou, sem id's obtidos");
-                }
-            }
+            pstmt.setBinaryStream(5, imageToBlob(user.getFotoUsuario()));
+            pstmt.execute();
             pstmt.close();
             connection.close();
         } catch (ClassNotFoundException | SQLException | IOException e) {
@@ -124,7 +110,7 @@ public class UserDAOImpl implements UserDAO{
             pstmt.setString(2, user.getLoginUsuario());
             pstmt.setString(3, user.getSenhaUsuario());
             pstmt.setString(4, String.valueOf(user.getIdtUsuario()));
-            pstmt.setBlob(5, imageToBlob(user.getFotoUsuario()));
+            pstmt.setBinaryStream(5, imageToBlob(user.getFotoUsuario()));
             pstmt.setLong(6, user.getIdUsuario());
             pstmt.executeUpdate();
             pstmt.close();
@@ -180,9 +166,9 @@ public class UserDAOImpl implements UserDAO{
                 usuario.setLoginUsuario(rs.getString("loginUsuario"));
                 usuario.setSenhaUsuario(rs.getString("senhaUsuario"));
                 usuario.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
-                Blob blob = rs.getBlob("userPhoto");  
-                InputStream in = blob.getBinaryStream();  
-                BufferedImage image = ImageIO.read(in);
+                InputStream blob = rs.getBinaryStream("userPhoto");  
+                  
+                BufferedImage image = ImageIO.read(blob);
                 usuario.setFotoUsuario(image);
             }
             rs.close();
@@ -216,9 +202,8 @@ public class UserDAOImpl implements UserDAO{
                 usuario.setLoginUsuario(rs.getString("loginUsuario"));
                 usuario.setSenhaUsuario(rs.getString("senhaUsuario"));
                 usuario.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
-                Blob blob = rs.getBlob("userPhoto");  
-                InputStream in = blob.getBinaryStream();  
-                BufferedImage image = ImageIO.read(in);
+                InputStream blob = rs.getBinaryStream("userPhoto");  
+                BufferedImage image = ImageIO.read(blob);
                 usuario.setFotoUsuario(image);
                 lista.add(usuario);
             }
@@ -240,7 +225,7 @@ public class UserDAOImpl implements UserDAO{
             
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, email);
-            pstmt.setString(2, "senha");
+            pstmt.setString(2, senha);
             ResultSet rs = pstmt.executeQuery(); 
             User usuario = null;
             if(rs.next()) {
@@ -250,9 +235,8 @@ public class UserDAOImpl implements UserDAO{
                 usuario.setLoginUsuario(rs.getString("loginUsuario"));
                 usuario.setSenhaUsuario(rs.getString("senhaUsuario"));
                 usuario.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
-                Blob blob = rs.getBlob("userPhoto");  
-                InputStream in = blob.getBinaryStream();  
-                BufferedImage image = ImageIO.read(in);
+                InputStream blob = rs.getBinaryStream("userPhoto");  
+                BufferedImage image = ImageIO.read(blob);
                 usuario.setFotoUsuario(image);
             }
             rs.close();

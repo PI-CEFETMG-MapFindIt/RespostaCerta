@@ -91,7 +91,7 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
             pstmt.setBoolean(4, questaoFechada.isIdtQuestao());
             pstmt.setDate(5, java.sql.Date.valueOf(questaoFechada.getDataCriacao()));
             pstmt.setString(6, questaoFechada.getTituloQuestao());   
-            pstmt.setBlob(7, imageToBlob(questaoFechada.getQuestPhoto()));
+            pstmt.setBinaryStream(7, imageToBlob(questaoFechada.getQuestPhoto()));
             int linhasAfetadas = pstmt.executeUpdate();
             if (linhasAfetadas == 0) {
                 throw new PersistenceException("Criação da Questao Falhou");
@@ -138,7 +138,7 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
             pstmt.setDate(4, java.sql.Date.valueOf(closedQuestion.getDataCriacao()));
             pstmt.setString(5, closedQuestion.getEnunciadoQuestao());
             pstmt.setString(6, closedQuestion.getTituloQuestao());
-            pstmt.setBlob(7, imageToBlob(closedQuestion.getQuestPhoto()));
+            pstmt.setBinaryStream(7, imageToBlob(closedQuestion.getQuestPhoto()));
             pstmt.setLong(8, closedQuestion.getIdQuestao());
             pstmt.executeUpdate();
             sql = "UPDATE respostaFechada SET alt1 = ?, alt2 = ?, alt3 = ?, alt4 = ?, alt5 = ?, altCorreta = ? WHERE idQuestao = ?";
@@ -216,9 +216,9 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
                 autor.setLoginUsuario(rs.getString("loginUsuario"));
                 autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
                 autor.setSenhaUsuario(rs.getString("senhaUsuario"));
-                Blob blob = rs.getBlob("userPhoto");  
-                InputStream in = blob.getBinaryStream();  
-                BufferedImage image = ImageIO.read(in);
+                InputStream blob = rs.getBinaryStream("userPhoto");  
+                  
+                BufferedImage image = ImageIO.read(blob);
                 autor.setFotoUsuario(image);
                 questao.setCriador(autor);
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
@@ -233,9 +233,9 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);
                 questao.setModulo(mod);
-                blob = rs.getBlob("questPhoto");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("questPhoto");  
+                  
+                image = ImageIO.read(blob);
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 questao.setAlt1(rs.getString("alt1"));
@@ -283,9 +283,9 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
                 autor.setLoginUsuario(rs.getString("loginUsuario"));
                 autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
                 autor.setSenhaUsuario(rs.getString("senhaUsuario"));
-                Blob blob = rs.getBlob("userPhoto");  
-                InputStream in = blob.getBinaryStream();  
-                BufferedImage image = ImageIO.read(in);
+                InputStream blob = rs.getBinaryStream("userPhoto");  
+                  
+                BufferedImage image = ImageIO.read(blob);
                 autor.setFotoUsuario(image);
                 questao.setCriador(autor);
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
@@ -300,9 +300,9 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);
                 questao.setModulo(mod);
-                blob = rs.getBlob("questPhoto");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("questPhoto");  
+                  
+                image = ImageIO.read(blob);
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 questao.setAlt1(rs.getString("alt1"));
@@ -348,9 +348,9 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
                 autor.setLoginUsuario(rs.getString("loginUsuario"));
                 autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
                 autor.setSenhaUsuario(rs.getString("senhaUsuario"));
-                Blob blob = rs.getBlob("userPhoto");  
-                InputStream in = blob.getBinaryStream();  
-                BufferedImage image = ImageIO.read(in);
+                InputStream blob = rs.getBinaryStream("userPhoto");  
+                  
+                BufferedImage image = ImageIO.read(blob);
                 autor.setFotoUsuario(image);
                 questao.setCriador(autor);
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
@@ -365,9 +365,9 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);
                 questao.setModulo(mod);
-                blob = rs.getBlob("questPhoto");  
-                in = blob.getBinaryStream();  
-                image = ImageIO.read(in);
+                blob = rs.getBinaryStream("questPhoto");  
+                  
+                image = ImageIO.read(blob);
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 questao.setAlt1(rs.getString("alt1"));

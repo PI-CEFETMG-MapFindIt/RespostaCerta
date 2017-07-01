@@ -1,11 +1,20 @@
 
+<%@page import="br.cefetmg.respostaCerta.model.domain.User"%>
+<%@page import="br.cefetmg.respostaCerta.model.service.UserManagementImpl"%>
+<%@page import="br.cefetmg.respostaCerta.model.service.UserManagement"%>
+<%@page import="br.cefetmg.respostaCerta.model.dao.UserDAOImpl"%>
+<%@page import="br.cefetmg.respostaCerta.model.dao.UserDAOImpl"%>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/Menu.css" rel="stylesheet">
 <div class="container-fluid">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <%
+            User usuario = null;
                 if (request.getSession().getAttribute("usuario") != null) {
+                    UserManagement management = new UserManagementImpl(new UserDAOImpl());
+                    usuario = management.getUserById((Long)request.getSession().getAttribute("usuario"));
+                    
             %>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-controls="navbar">
@@ -53,13 +62,15 @@
         <div class="container-fluid">
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav">
-                    <li class="sidebar-brand"><br></li>
-                    <li class="sidebar-brand"><a href="#" class="navbar-brand">João Silva</a></li>
+                    <br><br><br>
+                    <li class="sidebar-brand"><a href="#" class="navbar-brand" style="color:white"><%=usuario.getNomeUsuario()%></a></li>
                     <li><a href="#">Página Inicial</a></li>
+                    <li><a href="#">Desempenho</a></li>
+                    <% if(usuario.getIdtUsuario()=='P'){%>
                     <li><a href="#">Cadastrar Questão</a></li>
                     <li><a href="#">Minhas Questões</a></li>
-                    <li><a href="#">Desempenho</a></li>
                     <li><a href="#">Gerenciamento de Cadastros</a></li>
+                    <% } %>
                 </ul>
             </div>
         </div>
@@ -78,7 +89,7 @@
                                 <input class="form-control" placeholder="Digite o seu e-mail" required type="email" name="emailUsuario" id="emailUsuario">
                             </div>
                             <div class="form-group">
-                                <label for="senhaUsuario">E-mail</label>
+                                <label for="senhaUsuario">Senha</label>
                                 <input class="form-control" type="password" name="senhaUsuario" required id="senhaUsuario">
                             </div>
                             <button class="btn btn-default" type="submit">Login</button>
