@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    	<title>Resposta Certa</title>
+
+    	<link href="css/bootstrap.min.css" rel="stylesheet">
+    	<link href="css/style.css" rel="stylesheet">
+ 	</head>
+
+	<body>
+		<div class="container-fluid">
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+				<div class="container-fluid">
+					<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+					</div>
+					<div id="navbar" class="navbar-collapse collapse">
+						<ul class="nav navbar-nav navbar-right">
+							 <li><a href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Sair</a></li>
+						</ul>
+						<form class="navbar-form navbar-right" action="#" method="GET">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Search..." id="query" name="search" value="">
+								<div class="input-group-btn">
+									<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</nav>
+			<div id="wrapper" class="toggled">
+				<div class="container-fluid">
+					<div id="sidebar-wrapper">
+						<ul class="sidebar-nav">
+							<li class="sidebar-brand"><br></li>
+							<li class="sidebar-brand"><a href="#" class="navbar-brand">João Silva</a></li>
+							<li><a href="#">Página Inicial</a></li>
+							<li><a href="#">Cadastrar Questão</a></li>
+							<li><a href="#">Minhas Questões</a></li>
+							<li><a href="#">Desempenho</a></li>
+						</ul>
+					</div>
+				</div>
+				<br>
+				<br>
+				<!--Aqui vem a parte interna-->
+				<div class="row">
+					<br>
+					<div class="col-md-12" align="center" id="titulo">
+						<h3><b>Fórum</b></h3>
+					</div>
+					<br>
+				</div>
+				<div class="row">
+					<br>
+					<div class="col-md-8 col-md-offset-2">
+						<ol class="breadcrumb">
+	  						<li><a href="#">Disciplina</a></li>
+	  						<li><a href="#">Matemática</a></li>
+	  						<li class="active">Geometria Analítica</li>
+						</ol>
+					</div>					
+				</div>
+				<div class="row">
+					<br>
+					<div class="col-md-8 col-md-offset-2">
+						<div class="panel panel-default">
+    						<div class="panel-body"><h3>Não tô entendendo essa parte</h3></div>
+  						</div>
+						<div class="panel panel-default">
+    						<div class="panel-body"><h3>Ajuda Ajuda Ajuda</h3></div>
+  						</div>
+						<div class="panel panel-default">
+    						<div class="panel-body"><h3>Algúem me salva desse inferno de instituição!</h3></div>
+  						</div>  						  							
+					</div>					
+				</div>
+				<div class="row">
+					<div class="col-md-12" align="center">
+						<button class="btn btn-sucess " style="background-color: #555555; color:white;" 
+						data-toggle="modal" data-target="#modalModulo">Criar nova Questão</button>
+					</div>
+				</div>
+				<div id="modalModulo" class="modal fade" role="dialog">
+      				<div class="modal-dialog">
+        				<div class="modal-content">
+        					<div class="modal-header">
+        				   		<button type="button" class="close" data-dismiss="modal">&times;</button>
+        				   			<h4 class="modal-title">Adicionar Modulo</h4>
+        			  		</div>
+        			  	<div class="modal-body">
+        				  <form id="adicionarDisciplina">
+          					<div class="form-group">
+          						<label for="nomeModulo">Nome do Novo Modulo</label>
+          						<input class="form-control" placeholder="Digite o nome do modulo" type="text" id="nomeModulo" name="nomeModulo">
+							</div>
+          					<button class="btn btn-default" type="submit">Salvar</button>
+        				  </form>
+        			  	</div>
+        			  	<div class="modal-footer">
+        				   <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        			  	</div>
+        				</div>
+      			  </div>
+      		    </div>			
+			</div>
+		</div>
+    	<script src="js/jquery.min.js"></script>
+    	<script src="js/bootstrap.min.js"></script>
+    	<script src="js/scripts.js"></script>
+  	</body>
+</html>
+
