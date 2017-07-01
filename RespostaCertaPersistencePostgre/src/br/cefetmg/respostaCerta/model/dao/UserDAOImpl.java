@@ -80,14 +80,28 @@ public class UserDAOImpl implements UserDAO{
     synchronized public void insert(User user) throws PersistenceException {
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "INSERT INTO Usuario (nomeUsuario, loginUsuario, senhaUsuario, idtUsuario, userPhoto) VALUES(?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Usuario (nomeUsuario, loginUsuario, senhaUsuario, idtUsuario, userPhoto) VALUES(?, ?, ?, ?, ?) RETURNING idUsuario";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, user.getNomeUsuario());
             pstmt.setString(2, user.getLoginUsuario());
             pstmt.setString(3, user.getSenhaUsuario());
             pstmt.setString(4, String.valueOf(user.getIdtUsuario()));
             pstmt.setBlob(5, imageToBlob(user.getFotoUsuario()));
-            pstmt.executeQuery();
+            connection.setAutoCommit(false);
+            int linhasAfetadas = pstmt.executeUpdate();
+            connection.commit();
+            if (linhasAfetadas == 0) {
+                throw new PersistenceException("Criação da Resposta Falhou");
+            }
+
+            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    user.setIdUsuario(generatedKeys.getLong(1));
+                }
+                else {
+                    throw new PersistenceException("Criação falhou, sem id's obtidos");
+                }
+            }
             pstmt.close();
             connection.close();
         } catch (ClassNotFoundException | SQLException | IOException e) {

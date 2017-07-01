@@ -183,7 +183,7 @@ ALTER TABLE Questao ADD CONSTRAINT idQuestao UNIQUE (idQuestao)
 CREATE TABLE Usuario(
  idUsuario SERIAL,
  nomeUsuario Character(50) NOT NULL,
- loginUsuario Character(50) NOT NULL,
+ loginUsuario Character(50) NOT NULL UNIQUE,
  senhaUsuario Character(40) NOT NULL,
  idtUsuario Character(1) NOT NULL,
  userPhoto Bytea

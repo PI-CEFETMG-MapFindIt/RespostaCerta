@@ -66,7 +66,7 @@
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <div class="radio">
-                                        <label><input type="radio" name="tipo" id="prof" value="P">Professor</label>
+                                        <label><input type="radio" name="tipo" id="prof" value="E">Professor</label>
                                     </div>
                                 </div>
                             </div>
@@ -74,23 +74,6 @@
                                 <div class="form-group">
                                     <div class="radio">
                                         <label><input type="radio" id="aluno" name="tipo" value="A">Aluno</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <div class="radio">
-                                        <label><input type="radio" name="gender" id="masc" value="masculino">Masculino</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <div class="radio">
-                                        <label><input type="radio"
-                                                      id="femin" name="gender" value="feminino">Feminino</label>
                                     </div>
                                 </div>
                             </div>
@@ -117,6 +100,7 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.mask.min.js"></script>
 <script src="js/Cadastro.js"></script>
 </body>
 </html>
