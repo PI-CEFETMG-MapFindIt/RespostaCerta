@@ -1,6 +1,11 @@
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="br.cefetmg.respostaCerta.model.domain.Module"%>
+<%@page import="br.cefetmg.respostaCerta.model.domain.Module"%>
 <%@page import="java.math.BigInteger"%>
 <%@page import="java.security.MessageDigest"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<% List<Module> topicos = (List<Module>)request.getAttribute("topicos");%>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -12,6 +17,7 @@
 
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/Home.css" rel="stylesheet">
+        <link href="css/jquery.dataTables.min.css" rel="stylesheet">
 
     </head>
     <body>
@@ -35,85 +41,27 @@
                     <p>
                         <a class="btn" href="#">Saiba mais sobre nós</a>
                     </p>
-                    <h3>
-                        Topicos mais visitados
-                    </h3>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
-
-                                <div class="panel-body">
-                                    Matematica
-                                </div>
-                                <div class="panel-body">
-                                    Fisca
-                                </div>
-                                <div class="panel-body">
-                                    Calculo
-                                </div>
-                                <div class="panel-body">
-                                    Geometria
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
-
-                                <div class="panel-body">
-                                    Romantismo
-                                </div>
-                                <div class="panel-body">
-                                    Guerra Fria
-                                </div>
-                                <div class="panel-body">
-                                    Brasil republica
-                                </div>
-                                <div class="panel-body">
-                                    Banco de Dados
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
-
-                                <div class="panel-body">
-                                    JAVA
-                                </div>
-                                <div class="panel-body">
-                                    Portugues
-                                </div>
-                                <div class="panel-body">
-                                    Deseign pattern
-                                </div>
-                                <div class="panel-body">
-                                    Collections
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="pagination">
-                        <li>
-                            <a href="#">Prev</a>
-                        </li>
-                        <li>
-                            <a href="#">1</a>
-                        </li>
-                        <li>
-                            <a href="#">2</a>
-                        </li>
-                        <li>
-                            <a href="#">3</a>
-                        </li>
-                        <li>
-                            <a href="#">4</a>
-                        </li>
-                        <li>
-                            <a href="#">5</a>
-                        </li>
-                        <li>
-                            <a href="#">Next</a>
-                        </li>
-                    </ul>
+                    <table id="topicos" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Topicos mais visitados</th>                               
+                            </tr>
+                        </thead>
+                        <tfoot style="display:none">
+                            <tr>
+                                <th>Topicos mais visitados</th>     
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                          <% Iterator<Module> it = topicos.iterator();%>
+                            <% while(it.hasNext()){ %>
+                            <tr>
+                                <td><a href="#"><%=it.next().getNomeModulo()%></a></td>
+                            </tr>
+                          <% } %>
+                        </tbody>
+                    </table>
+                        <br><br>
                 </div>
             </div>
         </div>
@@ -121,6 +69,7 @@
 </div>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
 <script src="js/Home.js"></script>
 </body>
 </html>

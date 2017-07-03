@@ -157,9 +157,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
 
             String sql = "SELECT a.resposta resposta, b.idResposta idResposta, b.idtResposta idtResposta, b.dataResposta dataResposta, "
                     + "c.idUsuario idUsuario, c.nomeUsuario nomeUsuario, c.loginUsuario loginUsuario, c.senhaUsuario senhaUsuario, c.idtUsuario idtUsuario, "
-                    + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao "
-                    + "d.tituloQuestao tituloQuestao, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo "
-                    + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio "
+                    + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao, "
+                    + "d.tituloQuestao tituloQuestao, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo, "
+                    + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio, "
                     + "g.idUsuario idUsuarioQuestao, g.nomeUsuario nomeUsuarioQuestao, g.loginUsuario loginUsuarioQuestao, g.senhaUsuario senhaUsuarioQuestao, "
                     + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao, "
                     + "h.alt1 alt1, h.alt2 alt2, h.alt3 alt3, h.alt4 alt4, h.alt5 alt5, h.altCorreta altCorreta FROM respostaFechada a "
@@ -218,8 +218,10 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 questao.setModulo(mod);
                 blob = rs.getBinaryStream("questPhoto");  
                   
-                image = ImageIO.read(blob);
-                questao.setQuestPhoto(image);
+                if(blob!=null){
+                    image = ImageIO.read(blob);
+                    questao.setQuestPhoto(image);
+                }
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 questao.setAlt1(rs.getString("alt1"));
                 questao.setAlt2(rs.getString("alt2"));
@@ -252,9 +254,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
 
             String sql = "SELECT a.resposta resposta, b.idResposta idResposta, b.idtResposta idtResposta, b.dataResposta dataResposta, "
                     + "c.idUsuario idUsuario, c.nomeUsuario nomeUsuario, c.loginUsuario loginUsuario, c.senhaUsuario senhaUsuario, c.idtUsuario idtUsuario, "
-                    + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao "
-                    + "d.tituloQuestao tituloQuestao, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo "
-                    + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio "
+                    + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao, "
+                    + "d.tituloQuestao tituloQuestao, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo, "
+                    + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio, "
                     + "g.idUsuario idUsuarioQuestao, g.nomeUsuario nomeUsuarioQuestao, g.loginUsuario loginUsuarioQuestao, g.senhaUsuario senhaUsuarioQuestao, "
                     + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao, "
                     + "h.alt1 alt1, h.alt2 alt2, h.alt3 alt3, h.alt4 alt4, h.alt5 alt5, h.altCorreta altCorreta FROM respostaFechada a "
@@ -262,7 +264,7 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                     + "JOIN Usuario c ON c.idUsuario=b.idUsuario "
                     + "JOIN Questao d ON d.idQuestao=b.idQuestao "
                     + "JOIN Modulo e ON e.idModulo=d.idModulo "
-                    + "JOIN Dominio f ON f.idDominio=e.idDominio"
+                    + "JOIN Dominio f ON f.idDominio=e.idDominio "
                     + "JOIN Usuario g ON g.idUsuario=d.idUsuarioCriador "
                     + "JOIN QuestaoFechada h ON d.idQuestao=h.idQuestao";
             ArrayList<ClosedAnswer> lista = new ArrayList<>();
@@ -312,8 +314,10 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 questao.setModulo(mod);
                 blob = rs.getBinaryStream("questPhoto");  
                   
-                image = ImageIO.read(blob);
-                questao.setQuestPhoto(image);
+                if(blob!=null){
+                    image = ImageIO.read(blob);
+                    questao.setQuestPhoto(image);
+                }
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 questao.setAlt1(rs.getString("alt1"));
                 questao.setAlt2(rs.getString("alt2"));
@@ -342,9 +346,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
 
             String sql = "SELECT a.resposta resposta, b.idResposta idResposta, b.idtResposta idtResposta, b.dataResposta dataResposta, "
                     + "c.idUsuario idUsuario, c.nomeUsuario nomeUsuario, c.loginUsuario loginUsuario, c.senhaUsuario senhaUsuario, c.idtUsuario idtUsuario, "
-                    + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao "
-                    + "d.tituloQuestao tituloQuestao, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo "
-                    + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio "
+                    + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao, "
+                    + "d.tituloQuestao tituloQuestao, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo, "
+                    + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio, "
                     + "g.idUsuario idUsuarioQuestao, g.nomeUsuario nomeUsuarioQuestao, g.loginUsuario loginUsuarioQuestao, g.senhaUsuario senhaUsuarioQuestao, "
                     + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao, "
                     + "h.alt1 alt1, h.alt2 alt2, h.alt3 alt3, h.alt4 alt4, h.alt5 alt5, h.altCorreta altCorreta FROM respostaFechada a "
@@ -403,9 +407,10 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 mod.setDominio(sub);
                 questao.setModulo(mod);
                 blob = rs.getBinaryStream("questPhoto");  
-                  
-                image = ImageIO.read(blob);
-                questao.setQuestPhoto(image);
+                if(blob!=null){
+                    image = ImageIO.read(blob);
+                    questao.setQuestPhoto(image);
+                }
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 questao.setAlt1(rs.getString("alt1"));
                 questao.setAlt2(rs.getString("alt2"));

@@ -9,6 +9,7 @@ import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.dao.OpenAnswerDAO;
 import br.cefetmg.respostaCerta.model.domain.OpenAnswer;
+import java.util.List;
 /**
  *
  * @author adalbs
@@ -93,6 +94,11 @@ public class OpenAnswerManagementImpl implements OpenAnswerManagement{
             throw new BusinessException("ID não pode ser nulo");
         }
         return openAnswerDAO.getOpenAnswerById(id);
+    }
+
+    @Override
+    public List<OpenAnswer> getAllAnswers() throws BusinessException, PersistenceException {
+        return openAnswerDAO.listAll();
     }
     
 }

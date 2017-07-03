@@ -6,9 +6,9 @@
 package br.cefetmg.respostaCerta.model.service;
 
 import br.cefetmg.respostaCerta.model.domain.ClosedAnswer;
-import br.cefetmg.respostaCerta.model.domain.QuestionAnswer;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
+import java.util.List;
 
 /**
  *
@@ -19,4 +19,5 @@ public interface ClosedAnswerManagement {
     public void updateQuestionAnswer(Long id, ClosedAnswer questionAnswer) throws BusinessException, PersistenceException;
     public void removeQuestionAnswer(Long id) throws BusinessException, PersistenceException;
     public ClosedAnswer getQuestionAnswerById(Long id) throws BusinessException, PersistenceException;
+    public List<ClosedAnswer> getAllAnswers() throws BusinessException, PersistenceException;
 }

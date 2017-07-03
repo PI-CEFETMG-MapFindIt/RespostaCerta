@@ -5,7 +5,6 @@
  */
 package br.cefetmg.respostaCerta.model.dao;
 
-import br.cefetmg.respostaCerta.model.domain.ClosedAnswer;
 import br.cefetmg.respostaCerta.model.domain.Module;
 import br.cefetmg.respostaCerta.model.domain.OpenAnswer;
 import br.cefetmg.respostaCerta.model.domain.Question;
@@ -16,13 +15,11 @@ import br.cefetmg.util.db.ConnectionManager;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.imageio.ImageIO;
 
@@ -161,17 +158,17 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
 
             String sql = "SELECT a.resposta resposta, b.idResposta idResposta, b.idtResposta idtResposta, b.dataResposta dataResposta, "
                     + "c.idUsuario idUsuario, c.nomeUsuario nomeUsuario, c.loginUsuario loginUsuario, c.senhaUsuario senhaUsuario, c.idtUsuario idtUsuario, "
-                    + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao "
-                    + "d.tituloQuestao tituloQuestao, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo "
-                    + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio "
+                    + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao, "
+                    + "d.tituloQuestao tituloQuestao, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo, "
+                    + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio, "
                     + "g.idUsuario idUsuarioQuestao, g.nomeUsuario nomeUsuarioQuestao, g.loginUsuario loginUsuarioQuestao, g.senhaUsuario senhaUsuarioQuestao, "
-                    + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao, "
+                    + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao "
                     + "FROM respostaAberta a "
                     + "JOIN resposta b ON a.idResposta=b.idResposta "
                     + "JOIN Usuario c ON c.idUsuario=b.idUsuario "
                     + "JOIN Questao d ON d.idQuestao=b.idQuestao "
                     + "JOIN Modulo e ON e.idModulo=d.idModulo "
-                    + "JOIN Dominio f ON f.idDominio=e.idDominio"
+                    + "JOIN Dominio f ON f.idDominio=e.idDominio "
                     + "JOIN Usuario g ON g.idUsuario=d.idUsuarioCriador "
                     + "WHERE a.idResposta = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -194,9 +191,9 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
                 BufferedImage image = ImageIO.read(blob);
                 autor.setFotoUsuario(image);
                 open.setAutor(autor);
-                open.setDataResposta(rs.getDate("dataRespostaQuestao").toLocalDate());
-                open.setIdResposta(rs.getLong("idRespostaQuestao"));
-                open.setIdtResposta(rs.getString("idtRespostaQuestao").charAt(0));
+                open.setDataResposta(rs.getDate("dataResposta").toLocalDate());
+                open.setIdResposta(rs.getLong("idResposta"));
+                open.setIdtResposta(rs.getString("idtResposta").charAt(0));
                 autorQuestao.setIdUsuario(rs.getLong("idUsuarioQuestao"));
                 autorQuestao.setNomeUsuario(rs.getString("nomeUsuarioQuestao"));
                 autorQuestao.setLoginUsuario(rs.getString("loginUsuarioQuestao"));
@@ -220,9 +217,10 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
                 mod.setDominio(sub);
                 questao.setModulo(mod);
                 blob = rs.getBinaryStream("questPhoto");  
-                  
-                image = ImageIO.read(blob);
-                questao.setQuestPhoto(image);
+                if(blob!=null){
+                    image = ImageIO.read(blob);
+                    questao.setQuestPhoto(image);
+                }
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 open.setQuestao(questao);
                 open.setResposta(rs.getString("resposta"));
@@ -248,17 +246,17 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
 
             String sql = "SELECT a.resposta resposta, b.idResposta idResposta, b.idtResposta idtResposta, b.dataResposta dataResposta, "
                     + "c.idUsuario idUsuario, c.nomeUsuario nomeUsuario, c.loginUsuario loginUsuario, c.senhaUsuario senhaUsuario, c.idtUsuario idtUsuario, "
-                    + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao "
-                    + "d.tituloQuestao tituloQuestao, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo "
-                    + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio "
+                    + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao, "
+                    + "d.tituloQuestao tituloQuestao, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo, "
+                    + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio, "
                     + "g.idUsuario idUsuarioQuestao, g.nomeUsuario nomeUsuarioQuestao, g.loginUsuario loginUsuarioQuestao, g.senhaUsuario senhaUsuarioQuestao, "
-                    + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao, "
+                    + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao "
                     + "FROM respostaAberta a "
                     + "JOIN resposta b ON a.idResposta=b.idResposta "
                     + "JOIN Usuario c ON c.idUsuario=b.idUsuario "
                     + "JOIN Questao d ON d.idQuestao=b.idQuestao "
                     + "JOIN Modulo e ON e.idModulo=d.idModulo "
-                    + "JOIN Dominio f ON f.idDominio=e.idDominio"
+                    + "JOIN Dominio f ON f.idDominio=e.idDominio "
                     + "JOIN Usuario g ON g.idUsuario=d.idUsuarioCriador";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -280,9 +278,9 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
                 BufferedImage image = ImageIO.read(blob);
                 autor.setFotoUsuario(image);
                 open.setAutor(autor);
-                open.setDataResposta(rs.getDate("dataRespostaQuestao").toLocalDate());
-                open.setIdResposta(rs.getLong("idRespostaQuestao"));
-                open.setIdtResposta(rs.getString("idtRespostaQuestao").charAt(0));
+                open.setDataResposta(rs.getDate("dataResposta").toLocalDate());
+                open.setIdResposta(rs.getLong("idResposta"));
+                open.setIdtResposta(rs.getString("idtResposta").charAt(0));
                 autorQuestao.setIdUsuario(rs.getLong("idUsuarioQuestao"));
                 autorQuestao.setNomeUsuario(rs.getString("nomeUsuarioQuestao"));
                 autorQuestao.setLoginUsuario(rs.getString("loginUsuarioQuestao"));
@@ -306,9 +304,10 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
                 mod.setDominio(sub);
                 questao.setModulo(mod);
                 blob = rs.getBinaryStream("questPhoto");  
-                  
-                image = ImageIO.read(blob);
-                questao.setQuestPhoto(image);
+                if(blob!=null){
+                    image = ImageIO.read(blob);
+                    questao.setQuestPhoto(image);
+                }
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 open.setQuestao(questao);
                 open.setResposta(rs.getString("resposta"));

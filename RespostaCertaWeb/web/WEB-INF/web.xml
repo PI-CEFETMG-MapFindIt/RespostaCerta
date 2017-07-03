@@ -4,13 +4,25 @@
         <servlet-name>ControllerServlet</servlet-name>
         <servlet-class>br.cefetmg.respostaCerta.controller.ControllerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ImageServlet</servlet-name>
+        <servlet-class>br.cefetmg.respostaCerta.controller.ImageServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControllerServlet</servlet-name>
         <url-pattern>/ControllerServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImageServlet</servlet-name>
+        <url-pattern>/ImageServlet</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>ControllerServlet</welcome-file>
+    </welcome-file-list>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    
 </web-app>

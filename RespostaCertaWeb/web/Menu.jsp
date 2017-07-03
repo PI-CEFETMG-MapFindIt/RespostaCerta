@@ -63,6 +63,7 @@
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav">
                     <br><br><br>
+                    <img src="/RespostaCerta/ImageServlet?tipo=user&id=<%=usuario.getIdUsuario()%>" alt="..." width="200" height="200">`
                     <li class="sidebar-brand"><a href="#" class="navbar-brand" style="color:white"><%=usuario.getNomeUsuario()%></a></li>
                     <li><a href="#">Página Inicial</a></li>
                     <li><a href="#">Desempenho</a></li>

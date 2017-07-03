@@ -5,7 +5,20 @@
  */
 package br.cefetmg.respostaCerta.controller;
 
+import br.cefetmg.respostaCerta.model.dao.UserDAOImpl;
+import br.cefetmg.respostaCerta.model.domain.User;
+import br.cefetmg.respostaCerta.model.exception.BusinessException;
+import br.cefetmg.respostaCerta.model.exception.PersistenceException;
+import br.cefetmg.respostaCerta.model.service.UserManagement;
+import br.cefetmg.respostaCerta.model.service.UserManagementImpl;
+import java.awt.Image;
+import java.awt.image.RenderedImage;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author umcan
  */
-public class ControllerServlet extends HttpServlet {
+public class ImageServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,22 +42,26 @@ public class ControllerServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        String jsp="";
-        String control = request.getParameter("control");
-        if(control==null){
-            control="";
-        }
-        switch(control){
-            case "Login": jsp = Login.processa(request); break;
-            case "Cadastrar": jsp = Cadastro.processa(request); break;
-            case "PagCadastrar": jsp = "Cadastro.jsp"; break;
-            default: jsp = Inicio.processa(request);
-        }
-        //Redirecionando pagina
-        RequestDispatcher rd = request.getRequestDispatcher(jsp);
-        rd.forward(request, response);
+        Long id = Long.parseLong(request.getParameter("id"));
+        String tipo = request.getParameter("tipo");
+        Image img = null;
+        switch(tipo){
+            case "user": UserManagement manage = new UserManagementImpl(new UserDAOImpl());
+                         try {
+                            User user = manage.getUserById(id);
+                            img=user.getFotoUsuario();
+                         } catch (BusinessException | PersistenceException ex) {
+                            request.setAttribute("erro", ex.getMessage());
+                            RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
+                            rd.forward(request, response);
+                         }
+                         break;
+                         
+        }     
+        response.setContentType("image/png");
+        OutputStream out = response.getOutputStream();
+        ImageIO.write((RenderedImage) img, "png", out);
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

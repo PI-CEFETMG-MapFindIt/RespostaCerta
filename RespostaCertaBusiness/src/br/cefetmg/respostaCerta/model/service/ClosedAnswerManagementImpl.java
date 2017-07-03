@@ -9,6 +9,7 @@ import br.cefetmg.respostaCerta.model.dao.ClosedAnswerDAO;
 import br.cefetmg.respostaCerta.model.domain.ClosedAnswer;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
+import java.util.List;
 
 /**
  *
@@ -94,5 +95,10 @@ public class ClosedAnswerManagementImpl implements ClosedAnswerManagement{
             throw new BusinessException("ID não pode ser nulo");
         }
         return closedAnswerDAO.getClosedAnswerById(id);
+    }
+
+    @Override
+    public List<ClosedAnswer> getAllAnswers() throws BusinessException, PersistenceException {
+        return closedAnswerDAO.listAll();
     }
 }
