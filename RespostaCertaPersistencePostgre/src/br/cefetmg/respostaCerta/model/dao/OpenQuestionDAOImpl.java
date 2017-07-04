@@ -182,6 +182,7 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 BufferedImage image = ImageIO.read(blob);
                 autor.setFotoUsuario(image);
                 questao.setCriador(autor);
+                questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
@@ -246,6 +247,7 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
+                questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setNomeModulo(rs.getString("nomeModulo"));
@@ -304,6 +306,7 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
+                questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setNomeModulo(rs.getString("nomeModulo"));

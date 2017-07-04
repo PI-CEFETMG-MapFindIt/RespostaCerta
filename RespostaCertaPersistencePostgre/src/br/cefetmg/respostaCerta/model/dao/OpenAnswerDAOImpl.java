@@ -159,7 +159,7 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
             String sql = "SELECT a.resposta resposta, b.idResposta idResposta, b.idtResposta idtResposta, b.dataResposta dataResposta, "
                     + "c.idUsuario idUsuario, c.nomeUsuario nomeUsuario, c.loginUsuario loginUsuario, c.senhaUsuario senhaUsuario, c.idtUsuario idtUsuario, "
                     + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao, "
-                    + "d.tituloQuestao tituloQuestao, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo, "
+                    + "d.tituloQuestao tituloQuestao, d.idtDificuldade idtDificuldade, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo, "
                     + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio, "
                     + "g.idUsuario idUsuarioQuestao, g.nomeUsuario nomeUsuarioQuestao, g.loginUsuario loginUsuarioQuestao, g.senhaUsuario senhaUsuarioQuestao, "
                     + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao "
@@ -205,6 +205,7 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
                 autorQuestao.setFotoUsuario(image);
                 questao.setCriador(autorQuestao);
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
+                questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
@@ -247,7 +248,7 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
             String sql = "SELECT a.resposta resposta, b.idResposta idResposta, b.idtResposta idtResposta, b.dataResposta dataResposta, "
                     + "c.idUsuario idUsuario, c.nomeUsuario nomeUsuario, c.loginUsuario loginUsuario, c.senhaUsuario senhaUsuario, c.idtUsuario idtUsuario, "
                     + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao, "
-                    + "d.tituloQuestao tituloQuestao, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo, "
+                    + "d.tituloQuestao tituloQuestao, d.idtDificuldade idtDificuldade, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo, "
                     + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio, "
                     + "g.idUsuario idUsuarioQuestao, g.nomeUsuario nomeUsuarioQuestao, g.loginUsuario loginUsuarioQuestao, g.senhaUsuario senhaUsuarioQuestao, "
                     + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao "
@@ -294,6 +295,7 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
+                questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
                 mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));

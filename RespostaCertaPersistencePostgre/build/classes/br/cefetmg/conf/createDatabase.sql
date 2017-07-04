@@ -164,7 +164,8 @@ CREATE TABLE Questao(
  idtQuestao Boolean NOT NULL,
  dataCriacao Timestamp NOT NULL,
  tituloQuestao Character(255),
- questPhoto Bytea
+ questPhoto Bytea,
+ idtDificuldade Character(1) NOT NULL
 )
 ;
 COMMENT ON COLUMN Questao.idtQuestao IS '0 - fechada, 1 - aberta'

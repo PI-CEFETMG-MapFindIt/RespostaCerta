@@ -21,11 +21,12 @@ public class Question {
     private LocalDate dataCriacao;
     private String tituloQuestao;
     private Image questPhoto;
+    private char idtDificuldade;
 
     public Question() {
     }
 
-    public Question(Module modulo, User criador, String enunciadoQuestao, boolean idtQuestao, LocalDate dataCriacao, String tituloQuestao, Image questPhoto) {
+    public Question(Module modulo, User criador, String enunciadoQuestao, boolean idtQuestao, LocalDate dataCriacao, String tituloQuestao, Image questPhoto, char idtDificuldade) {
         this.modulo = modulo;
         this.criador = criador;
         this.enunciadoQuestao = enunciadoQuestao;
@@ -33,6 +34,7 @@ public class Question {
         this.dataCriacao = dataCriacao;
         this.tituloQuestao = tituloQuestao;
         this.questPhoto = questPhoto;
+        this.idtDificuldade=idtDificuldade;
     }
 
     public Module getModulo() {
@@ -98,4 +100,13 @@ public class Question {
     public void setQuestPhoto(Image questPhoto) {
         this.questPhoto = questPhoto;
     }
+
+    public char getIdtDificuldade() {
+        return idtDificuldade;
+    }
+
+    public void setIdtDificuldade(char idtDificuldade) {
+        this.idtDificuldade = idtDificuldade;
+    }
+    
 }

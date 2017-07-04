@@ -170,6 +170,7 @@ public class ForumDAOImpl implements ForumDAO{
                   
                 image = ImageIO.read(blob);
                 questao.setQuestPhoto(image);
+                questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 forum.setQuestao(questao);
                 forum.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
@@ -223,6 +224,7 @@ public class ForumDAOImpl implements ForumDAO{
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
+                questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
                 mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));

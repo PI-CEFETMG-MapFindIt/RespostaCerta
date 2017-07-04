@@ -163,7 +163,7 @@ public class TopicDAOImpl implements TopicDAO{
             String sql = "SELECT g.mensagem topicMensagem, g.dataPost dataPost, g.image topicImage, g.idMensagem idTopic "
                     + "i.idUsuario idUsuarioM, i.nomeUsuario nomeUsuarioM, i.loginUsuario loginUsuarioM, i.senhaUsuario senhaUsuarioM, i.idtUsuario idtUsuarioM, i.userPhoto userPhotoM, "
                     + "a.idQuestao idQuestaoForum, a.dataCriacao dataCriacaoForum, a.status statusForum, "
-                    + "b.idQuestao idQuestao, b.enunciadoQuestao enunciadoQuestao, b.idtQuestao idtQuestao, b.dataCriacao dataCriacaoQuestao, b.tituloQuestao tituloQuestao, b.questPhoto questPhoto "
+                    + "b.idQuestao idQuestao, b.enunciadoQuestao enunciadoQuestao, b.idtDificuldade idtDificuldade, b.idtQuestao idtQuestao, b.dataCriacao dataCriacaoQuestao, b.tituloQuestao tituloQuestao, b.questPhoto questPhoto "
                     + "c.idModulo idModulo, c.nomeModulo nomeModulo, c.descModulo descModulo "
                     + "d.idDominio idDominio, d.nomeDominio nomeDominio, d.descDominio descDominio, "
                     + "e.idUsuario idUsuarioQ, e.nomeUsuario nomeUsuarioQ, e.loginUsuario loginUsuarioQ, e.senhaUsuario senhaUsuarioQ, e.idtUsuario idtUsuarioQ, e.userPhoto userPhotoQ "
@@ -221,6 +221,7 @@ public class TopicDAOImpl implements TopicDAO{
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
+                questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 blob = rs.getBinaryStream("questPhoto");  
                   
                 image = ImageIO.read(blob);
@@ -264,7 +265,7 @@ public class TopicDAOImpl implements TopicDAO{
             String sql = "SELECT g.mensagem topicMensagem, g.dataPost dataPost, g.image topicImage, g.idMensagem idTopic "
                     + "i.idUsuario idUsuarioM, i.nomeUsuario nomeUsuarioM, i.loginUsuario loginUsuarioM, i.senhaUsuario senhaUsuarioM, i.idtUsuario idtUsuarioM, i.userPhoto userPhotoM, "
                     + "a.idQuestao idQuestaoForum, a.dataCriacao dataCriacaoForum, a.status statusForum, "
-                    + "b.idQuestao idQuestao, b.enunciadoQuestao enunciadoQuestao, b.idtQuestao idtQuestao, b.dataCriacao dataCriacaoQuestao, b.tituloQuestao tituloQuestao, b.questPhoto questPhoto "
+                    + "b.idQuestao idQuestao, b.idtDificuldade idtDificuldade, b.enunciadoQuestao enunciadoQuestao, b.idtQuestao idtQuestao, b.dataCriacao dataCriacaoQuestao, b.tituloQuestao tituloQuestao, b.questPhoto questPhoto "
                     + "c.idModulo idModulo, c.nomeModulo nomeModulo, c.descModulo descModulo "
                     + "d.idDominio idDominio, d.nomeDominio nomeDominio, d.descDominio descDominio, "
                     + "e.idUsuario idUsuarioQ, e.nomeUsuario nomeUsuarioQ, e.loginUsuario loginUsuarioQ, e.senhaUsuario senhaUsuarioQ, e.idtUsuario idtUsuarioQ, e.userPhoto userPhotoQ "
@@ -321,6 +322,7 @@ public class TopicDAOImpl implements TopicDAO{
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
+                questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 blob = rs.getBinaryStream("questPhoto");  
                   
                 image = ImageIO.read(blob);
@@ -362,7 +364,7 @@ public class TopicDAOImpl implements TopicDAO{
             String sql = "SELECT g.mensagem topicMensagem, g.dataPost dataPost, g.image topicImage, g.idMensagem idTopic "
                     + "i.idUsuario idUsuarioM, i.nomeUsuario nomeUsuarioM, i.loginUsuario loginUsuarioM, i.senhaUsuario senhaUsuarioM, i.idtUsuario idtUsuarioM, i.userPhoto userPhotoM, "
                     + "a.idQuestao idQuestaoForum, a.dataCriacao dataCriacaoForum, a.status statusForum, "
-                    + "b.idQuestao idQuestao, b.enunciadoQuestao enunciadoQuestao, b.idtQuestao idtQuestao, b.dataCriacao dataCriacaoQuestao, b.tituloQuestao tituloQuestao, b.questPhoto questPhoto "
+                    + "b.idQuestao idQuestao, b.idtDificuldade idtDificuldade, b.enunciadoQuestao enunciadoQuestao, b.idtQuestao idtQuestao, b.dataCriacao dataCriacaoQuestao, b.tituloQuestao tituloQuestao, b.questPhoto questPhoto "
                     + "c.idModulo idModulo, c.nomeModulo nomeModulo, c.descModulo descModulo "
                     + "d.idDominio idDominio, d.nomeDominio nomeDominio, d.descDominio descDominio, "
                     + "e.idUsuario idUsuarioQ, e.nomeUsuario nomeUsuarioQ, e.loginUsuario loginUsuarioQ, e.senhaUsuario senhaUsuarioQ, e.idtUsuario idtUsuarioQ, e.userPhoto userPhotoQ "
@@ -421,6 +423,7 @@ public class TopicDAOImpl implements TopicDAO{
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
+                questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 blob = rs.getBinaryStream("questPhoto");  
                   
                 image = ImageIO.read(blob);

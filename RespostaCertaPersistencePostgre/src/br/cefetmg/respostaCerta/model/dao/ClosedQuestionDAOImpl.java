@@ -237,6 +237,7 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
                   
                 image = ImageIO.read(blob);
                 questao.setQuestPhoto(image);
+                questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 questao.setAlt1(rs.getString("alt1"));
                 questao.setAlt2(rs.getString("alt2"));
@@ -291,6 +292,7 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
+                questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
                 mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
@@ -357,6 +359,7 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
+                questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setNomeModulo(rs.getString("nomeModulo"));

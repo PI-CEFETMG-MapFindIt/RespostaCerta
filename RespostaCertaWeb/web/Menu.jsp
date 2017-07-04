@@ -27,7 +27,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Sair</a></li>
+                    <li><a href="/RespostaCerta/ControllerServlet?control=Logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Sair</a></li>
                 </ul>
                 <form class="navbar-form navbar-right" action="#" method="GET">
                     <div class="input-group">
@@ -68,7 +68,7 @@
                     <li><a href="#">Página Inicial</a></li>
                     <li><a href="#">Desempenho</a></li>
                     <% if(usuario.getIdtUsuario()=='P'){%>
-                    <li><a href="#">Cadastrar Questão</a></li>
+                    <li><a href="/RespostaCerta/ControllerServlet?control=PagCadastrarQuestao">Cadastrar Questão</a></li>
                     <li><a href="#">Minhas Questões</a></li>
                     <li><a href="#">Gerenciamento de Cadastros</a></li>
                     <% } %>

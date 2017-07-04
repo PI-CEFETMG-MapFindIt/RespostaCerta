@@ -304,7 +304,7 @@ public class ClosedQuestionManagementImplTest {
     public void testRegisterQuestion12() throws Exception {
         System.out.println("RegisterQuestion12");
         ClosedQuestion question = new ClosedQuestion("1", "2", "3", "4", "5", 1, new Module(), 
-        new User(), "Test", true, LocalDate.MIN, "Test", null);
+        new User(), "Test", true, LocalDate.MIN, "Test", null, 'F');
         
         impl.registerQuestion(question);
         assertTrue(impl.getQuestionById(question.getIdQuestao()) == question);
@@ -574,7 +574,7 @@ public class ClosedQuestionManagementImplTest {
     public void testUpdateQuestion13() throws Exception {
         System.out.println("UpdateQuestion13");
         ClosedQuestion question = new ClosedQuestion("1", "2", "3", "4", "5", 1, new Module(), 
-        new User(), "Test", true, LocalDate.MIN, "Test", null);
+        new User(), "Test", true, LocalDate.MIN, "Test", null, 'F');
       
         impl.registerQuestion(question);
         question.setCorreta(2);

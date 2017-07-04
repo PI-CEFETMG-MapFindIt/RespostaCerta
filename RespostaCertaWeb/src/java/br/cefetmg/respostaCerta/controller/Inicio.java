@@ -63,7 +63,7 @@ public class Inicio {
                 lista.add(modulos.get(it.next()));
             }
             request.setAttribute("topicos", lista);
-            return "index.jsp";
+            return "Home.jsp";
         } catch (BusinessException | PersistenceException ex) {
             request.setAttribute("erro", ex.getMessage());
             return "Erro.jsp";

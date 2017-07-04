@@ -107,7 +107,7 @@ public class ClosedAnswerManagementImplTest {
     public void testRegisterQuestionAnswer4() throws Exception {
         System.out.println("registerClosedAnswer4");
         User us = new User("Joao", "joao@oi.com", "senha", 'p');
-        ClosedQuestion q = new ClosedQuestion(null, null, null, null, null, 0, null, null, "enunciado", true, LocalDate.now(), "titulo", null);
+        ClosedQuestion q = new ClosedQuestion(null, null, null, null, null, 0, null, null, "enunciado", true, LocalDate.now(), "titulo", null, 'F');
         ClosedAnswer closed = new ClosedAnswer(0, us, q, LocalDate.now(), 'f', true);
         try{
             impl.registerQuestionAnswer(closed);
