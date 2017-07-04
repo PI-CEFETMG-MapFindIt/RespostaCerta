@@ -9,6 +9,7 @@ package br.cefetmg.respostaCerta.model.service;
 import br.cefetmg.respostaCerta.model.domain.Subject;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
+import java.util.List;
 
 /**
  *
@@ -19,4 +20,5 @@ public interface SubjectManagement {
     public void updateSubject(Long id, Subject  subject) throws BusinessException, PersistenceException;
     public void removeSubject(Long id) throws BusinessException, PersistenceException;
     public Subject getSubjectById(Long id) throws BusinessException, PersistenceException;
+    public List<Subject> getAllSubjects() throws BusinessException, PersistenceException;
 }

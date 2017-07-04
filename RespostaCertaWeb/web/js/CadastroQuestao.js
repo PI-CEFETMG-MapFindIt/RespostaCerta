@@ -13,8 +13,20 @@ $('#aberta').on('change', function(e){
 $('#fechada').on('change', function(e){
 	$('#divAlternativas').removeClass('hidden');
 });
+//Identifica se o usuario criou modulo ou disciplina
+var nivel=0;
 
-$("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
+function salvarModulo(){
+    nivel=1;
+    $('#modalModulo').modal('hide');
+}
+
+function salvarDisciplina(){
+    nivel=2;
+    $('#modalModulo').modal('hide');
+    $('#modalDisciplina').modal('hide');
+}
+
+function cadastrar(){
+    $('#idtNovo').val(nivel);
+}

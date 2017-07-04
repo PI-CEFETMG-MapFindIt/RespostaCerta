@@ -117,9 +117,6 @@ public class PerformanceManagementImpl implements PerformanceManagement{
         if(modulo.getNomeModulo()==null){
             throw new BusinessException("Nome do modulo não pode ser nulo");
         }
-        if(modulo.getDescModulo()==null){
-            throw new BusinessException("Descrição do modulo não pode ser nulo");
-        }
         List<ClosedAnswer> tempq=answer.getClosedAnswerByUser(user.getIdUsuario());
         double totalquestoes=0;
         double totalerros=0;
@@ -167,9 +164,6 @@ public class PerformanceManagementImpl implements PerformanceManagement{
         }
         if(disciplina.getNomeDominio()==null){
             throw new BusinessException("Nome do dominio não pode ser nulo");
-        }
-        if(disciplina.getDescDominio()==null){
-            throw new BusinessException("Desc do dominio não pode ser nula");
         }
         List<ClosedAnswer> tempq=answer.getClosedAnswerByUser(user.getIdUsuario());
         double totalquestoes=0;

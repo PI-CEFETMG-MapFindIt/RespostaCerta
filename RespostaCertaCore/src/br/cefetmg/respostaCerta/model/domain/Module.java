@@ -13,15 +13,13 @@ public class Module {
     private Subject dominio;
     private Long idModulo;
     private String nomeModulo;
-    private String descModulo;
 
     public Module() {
     }
 
-    public Module(Subject dominio, String nomeModulo, String descModulo) {
+    public Module(Subject dominio, String nomeModulo) {
         this.dominio = dominio;
         this.nomeModulo = nomeModulo;
-        this.descModulo = descModulo;
     }
 
     public Subject getDominio() {
@@ -46,13 +44,5 @@ public class Module {
 
     public void setNomeModulo(String nomeModulo) {
         this.nomeModulo = nomeModulo;
-    }
-
-    public String getDescModulo() {
-        return descModulo;
-    }
-
-    public void setDescModulo(String descModulo) {
-        this.descModulo = descModulo;
     }
 }

@@ -12,14 +12,12 @@ package br.cefetmg.respostaCerta.model.domain;
 public class Subject {
     private Long idDominio;
     private String nomeDominio;
-    private String descDominio;
 
     public Subject() {
     }
 
-    public Subject(String nomeDominio, String descDominio) {
+    public Subject(String nomeDominio) {
         this.nomeDominio = nomeDominio;
-        this.descDominio = descDominio;
     }
 
     public Long getIdDominio() {
@@ -37,12 +35,4 @@ public class Subject {
     public void setNomeDominio(String nomeDominio) {
         this.nomeDominio = nomeDominio;
     }
-
-    public String getDescDominio() {
-        return descDominio;
-    }
-
-    public void setDescDominio(String descDominio) {
-        this.descDominio = descDominio;
-    }  
 }

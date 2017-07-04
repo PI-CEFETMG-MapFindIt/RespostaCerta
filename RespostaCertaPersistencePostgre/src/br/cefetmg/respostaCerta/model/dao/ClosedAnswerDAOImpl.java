@@ -158,8 +158,8 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
             String sql = "SELECT a.resposta resposta, b.idResposta idResposta, b.idtResposta idtResposta, b.dataResposta dataResposta, "
                     + "c.idUsuario idUsuario, c.nomeUsuario nomeUsuario, c.loginUsuario loginUsuario, c.senhaUsuario senhaUsuario, c.idtUsuario idtUsuario, "
                     + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao, "
-                    + "d.tituloQuestao tituloQuestao, d.idtDificuldade idtDificuldade, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo, "
-                    + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio, "
+                    + "d.tituloQuestao tituloQuestao, d.idtDificuldade idtDificuldade, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.idModulo idModulo, "
+                    + "f.nomeDominio nomeDominio, f.idDominio idDominio, "
                     + "g.idUsuario idUsuarioQuestao, g.nomeUsuario nomeUsuarioQuestao, g.loginUsuario loginUsuarioQuestao, g.senhaUsuario senhaUsuarioQuestao, "
                     + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao, "
                     + "h.alt1 alt1, h.alt2 alt2, h.alt3 alt3, h.alt4 alt4, h.alt5 alt5, h.altCorreta altCorreta FROM respostaFechada a "
@@ -209,10 +209,8 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
-                mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setNomeModulo(rs.getString("nomeModulo"));
-                sub.setDescDominio(rs.getString("descDominio"));
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);
@@ -256,8 +254,8 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
             String sql = "SELECT a.resposta resposta, b.idResposta idResposta, b.idtResposta idtResposta, b.dataResposta dataResposta, "
                     + "c.idUsuario idUsuario, c.nomeUsuario nomeUsuario, c.loginUsuario loginUsuario, c.senhaUsuario senhaUsuario, c.idtUsuario idtUsuario, "
                     + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao, "
-                    + "d.tituloQuestao tituloQuestao, d.idtDificuldade idtDificuldade, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo, "
-                    + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio, "
+                    + "d.tituloQuestao tituloQuestao, d.idtDificuldade idtDificuldade, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.idModulo idModulo, "
+                    + "f.nomeDominio nomeDominio, f.idDominio idDominio, "
                     + "g.idUsuario idUsuarioQuestao, g.nomeUsuario nomeUsuarioQuestao, g.loginUsuario loginUsuarioQuestao, g.senhaUsuario senhaUsuarioQuestao, "
                     + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao, "
                     + "h.alt1 alt1, h.alt2 alt2, h.alt3 alt3, h.alt4 alt4, h.alt5 alt5, h.altCorreta altCorreta FROM respostaFechada a "
@@ -306,10 +304,8 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
-                mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setNomeModulo(rs.getString("nomeModulo"));
-                sub.setDescDominio(rs.getString("descDominio"));
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);
@@ -349,8 +345,8 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
             String sql = "SELECT a.resposta resposta, b.idResposta idResposta, b.idtResposta idtResposta, b.dataResposta dataResposta, "
                     + "c.idUsuario idUsuario, c.nomeUsuario nomeUsuario, c.loginUsuario loginUsuario, c.senhaUsuario senhaUsuario, c.idtUsuario idtUsuario, "
                     + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao, "
-                    + "d.tituloQuestao tituloQuestao, d.idtDificuldade idtDificuldade, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.descModulo descModulo, e.idModulo idModulo, "
-                    + "f.nomeDominio nomeDominio, f.descDominio descDominio, f.idDominio idDominio, "
+                    + "d.tituloQuestao tituloQuestao, d.idtDificuldade idtDificuldade, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.idModulo idModulo, "
+                    + "f.nomeDominio nomeDominio, f.idDominio idDominio, "
                     + "g.idUsuario idUsuarioQuestao, g.nomeUsuario nomeUsuarioQuestao, g.loginUsuario loginUsuarioQuestao, g.senhaUsuario senhaUsuarioQuestao, "
                     + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao, "
                     + "h.alt1 alt1, h.alt2 alt2, h.alt3 alt3, h.alt4 alt4, h.alt5 alt5, h.altCorreta altCorreta FROM respostaFechada a "
@@ -401,10 +397,8 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
-                mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setNomeModulo(rs.getString("nomeModulo"));
-                sub.setDescDominio(rs.getString("descDominio"));
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);

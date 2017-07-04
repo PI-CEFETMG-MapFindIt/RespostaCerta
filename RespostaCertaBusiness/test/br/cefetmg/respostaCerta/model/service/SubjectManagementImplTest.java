@@ -81,7 +81,6 @@ public class SubjectManagementImplTest {
     public void testRegisterSubject2() throws Exception {
         System.out.println("registerSubject2");
         Subject subject = new Subject();
-        subject.setDescDominio(null);
         subject.setNomeDominio("Dominio");
         try{
             impl.registerSubject(subject);
@@ -96,7 +95,6 @@ public class SubjectManagementImplTest {
     public void testRegisterSubject3() throws Exception {
        System.out.println("registerSubject3");
         Subject subject = new Subject();
-        subject.setDescDominio("Descricao");
         subject.setNomeDominio(null);
         try{
             impl.registerSubject(subject);
@@ -110,7 +108,7 @@ public class SubjectManagementImplTest {
     @Test
     public void testRegisterSubject4() throws Exception {
         System.out.println("registerSubject4");
-        Subject subject = new Subject("Dominio", "Descricao");
+        Subject subject = new Subject("Dominio");
         try{
             impl.registerSubject(subject);
             assertEquals(subject, impl.getSubjectById(subject.getIdDominio()));
@@ -137,26 +135,9 @@ public class SubjectManagementImplTest {
     }
     
     @Test
-    public void testUpdateSubject2() throws Exception {
-        System.out.println("updateSubject2");
-        Subject subject = new Subject();
-        subject.setDescDominio(null);
-        subject.setNomeDominio("Dominio");
-        try{
-            impl.updateSubject(new Long(0), subject);
-        }catch(BusinessException ex){
-            System.out.println(ex);
-            assertTrue(ex.getMessage().equals("Desc do dominio não pode ser nula"));
-            return;
-        }
-        fail("Aceitou dominio com descricao nula");
-    }
-    
-    @Test
     public void testUpdateSubject3() throws Exception {
        System.out.println("updateSubject3");
         Subject subject = new Subject();
-        subject.setDescDominio("Descricao");
         subject.setNomeDominio(null);
         try{
             impl.updateSubject(new Long(0), subject);
@@ -173,7 +154,7 @@ public class SubjectManagementImplTest {
     @Test
     public void testUpdateSubject4() throws Exception {
         System.out.println("updateSubject4");
-        Subject subject = new Subject("Dominio", "Descricao");
+        Subject subject = new Subject("Dominio");
         try{
             impl.updateSubject(null, subject);
         }catch(BusinessException ex){
@@ -189,9 +170,9 @@ public class SubjectManagementImplTest {
     @Test
     public void testUpdateSubject5() throws Exception {
         System.out.println("updateSubject5");
-        Subject subject = new Subject("Dominio", "Descricao");
+        Subject subject = new Subject("Dominio");
         impl.registerSubject(subject);
-        Subject subject2=new Subject("Dominio2", "Descricao2");
+        Subject subject2=new Subject("Dominio2");
         impl.updateSubject(subject.getIdDominio(), subject2);
         assertTrue(impl.getSubjectById(subject.getIdDominio())==subject2);
     }
@@ -233,7 +214,7 @@ public class SubjectManagementImplTest {
     public void testRemoveSubject3() throws Exception {
         System.out.println("removeSubject3");
         try{
-           impl.registerSubject(new Subject("Dominio", "Desc"));
+           impl.registerSubject(new Subject("Dominio"));
            impl.removeSubject(new Long(0)); 
         }catch(PersistenceException ex){
            return;
@@ -247,7 +228,7 @@ public class SubjectManagementImplTest {
     @Test
     public void testRemoveSubject4() throws Exception {
         System.out.println("removeSubject4");
-        Subject user= new Subject("Dominio", "Desc");
+        Subject user= new Subject("Dominio");
         try{
            impl.registerSubject(user);
            impl.removeSubject(user.getIdDominio());
@@ -300,7 +281,7 @@ public class SubjectManagementImplTest {
     public void testGetSubjectById3() throws Exception {
         System.out.println("getSubjectById3");
         try{
-           impl.registerSubject(new Subject("Dominio", "Desc"));
+           impl.registerSubject(new Subject("Dominio"));
            impl.removeSubject(new Long(4)); 
         }catch(PersistenceException ex){
            return;
@@ -314,7 +295,7 @@ public class SubjectManagementImplTest {
     @Test
     public void testGetSubjectById4() throws Exception {
         System.out.println("getSubjectById4");
-        Subject subject= new Subject("Dominio", "Desc");
+        Subject subject= new Subject("Dominio");
         try{
            impl.registerSubject(subject);
            assertTrue(impl.getSubjectById(subject.getIdDominio())==subject);

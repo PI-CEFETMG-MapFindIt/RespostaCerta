@@ -58,11 +58,10 @@ public class ModuleDAOImpl implements ModuleDAO{
     synchronized public void insert(Module module) throws PersistenceException {
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "INSERT INTO Modulo (idDominio, nomeModulo, descModulo) VALUES(?, ?, ?)";
+            String sql = "INSERT INTO Modulo (idDominio, nomeModulo) VALUES(?, ?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, module.getDominio().getIdDominio());
             pstmt.setString(2, module.getNomeModulo());
-            pstmt.setString(3, module.getDescModulo());
             pstmt.executeQuery();
             pstmt.close();
             connection.close();
@@ -80,11 +79,10 @@ public class ModuleDAOImpl implements ModuleDAO{
     synchronized public void update(Module module) throws PersistenceException {
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "UPDATE forum SET idDominio = ?, nomeModulo = ?, descModulo = ? WHERE idModulo = ?";
+            String sql = "UPDATE forum SET idDominio = ?, nomeModulo = ? WHERE idModulo = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, module.getDominio().getIdDominio());
             pstmt.setString(2, module.getNomeModulo());
-            pstmt.setString(3, module.getDescModulo());
             pstmt.setLong(1, module.getIdModulo());
             pstmt.executeUpdate();
             pstmt.close();
@@ -138,10 +136,8 @@ public class ModuleDAOImpl implements ModuleDAO{
             Subject sub = new Subject();
             Module mod = new Module();
             if (rs.next()) {
-                mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setNomeModulo(rs.getString("nomeModulo"));
-                sub.setDescDominio(rs.getString("descDominio"));
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);
@@ -167,17 +163,15 @@ public class ModuleDAOImpl implements ModuleDAO{
 
             String sql = "SELECT * "
                     + "FROM modulo a "
-                    + "JOIN dominio b ON a.idDominio=b.idDominio";
+                    + "JOIN dominio b ON a.idDominio=b.idDominio ORDER BY nomeModulo";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Module> lista = new ArrayList<>();
             while(rs.next()) {
                 Subject sub = new Subject();
                 Module mod = new Module();
-                mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setNomeModulo(rs.getString("nomeModulo"));
-                sub.setDescDominio(rs.getString("descDominio"));
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);
@@ -208,10 +202,8 @@ public class ModuleDAOImpl implements ModuleDAO{
             while(rs.next()) {
                 Subject sub = new Subject();
                 Module mod = new Module();
-                mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setNomeModulo(rs.getString("nomeModulo"));
-                sub.setDescDominio(rs.getString("descDominio"));
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);

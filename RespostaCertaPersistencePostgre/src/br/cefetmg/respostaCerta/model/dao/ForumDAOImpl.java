@@ -158,10 +158,8 @@ public class ForumDAOImpl implements ForumDAO{
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
-                mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setNomeModulo(rs.getString("nomeModulo"));
-                sub.setDescDominio(rs.getString("descDominio"));
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);
@@ -226,10 +224,8 @@ public class ForumDAOImpl implements ForumDAO{
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
-                mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setNomeModulo(rs.getString("nomeModulo"));
-                sub.setDescDominio(rs.getString("descDominio"));
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);

@@ -80,7 +80,7 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(null);
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"),"modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"),"modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao("Titulo");
         try{
@@ -98,7 +98,7 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
         question.setDataCriacao(null);
-        question.setModulo(new Module(new Subject("dominio", "desc"), "modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"), "modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao("Titulo");
         try{
@@ -134,7 +134,7 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"),"modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"),"modulo"));
         question.setEnunciadoQuestao(null);
         question.setTituloQuestao("Titulo");
         try{
@@ -152,7 +152,7 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"), "modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"), "modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao(null);
         try{
@@ -170,7 +170,7 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"), "modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"), "modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao("Titulo");
         try{
@@ -204,7 +204,7 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(null);
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"),"modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"),"modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao("Titulo");
         try{
@@ -222,7 +222,7 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
         question.setDataCriacao(null);
-        question.setModulo(new Module(new Subject("dominio", "desc"), "modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"), "modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao("Titulo");
         try{
@@ -258,7 +258,7 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"), "modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"), "modulo"));
         question.setEnunciadoQuestao(null);
         question.setTituloQuestao("Titulo");
         try{
@@ -276,7 +276,7 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"), "modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"), "modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao(null);
         try{
@@ -296,7 +296,7 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"), "modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"), "modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao("Titulo");
         try{
@@ -317,14 +317,14 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"), "modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"), "modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao("Titulo");
         impl.registerQuestion(question);
         Question question2 = new Question();
         question2.setCriador(new User("Maria", "maria@gmail.com", "senha", 'j'));
         question2.setDataCriacao(LocalDate.now());
-        question2.setModulo(new Module(new Subject("dominio2", "desc2"), "modulo2", "desc2"));
+        question2.setModulo(new Module(new Subject("dominio2"), "modulo2"));
         question2.setEnunciadoQuestao("Enunciado2");
         question2.setTituloQuestao("Titulo2");
         impl.updateQuestion(question.getIdQuestao(), question2);
@@ -371,7 +371,7 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"),"modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"),"modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao("Titulo");
         try{
@@ -393,7 +393,7 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"),"modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"),"modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao("Titulo");
         try{
@@ -450,7 +450,7 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"), "modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"), "modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao("Titulo");
         try{
@@ -471,7 +471,7 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"), "modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"), "modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao("Titulo");
         try{
@@ -506,7 +506,7 @@ public class OpenQuestionManagementImplTest {
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
         question.getCriador().setIdUsuario(new Long(0));
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"),"modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"),"modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao("Titulo");
         impl.registerQuestion(question);
@@ -536,14 +536,14 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(user);
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"),"modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"),"modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao("Titulo");
         impl.registerQuestion(question);
         Question question2 = new Question();
         question2.setCriador(user);
         question2.setDataCriacao(LocalDate.now());
-        question2.setModulo(new Module(new Subject("dominio2", "desc2"),"modulo2", "desc2"));
+        question2.setModulo(new Module(new Subject("dominio2"),"modulo2"));
         question2.setEnunciadoQuestao("Enunciado2");
         question2.setTituloQuestao("Titulo2");
         impl.registerQuestion(question2);
@@ -572,14 +572,14 @@ public class OpenQuestionManagementImplTest {
         Question question = new Question();
         question.setCriador(user);
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"),"modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"),"modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao("Titulo");
         impl.registerQuestion(question);
         Question question2 = new Question();
         question2.setCriador(user);
         question2.setDataCriacao(LocalDate.now());
-        question2.setModulo(new Module(new Subject("dominio2", "desc2"), "modulo2", "desc2"));
+        question2.setModulo(new Module(new Subject("dominio2"), "modulo2"));
         question2.setEnunciadoQuestao("Enunciado2");
         question2.setTituloQuestao("Titulo2");
         impl.registerQuestion(question2);
@@ -605,7 +605,7 @@ public class OpenQuestionManagementImplTest {
         question.setCriador(new User("Joao", "joao@gmail.com", "senha", 'j'));
         question.getCriador().setIdUsuario(new Long(0));
         question.setDataCriacao(LocalDate.now());
-        question.setModulo(new Module(new Subject("dominio", "desc"), "modulo", "desc"));
+        question.setModulo(new Module(new Subject("dominio"), "modulo"));
         question.setEnunciadoQuestao("Enunciado");
         question.setTituloQuestao("Titulo");
         impl.registerQuestion(question);
@@ -613,7 +613,7 @@ public class OpenQuestionManagementImplTest {
         question2.setCriador(new User("Maria", "maria@gmail.com", "senha", 'j'));
         question2.getCriador().setIdUsuario(new Long(1));
         question2.setDataCriacao(LocalDate.now());
-        question2.setModulo(new Module(new Subject("dominio2", "desc2"), "modulo2", "desc2"));
+        question2.setModulo(new Module(new Subject("dominio2"), "modulo2"));
         question2.setEnunciadoQuestao("Enunciado2");
         question2.setTituloQuestao("Titulo2");
         impl.registerQuestion(question2);

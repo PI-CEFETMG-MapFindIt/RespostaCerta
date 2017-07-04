@@ -53,10 +53,9 @@ public class SubjectDAOImpl implements SubjectDAO{
     synchronized public void insert(Subject subject) throws PersistenceException {
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "INSERT INTO Dominio (nomeDominio, descDominio) VALUES(?, ?)";
+            String sql = "INSERT INTO Dominio (nomeDominio) VALUES(?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, subject.getNomeDominio());
-            pstmt.setString(2, subject.getDescDominio());
             pstmt.executeQuery();
             pstmt.close();
             connection.close();
@@ -74,11 +73,10 @@ public class SubjectDAOImpl implements SubjectDAO{
     synchronized public void update(Subject subject) throws PersistenceException {
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "UPDATE Dominio SET nomeDominio = ?, descDominio = ? WHERE idDominio = ?";
+            String sql = "UPDATE Dominio SET nomeDominio = ? WHERE idDominio = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(3, subject.getIdDominio());
             pstmt.setString(1, subject.getNomeDominio());
-            pstmt.setString(2, subject.getDescDominio());
             pstmt.executeUpdate();
             pstmt.close();
             connection.close(); 
@@ -128,7 +126,6 @@ public class SubjectDAOImpl implements SubjectDAO{
             ResultSet rs = pstmt.executeQuery(); 
             Subject sub = new Subject();
             if (rs.next()) {
-                sub.setDescDominio(rs.getString("descDominio"));
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
             }
@@ -151,16 +148,16 @@ public class SubjectDAOImpl implements SubjectDAO{
         try {
             Connection connection = ConnectionManager.getInstance().getConnection();
 
-            String sql = "SELECT * FROM Dominio";
+            String sql = "SELECT * FROM Dominio ORDER BY nomeDominio";
             
             PreparedStatement pstmt = connection.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery(); 
             ArrayList<Subject> lista = new ArrayList<>();
             while (rs.next()) {
                 Subject sub = new Subject();
-                sub.setDescDominio(rs.getString("descDominio"));
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
+                lista.add(sub);
             }
             rs.close();
             pstmt.close();

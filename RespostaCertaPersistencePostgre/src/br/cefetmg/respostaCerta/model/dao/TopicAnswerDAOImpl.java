@@ -146,8 +146,8 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                     + "i.idUsuario idUsuarioM, i.nomeUsuario nomeUsuarioM, i.loginUsuario loginUsuarioM, i.senhaUsuario senhaUsuarioM, i.idtUsuario idtUsuarioM, i.userPhoto userPhotoM, "
                     + "a.idQuestao idQuestaoForum, a.dataCriacao dataCriacaoForum, a.status statusForum, "
                     + "b.idQuestao idQuestao, b.idtDificuldade idtDificuldade, b.enunciadoQuestao enunciadoQuestao, b.idtQuestao idtQuestao, b.dataCriacao dataCriacaoQuestao, b.tituloQuestao tituloQuestao, b.questPhoto questPhoto "
-                    + "c.idModulo idModulo, c.nomeModulo nomeModulo, c.descModulo descModulo "
-                    + "d.idDominio idDominio, d.nomeDominio nomeDominio, d.descDominio descDominio, "
+                    + "c.idModulo idModulo, c.nomeModulo nomeModulo, "
+                    + "d.idDominio idDominio, d.nomeDominio nomeDominio, "
                     + "e.idUsuario idUsuarioQ, e.nomeUsuario nomeUsuarioQ, e.loginUsuario loginUsuarioQ, e.senhaUsuario senhaUsuarioQ, e.idtUsuario idtUsuarioQ, e.userPhoto userPhotoQ "
                     + "FROM MensagemResposta f "
                     + "JOIN usuario h ON h.idUsuario = f.idUsuario "
@@ -202,11 +202,9 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 image = ImageIO.read(blob);
                 autorQuestao.setFotoUsuario(image);
                 
-                sub.setDescDominio(rs.getString("descDominio"));
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 
-                mod.setDescModulo(rs.getString("descModulo"));
                 mod.setNomeModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setDominio(sub);
@@ -270,8 +268,8 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                     + "i.idUsuario idUsuarioM, i.nomeUsuario nomeUsuarioM, i.loginUsuario loginUsuarioM, i.senhaUsuario senhaUsuarioM, i.idtUsuario idtUsuarioM, i.userPhoto userPhotoM, "
                     + "a.idQuestao idQuestaoForum, a.dataCriacao dataCriacaoForum, a.status statusForum, "
                     + "b.idQuestao idQuestao, b.idtDificuldade idtDificuldade, b.enunciadoQuestao enunciadoQuestao, b.idtQuestao idtQuestao, b.dataCriacao dataCriacaoQuestao, b.tituloQuestao tituloQuestao, b.questPhoto questPhoto "
-                    + "c.idModulo idModulo, c.nomeModulo nomeModulo, c.descModulo descModulo "
-                    + "d.idDominio idDominio, d.nomeDominio nomeDominio, d.descDominio descDominio, "
+                    + "c.idModulo idModulo, c.nomeModulo nomeModulo, "
+                    + "d.idDominio idDominio, d.nomeDominio nomeDominio, "
                     + "e.idUsuario idUsuarioQ, e.nomeUsuario nomeUsuarioQ, e.loginUsuario loginUsuarioQ, e.senhaUsuario senhaUsuarioQ, e.idtUsuario idtUsuarioQ, e.userPhoto userPhotoQ "
                     + "FROM MensagemResposta f "
                     + "JOIN usuario h ON h.idUsuario = f.idUsuario "
@@ -325,11 +323,9 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 image = ImageIO.read(blob);
                 autorQuestao.setFotoUsuario(image);
                 
-                sub.setDescDominio(rs.getString("descDominio"));
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 
-                mod.setDescModulo(rs.getString("descModulo"));
                 mod.setNomeModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setDominio(sub);
@@ -391,8 +387,8 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                     + "i.idUsuario idUsuarioM, i.nomeUsuario nomeUsuarioM, i.loginUsuario loginUsuarioM, i.senhaUsuario senhaUsuarioM, i.idtUsuario idtUsuarioM, i.userPhoto userPhotoM, "
                     + "a.idQuestao idQuestaoForum, a.dataCriacao dataCriacaoForum, a.status statusForum, "
                     + "b.idQuestao idQuestao, b.idtDificuldade idtDificuldade, b.enunciadoQuestao enunciadoQuestao, b.idtQuestao idtQuestao, b.dataCriacao dataCriacaoQuestao, b.tituloQuestao tituloQuestao, b.questPhoto questPhoto "
-                    + "c.idModulo idModulo, c.nomeModulo nomeModulo, c.descModulo descModulo "
-                    + "d.idDominio idDominio, d.nomeDominio nomeDominio, d.descDominio descDominio, "
+                    + "c.idModulo idModulo, c.nomeModulo nomeModulo, "
+                    + "d.idDominio idDominio, d.nomeDominio nomeDominio, "
                     + "e.idUsuario idUsuarioQ, e.nomeUsuario nomeUsuarioQ, e.loginUsuario loginUsuarioQ, e.senhaUsuario senhaUsuarioQ, e.idtUsuario idtUsuarioQ, e.userPhoto userPhotoQ "
                     + "FROM MensagemResposta f "
                     + "JOIN usuario h ON h.idUsuario = f.idUsuario "
@@ -448,11 +444,9 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 image = ImageIO.read(blob);
                 autorQuestao.setFotoUsuario(image);
                 
-                sub.setDescDominio(rs.getString("descDominio"));
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 
-                mod.setDescModulo(rs.getString("descModulo"));
                 mod.setNomeModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setDominio(sub);

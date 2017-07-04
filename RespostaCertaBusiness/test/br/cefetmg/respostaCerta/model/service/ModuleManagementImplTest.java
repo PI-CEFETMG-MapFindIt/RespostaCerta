@@ -77,8 +77,6 @@ public class ModuleManagementImplTest {
         System.out.println("RegisterModule2");
         Module modulo = new Module();
         modulo.setNomeModulo("");
-        modulo.setDescModulo("");
-        
         try{
             impl.registerModule(modulo);
         }catch(BusinessException ex){
@@ -93,8 +91,6 @@ public class ModuleManagementImplTest {
         System.out.println("RegisterModule3");
         Module modulo = new Module();
         modulo.setDominio(new Subject());
-        modulo.setDescModulo("");
-        
         try{
             impl.registerModule(modulo);
         }catch(BusinessException ex){
@@ -140,8 +136,6 @@ public class ModuleManagementImplTest {
         System.out.println("UpdateModule2");
         Module modulo = new Module();
         modulo.setNomeModulo("");
-        modulo.setDescModulo("");
-        
         try{
             impl.updateModule(new Long(1),modulo);
         }catch(BusinessException ex){
@@ -156,8 +150,6 @@ public class ModuleManagementImplTest {
         System.out.println("UpdateModule3");
         Module modulo = new Module();
         modulo.setDominio(new Subject());
-        modulo.setDescModulo("");
-        
         try{
             impl.updateModule(new Long(1),modulo);
         }catch(BusinessException ex){
@@ -189,7 +181,6 @@ public class ModuleManagementImplTest {
         Module modulo = new Module();
         modulo.setDominio(new Subject());
         modulo.setNomeModulo("");
-        modulo.setDescModulo("");
         try{
             impl.updateModule(null,modulo);
         }catch(BusinessException ex){

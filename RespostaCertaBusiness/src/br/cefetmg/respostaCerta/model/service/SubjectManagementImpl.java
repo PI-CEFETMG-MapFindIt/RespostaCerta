@@ -9,6 +9,7 @@ import br.cefetmg.respostaCerta.model.domain.Subject;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.dao.SubjectDAO;
+import java.util.List;
 /**
  *
  * @author adalbs
@@ -37,9 +38,6 @@ public class SubjectManagementImpl implements SubjectManagement{
         if(subject.getNomeDominio()==null){
             throw new BusinessException("Nome do dominio não pode ser nulo");
         }
-        if( subject.getDescDominio()==null){
-            throw new BusinessException("Desc do dominio não pode ser nula");
-        }
         subjectDAO.insert(subject);
     }
 
@@ -60,9 +58,6 @@ public class SubjectManagementImpl implements SubjectManagement{
         }
         if(subject.getNomeDominio()==null){
             throw new BusinessException("Nome do dominio não pode ser nulo");
-        }
-        if( subject.getDescDominio()==null){
-            throw new BusinessException("Desc do dominio não pode ser nula");
         }
         subject.setIdDominio(id);
         subjectDAO.update(subject);
@@ -95,6 +90,11 @@ public class SubjectManagementImpl implements SubjectManagement{
             throw new BusinessException("ID não pode ser nulo");
         }
         return subjectDAO.getSubjectById(id);
+    }
+
+    @Override
+    public List<Subject> getAllSubjects() throws BusinessException, PersistenceException {
+        return subjectDAO.listAll();
     }
     
 }

@@ -104,8 +104,7 @@ ALTER TABLE Forum ADD CONSTRAINT pk_Forum PRIMARY KEY (idQuestao)
 CREATE TABLE Modulo(
  idModulo SERIAL,
  idDominio Integer NOT NULL,
- nomeModulo Character(50) NOT NULL,
- descModulo Character(255)
+ nomeModulo Character(50) NOT NULL
 )
 ;
 
@@ -141,8 +140,7 @@ ALTER TABLE QuestaoFechada ADD CONSTRAINT pk_QuestaoFechada PRIMARY KEY (idQuest
 
 CREATE TABLE Dominio(
  idDominio SERIAL,
- nomeDominio Character(50) NOT NULL,
- descDominio Character(255)
+ nomeDominio Character(50) NOT NULL
 )
 ;
 

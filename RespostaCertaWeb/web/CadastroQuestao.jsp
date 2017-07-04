@@ -1,4 +1,9 @@
+<%@page import="br.cefetmg.respostaCerta.model.domain.Subject"%>
+<%@page import="java.util.List"%>
+<%@page import="br.cefetmg.respostaCerta.model.domain.Module"%>
 <!DOCTYPE html>
+<% List<Module> modulos = (List<Module>) request.getAttribute("modulos");
+   List<Subject> dominios = (List<Subject>) request.getAttribute("dominios");%>
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
@@ -16,14 +21,13 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h2>Cadastro de Questão</h2>
-                <form id="formCadastro">
+                <form id="formCadastro" method="POST" action="/RespostaCerta/ControllerServlet?control=CadastrarQuestao">
                     <div class="form-group">
                         <label for="modulo"><h4>Modulo da Questão</h4></label>
                         <select id="modulo" class="form-control">
-                            <option>Escolha o modulo</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
+                            <% for(Module modulo:modulos){ %>
+                            <option><%=modulo.getNomeModulo()%></option>
+                            <% } %>
                         </select>
                         <br>
                         <button class="btn btn-default" type="button" data-toggle="modal" data-target="#modalModulo">Adicionar Modulo</button>
@@ -88,8 +92,11 @@
                                     <div class="radio">
                                         <label class="col-md-12"><input type="radio" id="op5" name="altQuestao"><textarea class="form-control" rows="2" id="alternativa5" placeholder="Digite a quinta alternativa"></textarea></label>
                                     </div>
+                                    <input type="hidden" id="novoModulo" value=""/>
+                                    <input type="hidden" id="novoDominio" value=""/>
+                                    <input type="hidden" id="idtNovo" value=""/>
                                     </div>
-                                    <button type="submit" class="btn btn-default">
+                                    <button type="button" onclick="cadastrar();" class="btn btn-default">
                                         Cadastrar
                                     </button>
                                     </form>
@@ -108,16 +115,15 @@
                                                             <div class="form-group">
                                                                 <label for="disciplina"><h4>Disciplina</h4></label>
                                                                 <select id="disciplina" class="form-control">
-                                                                    <option>Escolha a disciplina</option>
-                                                                    <option>2</option>
-                                                                    <option>3</option>
-                                                                    <option>4</option>
+                                                                    <% for(Subject dominio:dominios){ %>
+                                                                    <option><%=dominio.getNomeDominio()%></option>
+                                                                    <% } %>
                                                                 </select>
                                                                 <br>
                                                                 <button class="btn btn-default" type="button" data-toggle="modal" data-target="#modalDisciplina">Adicionar Disciplina</button>
                                                             </div>
                                                         </div>
-                                                        <button class="btn btn-default" type="submit">Salvar</button>
+                                                        <button class="btn btn-default" onClick="salvarModulo();">Salvar</button>
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
@@ -139,7 +145,7 @@
                                                             <label for="nomeDisciplina">Nome da nova Disciplina</label>
                                                             <input class="form-control" placeholder="Digite o nome da disciplina" type="text" name="nomeDisciplina" id="nomeDisciplina">
                                                         </div>
-                                                        <button class="btn btn-default" type="submit">Salvar</button>
+                                                        <button class="btn btn-default" onclick="salvarDisciplina();">Salvar</button>
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">

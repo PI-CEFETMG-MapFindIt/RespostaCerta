@@ -225,10 +225,8 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
-                mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setNomeModulo(rs.getString("nomeModulo"));
-                sub.setDescDominio(rs.getString("descDominio"));
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);
@@ -294,10 +292,8 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
-                mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setNomeModulo(rs.getString("nomeModulo"));
-                sub.setDescDominio(rs.getString("descDominio"));
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);
@@ -360,10 +356,8 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
                 questao.setIdQuestao(rs.getLong("idQuestao"));
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
                 questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
-                mod.setDescModulo(rs.getString("descModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setNomeModulo(rs.getString("nomeModulo"));
-                sub.setDescDominio(rs.getString("descDominio"));
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 mod.setDominio(sub);

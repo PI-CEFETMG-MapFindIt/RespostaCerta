@@ -20,4 +20,5 @@ public interface ModuleManagement {
     public void removeModule(Long id) throws BusinessException, PersistenceException;
     public Module getModuleById(Long id) throws BusinessException, PersistenceException;
     public List<Module> getModulesSubject(Long subjectId) throws BusinessException, PersistenceException;
+    public List<Module> getAllModules() throws BusinessException, PersistenceException;
 }
