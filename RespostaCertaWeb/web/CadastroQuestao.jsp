@@ -24,17 +24,21 @@
                 <form id="formCadastro" method="POST" action="/RespostaCerta/ControllerServlet?control=CadastrarQuestao">
                     <div class="form-group">
                         <label for="modulo"><h4>Modulo da Questão</h4></label>
-                        <select id="modulo" class="form-control">
+                        <select id="modulo" name="modulo" class="form-control">
                             <% for(Module modulo:modulos){ %>
                             <option value="<%=modulo.getIdModulo()%>"><%=modulo.getNomeModulo()%></option>
                             <% } %>
                         </select>
                         <br>
                         <button class="btn btn-default" type="button" data-toggle="modal" data-target="#modalModulo">Adicionar Modulo</button>
+                    </div>   
+                    <div class="form-group">
+                        <label for="titulo"><h4>Titulo da Questão</h4></label><br>
+                        <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Digite o titulo da questão">
                     </div>
                     <div class="form-group">
                         <label for="enunciado"><h4>Enunciado da Questão</h4></label>
-                        <textarea class="form-control" rows="5" id="enunciado" placeholder="Digite o enunciado da questão"></textarea>
+                        <textarea class="form-control" rows="5" name="enunciado" id="enunciado" placeholder="Digite o enunciado da questão"></textarea>
                     </div>
                     <div class="form-group">
                         <label><h4>Dificuldade da Questão</h4></label>
@@ -92,11 +96,9 @@
                                     <div class="radio">
                                         <label class="col-md-12"><input type="radio" id="op5" name="altQuestao"><textarea class="form-control" rows="2" id="alternativa5" placeholder="Digite a quinta alternativa"></textarea></label>
                                     </div>
-                                    <input type="hidden" id="novoModulo" value=""/>
-                                    <input type="hidden" id="novoDominio" value=""/>
-                                    <input type="hidden" id="idtNovo" value=""/>
+                                    <input type="hidden" name="idtNovo" id="idtNovo" value=""/>
                                     </div>
-                                    <button type="button" onclick="cadastrar();" class="btn btn-default">
+                                    <button class="btn btn-default">
                                         Cadastrar
                                     </button>
                                     </form>
@@ -114,7 +116,7 @@
                                                             <input class="form-control" placeholder="Digite o nome do modulo" type="text" id="nomeModulo" name="nomeModulo">
                                                             <div class="form-group">
                                                                 <label for="disciplina"><h4>Disciplina</h4></label>
-                                                                <select id="disciplina" class="form-control">
+                                                                <select id="disciplina" name="disciplina" class="form-control">
                                                                     <% for(Subject dominio:dominios){ %>
                                                                     <option value="<%=dominio.getIdDominio()%>"><%=dominio.getNomeDominio()%></option>
                                                                     <% } %>
@@ -123,11 +125,11 @@
                                                                 <button class="btn btn-default" type="button" data-toggle="modal" data-target="#modalDisciplina">Adicionar Disciplina</button>
                                                             </div>
                                                         </div>
-                                                        <button class="btn btn-default" onClick="salvarModulo();">Salvar</button>
+                                                        <button type="button" class="btn btn-default" onClick="salvarModulo();">Salvar</button>
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                    <button type="button" id="fecharModulo" class="btn btn-default" data-dismiss="modal">Fechar</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -145,11 +147,11 @@
                                                             <label for="nomeDisciplina">Nome da nova Disciplina</label>
                                                             <input class="form-control" placeholder="Digite o nome da disciplina" type="text" name="nomeDisciplina" id="nomeDisciplina">
                                                         </div>
-                                                        <button class="btn btn-default" onclick="salvarDisciplina();">Salvar</button>
+                                                        <button type="button" class="btn btn-default" onclick="salvarDisciplina();">Salvar</button>
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                    <button type="button" id="fecharDisiciplina" class="btn btn-default" data-dismiss="modal">Fechar</button>
                                                 </div>
                                             </div>
                                         </div>

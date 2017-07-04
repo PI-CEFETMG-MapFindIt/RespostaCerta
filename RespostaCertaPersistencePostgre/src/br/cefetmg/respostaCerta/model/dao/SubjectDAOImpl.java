@@ -53,10 +53,13 @@ public class SubjectDAOImpl implements SubjectDAO{
     synchronized public void insert(Subject subject) throws PersistenceException {
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "INSERT INTO Dominio (nomeDominio) VALUES(?, ?)";
+            String sql = "INSERT INTO Dominio (nomeDominio) VALUES(?) SELECT currval('idDominio') id";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, subject.getNomeDominio());
-            pstmt.executeQuery();
+            ResultSet res = pstmt.executeQuery();
+            if(res.next()){
+                subject.setIdDominio(res.getLong("id"));
+            }
             pstmt.close();
             connection.close();
         } catch (ClassNotFoundException | SQLException e) {
