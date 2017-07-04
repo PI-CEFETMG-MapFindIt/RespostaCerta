@@ -26,7 +26,7 @@
                         <label for="modulo"><h4>Modulo da Questão</h4></label>
                         <select id="modulo" class="form-control">
                             <% for(Module modulo:modulos){ %>
-                            <option><%=modulo.getNomeModulo()%></option>
+                            <option value="<%=modulo.getIdModulo()%>"><%=modulo.getNomeModulo()%></option>
                             <% } %>
                         </select>
                         <br>
@@ -116,7 +116,7 @@
                                                                 <label for="disciplina"><h4>Disciplina</h4></label>
                                                                 <select id="disciplina" class="form-control">
                                                                     <% for(Subject dominio:dominios){ %>
-                                                                    <option><%=dominio.getNomeDominio()%></option>
+                                                                    <option value="<%=dominio.getIdDominio()%>"><%=dominio.getNomeDominio()%></option>
                                                                     <% } %>
                                                                 </select>
                                                                 <br>

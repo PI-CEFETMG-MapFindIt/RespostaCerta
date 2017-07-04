@@ -19,14 +19,19 @@ var nivel=0;
 function salvarModulo(){
     nivel=1;
     $('#modalModulo').modal('hide');
+    $('#modulo').append(`<option>$($('#nomeModulo').val())</option>`);
+    $('#modulo').val('#nomeModulo').val()).change();
 }
 
 function salvarDisciplina(){
     nivel=2;
     $('#modalModulo').modal('hide');
     $('#modalDisciplina').modal('hide');
+    $('#disciplina').append(`<option>$($('#nomeDisciplina').val())</option>`);
+    $('#disciplina').val('#nomeDisciplina').val()).change();
 }
 
 function cadastrar(){
     $('#idtNovo').val(nivel);
+    $('#formCadastro').submit();
 }
