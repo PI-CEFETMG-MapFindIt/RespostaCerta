@@ -190,7 +190,11 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 autor.setSenhaUsuario(rs.getString("senhaUsuario"));
                 InputStream blob = rs.getBinaryStream("userPhoto");  
                   
-                BufferedImage image = ImageIO.read(blob);
+                BufferedImage image;
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 autor.setFotoUsuario(image);
                 questao.setCriador(autor);
                 questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
@@ -206,7 +210,10 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 questao.setModulo(mod);
                 blob = rs.getBinaryStream("questPhoto");  
                   
-                image = ImageIO.read(blob);
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
             }
@@ -248,8 +255,11 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
                 autor.setSenhaUsuario(rs.getString("senhaUsuario"));
                 InputStream blob = rs.getBinaryStream("userPhoto");  
-                  
-                BufferedImage image = ImageIO.read(blob);
+                BufferedImage image;
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 autor.setFotoUsuario(image);
                 questao.setCriador(autor);
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
@@ -265,7 +275,10 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 questao.setModulo(mod);
                 blob = rs.getBinaryStream("questPhoto");  
                   
-                image = ImageIO.read(blob);
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 lista.add(questao);
@@ -289,7 +302,7 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                     + "JOIN modulo b ON b.idModulo=a.idModulo "
                     + "JOIN dominio c ON b.idDominio=c.idDominio "
                     + "JOIN usuario d ON a.idUsuarioCriador=d.idUsuario "
-                    + "WHERE b.idUsuarioCriador = ?";
+                    + "WHERE a.idUsuarioCriador = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, userId);
             ResultSet rs = pstmt.executeQuery();
@@ -305,8 +318,11 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
                 autor.setSenhaUsuario(rs.getString("senhaUsuario"));
                 InputStream blob = rs.getBinaryStream("userPhoto");  
-                  
-                BufferedImage image = ImageIO.read(blob);
+                BufferedImage image=null;
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 autor.setFotoUsuario(image);
                 questao.setCriador(autor);
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
@@ -321,8 +337,10 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 mod.setDominio(sub);
                 questao.setModulo(mod);
                 blob = rs.getBinaryStream("questPhoto");  
-                  
-                image = ImageIO.read(blob);
+                if(blob!=null)  
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 lista.add(questao);

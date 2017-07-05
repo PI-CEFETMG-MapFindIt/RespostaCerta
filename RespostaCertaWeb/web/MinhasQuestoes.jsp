@@ -1,0 +1,75 @@
+<%@page import="java.util.List"%>
+<%@page import="br.cefetmg.respostaCerta.model.domain.Question"%>
+<%@page import="br.cefetmg.respostaCerta.model.domain.Question"%>
+<!DOCTYPE html>
+
+<% List<Question> lista = (List<Question>) request.getAttribute("questoes");%>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Minhas Questões</title>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/MinhasQuestoes.css" rel="stylesheet">
+
+    </head>
+    <body>
+        <%@include file="/Menu.jsp" %>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+                <h3>
+                    <b>Minhas Questões</b>
+                </h3>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <ul class="list-group">
+                    <%int id=0; 
+                      for(Question questao:lista){ %>
+                        <li class="list-group-item">
+                            <div class="flexContainer">
+                                <div class="leftItem">
+                                    <h4 id="tituloQuestao<%=id%>"><b><%=questao.getTituloQuestao()%></b></h4>
+                                    <label for="tituloQuestao<%=id%>"><a href="#"><%=questao.getModulo().getNomeModulo()%></a></label>
+                                </div>
+                                <div class="rightItem">
+                                    <button type="button" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-pencil right"></span>
+                                    </button>
+                                    <button type="button" data-toggle="modal" data-target="#confirm<%=id%>" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-trash right"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="confirm<%=id%>" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <h4>Você tem certeza que deseja deletar a questão <%=questao.getTituloQuestao()%>?</h4>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete<%=id%>">Deletar</button>
+                                            <button type="button" data-dismiss="modal" class="btn">Cancelar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    <%id++;
+                    }
+                    %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/MinhasQuestoes.js"></script>
+</body>
+</html>

@@ -43,6 +43,8 @@ public class ControllerServlet extends HttpServlet {
             case "Logout": jsp = Logout.processa(request); break;
             case "PagCadastrarQuestao": jsp = PagCadastrarQuestao.processa(request); break;
             case "CadastrarQuestao": jsp = CadastrarQuestao.processa(request); break;
+            case "PagMinhasQuestoes": jsp = PagMinhasQuestoes.processa(request); break;
+            case "PagEditarQuestao": jsp = PagEditarQuestao.processa(request); break;
             default: jsp = Inicio.processa(request);
         }
         //Redirecionando pagina

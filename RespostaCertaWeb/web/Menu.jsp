@@ -69,7 +69,7 @@
                     <li><a href="#">Desempenho</a></li>
                     <% if(usuario.getIdtUsuario()=='P'){%>
                     <li><a href="/RespostaCerta/ControllerServlet?control=PagCadastrarQuestao">Cadastrar Questão</a></li>
-                    <li><a href="#">Minhas Questões</a></li>
+                    <li><a href="/RespostaCerta/ControllerServlet?control=PagMinhasQuestoes">Minhas Questões</a></li>
                     <li><a href="#">Gerenciamento de Cadastros</a></li>
                     <% } %>
                 </ul>
