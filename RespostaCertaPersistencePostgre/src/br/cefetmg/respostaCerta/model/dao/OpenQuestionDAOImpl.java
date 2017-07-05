@@ -240,7 +240,8 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                     + "FROM questao a "
                     + "JOIN modulo b ON b.idModulo=a.idModulo "
                     + "JOIN dominio c ON b.idDominio=c.idDominio "
-                    + "JOIN usuario d ON a.idUsuarioCriador=d.idUsuario ";
+                    + "JOIN usuario d ON a.idUsuarioCriador=d.idUsuario "
+                    + "WHERE a.idtQuestao='1'";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Question> lista = new ArrayList<>();
@@ -302,7 +303,7 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                     + "JOIN modulo b ON b.idModulo=a.idModulo "
                     + "JOIN dominio c ON b.idDominio=c.idDominio "
                     + "JOIN usuario d ON a.idUsuarioCriador=d.idUsuario "
-                    + "WHERE a.idUsuarioCriador = ?";
+                    + "WHERE a.idUsuarioCriador = ? AND a.idtQuestao='1'";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, userId);
             ResultSet rs = pstmt.executeQuery();

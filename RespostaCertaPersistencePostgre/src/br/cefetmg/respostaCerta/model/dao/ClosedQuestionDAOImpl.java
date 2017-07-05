@@ -357,7 +357,7 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
                     + "JOIN modulo c ON b.idModulo=c.idModulo "
                     + "JOIN dominio d ON c.idDominio=d.idDominio "
                     + "JOIN usuario e ON b.idUsuarioCriador=e.idUsuario "
-                    + "WHERE b.idUsuarioCriador = ?";
+                    + "WHERE b.idUsuarioCriador = ? AND b.idtQuestao='0'";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, userId);
             ResultSet rs = pstmt.executeQuery();
