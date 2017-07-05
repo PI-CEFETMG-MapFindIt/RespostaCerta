@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,12 +54,20 @@ public class SubjectDAOImpl implements SubjectDAO{
     synchronized public void insert(Subject subject) throws PersistenceException {
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "INSERT INTO Dominio (nomeDominio) VALUES(?) SELECT currval('idDominio') id";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
+            String sql = "INSERT INTO Dominio (nomeDominio) VALUES(?)";
+            PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, subject.getNomeDominio());
-            ResultSet res = pstmt.executeQuery();
-            if(res.next()){
-                subject.setIdDominio(res.getLong("id"));
+            int linhasAfetadas = pstmt.executeUpdate();
+            if (linhasAfetadas == 0) {
+                throw new PersistenceException("Criação da Questao Falhou");
+            }
+            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    subject.setIdDominio(generatedKeys.getLong(1));
+                }
+                else {
+                    throw new PersistenceException("Criação falhou, sem id's obtidos");
+                }
             }
             pstmt.close();
             connection.close();

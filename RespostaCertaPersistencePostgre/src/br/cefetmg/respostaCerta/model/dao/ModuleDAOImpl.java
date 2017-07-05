@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -58,11 +59,22 @@ public class ModuleDAOImpl implements ModuleDAO{
     synchronized public void insert(Module module) throws PersistenceException {
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "INSERT INTO Modulo (idDominio, nomeModulo) VALUES(?, ?, ?)";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
+            String sql = "INSERT INTO Modulo (idDominio, nomeModulo) VALUES(?, ?)";
+            PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setLong(1, module.getDominio().getIdDominio());
             pstmt.setString(2, module.getNomeModulo());
-            pstmt.executeQuery();
+            int linhasAfetadas = pstmt.executeUpdate();
+            if (linhasAfetadas == 0) {
+                throw new PersistenceException("Criação da Questao Falhou");
+            }
+            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    module.setIdModulo(generatedKeys.getLong(1));
+                }
+                else {
+                    throw new PersistenceException("Criação falhou, sem id's obtidos");
+                }
+            }
             pstmt.close();
             connection.close();
         } catch (ClassNotFoundException | SQLException e) {

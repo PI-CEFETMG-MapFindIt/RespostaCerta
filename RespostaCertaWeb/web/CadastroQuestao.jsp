@@ -14,7 +14,7 @@
 
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/CadastroQuestao.css" rel="stylesheet">
-
+        <link href="css/cropper.min.css" rel="stylesheet">
     </head>
     <body>
         <%@include file="/Menu.jsp" %>
@@ -40,28 +40,41 @@
                         <label for="enunciado"><h4>Enunciado da Questão</h4></label>
                         <textarea class="form-control" rows="5" name="enunciado" id="enunciado" placeholder="Digite o enunciado da questão"></textarea>
                     </div>
+                    <div class="form-group" height="800px">
+			<div class="input-group">
+                            <span class="input-group-btn">
+				<span class="btn btn-default btn-file">
+                                    Escolher Imagem... <input accept="image/*" type="file" id="imgInp">
+                                </span>
+                            </span>
+			</div>
+			<br>
+			<input type="hidden" id="blob" name="blob">
+                        <img id='novaImg'/>
+                    </div>    
                     <div class="form-group">
                         <label><h4>Dificuldade da Questão</h4></label>
                         <div class="radio">
-                            <label><input type="radio" id="facil" name="difQuestao">Fácil</label>
+                            <label><input type="radio" id="facil" name="difQuestao" value="Facil">Fácil</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" id="moderada" name="difQuestao">Moderada</label>
+                            <label><input type="radio" id="moderada" name="difQuestao" value="Moderada">Moderada</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" id="dificl" name="difQuestao">Difícil</label>
+                            <label><input type="radio" id="dificl" name="difQuestao" value="Dificil">Difícil</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" id="desafio" name="difQuestao">Desafio</label>
+                            <label><input type="radio" id="desafio" name="difQuestao" value="Desafio">Desafio</label>
                         </div>
                     </div>
+                    
                     <div class="form-group">
                         <label><h4>Tipo da Questão</h4></label>
                         <div class="radio">
-                            <label><input type="radio" id="aberta" name="tipoQuestao">Discursiva</label>
+                            <label><input type="radio" id="aberta" name="tipoQuestao" value="Discursiva">Discursiva</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" id="fechada" name="tipoQuestao">Objetiva</label>
+                            <label><input type="radio" id="fechada" name="tipoQuestao" value="Objetiva">Objetiva</label>
                         </div>
                     </div>
                     <div class="form-group hidden" id="divAlternativas">
@@ -70,33 +83,36 @@
                                         <br>
                                     </div>
                                     <div class="radio">
-                                        <label class="col-md-12"><input type="radio" id="op1" name="altQuestao"><textarea class="form-control" rows="2" id="alternativa1" placeholder="Digite a primeira alternativa"></textarea></label>
+                                        <label class="col-md-12"><input type="radio" id="op1" name="altQuestao" value="1"><textarea class="form-control" rows="2" id="alternativa1" name="alternativa1" placeholder="Digite a primeira alternativa"></textarea></label>
                                     </div>
                                     <div class="col-md-12">
                                         <br>
                                     </div>
                                     <div class="radio">
-                                        <label class="col-md-12"><input type="radio" id="op2" name="altQuestao"><textarea class="form-control" rows="2" id="alternativa2" placeholder="Digite a segunda alternativa"></textarea></label>
+                                        <label class="col-md-12"><input type="radio" id="op2" name="altQuestao" value="2"><textarea class="form-control" rows="2" id="alternativa2" name="alternativa2" placeholder="Digite a segunda alternativa"></textarea></label>
                                     </div>
                                     <div class="col-md-12">
                                         <br>
                                     </div>
                                     <div class="radio">
-                                        <label class="col-md-12"><input type="radio" id="op3" name="altQuestao"><textarea class="form-control" rows="2" id="alternativa3" placeholder="Digite a terceira alternativa"></textarea></label>
+                                        <label class="col-md-12"><input type="radio" id="op3" name="altQuestao" value="3"><textarea class="form-control" rows="2" id="alternativa3" name="alternativa3" placeholder="Digite a terceira alternativa"></textarea></label>
                                     </div>
                                     <div class="col-md-12">
                                         <br>
                                     </div>
                                     <div class="radio">
-                                        <label class="col-md-12"><input type="radio" id="op4" name="altQuestao"><textarea class="form-control" rows="2" id="alternativa4" placeholder="Digite a quarta alternativa"></textarea></label>
+                                        <label class="col-md-12"><input type="radio" id="op4" name="altQuestao" value="4"><textarea class="form-control" rows="2" id="alternativa4" name="alternativa4" placeholder="Digite a quarta alternativa"></textarea></label>
                                     </div>
                                     <div class="col-md-12">
                                         <br>
                                     </div>
                                     <div class="radio">
-                                        <label class="col-md-12"><input type="radio" id="op5" name="altQuestao"><textarea class="form-control" rows="2" id="alternativa5" placeholder="Digite a quinta alternativa"></textarea></label>
+                                        <label class="col-md-12"><input type="radio" id="op5" name="altQuestao" value="5"><textarea class="form-control" rows="2" id="alternativa5" name="alternativa5" placeholder="Digite a quinta alternativa"></textarea></label>
                                     </div>
-                                    <input type="hidden" name="idtNovo" id="idtNovo" value=""/>
+                                    <input type="hidden" name="idtNovo" id="idtNovo" value="0"/>
+                                    <input type="hidden" name="disciplina" id="novaDisciplina"/>
+                                    <input type="hidden" name="modulo" id="novoModulo"/>
+                                    <input type="hidden" name="idDisciplina" id="novoModuloIdDisciplina"/>
                                     </div>
                                     <button class="btn btn-default">
                                         Cadastrar
@@ -163,5 +179,6 @@
                                     <script src="js/jquery.min.js"></script>
                                     <script src="js/bootstrap.min.js"></script>
                                     <script src="js/CadastroQuestao.js"></script>
+                                    <script src="js/cropper.min.js"></script>
                                     </body>
                                     </html>

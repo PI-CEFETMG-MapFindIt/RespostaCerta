@@ -23,6 +23,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -59,19 +61,23 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
     }
     
     private ByteArrayInputStream imageToBlob(Image img) throws IOException{
-        BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = bi.createGraphics();
-        g2d.drawImage(img, 0, 0, null);
-        g2d.dispose();
-        ByteArrayOutputStream baos = null;
-        try {
-            baos = new ByteArrayOutputStream();
-            ImageIO.write(bi, "png", baos);
-        } finally {
-            baos.close();
+        if(img!=null){
+            BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2d = bi.createGraphics();
+            g2d.drawImage(img, 0, 0, null);
+            g2d.dispose();
+            ByteArrayOutputStream baos = null;
+            try {
+                baos = new ByteArrayOutputStream();
+                ImageIO.write(bi, "png", baos);
+            } finally {
+                baos.close();
+            }
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            return bais;
+        }else{
+            return null;
         }
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-        return bais;
     }
     
     /**
@@ -83,15 +89,20 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
     synchronized public void insert(ClosedQuestion questaoFechada) throws PersistenceException {
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "INSERT INTO questao (idModulo, idUsuarioCriador, enunciadoQuestao, idtQuestao, dataCriacao, tituloQuestao, questPhoto) VALUES(?, ?, ?, ?, ?, ?, ?) RETURNING idQuestao";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
+            String sql = "INSERT INTO questao (idModulo, idUsuarioCriador, enunciadoQuestao, idtQuestao, dataCriacao, tituloQuestao, questPhoto, idtDificuldade) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setLong(1, questaoFechada.getModulo().getIdModulo());
             pstmt.setLong(2, questaoFechada.getCriador().getIdUsuario());
             pstmt.setString(3, questaoFechada.getEnunciadoQuestao());
             pstmt.setBoolean(4, questaoFechada.isIdtQuestao());
             pstmt.setDate(5, java.sql.Date.valueOf(questaoFechada.getDataCriacao()));
-            pstmt.setString(6, questaoFechada.getTituloQuestao());   
-            pstmt.setBinaryStream(7, imageToBlob(questaoFechada.getQuestPhoto()));
+            pstmt.setString(6, questaoFechada.getTituloQuestao());
+            if(questaoFechada.getQuestPhoto()!=null){
+                pstmt.setBinaryStream(7, imageToBlob(questaoFechada.getQuestPhoto()));
+            }else{
+                pstmt.setNull(7, Types.NULL);
+            }
+            pstmt.setString(8, String.valueOf(questaoFechada.getIdtDificuldade()));
             int linhasAfetadas = pstmt.executeUpdate();
             if (linhasAfetadas == 0) {
                 throw new PersistenceException("Criação da Questao Falhou");
@@ -130,7 +141,7 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
     synchronized public void update(ClosedQuestion closedQuestion) throws PersistenceException {
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "UPDATE questao SET idModulo = ?, idUsuarioCriador = ?, idtQuestao = ?, dataCriacao = ?, enunciadoQuestao = ?, tituloQuestao = ?, questPhoto = ? WHERE idQuestao = ?";
+            String sql = "UPDATE questao SET idModulo = ?, idUsuarioCriador = ?, idtQuestao = ?, dataCriacao = ?, enunciadoQuestao = ?, tituloQuestao = ?, questPhoto = ?, idtDificuldade = ? WHERE idQuestao = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, closedQuestion.getModulo().getIdModulo());
             pstmt.setLong(2, closedQuestion.getCriador().getIdUsuario());
@@ -139,7 +150,8 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
             pstmt.setString(5, closedQuestion.getEnunciadoQuestao());
             pstmt.setString(6, closedQuestion.getTituloQuestao());
             pstmt.setBinaryStream(7, imageToBlob(closedQuestion.getQuestPhoto()));
-            pstmt.setLong(8, closedQuestion.getIdQuestao());
+            pstmt.setString(9, String.valueOf(closedQuestion.getIdtDificuldade()));
+            pstmt.setLong(10, closedQuestion.getIdQuestao());
             pstmt.executeUpdate();
             sql = "UPDATE respostaFechada SET alt1 = ?, alt2 = ?, alt3 = ?, alt4 = ?, alt5 = ?, altCorreta = ? WHERE idQuestao = ?";
             pstmt = connection.prepareStatement(sql);
