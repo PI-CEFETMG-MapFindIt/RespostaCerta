@@ -44,7 +44,7 @@
                         <label for="enunciado"><h4>Enunciado da Questão</h4></label>
                         <textarea class="form-control" rows="5" name="enunciado" id="enunciado" placeholder="Digite o enunciado da questão"><%=q.getEnunciadoQuestao()%></textarea>
                     </div>
-                    <% if(q.getQuestPhoto()!=null){%>
+                    <% if (q.getQuestPhoto() != null) {%>
                     <div class="form-group">
                         <img src="/RespostaCerta/ImageServlet?tipo=quest&id=<%=q.getIdQuestao()%>">
                     </div>    
@@ -88,57 +88,54 @@
                     <% if (!q.isIdtQuestao()) {
                             ClosedQuestion clQ = (ClosedQuestion) q;
                     %>
-                    <div class="form-group" id = "divAlternativas"> <label> < h4 > Digite as alternativas e selecione a alternativa correta<h4></label
-                        > <div 
-                            class="col-md-12">
-                            <br
-                                > </div
-                        > <div 
+                    <div class="form-group" id = "divAlternativas"> <label> <h4> Digite as alternativas e selecione a alternativa correta<h4></label> 
+                        <div class="col-md-12">
+                            <br> </div> <div 
                             class="radio">
-                            <label class="col-md-12"><input type = "radio" id = "op1" name = "altQuestao" value = "1" <%if (clQ.getCorreta() == 1) {%>selected<%}%>> <textarea 
-                                    class="form-control" rows = "2" id = "alternativa1" name = "alternativa1" placeholder = "Digite a primeira alternativa" > <%= clQ.getAlt1()%> < / textarea > < / label
-                                    > < / div
+                            <label class="col-md-12"><input type = "radio" id = "op1" name = "altQuestao" value = "1" <%if (clQ.getCorreta() == 1) {%>checked<%}%>> <textarea 
+                                    class="form-control" rows = "2" id = "alternativa1" name = "alternativa1" placeholder = "Digite a primeira alternativa" > <%= clQ.getAlt1()%> </textarea> </label
+                                    > </div
                                     > <div 
                                         class="col-md-12">
                                         <br
-                                            > < / div
+                                            > </div
                                         > <div 
                                             class="radio">
-                                            <label class="col-md-12"><input type = "radio" id = "op2" name = "altQuestao" value = "2" <%if (clQ.getCorreta() == 2) {%>selected<%}%> > <textarea 
-                                                    class="form-control" rows = "2" id = "alternativa2" name = "alternativa2" placeholder = "Digite a segunda alternativa" > <%= clQ.getAlt2()%> < / textarea > < / label
-                                                    > < / div
+                                            <label class="col-md-12"><input type = "radio" id = "op2" name = "altQuestao" value = "2" <%if (clQ.getCorreta() == 2) {%>checked<%}%> > <textarea 
+                                                    class="form-control" rows = "2" id = "alternativa2" name = "alternativa2" placeholder = "Digite a segunda alternativa" > <%= clQ.getAlt2()%> </textarea > </label
+                                                    > </div
                                                     > <div 
                                                         class="col-md-12">
                                                         <br
-                                                            > < / div
+                                                            > </div
                                                         > <div 
                                                             class="radio">
-                                                            <label class="col-md-12"><input type = "radio" id = "op3" name = "altQuestao" value = "3" <%if (clQ.getCorreta() == 3) {%>selected<%}%>> <textarea 
-                                                                    class="form-control" rows = "2" id = "alternativa3" name = "alternativa3" placeholder = "Digite a terceira alternativa" > <%= clQ.getAlt3()%> < / textarea > < / label
-                                                                    > < / div
+                                                            <label class="col-md-12"><input type = "radio" id = "op3" name = "altQuestao" value = "3" <%if (clQ.getCorreta() == 3) {%>checked<%}%>> <textarea 
+                                                                    class="form-control" rows = "2" id = "alternativa3" name = "alternativa3" placeholder = "Digite a terceira alternativa" > <%= clQ.getAlt3()%> </textarea > </label
+                                                                    > </div
                                                                     > <div 
                                                                         class="col-md-12">
                                                                         <br
-                                                                            > < / div
+                                                                            > </div
                                                                         > <div 
                                                                             class="radio">
-                                                                            <label class="col-md-12"><input type = "radio" id = "op4" name = "altQuestao" value = "4" <%if (clQ.getCorreta() == 4) {%>selected<%}%> > <textarea 
-                                                                                    class="form-control" rows = "2" id = "alternativa4" name = "alternativa4" placeholder = "Digite a quarta alternativa" > <%= clQ.getAlt4()%> < / textarea > < / label
-                                                                                    > < / div
+                                                                            <label class="col-md-12"><input type = "radio" id = "op4" name = "altQuestao" value = "4" <%if (clQ.getCorreta() == 4) {%>checked<%}%> > <textarea 
+                                                                                    class="form-control" rows = "2" id = "alternativa4" name = "alternativa4" placeholder = "Digite a quarta alternativa" > <%= clQ.getAlt4()%> </textarea > </label
+                                                                                    > </div
                                                                                     > <div 
                                                                                         class="col-md-12">
                                                                                         <br
-                                                                                            > < / div
+                                                                                            > </div
                                                                                         > <div 
                                                                                             class="radio">
-                                                                                            <label class="col-md-12"><input type = "radio" id = "op5" name = "altQuestao" value = "5" <%if (clQ.getCorreta() == 5) {%>selected<%}%>> 
+                                                                                            <label class="col-md-12"><input type = "radio" id = "op5" name = "altQuestao" value = "5" <%if (clQ.getCorreta() == 5) {%>checked<%}%>> 
                                                                                                 <textarea class="form-control" rows = "2" id = "alternativa5" name = "alternativa5" placeholder = "Digite a quinta alternativa" > <%= clQ.getAlt5()%> </textarea> 
                                                                                             </label> 
                                                                                         </div> 
-                                                                                        
+
                                                                                     </div>
-                                                                                            <%
-                                                                                            }%>
+                                                                                    <%
+                                                                                        }%>
                                                                                     <input type="hidden" name="idtNovo" id="idtNovo" value="0"/>
                                                                                     <input type="hidden" name="disciplina" id="novaDisciplina"/>
                                                                                     <input type="hidden" name="modulo" id="novoModulo"/>

@@ -96,7 +96,7 @@ public class CadastrarQuestao {
                     case "Desafio": questao.setIdtDificuldade('X'); break;
                 }
                 questao.setIdtQuestao(false);
-                if(request.getParameter("blob")!="")
+                if(!"".equals(request.getParameter("blob")))
                     questao.setQuestPhoto(decodeToImage(request.getParameter("blob").substring(22)));
                 questao.setTituloQuestao(request.getParameter("titulo"));
                 questao.setAlt1(request.getParameter("alternativa1"));

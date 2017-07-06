@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -12,58 +13,17 @@
 
     <body>
         <div class="container-fluid">
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
-                    </div>
-                    <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Sair</a></li>
-                        </ul>
-                        <form class="navbar-form navbar-right" action="#" method="GET">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search..." id="query" name="search" value="">
-                                <div class="input-group-btn">
-                                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </nav>
-            <div id="wrapper" class="toggled">
-                <div class="container-fluid">
-                    <div id="sidebar-wrapper">
-                        <ul class="sidebar-nav">
-                            <li class="sidebar-brand"><br></li>
-                            <li class="sidebar-brand"><a href="#" class="navbar-brand">Jo√£o Silva</a></li>
-                            <li><a href="#">P√°gina Inicial</a></li>
-                            <li><a href="#">Cadastrar Quest√£o</a></li>
-                            <li><a href="#">Minhas Quest√µes</a></li>
-                            <li><a href="#">Desempenho</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <br>
-                <br>
-                <br>
+            <%@include file="/Menu.jsp" %>
                 <!--Aqui vem a parte interna-->
                 <div class="row">
                     <div class="col-md-12">
                         <div class="tabbable" id="tabs-835946">
                             <ul class="nav nav-tabs">
                                 <li class="active">
-                                    <a href="#panel-712485" data-toggle="tab">Pontua√ß√£o</a>
+                                    <a href="#panel-712485" data-toggle="tab">PontuaÁ„o</a>
                                 </li>
                                 <li>
-                                    <a href="#panel-254705" data-toggle="tab">Hist√≥rico</a>
+                                    <a href="#panel-254705" data-toggle="tab">HistÛrico</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -71,7 +31,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <h1 class="text-center">
-                                                Pontua√ß√£o
+                                                PontuaÁ„o
                                             </h1>
                                         </div>
                                     </div>
@@ -79,10 +39,10 @@
                                         <thead>
                                             <tr>
                                                 <th>
-                                                    Mat√©ria
+                                                    MatÈria
                                                 </th>
                                                 <th>
-                                                    M√≥dulo
+                                                    MÛdulo
                                                 </th>
                                                 <th>
                                                     Taxa de acerto
@@ -101,28 +61,7 @@
                                                     60% (12/20)
                                                 </td>
                                             </tr>
-                                            <tr class="danger">
-                                                <td>
-                                                    F√≠sica
-                                                </td>
-                                                <td>
-                                                    Ondas Sonoras
-                                                </td>
-                                                <td>
-                                                    55% (11/20)
-                                                </td>
-                                            </tr>
-                                            <tr class="danger">
-                                                <td>
-                                                    Hist√≥ria
-                                                </td>
-                                                <td>
-                                                    Guerra Fria
-                                                </td>
-                                                <td>
-                                                    50% (5/10)
-                                                </td>
-                                            </tr>
+                                            
                                         </tbody>
                                     </table>
                                     <div class="row">
@@ -145,7 +84,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <h1 class="text-center">
-                                                Hist√≥rico
+                                                HistÛrico
                                             </h1>
                                         </div>
                                     </div>
@@ -153,16 +92,16 @@
                                         <thead>
                                             <tr>
                                                 <th>
-                                                    Horario
+                                                    Data
                                                 </th>
                                                 <th>
-                                                    Mat√©ria
+                                                    MatÈria
                                                 </th>
                                                 <th>
-                                                    M√≥dulo
+                                                    MÛdulo
                                                 </th>
                                                 <th>
-                                                    Avalia√ß√£o
+                                                    AvaliaÁ„o
                                                 </th>
                                             </tr>
                                         </thead>
@@ -179,48 +118,6 @@
                                                 </td>
                                                 <td>
                                                     Certa
-                                                </td>
-                                            </tr>
-                                            <tr class="success">
-                                                <td>
-                                                    01/05/2017 - 14:25
-                                                </td>
-                                                <td>
-                                                    Hist√≥ria
-                                                </td>
-                                                <td>
-                                                    Guerra Fria
-                                                </td>
-                                                <td>
-                                                    Certa
-                                                </td>
-                                            </tr>
-                                            <tr class="success">
-                                                <td>
-                                                    01/05/2017 - 14:20
-                                                </td>
-                                                <td>
-                                                    Matem√°tica
-                                                </td>
-                                                <td>
-                                                    Trigonometria
-                                                </td>
-                                                <td>
-                                                    Certa
-                                                </td>
-                                            </tr>
-                                            <tr class="danger">
-                                                <td>
-                                                    01/05/2017 - 14:15
-                                                </td>
-                                                <td>
-                                                    Matem√°tica
-                                                </td>
-                                                <td>
-                                                    Trigonometria
-                                                </td>
-                                                <td>
-                                                    Errada
                                                 </td>
                                             </tr>
                                         </tbody>

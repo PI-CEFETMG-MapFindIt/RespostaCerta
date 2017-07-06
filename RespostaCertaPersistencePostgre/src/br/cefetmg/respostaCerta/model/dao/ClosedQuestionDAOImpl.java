@@ -149,11 +149,15 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
             pstmt.setDate(4, java.sql.Date.valueOf(closedQuestion.getDataCriacao()));
             pstmt.setString(5, closedQuestion.getEnunciadoQuestao());
             pstmt.setString(6, closedQuestion.getTituloQuestao());
-            pstmt.setBinaryStream(7, imageToBlob(closedQuestion.getQuestPhoto()));
-            pstmt.setString(9, String.valueOf(closedQuestion.getIdtDificuldade()));
-            pstmt.setLong(10, closedQuestion.getIdQuestao());
+            if(closedQuestion.getQuestPhoto()!=null){
+                pstmt.setBinaryStream(7, imageToBlob(closedQuestion.getQuestPhoto()));
+            }else{
+                pstmt.setNull(7, Types.NULL);
+            }
+            pstmt.setString(8, String.valueOf(closedQuestion.getIdtDificuldade()));
+            pstmt.setLong(9, closedQuestion.getIdQuestao());
             pstmt.executeUpdate();
-            sql = "UPDATE respostaFechada SET alt1 = ?, alt2 = ?, alt3 = ?, alt4 = ?, alt5 = ?, altCorreta = ? WHERE idQuestao = ?";
+            sql = "UPDATE questaoFechada SET alt1 = ?, alt2 = ?, alt3 = ?, alt4 = ?, alt5 = ?, altCorreta = ? WHERE idQuestao = ?";
             pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, closedQuestion.getAlt1());
             pstmt.setString(2, closedQuestion.getAlt2());

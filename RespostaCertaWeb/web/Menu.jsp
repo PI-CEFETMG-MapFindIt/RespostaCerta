@@ -65,8 +65,8 @@
                     <br><br><br>
                     <img src="/RespostaCerta/ImageServlet?tipo=user&id=<%=usuario.getIdUsuario()%>" alt="..." width="200" height="200">`
                     <li class="sidebar-brand"><a href="#" class="navbar-brand" style="color:white"><%=usuario.getNomeUsuario()%></a></li>
-                    <li><a href="#">Página Inicial</a></li>
-                    <li><a href="#">Desempenho</a></li>
+                    <li><a href="/RespostaCerta/">Página Inicial</a></li>
+                    <li><a href="/RespostaCerta/ControllerServlet?control=Desempenho">Desempenho</a></li>
                     <% if(usuario.getIdtUsuario()=='P'){%>
                     <li><a href="/RespostaCerta/ControllerServlet?control=PagCadastrarQuestao">Cadastrar Questão</a></li>
                     <li><a href="/RespostaCerta/ControllerServlet?control=PagMinhasQuestoes">Minhas Questões</a></li>
@@ -103,6 +103,7 @@
             </div>
         </div>
         <% }%>
+        <br>
         <br>
         <br>
         <!--Aqui vem a parte interna-->
