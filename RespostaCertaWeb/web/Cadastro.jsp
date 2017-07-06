@@ -101,6 +101,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.mask.min.js"></script>
+<script src="js/Menu.js"></script>
 <script src="js/Cadastro.js"></script>
 </body>
 </html>

@@ -178,7 +178,9 @@
                                     </div>
                                     <script src="js/jquery.min.js"></script>
                                     <script src="js/bootstrap.min.js"></script>
-                                    <script src="js/CadastroQuestao.js"></script>
                                     <script src="js/cropper.min.js"></script>
+                                    
+                                    <script src="js/CadastroQuestao.js"></script>
+                                    
                                     </body>
                                     </html>

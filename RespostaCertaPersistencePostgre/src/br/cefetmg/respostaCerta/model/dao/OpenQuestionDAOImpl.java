@@ -124,9 +124,13 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
             pstmt.setDate(4, java.sql.Date.valueOf(openQuestion.getDataCriacao()));
             pstmt.setString(5, openQuestion.getEnunciadoQuestao());
             pstmt.setString(6, openQuestion.getTituloQuestao());
-            pstmt.setBinaryStream(7, imageToBlob(openQuestion.getQuestPhoto()));
-            pstmt.setString(9, String.valueOf(openQuestion.getIdtDificuldade()));
-            pstmt.setLong(10, openQuestion.getIdQuestao());
+            if(openQuestion.getQuestPhoto()!=null){
+                pstmt.setBinaryStream(7, imageToBlob(openQuestion.getQuestPhoto()));
+            }else{
+                pstmt.setNull(7, Types.NULL);
+            }
+            pstmt.setString(8, String.valueOf(openQuestion.getIdtDificuldade()));
+            pstmt.setLong(9, openQuestion.getIdQuestao());
             pstmt.executeUpdate();
             pstmt.close();
             connection.close(); 

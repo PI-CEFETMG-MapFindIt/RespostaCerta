@@ -39,7 +39,7 @@
                             </div>
                             <div class="rightItem">
 
-                                <a href="/RespostaCerta/ControllerServlet?control=EditarQuestao&id=<%=questao.getIdQuestao()%>" type="button" class="btn btn-default">
+                                <a href="/RespostaCerta/ControllerServlet?control=PagEditarQuestao&id=<%=questao.getIdQuestao()%>" type="button" class="btn btn-default">
                                     <span class="glyphicon glyphicon-pencil right"></span>
                                 </a>
 
@@ -76,6 +76,7 @@
 </div>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/Menu.js"></script>
 <script src="js/MinhasQuestoes.js"></script>
 </body>
 </html>

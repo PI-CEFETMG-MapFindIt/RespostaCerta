@@ -5,10 +5,17 @@
  */
 package br.cefetmg.respostaCerta.controller;
 
+import br.cefetmg.respostaCerta.model.dao.ClosedQuestionDAOImpl;
+import br.cefetmg.respostaCerta.model.dao.OpenQuestionDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.UserDAOImpl;
+import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
+import br.cefetmg.respostaCerta.model.service.ClosedQuestionManagement;
+import br.cefetmg.respostaCerta.model.service.ClosedQuestionManagementImpl;
+import br.cefetmg.respostaCerta.model.service.OpenQuestionManagement;
+import br.cefetmg.respostaCerta.model.service.OpenQuestionManagementImpl;
 import br.cefetmg.respostaCerta.model.service.UserManagement;
 import br.cefetmg.respostaCerta.model.service.UserManagementImpl;
 import java.awt.Image;
@@ -51,6 +58,20 @@ public class ImageServlet extends HttpServlet {
                             User user = manage.getUserById(id);
                             img=user.getFotoUsuario();
                          } catch (BusinessException | PersistenceException ex) {
+                            request.setAttribute("erro", ex.getMessage());
+                            RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
+                            rd.forward(request, response);
+                         }
+                         break;
+            case "quest": OpenQuestionManagement manageQ = new OpenQuestionManagementImpl(new OpenQuestionDAOImpl());
+                          try{
+                              Question q = manageQ.getQuestionById(id);
+                              if(q==null){
+                                  ClosedQuestionManagement manageC = new ClosedQuestionManagementImpl(new ClosedQuestionDAOImpl());
+                                  q=manageC.getQuestionById(id);
+                              }
+                              img=q.getQuestPhoto();
+                          } catch (BusinessException | PersistenceException ex) {
                             request.setAttribute("erro", ex.getMessage());
                             RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
                             rd.forward(request, response);

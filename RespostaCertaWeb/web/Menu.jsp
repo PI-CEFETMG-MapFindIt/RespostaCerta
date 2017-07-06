@@ -106,7 +106,5 @@
         <br>
         <br>
         <!--Aqui vem a parte interna-->
-
         <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
         <script src="js/Menu.js"></script>
