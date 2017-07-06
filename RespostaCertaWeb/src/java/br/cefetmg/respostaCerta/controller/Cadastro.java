@@ -61,7 +61,8 @@ public class Cadastro {
         }
         LoginManagement login = new LoginManagementImpl(new UserDAOImpl());
         try {
-            login.loginUser(email, senhaMd5);
+            usuario=login.loginUser(email, senhaMd5);
+            request.getSession().setAttribute("usuario", usuario.getIdUsuario());
         } catch (BusinessException | PersistenceException ex) {
             request.setAttribute("erro", ex.getMessage());
             return "Erro.jsp";

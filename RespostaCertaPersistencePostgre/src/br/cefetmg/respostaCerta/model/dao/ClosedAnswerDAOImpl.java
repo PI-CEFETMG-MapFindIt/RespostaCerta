@@ -191,9 +191,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 BufferedImage image = ImageIO.read(blob);
                 autor.setFotoUsuario(image);
                 closed.setAutor(autor);
-                closed.setDataResposta(rs.getDate("dataRespostaQuestao").toLocalDate());
-                closed.setIdResposta(rs.getLong("idRespostaQuestao"));
-                closed.setIdtResposta(rs.getString("idtRespostaQuestao").charAt(0));
+                closed.setDataResposta(rs.getDate("dataResposta").toLocalDate());
+                closed.setIdResposta(rs.getLong("idResposta"));
+                closed.setIdtResposta(rs.getString("idtResposta").charAt(0));
                 autorQuestao.setIdUsuario(rs.getLong("idUsuarioQuestao"));
                 autorQuestao.setNomeUsuario(rs.getString("nomeUsuarioQuestao"));
                 autorQuestao.setLoginUsuario(rs.getString("loginUsuarioQuestao"));
@@ -286,9 +286,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 BufferedImage image = ImageIO.read(blob);
                 autor.setFotoUsuario(image);
                 closed.setAutor(autor);
-                closed.setDataResposta(rs.getDate("dataRespostaQuestao").toLocalDate());
-                closed.setIdResposta(rs.getLong("idRespostaQuestao"));
-                closed.setIdtResposta(rs.getString("idtRespostaQuestao").charAt(0));
+                closed.setDataResposta(rs.getDate("dataResposta").toLocalDate());
+                closed.setIdResposta(rs.getLong("idResposta"));
+                closed.setIdtResposta(rs.getString("idtResposta").charAt(0));
                 autorQuestao.setIdUsuario(rs.getLong("idUsuarioQuestao"));
                 autorQuestao.setNomeUsuario(rs.getString("nomeUsuarioQuestao"));
                 autorQuestao.setLoginUsuario(rs.getString("loginUsuarioQuestao"));
@@ -354,7 +354,7 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                     + "JOIN Usuario c ON c.idUsuario=b.idUsuario "
                     + "JOIN Questao d ON d.idQuestao=b.idQuestao "
                     + "JOIN Modulo e ON e.idModulo=d.idModulo "
-                    + "JOIN Dominio f ON f.idDominio=e.idDominio"
+                    + "JOIN Dominio f ON f.idDominio=e.idDominio "
                     + "JOIN Usuario g ON g.idUsuario=d.idUsuarioCriador "
                     + "JOIN QuestaoFechada h ON d.idQuestao=h.idQuestao "
                     + "WHERE c.idUsuario=?";
@@ -379,9 +379,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
                 BufferedImage image = ImageIO.read(blob);
                 autor.setFotoUsuario(image);
                 closed.setAutor(autor);
-                closed.setDataResposta(rs.getDate("dataRespostaQuestao").toLocalDate());
-                closed.setIdResposta(rs.getLong("idRespostaQuestao"));
-                closed.setIdtResposta(rs.getString("idtRespostaQuestao").charAt(0));
+                closed.setDataResposta(rs.getDate("dataResposta").toLocalDate());
+                closed.setIdResposta(rs.getLong("idResposta"));
+                closed.setIdtResposta(rs.getString("idtResposta").charAt(0));
                 autorQuestao.setIdUsuario(rs.getLong("idUsuarioQuestao"));
                 autorQuestao.setNomeUsuario(rs.getString("nomeUsuarioQuestao"));
                 autorQuestao.setLoginUsuario(rs.getString("loginUsuarioQuestao"));
