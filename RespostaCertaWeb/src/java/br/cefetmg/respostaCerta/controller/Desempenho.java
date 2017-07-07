@@ -11,6 +11,7 @@ import br.cefetmg.respostaCerta.model.dao.ModuleDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.OpenQuestionDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.SubjectDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.UserDAOImpl;
+import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
 import br.cefetmg.respostaCerta.model.domain.Module;
 import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.domain.Subject;
@@ -45,11 +46,9 @@ public class Desempenho {
             
             HashMap<Module, Double> errosModulo = new HashMap<>();
             
-            OpenQuestionManagement opQuest = new OpenQuestionManagementImpl(new OpenQuestionDAOImpl());
             ClosedQuestionManagement clQuest = new ClosedQuestionManagementImpl(new ClosedQuestionDAOImpl());
             
-            List<Question> listQuest = opQuest.getQuestionsByUser((Long)request.getSession().getAttribute("usuario"));
-            listQuest.addAll(clQuest.getQuestionsByUser((Long)request.getSession().getAttribute("usuario")));
+            List<ClosedQuestion> listQuest=clQuest.getQuestionsByUser((Long)request.getSession().getAttribute("usuario"));
             HashSet<Module> modulos = new HashSet<>();
             for(Question q:listQuest){
                 modulos.add(q.getModulo());

@@ -1,3 +1,4 @@
+<%@page import="java.util.Iterator"%>
 <%@page import="java.util.Map"%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Module"%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Subject"%>
@@ -42,69 +43,74 @@
                                             </h1>
                                         </div>
                                     </div>
-                                    <h2 align="center">Porcentagem de Erros e Acertos</h2>
-                                    <div id="container" >
-                                        <canvas id="pie-chart" width="100px" height="50px"></canvas>
+                                    <div class="row">
+                                       <div class="col-md-12">
+                                            <h2 align="center">Porcentagem de Erros e Acertos</h2>
+                                            <div id="container" >
+                                                <canvas id="pie-chart" style="height:30vh; width:40vw;" ></canvas>
+                                            </div>
+                                            <br>
+                                            <h2 align="center">Porcentagem de Erros por Módulo</h2>
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Módulo
+                                                        </th>
+                                                        <th>
+                                                            Taxa de acerto
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <%  Iterator<Map.Entry<Module, Double>> it = errosModulo.entrySet().iterator();
+                                                    while (it.hasNext()) {
+                                                        Map.Entry<Module, Double> entry = it.next();
+                                                    %>
+                                                    <tbody>
+                                                        <tr class="success">
+                                                            <td>
+                                                                <%= entry.getKey().getNomeModulo() %>
+                                                            </td>
+                                                            <td>
+                                                                <%= entry.getValue() %>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                <% } %>
+                                            </table>
+                                            <h2 align="center">Porcentagem de Erros por Disciplina</h2>
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Matéria
+                                                        </th>
+                                                        <th>
+                                                            Módulo
+                                                        </th>
+                                                        <th>
+                                                            Taxa de acerto
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="success">
+                                                        <td>
+                                                            MatemÃ¡tica
+                                                        </td>
+                                                        <td>
+                                                            Trigonometria
+                                                        </td>
+                                                        <td>
+                                                            60% (12/20)
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                       </div>
                                     </div>
-                                    <br>
-                                    <table class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>
-                                                    Matéria
-                                                </th>
-                                                <th>
-                                                    Módulo
-                                                </th>
-                                                <th>
-                                                    Taxa de acerto
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="success">
-                                                <td>
-                                                    MatemÃ¡tica
-                                                </td>
-                                                <td>
-                                                    Trigonometria
-                                                </td>
-                                                <td>
-                                                    60% (12/20)
-                                                </td>
-                                            </tr>
-                                            
-                                        </tbody>
-                                    </table>
-                                    <table class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>
-                                                    Matéria
-                                                </th>
-                                                <th>
-                                                    Módulo
-                                                </th>
-                                                <th>
-                                                    Taxa de acerto
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="success">
-                                                <td>
-                                                    MatemÃ¡tica
-                                                </td>
-                                                <td>
-                                                    Trigonometria
-                                                </td>
-                                                <td>
-                                                    60% (12/20)
-                                                </td>
-                                            </tr>
-                                            
-                                        </tbody>
-                                    </table>
+                                    
                                 </div>
                                 <div class="tab-pane" id="panel-254705">
                                     <div class="row">

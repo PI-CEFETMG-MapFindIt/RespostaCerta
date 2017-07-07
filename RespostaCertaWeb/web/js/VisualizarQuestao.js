@@ -14,7 +14,6 @@ $('#fechada').on('change', function(e){
 	$('#divAlternativas').removeClass('hidden');
 });
 
-
 $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
