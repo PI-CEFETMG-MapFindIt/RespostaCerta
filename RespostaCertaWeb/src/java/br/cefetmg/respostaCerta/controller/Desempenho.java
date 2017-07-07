@@ -64,7 +64,7 @@ public class Desempenho {
             for(Subject d:dominios){
                 errosDominio.put(d, perf.calculateErrorsBySubject(usuario, d));
             }
-            request.setAttribute("errosModulo", errosDominio);
+            request.setAttribute("errosDominio", errosDominio);
             return "Desempenho.jsp";
         } catch (BusinessException | PersistenceException ex) {
             request.setAttribute("erro", ex.getMessage());
