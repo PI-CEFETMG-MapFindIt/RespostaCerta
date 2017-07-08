@@ -65,13 +65,19 @@
                     <br><br><br>
                     <img src="/RespostaCerta/ImageServlet?tipo=user&id=<%=usuario.getIdUsuario()%>" alt="..." width="200" height="200">`
                     <li class="sidebar-brand"><a href="#" class="navbar-brand" style="color:white"><%=usuario.getNomeUsuario()%></a></li>
+                    <% if(usuario.getIdtUsuario()!='E'){%>
                     <li><a href="/RespostaCerta/">Página Inicial</a></li>
                     <li><a href="/RespostaCerta/ControllerServlet?control=Desempenho">Desempenho</a></li>
-                    <% if(usuario.getIdtUsuario()=='P'){%>
+                    <%}else{%>
+                    <p>Cadastro de Professor em Análise</p>
+                    <%}%>
+                    <% if(usuario.getIdtUsuario()=='P' || usuario.getIdtUsuario()=='G'){%>
                     <li><a href="/RespostaCerta/ControllerServlet?control=PagCadastrarQuestao">Cadastrar Questão</a></li>
                     <li><a href="/RespostaCerta/ControllerServlet?control=PagMinhasQuestoes">Minhas Questões</a></li>
-                    <li><a href="#">Gerenciamento de Cadastros</a></li>
                     <% } %>
+                    <% if(usuario.getIdtUsuario()=='G'){%>
+                    <li><a href="/RespostaCerta/ControllerServlet?control=PagGerenciarCadastro">Gerenciamento de Cadastros</a></li>
+                    <%}%>
                 </ul>
             </div>
         </div>

@@ -91,11 +91,11 @@ public class ModuleDAOImpl implements ModuleDAO{
     synchronized public void update(Module module) throws PersistenceException {
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "UPDATE forum SET idDominio = ?, nomeModulo = ? WHERE idModulo = ?";
+            String sql = "UPDATE modulo SET idDominio = ?, nomeModulo = ? WHERE idModulo = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, module.getDominio().getIdDominio());
             pstmt.setString(2, module.getNomeModulo());
-            pstmt.setLong(1, module.getIdModulo());
+            pstmt.setLong(3, module.getIdModulo());
             pstmt.executeUpdate();
             pstmt.close();
             connection.close(); 

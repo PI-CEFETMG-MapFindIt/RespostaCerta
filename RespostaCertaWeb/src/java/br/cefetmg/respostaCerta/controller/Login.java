@@ -49,6 +49,7 @@ public class Login {
             request.setAttribute("erro", "Falha no Login");
         }else{
             request.getSession().setAttribute("usuario", usuario.getIdUsuario());
+            
             resposta="index.jsp";
         }
         return resposta;

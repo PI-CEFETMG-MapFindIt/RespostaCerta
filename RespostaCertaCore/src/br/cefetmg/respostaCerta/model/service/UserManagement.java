@@ -8,6 +8,7 @@ package br.cefetmg.respostaCerta.model.service;
 import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
+import java.util.List;
 
 /**
  *
@@ -18,4 +19,5 @@ public interface UserManagement {
     public void updateUser(Long id, User user) throws BusinessException, PersistenceException;
     public void removeUser(Long id) throws BusinessException, PersistenceException;
     public User getUserById(Long id) throws BusinessException, PersistenceException;
+    public List<User> getUserByIdt(char idt) throws BusinessException, PersistenceException;
 }

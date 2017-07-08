@@ -15,14 +15,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import javax.imageio.ImageIO;
 
@@ -243,6 +240,38 @@ public class UserDAOImpl implements UserDAO{
             pstmt.close();
             connection.close();
             return usuario;
+        } catch (ClassNotFoundException | SQLException | IOException e) {
+            throw new PersistenceException(e.getMessage());
+        }
+    }
+    
+    @Override
+    public List<User> getUserByIdt(char idt) throws PersistenceException {
+        try {
+            Connection connection = ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT * FROM Usuario WHERE idtUsuario=?";
+            
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, String.valueOf(idt));
+            ResultSet rs = pstmt.executeQuery(); 
+            List<User> usuarios = new ArrayList<>();
+            while(rs.next()) {
+                User usuario = new User();
+                usuario.setIdUsuario(rs.getLong("idUsuario"));
+                usuario.setNomeUsuario(rs.getString("nomeUsuario"));
+                usuario.setLoginUsuario(rs.getString("loginUsuario"));
+                usuario.setSenhaUsuario(rs.getString("senhaUsuario"));
+                usuario.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
+                InputStream blob = rs.getBinaryStream("userPhoto");  
+                BufferedImage image = ImageIO.read(blob);
+                usuario.setFotoUsuario(image);
+                usuarios.add(usuario);
+            }
+            rs.close();
+            pstmt.close();
+            connection.close();
+            return usuarios;
         } catch (ClassNotFoundException | SQLException | IOException e) {
             throw new PersistenceException(e.getMessage());
         }

@@ -48,6 +48,15 @@ public class ControllerServlet extends HttpServlet {
             case "ExcluirQuestao": jsp = ExcluirQuestao.processa(request); break;
             case "EditarQuestao": jsp = EditarQuestao.processa(request); break;
             case "Desempenho": jsp = Desempenho.processa(request); break;
+            case "PagGerenciarCadastro": jsp = PagGerenciarCadastro.processa(request); break;
+            case "PagEditarModulo": jsp = PagEditarModulo.processa(request); break;
+            case "PagEditarDominio": jsp = PagEditarDominio.processa(request); break;
+            case "ExcluirModulo": jsp = ExcluirModulo.processa(request); break;
+            case "ExcluirDominio": jsp = ExcluirDominio.processa(request); break;
+            case "AceitarProfessor": jsp = AceitarProfessor.processa(request); break;
+            case "RecusarProfessor": jsp = RecusarProfessor.processa(request); break;
+            case "EditarDisciplina": jsp = EditarDominio.processa(request); break;
+            case "EditarModulo": jsp = EditarModulo.processa(request); break;
             default: jsp = Inicio.processa(request);
         }
         //Redirecionando pagina

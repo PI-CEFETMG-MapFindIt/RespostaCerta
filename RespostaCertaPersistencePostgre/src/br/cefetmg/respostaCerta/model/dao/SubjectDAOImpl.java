@@ -87,7 +87,7 @@ public class SubjectDAOImpl implements SubjectDAO{
             Connection connection = ConnectionManager.getInstance().getConnection();
             String sql = "UPDATE Dominio SET nomeDominio = ? WHERE idDominio = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(3, subject.getIdDominio());
+            pstmt.setLong(2, subject.getIdDominio());
             pstmt.setString(1, subject.getNomeDominio());
             pstmt.executeUpdate();
             pstmt.close();

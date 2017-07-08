@@ -9,6 +9,7 @@ import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.dao.UserDAO;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -78,11 +79,7 @@ public class UserManagementImpl implements UserManagement {
             throw new BusinessException("ID não pode ser nulo");
         }
         user.setIdUsuario(id);
-        userDAO.update(user);
-        if(userDAO.getUserById(id) != user){
-            throw new PersistenceException("Erro de persistencia");
-        }
-       
+        userDAO.update(user);     
     }
 
     /**
@@ -112,6 +109,11 @@ public class UserManagementImpl implements UserManagement {
             throw new BusinessException ("ID não pode ser nulo");
         }
         return userDAO.getUserById(id);
+    }
+
+    @Override
+    public List<User> getUserByIdt(char idt) throws BusinessException, PersistenceException {
+        return userDAO.getUserByIdt(idt);
     }
 
 }
