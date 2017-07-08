@@ -20,4 +20,5 @@ public interface ClosedAnswerManagement {
     public void removeQuestionAnswer(Long id) throws BusinessException, PersistenceException;
     public ClosedAnswer getQuestionAnswerById(Long id) throws BusinessException, PersistenceException;
     public List<ClosedAnswer> getAllAnswers() throws BusinessException, PersistenceException;
+    public List<ClosedAnswer> getAnswerByUser(Long id) throws BusinessException, PersistenceException;
 }

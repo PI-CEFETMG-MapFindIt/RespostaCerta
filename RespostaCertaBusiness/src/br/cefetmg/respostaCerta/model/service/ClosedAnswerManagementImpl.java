@@ -101,4 +101,12 @@ public class ClosedAnswerManagementImpl implements ClosedAnswerManagement{
     public List<ClosedAnswer> getAllAnswers() throws BusinessException, PersistenceException {
         return closedAnswerDAO.listAll();
     }
+    
+    @Override
+    public List<ClosedAnswer> getAnswerByUser(Long id) throws BusinessException, PersistenceException{
+        if(id==null){
+            throw new BusinessException("ID não pode ser nulo");
+        }
+        return closedAnswerDAO.getClosedAnswerByUser(id);
+    }
 }

@@ -1,3 +1,6 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="br.cefetmg.respostaCerta.model.domain.ClosedAnswer"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Map"%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Module"%>
@@ -7,6 +10,7 @@
 <% Double erros = (Double) request.getAttribute("erros"); 
    Map<Module, Double> errosModulo = (Map<Module, Double>) request.getAttribute("errosModulo");
    Map<Subject, Double> errosDominio = (Map<Subject, Double>) request.getAttribute("errosDominio");
+   List<ClosedAnswer> respostas = (List<ClosedAnswer>) request.getAttribute("respostas");
 %>
 <html lang="en">
     <head>
@@ -58,6 +62,9 @@
                                                             Módulo
                                                         </th>
                                                         <th>
+                                                            Disciplina
+                                                        </th>
+                                                        <th>
                                                             Taxa de acerto
                                                         </th>
                                                     </tr>
@@ -67,9 +74,12 @@
                                                         Map.Entry<Module, Double> entry = it.next();
                                                     %>
                                                     <tbody>
-                                                        <tr class="success">
+                                                        <tr>
                                                             <td>
                                                                 <%= entry.getKey().getNomeModulo() %>
+                                                            </td>
+                                                            <td>
+                                                                <%= entry.getKey().getDominio().getNomeDominio()%>
                                                             </td>
                                                             <td>
                                                                 <%= entry.getValue() %>
@@ -83,30 +93,28 @@
                                                 <thead>
                                                     <tr>
                                                         <th>
-                                                            Matéria
-                                                        </th>
-                                                        <th>
-                                                            Módulo
+                                                            Disciplina
                                                         </th>
                                                         <th>
                                                             Taxa de acerto
                                                         </th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <tr class="success">
-                                                        <td>
-                                                            MatemÃ¡tica
-                                                        </td>
-                                                        <td>
-                                                            Trigonometria
-                                                        </td>
-                                                        <td>
-                                                            60% (12/20)
-                                                        </td>
-                                                    </tr>
-
-                                                </tbody>
+                                                <%  Iterator<Map.Entry<Subject, Double>> itDisc = errosDominio.entrySet().iterator();
+                                                    while (itDisc.hasNext()) {
+                                                        Map.Entry<Subject, Double> entry = itDisc.next();
+                                                    %>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <%= entry.getKey().getNomeDominio() %>
+                                                            </td>
+                                                            <td>
+                                                                <%= entry.getValue() %>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                <% } %>
                                             </table>
                                        </div>
                                     </div>
@@ -127,48 +135,41 @@
                                                     Data
                                                 </th>
                                                 <th>
-                                                    Matéria
+                                                    Questão
                                                 </th>
                                                 <th>
                                                     Módulo
+                                                </th>
+                                                <th>
+                                                    Disciplina
                                                 </th>
                                                 <th>
                                                     Avaliação
                                                 </th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr class="success">
-                                                <td>
-                                                    02/05/2017 - 14:30
-                                                </td>
-                                                <td>
-                                                    FÃ­sica
-                                                </td>
-                                                <td>
-                                                    Ondas sonoras
-                                                </td>
-                                                <td>
-                                                    Certa
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                        <% for(ClosedAnswer answ: respostas){%>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <%=answ.getDataResposta().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))%>
+                                                    </td>
+                                                    <td>
+                                                        <%=answ.getQuestao().getTituloQuestao()%>
+                                                    </td>
+                                                    <td>
+                                                        <%=answ.getQuestao().getModulo().getNomeModulo()%>
+                                                    </td>
+                                                    <td>
+                                                        <%=answ.getQuestao().getModulo().getDominio().getNomeDominio()%>
+                                                    </td>
+                                                    <td>
+                                                        <%=answ.isCorreta()?"Certa":"Errada"%>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        <%}%>
                                     </table>
-                                    <div class="row">
-                                        <div class="col-md-12 text-center">
-                                            <ul class="pagination">
-                                                <li>
-                                                    <a href="#"><</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">1</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
