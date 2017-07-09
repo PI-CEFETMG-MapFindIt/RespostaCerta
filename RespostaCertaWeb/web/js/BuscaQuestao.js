@@ -1,20 +1,10 @@
-$('input[name="altQuestao"]').on('change', function(e) {
-    let inputs = document.getElementsByName("altQuestao");
-	for(let i=0; i<inputs.length; i++){
-		inputs[i].parentNode.className="col-md-12";
-	}
-	e.target.parentNode.className="col-md-12 alert alert-success";
-});
+<li class="list-group-item">
+                        <div class="flexContainer">
+                            <div class="leftItem">
+                                <h4 id="tituloQuestao1"><b>Questão 1 [...]</b></h4>
+                                <label for="tituloQuestao1"><a href="#">Engenharia de Software</a></label>
+                            </div>
+                        </div>
+                    </li>
 
-$('#aberta').on('change', function(e){
-	$('#divAlternativas').addClass('hidden');
-});
 
-$('#fechada').on('change', function(e){
-	$('#divAlternativas').removeClass('hidden');
-});
-
-$("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });

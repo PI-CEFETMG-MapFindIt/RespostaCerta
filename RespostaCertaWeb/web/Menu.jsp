@@ -29,7 +29,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/RespostaCerta/ControllerServlet?control=Logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Sair</a></li>
                 </ul>
-                <form class="navbar-form navbar-right" action="#" method="GET">
+                <form class="navbar-form navbar-right" action="/RespostaCerta/ControllerServlet?control=BuscarQuestao" method="GET">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Pesquisar..." id="query" name="search" value="">
                         <div class="input-group-btn">
