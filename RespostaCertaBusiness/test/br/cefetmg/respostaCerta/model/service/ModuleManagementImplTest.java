@@ -99,22 +99,6 @@ public class ModuleManagementImplTest {
         }
         fail("Aceitou nome nulo");
     }
-    
-    @Test
-    public void testRegisterModule4() throws Exception {
-        System.out.println("RegisterModule4");
-        Module modulo = new Module();
-        modulo.setDominio(new Subject());
-        modulo.setNomeModulo("");
-        
-        try{
-            impl.registerModule(modulo);
-        }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("Descrição do modulo não pode ser nulo"));
-            return;
-        }
-        fail("Aceitou descrição nula");
-    }
 
     /**
      * Test of updateModule method, of class ModuleManagementImpl.
@@ -157,22 +141,6 @@ public class ModuleManagementImplTest {
             return;
         }
         fail("Aceitou nome nulo");
-    }
-    
-    @Test
-    public void testUpdateModule4() throws Exception {
-        System.out.println("UpdateModule4");
-        Module modulo = new Module();
-        modulo.setDominio(new Subject());
-        modulo.setNomeModulo("");
-        
-        try{
-            impl.updateModule(new Long(1),modulo);
-        }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("Descrição do modulo não pode ser nulo"));
-            return;
-        }
-        fail("Aceitou descrição nula");
     }
     
     @Test

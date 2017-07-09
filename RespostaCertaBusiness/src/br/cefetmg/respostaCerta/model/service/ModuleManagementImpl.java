@@ -51,7 +51,7 @@ public class ModuleManagementImpl implements ModuleManagement{
      */
     @Override
     public void updateModule(Long id, Module module) throws BusinessException, PersistenceException {
-                if(module==null){
+        if(module==null){
             throw new BusinessException("Modulo não pode ser nulo");
         }
         if(module.getDominio()==null){

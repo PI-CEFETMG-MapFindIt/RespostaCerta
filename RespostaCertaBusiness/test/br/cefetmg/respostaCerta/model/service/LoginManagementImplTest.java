@@ -131,7 +131,7 @@ public class LoginManagementImplTest {
         String password = "senha";
         try{
             impl.loginUser(username, password);
-        }catch(BusinessException ex){
+        }catch(BusinessException|PersistenceException ex){
             return;
         }
         fail("Logou usuario inexistente");

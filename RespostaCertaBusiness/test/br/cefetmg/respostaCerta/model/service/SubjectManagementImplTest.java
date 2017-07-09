@@ -78,20 +78,6 @@ public class SubjectManagementImplTest {
     }
     
     @Test
-    public void testRegisterSubject2() throws Exception {
-        System.out.println("registerSubject2");
-        Subject subject = new Subject();
-        subject.setNomeDominio("Dominio");
-        try{
-            impl.registerSubject(subject);
-        }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("Desc do dominio não pode ser nula"));
-            return;
-        }
-        fail("Aceitou dominio com descricao nula");
-    }
-    
-    @Test
     public void testRegisterSubject3() throws Exception {
        System.out.println("registerSubject3");
         Subject subject = new Subject();
