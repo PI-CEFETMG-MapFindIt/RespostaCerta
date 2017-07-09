@@ -45,7 +45,7 @@
                     <li><a href="##modalLogin" data-toggle="modal">Logar</a></li>
                     <li><a href="/RespostaCerta/ControllerServlet?control=PagCadastrar">Cadastrar</a></li>
                 </ul>
-                <form class="navbar-form navbar-right" action="#" method="GET">
+                <form class="navbar-form navbar-right" action="/RespostaCerta/ControllerServlet?control=BuscarQuestao" method="GET">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Pesquisar..." id="query" name="search" value="">
                         <div class="input-group-btn">

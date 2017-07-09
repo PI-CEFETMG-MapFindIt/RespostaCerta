@@ -14,7 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 public class BuscarQuestao {
     public static String processa(HttpServletRequest request){
         try{
+            
             return PagBuscarQuestoes.processa(request);
+        }catch (Exception e) {
+            request.setAttribute("erro", e.getMessage());
+            return "Erro.jsp";
         }
     }
 }
