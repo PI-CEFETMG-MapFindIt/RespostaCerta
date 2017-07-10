@@ -48,6 +48,7 @@ public class ControllerServlet extends HttpServlet {
             case "PagEditarQuestao": jsp = PagEditarQuestao.processa(request); break;
             case "ExcluirQuestao": jsp = ExcluirQuestao.processa(request); break;
             case "BuscarQuestao": jsp = BuscarQuestao.processa(request); break;
+            case "Questao": jsp = VisualizarQuestao.processa(request); break;
             case "EditarQuestao": jsp = EditarQuestao.processa(request); break;
             case "Desempenho": jsp = Desempenho.processa(request); break;
             case "PagGerenciarCadastro": jsp = PagGerenciarCadastro.processa(request); break;
