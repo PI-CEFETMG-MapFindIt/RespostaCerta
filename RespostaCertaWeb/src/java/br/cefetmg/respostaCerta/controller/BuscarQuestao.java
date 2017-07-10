@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package br.cefetmg.respostaCerta.controller;
-
+import br.cefetmg.respostaCerta.model.dao.*;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 public class BuscarQuestao {
     public static String processa(HttpServletRequest request){
         try{
-            
             return PagBuscarQuestoes.processa(request);
         }catch (Exception e) {
             request.setAttribute("erro", e.getMessage());

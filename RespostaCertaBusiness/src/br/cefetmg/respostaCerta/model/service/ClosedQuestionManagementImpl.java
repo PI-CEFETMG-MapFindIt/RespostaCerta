@@ -120,6 +120,13 @@ public class ClosedQuestionManagementImpl implements ClosedQuestionManagement{
         return questC.getClosedQuestionById(id);
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws BusinessException
+     * @throws PersistenceException
+     */
     @Override
     public List<ClosedQuestion> getQuestionsByUser(Long id) throws BusinessException, PersistenceException {
         if(id==null){

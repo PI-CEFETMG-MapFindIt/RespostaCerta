@@ -8,7 +8,7 @@
 <%@page import="br.cefetmg.respostaCerta.model.domain.ClosedQuestion"%>
 
 <!DOCTYPE html>
-<% ClosedQuestion question = (ClosedQuestion) request.getAttribute("quest");%>
+<% ClosedQuestion question = (ClosedQuestion) request.getAttribute("question");%>
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">

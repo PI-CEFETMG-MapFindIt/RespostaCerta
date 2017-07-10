@@ -26,6 +26,17 @@ public class Question {
     public Question() {
     }
 
+    /**
+     *
+     * @param modulo
+     * @param criador
+     * @param enunciadoQuestao
+     * @param idtQuestao
+     * @param dataCriacao
+     * @param tituloQuestao
+     * @param questPhoto
+     * @param idtDificuldade
+     */
     public Question(Module modulo, User criador, String enunciadoQuestao, boolean idtQuestao, LocalDate dataCriacao, String tituloQuestao, Image questPhoto, char idtDificuldade) {
         this.modulo = modulo;
         this.criador = criador;
@@ -37,54 +48,106 @@ public class Question {
         this.idtDificuldade=idtDificuldade;
     }
 
+    /**
+     *
+     * @return
+     */
     public Module getModulo() {
         return modulo;
     }
 
+    /**
+     *
+     * @param modulo
+     */
     public void setModulo(Module modulo) {
         this.modulo = modulo;
     }
 
+    /**
+     *
+     * @return
+     */
     public User getCriador() {
         return criador;
     }
 
+    /**
+     *
+     * @param criador
+     */
     public void setCriador(User criador) {
         this.criador = criador;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getIdQuestao() {
         return idQuestao;
     }
 
+    /**
+     *
+     * @param idQuestao
+     */
     public void setIdQuestao(Long idQuestao) {
         this.idQuestao = idQuestao;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEnunciadoQuestao() {
         return enunciadoQuestao;
     }
 
+    /**
+     *
+     * @param enunciadoQuestao
+     */
     public void setEnunciadoQuestao(String enunciadoQuestao) {
         this.enunciadoQuestao = enunciadoQuestao;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isIdtQuestao() {
         return idtQuestao;
     }
 
+    /**
+     *
+     * @param idtQuestao
+     */
     public void setIdtQuestao(boolean idtQuestao) {
         this.idtQuestao = idtQuestao;
     }
 
+    /**
+     *
+     * @return
+     */
     public LocalDate getDataCriacao() {
         return dataCriacao;
     }
 
+    /**
+     *
+     * @param dataCriacao
+     */
     public void setDataCriacao(LocalDate dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTituloQuestao() {
         return tituloQuestao;
     }

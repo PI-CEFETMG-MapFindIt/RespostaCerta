@@ -23,6 +23,23 @@ public class ClosedQuestion extends Question{
     public ClosedQuestion() {
     }
     
+    /**
+     *
+     * @param alt1
+     * @param alt2
+     * @param alt3
+     * @param alt4
+     * @param alt5
+     * @param correta
+     * @param modulo
+     * @param criador
+     * @param enunciadoQuestao
+     * @param idtQuestao
+     * @param dataCriacao
+     * @param tituloQuestao
+     * @param questPhoto
+     * @param idtDificuldade
+     */
     public ClosedQuestion(String alt1, String alt2, String alt3, String alt4, String alt5, int correta, Module modulo, User criador, String enunciadoQuestao, boolean idtQuestao, LocalDate dataCriacao, String tituloQuestao, Image questPhoto, char idtDificuldade) {
         super(modulo, criador, enunciadoQuestao, idtQuestao, dataCriacao, tituloQuestao, questPhoto, idtDificuldade);
         this.alt1 = alt1;
@@ -33,10 +50,18 @@ public class ClosedQuestion extends Question{
         this.correta = correta;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAlt1() {
         return alt1;
     }
 
+    /**
+     *
+     * @param alt1
+     */
     public void setAlt1(String alt1) {
         this.alt1 = alt1;
     }
