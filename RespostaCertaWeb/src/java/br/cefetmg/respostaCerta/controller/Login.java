@@ -45,8 +45,8 @@ public class Login {
             return resposta;
         }
         if(usuario==null){
-            resposta="Erro.jsp";
-            request.setAttribute("erro", "Falha no Login");
+            request.setAttribute("falha", true);
+            return "index.jsp";
         }else{
             request.getSession().setAttribute("usuario", usuario.getIdUsuario());
             

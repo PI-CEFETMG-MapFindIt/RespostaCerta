@@ -6,6 +6,11 @@
 <%@page import="br.cefetmg.respostaCerta.model.dao.UserDAOImpl"%>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/Menu.css" rel="stylesheet">
+<% Boolean falhouLogin = (Boolean) request.getAttribute("falha");
+   if(falhouLogin==null){
+       falhouLogin=false;
+   }
+%>
 <div class="container-fluid">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
@@ -42,7 +47,7 @@
             %>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="##modalLogin" data-toggle="modal">Logar</a></li>
+                    <li><a id="logar" href="#modalLogin" data-toggle="modal">Logar</a></li>
                     <li><a href="/RespostaCerta/ControllerServlet?control=PagCadastrar">Cadastrar</a></li>
                 </ul>
                 <form class="navbar-form navbar-right" action="/RespostaCerta/ControllerServlet?control=BuscarQuestao" method="GET">
@@ -82,7 +87,7 @@
             </div>
         </div>
         <%} else {%>
-        <div id="modalLogin" class="modal fade" role="dialog">
+        <div id="modalLogin" class="modal fade role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -99,6 +104,11 @@
                                 <label for="senhaUsuario">Senha</label>
                                 <input class="form-control" type="password" name="senhaUsuario" required id="senhaUsuario">
                             </div>
+                            <%if(falhouLogin){%>
+                            <div class="form-group" style="color:red;">
+                                <p>E-mail ou senha incorreto</p>
+                            </div>
+                            <%}%>
                             <button class="btn btn-default" type="submit">Login</button>
                         </form>
                     </div>
@@ -116,3 +126,6 @@
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/Menu.js"></script>
+        <%if(falhouLogin){%>
+        <script>$('#logar').click()</script>
+        <%}%>
