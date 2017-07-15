@@ -6,6 +6,7 @@
 package br.cefetmg.respostaCerta.model.dao;
 
 import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
+import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import java.util.List;
 
@@ -20,4 +21,5 @@ public interface ClosedQuestionDAO {
     public ClosedQuestion getClosedQuestionById(Long questaoId) throws PersistenceException;
     public List<ClosedQuestion> listAll() throws PersistenceException;
     public List<ClosedQuestion> getClosedQuestionsByUser(Long userId) throws PersistenceException;
+    public List<Question> searchClosedQuestion(String parameter) throws PersistenceException;
 }

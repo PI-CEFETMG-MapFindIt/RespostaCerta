@@ -5,6 +5,7 @@
         <group>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/Desempenho.java</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/web/js/Home.js</file>
+            <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/VisualizarQuestao.java</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/web/ResponderQuestaoAberta.html</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/PagEditarDominio.java</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/nbproject/build-impl.xml</file>
@@ -29,9 +30,9 @@
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/Cadastro.java</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/ControllerServlet.java</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/src/conf/MANIFEST.MF</file>
-            <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/web/WEB-INF/glassfish-web.xml</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/CadastrarQuestao.java</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/web/js/EditarModulo.js</file>
+            <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/QuestaoFechada.java</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/PagEditarModulo.java</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/web/js/BuscaQuestao.js</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/web/VisualizarQuestao.html</file>
@@ -39,13 +40,13 @@
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/PagGerenciarCadastro.java</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/web/js/Desempenho.js</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/web/MinhasQuestoes.jsp</file>
-            <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/web/ResponderQuestaoFechada.html</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/ExcluirDominio.java</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/web/js/ResponderQuestao.js</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/PagCadastrarQuestao.java</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/web/js/bootstrap.min.js</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/web/ResponderQuestaoFechada.jsp</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/ImageServlet.java</file>
+            <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/PagQuestaoFechada.java</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/web/Perfil.html</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/RecusarProfessor.java</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/BuscarQuestao.java</file>

@@ -7,6 +7,7 @@ package br.cefetmg.respostaCerta.model.dao;
 
 import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
 import br.cefetmg.respostaCerta.model.domain.Module;
+import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.domain.Subject;
 import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
@@ -349,7 +350,7 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
             throw new PersistenceException(e.getMessage());
         }
     }
-
+    
     @Override
     public List<ClosedQuestion> getClosedQuestionsByUser(Long userId) throws PersistenceException {
         try {
@@ -416,6 +417,35 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
             connection.close();
             return lista;
         } catch (ClassNotFoundException | SQLException | IOException e) {
+            throw new PersistenceException(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Question> searchClosedQuestion(String parameter) throws PersistenceException{
+        String[] textoSeparado = parameter.split("\\s");
+        try{
+            Connection connection = ConnectionManager.getInstance().getConnection();
+            String SQL ="SELECT b.idQuestao, "
+                    +"to_tsquery( ";
+                    for(int i=0; i>textoSeparado.length;i++){
+                        if(i==0 || i==textoSeparado.length-1){
+                            SQL += textoSeparado[i];
+                        }else{
+                            SQL += " & " +textoSeparado[i];
+                        }
+                    }
+                    SQL+=", 'portuguese' ) @@ to_tsvector(b.tituloQuestao) || to_tsvector(b.enunciadoQuestao)"
+                    + "FROM questaoFechada a "
+                    + "JOIN questao b ON a.idQuestao=b.idQuestao ";
+            PreparedStatement pstmt = connection.prepareStatement(SQL);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Question> lista = new ArrayList<>();
+            while(rs.next()){
+                lista.add(getClosedQuestionById(rs.getLong("idQuestao")));
+            }
+            return lista;
+        }catch(ClassNotFoundException | SQLException e){
             throw new PersistenceException(e.getMessage());
         }
     }

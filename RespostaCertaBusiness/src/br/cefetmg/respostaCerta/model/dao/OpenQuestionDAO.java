@@ -21,4 +21,5 @@ public interface OpenQuestionDAO {
     public Question  getOpenQuestionById(Long openQuestionId) throws PersistenceException;
     public List<Question> listAll() throws PersistenceException;
     public List<Question> getOpenQuestionsByUser(Long userId) throws PersistenceException;
+    public List<Question> searchQuestion(String parameter) throws PersistenceException;
 }

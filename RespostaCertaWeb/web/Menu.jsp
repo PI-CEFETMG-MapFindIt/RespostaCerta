@@ -127,5 +127,5 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/Menu.js"></script>
         <%if(falhouLogin){%>
-        <script>$('#logar').click()</script>
+        <script>$('#logar').click();</script>
         <%}%>

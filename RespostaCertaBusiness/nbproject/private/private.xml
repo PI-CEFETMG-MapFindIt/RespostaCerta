@@ -4,6 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaBusiness/src/br/cefetmg/respostaCerta/model/dao/ClosedQuestionDAO.java</file>
+            <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaBusiness/src/br/cefetmg/respostaCerta/model/service/LoginManagementImpl.java</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaBusiness/src/br/cefetmg/respostaCerta/model/dao/ClosedAnswerDAO.java</file>
             <file>file:/C:/Users/Adalbs/Desktop/RespostaCerta/RespostaCertaBusiness/src/br/cefetmg/respostaCerta/model/service/ClosedQuestionManagementImpl.java</file>
         </group>

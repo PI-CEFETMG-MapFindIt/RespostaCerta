@@ -358,4 +358,32 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
             throw new PersistenceException(e.getMessage());
         }
     }
+
+    @Override
+    public List<Question> searchQuestion(String parameter) throws PersistenceException {
+        String[] textoSeparado = parameter.split("\\s");
+        try{
+            Connection connection = ConnectionManager.getInstance().getConnection();
+            String SQL ="SELECT b.idQuestao, "
+                    +"to_tsquery( ";
+                    for(int i=0; i>textoSeparado.length;i++){
+                        if(i==0 || i==textoSeparado.length-1){
+                            SQL += textoSeparado[i];
+                        }else{
+                            SQL += " & " +textoSeparado[i];
+                        }
+                    }
+                    SQL+=", 'portuguese' ) @@ to_tsvector(b.tituloQuestao) || to_tsvector(b.enunciadoQuestao)"
+                    + "FROM questaob";
+            PreparedStatement pstmt = connection.prepareStatement(SQL);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Question> lista = new ArrayList<>();
+            while(rs.next()){
+                lista.add(getOpenQuestionById(rs.getLong("idQuestao")));
+            }
+            return lista;
+        }catch(ClassNotFoundException | SQLException e){
+            throw new PersistenceException(e.getMessage());
+        }
+    }
 }
