@@ -21,4 +21,5 @@ public interface OpenQuestionManagement {
     public void removeQuestion(Long id) throws BusinessException, PersistenceException;
     public Question getQuestionById(Long id) throws BusinessException, PersistenceException;
     public List<Question> getQuestionsByUser(Long id) throws BusinessException, PersistenceException;
+    public List<Question> searchQuestion(String Parameter) throws BusinessException, PersistenceException;
 }

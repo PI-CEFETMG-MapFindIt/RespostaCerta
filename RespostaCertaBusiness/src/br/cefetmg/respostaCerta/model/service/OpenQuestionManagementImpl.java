@@ -122,5 +122,13 @@ public class OpenQuestionManagementImpl implements OpenQuestionManagement{
         List<Question> resp=questO.getOpenQuestionsByUser(id);
         return resp;
     }
+
+    @Override
+    public List<Question> searchQuestion(String Parameter) throws BusinessException, PersistenceException {
+        if(Parameter.isEmpty()){
+            throw new BusinessException("Parametro não pode ser nulo");
+        }
+       return questO.searchQuestion(Parameter);
+    }
     
 }
