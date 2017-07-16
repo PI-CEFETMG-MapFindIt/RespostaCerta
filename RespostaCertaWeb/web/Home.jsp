@@ -56,7 +56,8 @@
                           <% Iterator<Module> it = topicos.iterator();%>
                             <% while(it.hasNext()){ %>
                             <tr>
-                                <td><a href="#"><%=it.next().getNomeModulo()%></a></td>
+                                <%String nome = it.next().getNomeModulo();%>
+                                <td><a href="/RespostaCerta/ControllerServlet?control=BuscarQuestao&query=<%=nome%>"><%=nome%></a></td>
                             </tr>
                           <% } %>
                         </tbody>

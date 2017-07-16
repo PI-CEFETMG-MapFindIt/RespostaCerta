@@ -3,9 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/H:/TP/RespostaCerta/RespostaCertaWeb/web/Topico.jsp</file>
             <file>file:/H:/TP/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/TopicoQuestao.java</file>
             <file>file:/H:/TP/RespostaCerta/RespostaCertaWeb/web/Forum.jsp</file>
+=======
+            <file>file:/C:/Users/umcan/Desktop/RespostaCerta/RespostaCertaWeb/src/java/br/cefetmg/respostaCerta/controller/Login.java</file>
+            <file>file:/C:/Users/umcan/Desktop/RespostaCerta/RespostaCertaWeb/web/Menu.jsp</file>
+>>>>>>> 85a04f863f23d28994ad011633b0da2522f62d0a
         </group>
     </open-files>
 </project-private>
