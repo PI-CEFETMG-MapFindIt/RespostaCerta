@@ -205,7 +205,7 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 
-                mod.setNomeModulo(rs.getString("descModulo"));
+                mod.setNomeModulo(rs.getString("nomeModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setDominio(sub);
                 
@@ -326,7 +326,7 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 
-                mod.setNomeModulo(rs.getString("descModulo"));
+                mod.setNomeModulo(rs.getString("nomeModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setDominio(sub);
                 
@@ -383,10 +383,10 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
 
             String sql = "SELECT f.idMensagemResposta idMensagemResposta, f.mensagem respMensagem, f.dataResposta dataResposta, "
                     + "h.idUsuario idUsuarioMR, h.nomeUsuario nomeUsuarioMR, h.loginUsuario loginUsuarioMR, h.senhaUsuario senhaUsuarioMR, h.idtUsuario idtUsuarioMR, h.userPhoto userPhotoMR, "
-                    + "g.mensagem topicMensagem, g.dataPost dataPost, g.image topicImage, g.idMensagem idTopic "
+                    + "g.mensagem topicMensagem, g.dataPost dataPost, g.image topicImage, g.idMensagem idTopic, "
                     + "i.idUsuario idUsuarioM, i.nomeUsuario nomeUsuarioM, i.loginUsuario loginUsuarioM, i.senhaUsuario senhaUsuarioM, i.idtUsuario idtUsuarioM, i.userPhoto userPhotoM, "
                     + "a.idQuestao idQuestaoForum, a.dataCriacao dataCriacaoForum, a.status statusForum, "
-                    + "b.idQuestao idQuestao, b.idtDificuldade idtDificuldade, b.enunciadoQuestao enunciadoQuestao, b.idtQuestao idtQuestao, b.dataCriacao dataCriacaoQuestao, b.tituloQuestao tituloQuestao, b.questPhoto questPhoto "
+                    + "b.idQuestao idQuestao, b.idtDificuldade idtDificuldade, b.enunciadoQuestao enunciadoQuestao, b.idtQuestao idtQuestao, b.dataCriacao dataCriacaoQuestao, b.tituloQuestao tituloQuestao, b.questPhoto questPhoto, "
                     + "c.idModulo idModulo, c.nomeModulo nomeModulo, "
                     + "d.idDominio idDominio, d.nomeDominio nomeDominio, "
                     + "e.idUsuario idUsuarioQ, e.nomeUsuario nomeUsuarioQ, e.loginUsuario loginUsuarioQ, e.senhaUsuario senhaUsuarioQ, e.idtUsuario idtUsuarioQ, e.userPhoto userPhotoQ "
@@ -447,7 +447,7 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 sub.setIdDominio(rs.getLong("idDominio"));
                 sub.setNomeDominio(rs.getString("nomeDominio"));
                 
-                mod.setNomeModulo(rs.getString("descModulo"));
+                mod.setNomeModulo(rs.getString("nomeModulo"));
                 mod.setIdModulo(rs.getLong("idModulo"));
                 mod.setDominio(sub);
                 
@@ -460,7 +460,8 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
                 blob = rs.getBinaryStream("questPhoto");  
                   
-                image = ImageIO.read(blob);
+                if(blob!=null)
+                    image = ImageIO.read(blob);
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 
@@ -473,8 +474,9 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 topico.setDataPostagem(rs.getDate("dataPost").toLocalDate());
                 topico.setForum(forum);
                 blob = rs.getBinaryStream("topicImage");  
-                  
-                image = ImageIO.read(blob);
+                
+                if(blob!=null)
+                    image = ImageIO.read(blob);
                 topico.setMsgPhoto(image);
                 topico.setTopicoId(rs.getLong("idTopic"));
                 topico.setTxtMensagem(rs.getString("topicMensagem"));

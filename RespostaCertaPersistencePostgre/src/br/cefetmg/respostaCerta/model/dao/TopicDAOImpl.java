@@ -222,7 +222,8 @@ public class TopicDAOImpl implements TopicDAO{
                 questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 blob = rs.getBinaryStream("questPhoto");  
                   
-                image = ImageIO.read(blob);
+                if(blob!=null)
+                    image = ImageIO.read(blob);
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 
@@ -236,7 +237,8 @@ public class TopicDAOImpl implements TopicDAO{
                 topico.setForum(forum);
                 blob = rs.getBinaryStream("topicImage");  
                   
-                image = ImageIO.read(blob);
+                if(blob!=null)    
+                    image = ImageIO.read(blob);
                 topico.setMsgPhoto(image);
                 topico.setTopicoId(rs.getLong("idTopic"));
                 topico.setTxtMensagem(rs.getString("topicMensagem"));

@@ -1,12 +1,12 @@
 <%-- Author: Pedro Almeida --%>
 
-<%@page import="br.cefetmg.respostaCerta.model.domain.Question"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Topic"%>
-        
+<%@page import="br.cefetmg.respostaCerta.model.domain.Question"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+       
 <!DOCTYPE html>
-<% List<Topic> topico = (List<Topic>) request.getAttribute("topico");%>
+<%List<Topic> topico = (List<Topic>) request.getAttribute("topico");%>
 <%Question questao = (Question) request.getAttribute("questao");%>
 <html>
     <head>
@@ -27,25 +27,25 @@
                         <% for (Topic top : topico) {%>
                             <%User autor = top.getAutor();%>
                             <p></p>
-                            <a href="">
+                            <a href="/RespostaCerta/ControllerServlet?control=TopicoQuestao&id=<%=top.getTopicoId()%>">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <div class="row">
-                                            <h4>
-                                                <div class="col-md-6 text-left">
-                                                    <%=autor.getNomeUsuario()%>
-                                                </div>
-                                                <div class="col-md-6 text-right">
-                                                    <%=top.getDataPostagem()%>
-                                                </div>
-                                            </h4>
+                                            <div class="col-md-6 text-right">
+                                                <%=autor.getNomeUsuario()%>
+                                            </div>
+                                            <div class="col-md-6 text-left">
+                                                <%=top.getDataPostagem()%>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="panel-body">
                                         <div class="row">
-                                            <div class="col-md-12 text-left">
-                                                <%=top.getTxtMensagem()%>
-                                            </div>
+                                            <h4>
+                                                <div class="col-md-12 text-left">
+                                                    <%=top.getTxtMensagem()%>
+                                                </div>
+                                            </h4>
                                         </div>
                                     </div>
                                 </div>
