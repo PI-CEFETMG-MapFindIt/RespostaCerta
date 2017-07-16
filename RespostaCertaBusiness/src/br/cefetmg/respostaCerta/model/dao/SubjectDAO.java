@@ -18,5 +18,6 @@ public interface SubjectDAO {
     public void update(Subject disciplina) throws PersistenceException;
     public Subject delete(Long disciplinaId) throws PersistenceException;
     public Subject getSubjectById(Long disciplinaId) throws PersistenceException;
-    public List<Subject > listAll() throws PersistenceException;
+    public List<Subject> listAll() throws PersistenceException;
+    public List<Subject> searchSubjects(String busca) throws PersistenceException;
 }

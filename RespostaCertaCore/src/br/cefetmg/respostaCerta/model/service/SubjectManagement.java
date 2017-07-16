@@ -21,4 +21,5 @@ public interface SubjectManagement {
     public void removeSubject(Long id) throws BusinessException, PersistenceException;
     public Subject getSubjectById(Long id) throws BusinessException, PersistenceException;
     public List<Subject> getAllSubjects() throws BusinessException, PersistenceException;
+    public List<Subject> searchSubjects(String busca) throws BusinessException, PersistenceException;
 }

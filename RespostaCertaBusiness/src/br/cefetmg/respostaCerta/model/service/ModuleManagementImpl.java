@@ -108,5 +108,13 @@ public class ModuleManagementImpl implements ModuleManagement{
     public List<Module> getAllModules() throws BusinessException, PersistenceException {
         return moduleDAO.listAll();
     }
+
+    @Override
+    public List<Module> searchModules(String busca) throws BusinessException, PersistenceException {
+        if(busca==null || busca.equals("")){
+            throw new BusinessException("Busca Vazia");
+        }
+        return moduleDAO.searchModules(busca);
+    }
     
 }

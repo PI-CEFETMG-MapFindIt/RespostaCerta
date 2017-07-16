@@ -62,7 +62,7 @@
                         <select class="form-control" name="opcao">
                             <option>Questão</option>
                             <option>Módulo</option>
-                            <option>Domínio</option>
+                            <option>Disciplina</option>
                         </select>
                         <div class="input-group-btn">
                             <input type="text" class="form-control" placeholder="Pesquisar..." id="query" name="query" value="">

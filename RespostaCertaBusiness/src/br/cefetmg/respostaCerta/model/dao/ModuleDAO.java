@@ -20,4 +20,5 @@ public interface ModuleDAO {
     public Module getModuleById(Long moduloId) throws PersistenceException;
     public List<Module> listAll() throws PersistenceException;
     public List<Module> getModulesSubject(long subjectId) throws PersistenceException;
+    public List<Module> searchModules(String busca) throws PersistenceException;
 }

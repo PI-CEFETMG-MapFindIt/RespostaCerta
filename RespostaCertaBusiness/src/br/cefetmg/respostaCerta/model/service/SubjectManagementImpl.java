@@ -97,4 +97,11 @@ public class SubjectManagementImpl implements SubjectManagement{
         return subjectDAO.listAll();
     }
     
+    @Override
+    public List<Subject> searchSubjects(String busca) throws BusinessException, PersistenceException {
+        if(busca==null || busca.equals("")){
+            throw new BusinessException("Busca Vazia");
+        }
+        return subjectDAO.searchSubjects(busca);
+    }
 }
