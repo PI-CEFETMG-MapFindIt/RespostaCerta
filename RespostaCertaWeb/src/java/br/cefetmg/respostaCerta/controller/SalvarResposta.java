@@ -5,10 +5,14 @@
  */
 package br.cefetmg.respostaCerta.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  *
  * @author Adalbs
  */
 public class SalvarResposta {
-    
+    public static String processa(HttpServletRequest request){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

@@ -66,7 +66,8 @@
                             <input type="radio" name="option" id="option5" value="option5">
                                 <%=question.getAlt5()%>
                         </label>
-                    </div>	                 																														
+                    </div>
+                    
                 </div>
             </div>
             <div class="row">

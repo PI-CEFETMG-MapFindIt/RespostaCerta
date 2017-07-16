@@ -7,6 +7,7 @@ package br.cefetmg.respostaCerta.model.service;
 
 import br.cefetmg.respostaCerta.model.dao.ClosedQuestionDAO;
 import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
+import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import java.util.List;
@@ -134,5 +135,13 @@ public class ClosedQuestionManagementImpl implements ClosedQuestionManagement{
         }
         List<ClosedQuestion> resp=questC.getClosedQuestionsByUser(id);
         return resp;
+    }
+    
+    @Override
+    public List<Question> searchClosedQuestion(String Parameter) throws BusinessException, PersistenceException{
+        if(Parameter.isEmpty()){
+            throw new BusinessException("Parametro não pode ser nulo");
+        }
+       return questC.searchClosedQuestion(Parameter);
     }
 }

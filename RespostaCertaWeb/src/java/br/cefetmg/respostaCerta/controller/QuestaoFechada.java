@@ -7,7 +7,6 @@ package br.cefetmg.respostaCerta.controller;
 
 import br.cefetmg.respostaCerta.model.dao.ClosedQuestionDAO;
 import br.cefetmg.respostaCerta.model.dao.ClosedQuestionDAOImpl;
-
 import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
 import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
