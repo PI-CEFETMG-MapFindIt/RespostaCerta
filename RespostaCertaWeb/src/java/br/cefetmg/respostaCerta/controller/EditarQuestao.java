@@ -5,7 +5,6 @@
  */
 package br.cefetmg.respostaCerta.controller;
 
-import static br.cefetmg.respostaCerta.controller.CadastrarQuestao.decodeToImage;
 import br.cefetmg.respostaCerta.model.dao.ClosedQuestionDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.ModuleDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.OpenQuestionDAOImpl;
@@ -27,8 +26,15 @@ import br.cefetmg.respostaCerta.model.service.SubjectManagement;
 import br.cefetmg.respostaCerta.model.service.SubjectManagementImpl;
 import br.cefetmg.respostaCerta.model.service.UserManagement;
 import br.cefetmg.respostaCerta.model.service.UserManagementImpl;
+import java.awt.AlphaComposite;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import sun.misc.BASE64Decoder;
 
 /**
  *
@@ -112,5 +118,31 @@ public class EditarQuestao {
             return "Erro.jsp";
         }
         
+    }
+    
+    private static BufferedImage decodeToImage(String imageString) throws BusinessException {
+        BufferedImage image = null;
+        byte[] imageByte;
+        try {
+            BASE64Decoder decoder = new BASE64Decoder();
+            imageByte = decoder.decodeBuffer(imageString);
+            ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+            image = ImageIO.read(bis);
+            bis.close();
+        } catch (Exception e) {
+            throw new BusinessException("Erro na imagem");
+        }
+        image = redimensionar(image, 300, 300);
+        return image;
+    }
+    
+    private static BufferedImage redimensionar(Image originalImage, int scaledWidth, int scaledHeight){
+        int imageType = BufferedImage.TYPE_INT_RGB;
+        BufferedImage scaledBI = new BufferedImage(scaledWidth, scaledHeight, imageType);
+        Graphics2D g = scaledBI.createGraphics();
+        g.setComposite(AlphaComposite.Src);
+        g.drawImage(originalImage, 0, 0, scaledWidth, scaledHeight, null); 
+        g.dispose();
+        return scaledBI;
     }
 }
