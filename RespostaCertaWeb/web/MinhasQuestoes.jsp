@@ -12,7 +12,6 @@
 
         <title>Minhas Questões</title>
 
-        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/MinhasQuestoes.css" rel="stylesheet">
 
     </head>
@@ -72,10 +71,6 @@
                 </ul>
             </div>
         </div>
-    </div>
-</div>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
 <script src="js/MinhasQuestoes.js"></script>
 </body>
 </html>

@@ -11,10 +11,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Cadastro de Questões</title>
-
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/CadastroQuestao.css" rel="stylesheet">
+        
         <link href="css/cropper.min.css" rel="stylesheet">
+        <link href="css/CadastroQuestao.css" rel="stylesheet">
     </head>
     <body>
         <%@include file="/Menu.jsp" %>
@@ -174,10 +173,6 @@
                                     </div>
                                     </div>
                                     </div>
-                                    </div>
-                                    </div>
-                                    <script src="js/jquery.min.js"></script>
-                                    <script src="js/bootstrap.min.js"></script>
                                     <script src="js/cropper.min.js"></script>
                                     
                                     <script src="js/CadastroQuestao.js"></script>

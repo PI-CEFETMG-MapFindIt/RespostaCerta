@@ -63,8 +63,6 @@
                 </div>
             </div>
         </div>
-        </div>
-        </div>
         <script src="js/EditarModulo.js"></script>
     </body>
 </html>

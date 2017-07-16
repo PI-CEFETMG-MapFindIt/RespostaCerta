@@ -11,7 +11,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><%=questao.getTituloQuestao()%></title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/Questao.css" rel="stylesheet">
     </head>
     <body>
@@ -46,8 +45,5 @@
                 </div>
             </div>
         </div>
-        <%= "</div></div>"%>
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
     </body>
 </html>

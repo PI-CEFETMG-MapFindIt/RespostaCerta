@@ -9,7 +9,6 @@
 <!DOCTYPE html>
 <%List <Question> lista=(List<Question>) request.getAttribute("questoes");%>
 <html>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/BuscaQuestao.css" rel="stylesheet">
     <head>
         <title>Resultados <%=request.getAttribute("query")%></title>
@@ -43,10 +42,6 @@
                 </ul>
             </div>
       	</div>
-      </div>
-    </div>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/BuscaQuestao.js"></script>
   </body>
 </html>

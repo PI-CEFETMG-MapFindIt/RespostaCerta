@@ -9,8 +9,6 @@
 
         <meta name="description" content="Source code generated using layoutit.com">
         <meta name="author" content="LayoutIt!">
-
-        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/cropper.min.css" rel="stylesheet">
         <link href="css/Cadastro.css" rel="stylesheet">
 
@@ -108,11 +106,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.mask.min.js"></script>
 <script src="js/cropper.min.js"></script>
 <script src="js/Menu.js"></script>

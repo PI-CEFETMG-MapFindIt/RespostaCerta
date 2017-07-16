@@ -13,7 +13,6 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><%=question.getTituloQuestao()%></title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/ResponderQuestao.css" rel="stylesheet">
     </head>
 
@@ -76,10 +75,6 @@
                 </div>
             </div>
         </form>
-
-    </div>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/ResponderQuestao.js"></script>
 </body>
 </html>
