@@ -1,18 +1,20 @@
 $('document').ready(function(){
 jQuery("#dataNascimento").mask("99/99/9999");
 });
-        function minCaracSenha(senha){
-        return senha.match(/[a-zA-Z]/g) && senha.match(/[0-9]/g);
-        }
+
+function minCaracSenha(senha){
+    return senha.match(/[a-zA-Z]/g) && senha.match(/[0-9]/g);
+}
 
 var erroEmail;
-        var erroSenhaConf;
-        var erroSenha;
-        var erroTipo;
-        var erroTermo;
-        var erroData;
-        var erroEmailExiste;
-        function validateCadastro(){
+var erroSenhaConf;
+var erroSenha;
+var erroTipo;
+var erroTermo;
+var erroData;
+var erroEmailExiste;
+
+    function validateCadastro(){
         let email = $('#emailCad');
                 let emailConf = $('#emailConf');
                 let senha = $('#password');
@@ -96,3 +98,39 @@ var erroEmail;
             $('#formCadastro').submit();
         }
     }
+    
+    //Função para mudar a imagem do Crop
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#novaImg').attr('src', e.target.result);
+            $('#novaImg').cropper({
+                aspectRatio: 1/1,
+                crop: function(e) {
+                }
+            });
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#imgInp").change(function(){
+    readURL(this);
+    setTimeout(function(){
+        mudarImagem();
+    }, 1000);
+});
+
+function mudarImagem(){
+    //Obtem a imagem cropped em blob
+    $("#novaImg").cropper('getCroppedCanvas').toBlob(function (blob) {
+        //Envia o blob para o back-end
+        var reader = new window.FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = function() {
+            base64data = reader.result;
+            $("#blob").val(base64data);
+        }
+    });
+}

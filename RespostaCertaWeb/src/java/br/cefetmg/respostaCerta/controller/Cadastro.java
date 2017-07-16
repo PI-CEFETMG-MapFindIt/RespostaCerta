@@ -13,16 +13,20 @@ import br.cefetmg.respostaCerta.model.service.LoginManagement;
 import br.cefetmg.respostaCerta.model.service.LoginManagementImpl;
 import br.cefetmg.respostaCerta.model.service.UserManagement;
 import br.cefetmg.respostaCerta.model.service.UserManagementImpl;
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import static javax.swing.Spring.height;
+import sun.misc.BASE64Decoder;
 
 /**
  *
@@ -31,16 +35,18 @@ import static javax.swing.Spring.height;
 public class Cadastro {
     public static String processa(HttpServletRequest request){
         User usuario = new User();
-        //Cria imagem vazia
-        BufferedImage bi = new BufferedImage(300, 300, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D ig2 = bi.createGraphics();
-        ig2.setBackground(Color.WHITE);
-        ig2.clearRect(0, 0, 300, 300);
-        usuario.setFotoUsuario(bi);
         usuario.setIdtUsuario(request.getParameter("tipo").charAt(0));//A = Aluno e E=Professor em espera
         String email=request.getParameter("email");
         usuario.setLoginUsuario(email);
         usuario.setNomeUsuario(request.getParameter("primNome") + " " + request.getParameter("ultimoNome"));
+        try {
+            if(!"".equals(request.getParameter("blob"))){
+                usuario.setFotoUsuario(decodeToImage(request.getParameter("blob").substring(22)));
+            }
+        } catch (BusinessException ex) {
+            request.setAttribute("erro", ex.getMessage());
+            return "Erro.jsp";
+        }
         String senha = request.getParameter("password");
         MessageDigest m;
         try {
@@ -68,5 +74,31 @@ public class Cadastro {
             return "Erro.jsp";
         }
         return "index.jsp";
+    }
+    
+    private static BufferedImage decodeToImage(String imageString) throws BusinessException {
+        BufferedImage image = null;
+        byte[] imageByte;
+        try {
+            BASE64Decoder decoder = new BASE64Decoder();
+            imageByte = decoder.decodeBuffer(imageString);
+            ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+            image = ImageIO.read(bis);
+            bis.close();
+        } catch (Exception e) {
+            throw new BusinessException("Erro na imagem");
+        }
+        image = redimensionar(image, 300, 300);
+        return image;
+    }
+    
+    private static BufferedImage redimensionar(Image originalImage, int scaledWidth, int scaledHeight){
+        int imageType = BufferedImage.TYPE_INT_RGB;
+        BufferedImage scaledBI = new BufferedImage(scaledWidth, scaledHeight, imageType);
+        Graphics2D g = scaledBI.createGraphics();
+        g.setComposite(AlphaComposite.Src);
+        g.drawImage(originalImage, 0, 0, scaledWidth, scaledHeight, null); 
+        g.dispose();
+        return scaledBI;
     }
 }

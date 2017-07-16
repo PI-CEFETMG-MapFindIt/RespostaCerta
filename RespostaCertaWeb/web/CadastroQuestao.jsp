@@ -40,7 +40,7 @@
                         <label for="enunciado"><h4>Enunciado da Questão</h4></label>
                         <textarea class="form-control" rows="5" name="enunciado" id="enunciado" placeholder="Digite o enunciado da questão"></textarea>
                     </div>
-                    <div class="form-group" height="800px">
+                    <div class="form-group">
 			<div class="input-group">
                             <span class="input-group-btn">
 				<span class="btn btn-default btn-file">
