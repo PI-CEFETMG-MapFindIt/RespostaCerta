@@ -17,29 +17,24 @@ $('#fechada').on('change', function(e){
 var nivel=0;
 
 function salvarModulo(){
-    nivel=1;
-    $('#fecharModulo').click();
-    $('.modal-backdrop').remove()
+    if(nivel!=2)
+        nivel=1;
     $('#modulo').append(`<option>${$('#nomeModulo').val()}</option>`);
-    $('#modulo').val($('#nomeModulo').val()).change();
+    $('#modulo').val($('#nomeModulo').val()).change(); 
     $('#idtNovo').val(nivel);
     $('#novoModuloIdDisciplina').val($('#disciplina').val());
-    $('#novoModulo').val($('#nomeModulo').val());
+    $('#novoModulo').val($('#nomeModulo').val());  
+    $('#fecharModulo').click();
 }
 
 function salvarDisciplina(){
     nivel=2;
-    $('#fecharModulo').click();
-    $('#fecharDisciplina').click();
     $('#modalDisciplina').removeClass('in');
     $('.modal-backdrop').remove()
     $('#disciplina').append(`<option>${$('#nomeDisciplina').val()}</option>`);
     $('#disciplina').val($('#nomeDisciplina').val()).change();
-    $('#modulo').append(`<option>${$('#nomeModulo').val()}</option>`);
-    $('#modulo').val($('#nomeModulo').val()).change();
-    $('#idtNovo').val(nivel);
-    $('#novoModulo').val($('#nomeModulo').val());
     $('#novaDisciplina').val($('#nomeDisciplina').val());
+    $('#fecharDisciplina').click();
 }
 
 //Função para mudar a imagem do Crop
