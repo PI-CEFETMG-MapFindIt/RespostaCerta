@@ -36,7 +36,14 @@
                 </ul>
                 <form class="navbar-form navbar-right" action="/RespostaCerta/ControllerServlet?control=BuscarQuestao" method="POST">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Pesquisar..." id="query" name="query" value="">
+                        <select class="form-control" name="opcao">
+                            <option>Questão</option>
+                            <option>Módulo</option>
+                            <option>Domínio</option>
+                        </select>
+                        <div class="input-group-btn">
+                            <input type="text" class="form-control" placeholder="Pesquisar..." id="query" name="query" value="">
+                        </div>
                         <div class="input-group-btn">
                             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
                         </div>
@@ -50,9 +57,16 @@
                     <li><a id="logar" href="#modalLogin" data-toggle="modal">Logar</a></li>
                     <li><a href="/RespostaCerta/ControllerServlet?control=PagCadastrar">Cadastrar</a></li>
                 </ul>
-                <form class="navbar-form navbar-right" action="/RespostaCerta/ControllerServlet?control=BuscarQuestao" method="GET">
+                <form class="navbar-form navbar-right" action="/RespostaCerta/ControllerServlet?control=BuscarQuestao" method="POST">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Pesquisar..." id="query" name="search" value="">
+                        <select class="form-control" name="opcao">
+                            <option>Questão</option>
+                            <option>Módulo</option>
+                            <option>Domínio</option>
+                        </select>
+                        <div class="input-group-btn">
+                            <input type="text" class="form-control" placeholder="Pesquisar..." id="query" name="query" value="">
+                        </div>
                         <div class="input-group-btn">
                             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
                         </div>
