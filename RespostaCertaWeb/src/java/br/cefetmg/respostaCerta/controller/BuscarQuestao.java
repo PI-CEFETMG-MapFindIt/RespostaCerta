@@ -29,8 +29,8 @@ public class BuscarQuestao {
             ClosedQuestionManagement cq = new ClosedQuestionManagementImpl(new ClosedQuestionDAOImpl());
             OpenQuestionManagement co = new OpenQuestionManagementImpl(new OpenQuestionDAOImpl());
             List<Question> questoes  = new ArrayList();
-            questoes.addAll(cq.searchClosedQuestion((String) request.getAttribute("query")));
-            questoes.addAll(co.searchQuestion((String) request.getAttribute("query")));
+            questoes.addAll(cq.searchClosedQuestion(request.getParameter("query")));
+            questoes.addAll(co.searchQuestion(request.getParameter("query")));
             request.setAttribute("questoes",questoes);
             request.setAttribute("query", request.getAttribute("query"));
             return "BuscarQuestao.jsp";

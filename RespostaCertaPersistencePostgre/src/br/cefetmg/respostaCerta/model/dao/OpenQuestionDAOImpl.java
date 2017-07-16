@@ -373,8 +373,9 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                             SQL += " & " +textoSeparado[i];
                         }
                     }
-                    SQL+=", 'portuguese' ) @@ to_tsvector(b.tituloQuestao) || to_tsvector(b.enunciadoQuestao)"
-                    + "FROM questaob";
+                    SQL+=", 'portuguese' ) @@ to_tsvector(b.tituloQuestao) || to_tsvector(b.enunciadoQuestao) "
+                    + "FROM questao "
+                    + "WHERE idtQuestao=1";
             PreparedStatement pstmt = connection.prepareStatement(SQL);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Question> lista = new ArrayList<>();
