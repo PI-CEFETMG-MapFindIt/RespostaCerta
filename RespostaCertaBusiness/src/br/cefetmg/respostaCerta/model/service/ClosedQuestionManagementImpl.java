@@ -153,4 +153,9 @@ public class ClosedQuestionManagementImpl implements ClosedQuestionManagement{
         }
         return questC.getClosedQuestionByModule(id);
     }
+
+    @Override
+    public List<ClosedQuestion> getAllQuestions() throws BusinessException, PersistenceException {
+        return questC.listAll();
+    }
 }

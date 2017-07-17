@@ -138,5 +138,10 @@ public class OpenQuestionManagementImpl implements OpenQuestionManagement{
         }
         return questO.getOpenQuestionByModule(id);
     }
+
+    @Override
+    public List<Question> getAllQuestions() throws BusinessException, PersistenceException {
+        return questO.listAll();
+    }
     
 }

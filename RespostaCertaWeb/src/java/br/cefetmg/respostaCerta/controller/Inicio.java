@@ -1,17 +1,25 @@
 package br.cefetmg.respostaCerta.controller;
 
 import br.cefetmg.respostaCerta.model.dao.ClosedAnswerDAOImpl;
+import br.cefetmg.respostaCerta.model.dao.ClosedQuestionDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.OpenAnswerDAOImpl;
+import br.cefetmg.respostaCerta.model.dao.OpenQuestionDAOImpl;
 import br.cefetmg.respostaCerta.model.domain.ClosedAnswer;
+import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
 import br.cefetmg.respostaCerta.model.domain.Module;
 import br.cefetmg.respostaCerta.model.domain.OpenAnswer;
+import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.domain.Subject;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.service.ClosedAnswerManagement;
 import br.cefetmg.respostaCerta.model.service.ClosedAnswerManagementImpl;
+import br.cefetmg.respostaCerta.model.service.ClosedQuestionManagement;
+import br.cefetmg.respostaCerta.model.service.ClosedQuestionManagementImpl;
 import br.cefetmg.respostaCerta.model.service.OpenAnswerManagement;
 import br.cefetmg.respostaCerta.model.service.OpenAnswerManagementImpl;
+import br.cefetmg.respostaCerta.model.service.OpenQuestionManagement;
+import br.cefetmg.respostaCerta.model.service.OpenQuestionManagementImpl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -39,13 +47,16 @@ public class Inicio {
             respostasAbertas=openAnswer.getAllAnswers();
             HashMap<Long, Module> modulos = new HashMap();
             HashMap<Long, Subject> disciplinas = new HashMap();
+            HashMap<Long, Question> questoes = new HashMap();
             for(ClosedAnswer fechada:respostasFechadas){
                 modulos.put(fechada.getQuestao().getModulo().getIdModulo(), fechada.getQuestao().getModulo());
                 disciplinas.put(fechada.getQuestao().getModulo().getDominio().getIdDominio(), fechada.getQuestao().getModulo().getDominio());
+                questoes.put(fechada.getQuestao().getIdQuestao(), fechada.getQuestao());
             }
             for(OpenAnswer aberta:respostasAbertas){
                 modulos.put(aberta.getQuestao().getModulo().getIdModulo(), aberta.getQuestao().getModulo());
                 disciplinas.put(aberta.getQuestao().getModulo().getDominio().getIdDominio(), aberta.getQuestao().getModulo().getDominio());
+                questoes.put(aberta.getQuestao().getIdQuestao(), aberta.getQuestao());
             }
             Map<Long, Integer> contModulos = new HashMap<>();
             try{
@@ -77,19 +88,66 @@ public class Inicio {
             }
             //Ordena o HashMap pelo value
             contDisciplinas = ordenaPorValor(contDisciplinas);
-            ArrayList<Module> mod = new ArrayList<>();
+            Map<Long, Integer> contQuestoes = new HashMap<>();
+            try{
+                for(Long questao:questoes.keySet()){
+                    if(contQuestoes.containsKey(questao)){
+                        contQuestoes.replace(questao, contQuestoes.get(questao)+1);
+                    }else{
+                        contQuestoes.put(questao, 1);
+                    }
+                }
+            }catch(ClassCastException ex){
+                request.setAttribute("erro", ex.getMessage());
+                return "Erro.jsp";
+            }
+            //Ordena HashMap pelo value
+            contQuestoes = ordenaPorValor(contQuestoes);
+            List<Module> mod = new ArrayList<>();
             Iterator<Long> it = contModulos.keySet().iterator();
             while(it.hasNext()){
                 mod.add(modulos.get(it.next()));
             }
-            ArrayList<Subject> disc = new ArrayList<>();
+            List<Subject> disc = new ArrayList<>();
             it = contDisciplinas.keySet().iterator();
             while(it.hasNext()){
                 disc.add(disciplinas.get(it.next()));
             }
+            List<Question> quest = new ArrayList<>();
+            it = contQuestoes.keySet().iterator();
+            while(it.hasNext()){
+                quest.add(questoes.get(it.next()));
+            }
+            if(mod.size()>7)
+                mod=mod.subList(0, 7);
+            if(disc.size()>7)
+                disc=disc.subList(0, 7);
+            if(quest.size()>7)
+                quest=quest.subList(0, 7);
+            OpenQuestionManagement opMan = new OpenQuestionManagementImpl(new OpenQuestionDAOImpl());
+            ClosedQuestionManagement clMan = new ClosedQuestionManagementImpl(new ClosedQuestionDAOImpl());
+            List<ClosedQuestion> closed = clMan.getAllQuestions();
+            List<Question> novasQuestoes = opMan.getAllQuestions();
+            if(closed.size()>7){
+                closed = closed.subList(0, 7);
+            }
+            if(novasQuestoes.size()>7){
+                novasQuestoes = novasQuestoes.subList(0, 7);
+            }
+            novasQuestoes.addAll(closed);
+            Collections.sort(novasQuestoes, new Comparator<Question>() {
+                @Override
+                public int compare(Question o1, Question o2) {
+                    return o1.getDataCriacao().compareTo(o2.getDataCriacao());
+                }
+            });
+            if(novasQuestoes.size()>7){
+                novasQuestoes = novasQuestoes.subList(0, 7);
+            }
             request.setAttribute("modulos", mod);
             request.setAttribute("disciplinas", disc);
-            request.setAttribute("questao", it);
+            request.setAttribute("questoesVis", quest);
+            request.setAttribute("questoesNovas", novasQuestoes);
             return "Home.jsp";
         } catch (BusinessException | PersistenceException ex) {
             request.setAttribute("erro", ex.getMessage());
