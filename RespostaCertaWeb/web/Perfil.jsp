@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-<%--Author: Pedro Almeida, Vitor Rodarte, Jo„o Vitor--%>
-=======
-<%--Author:Jo„o Vitor --%>
-<!DOCTYPE html>
->>>>>>> c061049b369707050de3a46695332674b994ed80
+<%--Author: Pedro Almeida, Vitor Rodarte, Jo√£o Vitor--%>
 
 <!DOCTYPE html>
 <% User user = (User)(request.getAttribute("usuario"));%>
@@ -123,7 +118,7 @@
             </div>
         </div>
         
-        <!-- Modal Confirma exclus„o -->
+        <!-- Modal Confirma exclus√£o -->
         <div id="modalConfirmDel" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -132,8 +127,8 @@
                         <h4 class="modal-title">Excluir Conta</h4>
                     </div>
                     <div class="modal-body">
-                        <h4>Confirma a exclus„o da conta?</h4>
-                        <h6>Clicando em "Confirma" sua conta ser· excluida, e todos os seus dados ser„o perdidos.</h6>
+                        <h4>Confirma a exclus√£o da conta?</h4>
+                        <h6>Clicando em "Confirma" sua conta ser√° excluida, e todos os seus dados ser√£o perdidos.</h6>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-default" id="btnDeletaConta" type="button">Confirmar</button>
