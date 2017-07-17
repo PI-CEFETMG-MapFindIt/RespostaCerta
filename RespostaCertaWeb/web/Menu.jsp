@@ -1,4 +1,4 @@
-<%--Author:Pedro Almeida & Vitor --%>
+<%--Author:Pedro Almeida & Vitor Rodarte --%>
 
 <%@page import="br.cefetmg.respostaCerta.model.domain.User"%>
 <%@page import="br.cefetmg.respostaCerta.model.dao.UserDAOImpl"%>
@@ -21,7 +21,7 @@
                 UserManagement management = new UserManagementImpl(new UserDAOImpl());
                 User usuario = management.getUserById((Long)request.getSession().getAttribute("usuario"));  %>
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="#" style="color:white">Bem Vindo, <%=usuario.getNomeUsuario()%></a></li>
+                <li><a style="color:white">Bem Vindo, <%=usuario.getNomeUsuario()%></a></li>
                 <%  char acesso = usuario.getIdtUsuario();  
                     if(acesso=='E') {  %>
                         <li style="color:white"><a href="#">Cadastro em Análise</a></li>
@@ -97,5 +97,5 @@
     <script>$('#logar').click();</script>
 <%}%>
 
-<br><br><br>
+
 
