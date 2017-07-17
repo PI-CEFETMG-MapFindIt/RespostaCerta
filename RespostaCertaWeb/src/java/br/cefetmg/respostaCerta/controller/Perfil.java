@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.respostaCerta.controller;
 
 import br.cefetmg.respostaCerta.model.dao.UserDAOImpl;
@@ -11,12 +6,7 @@ import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.service.UserManagement;
 import br.cefetmg.respostaCerta.model.service.UserManagementImpl;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
 /**

@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.respostaCerta.controller;
 
 import br.cefetmg.respostaCerta.model.dao.ClosedQuestionDAOImpl;
+import br.cefetmg.respostaCerta.model.dao.ForumDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.ModuleDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.OpenQuestionDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.SubjectDAOImpl;
+import br.cefetmg.respostaCerta.model.dao.TopicDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.UserDAOImpl;
 import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
+import br.cefetmg.respostaCerta.model.domain.Forum;
 import br.cefetmg.respostaCerta.model.domain.Module;
 import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.domain.Subject;
@@ -18,6 +16,8 @@ import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.service.ClosedQuestionManagement;
 import br.cefetmg.respostaCerta.model.service.ClosedQuestionManagementImpl;
+import br.cefetmg.respostaCerta.model.service.ForumManagement;
+import br.cefetmg.respostaCerta.model.service.ForumManagementImpl;
 import br.cefetmg.respostaCerta.model.service.ModuleManagement;
 import br.cefetmg.respostaCerta.model.service.ModuleManagementImpl;
 import br.cefetmg.respostaCerta.model.service.OpenQuestionManagement;
@@ -38,7 +38,7 @@ import sun.misc.BASE64Decoder;
 
 /**
  *
- * @author aluno
+ * @author Vitor
  */
 public class CadastrarQuestao {
     public static String processa(HttpServletRequest request){
@@ -86,6 +86,12 @@ public class CadastrarQuestao {
                 questao.setTituloQuestao(request.getParameter("titulo"));
                 questao.setModulo(mod);
                 openQuestMan.registerQuestion(questao);
+                ForumManagement fMan = new ForumManagementImpl(new ForumDAOImpl(), new TopicDAOImpl());
+                Forum f = new Forum();
+                f.setDataCriacao(LocalDate.now());
+                f.setQuestao(questao);
+                f.setStatus(true);
+                fMan.registerForum(f);
             }else{
                 ClosedQuestion questao = new ClosedQuestion();
                 questao.setCriador(userMan.getUserById((Long) request.getSession().getAttribute("usuario")));
@@ -109,9 +115,13 @@ public class CadastrarQuestao {
                 questao.setCorreta(Integer.parseInt(request.getParameter("altQuestao")));
                 questao.setModulo(mod);
                 closedQuestMan.registerQuestion(questao);
+                ForumManagement fMan = new ForumManagementImpl(new ForumDAOImpl(), new TopicDAOImpl());
+                Forum f = new Forum();
+                f.setDataCriacao(LocalDate.now());
+                f.setQuestao(questao);
+                f.setStatus(true);
+                fMan.registerForum(f);
             }
-            
-            
             return "index.jsp";
         } catch (BusinessException | PersistenceException ex) {
             request.setAttribute("erro", ex.getMessage());

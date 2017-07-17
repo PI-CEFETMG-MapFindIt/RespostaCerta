@@ -1,9 +1,10 @@
+<%--Author:Vitor --%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Subject"%>
 <%@page import="java.util.List"%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Module"%>
 <!DOCTYPE html>
 <% List<Module> modulos = (List<Module>) request.getAttribute("modulos");
-   List<Subject> dominios = (List<Subject>) request.getAttribute("dominios");%>
+    List<Subject> dominios = (List<Subject>) request.getAttribute("dominios");%>
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
@@ -11,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Cadastro de Questões</title>
-        
+
         <link href="css/cropper.min.css" rel="stylesheet">
         <link href="css/CadastroQuestao.css" rel="stylesheet">
     </head>
@@ -24,7 +25,7 @@
                     <div class="form-group">
                         <label for="modulo"><h4>Modulo da Questão</h4></label>
                         <select id="modulo" name="modulo" class="form-control">
-                            <% for(Module modulo:modulos){ %>
+                            <% for (Module modulo : modulos) {%>
                             <option value="<%=modulo.getIdModulo()%>"><%=modulo.getNomeModulo()%></option>
                             <% } %>
                         </select>
@@ -40,15 +41,15 @@
                         <textarea class="form-control" rows="5" name="enunciado" id="enunciado" placeholder="Digite o enunciado da questão"></textarea>
                     </div>
                     <div class="form-group">
-			<div class="input-group">
+                        <div class="input-group">
                             <span class="input-group-btn">
-				<span class="btn btn-default btn-file">
+                                <span class="btn btn-default btn-file">
                                     Escolher Imagem... <input accept="image/*" type="file" id="imgInp">
                                 </span>
                             </span>
-			</div>
-			<br>
-			<input type="hidden" id="blob" name="blob">
+                        </div>
+                        <br>
+                        <input type="hidden" id="blob" name="blob">
                         <img id='novaImg'/>
                     </div>    
                     <div class="form-group">
@@ -66,7 +67,7 @@
                             <label><input type="radio" id="desafio" name="difQuestao" value="Desafio">Desafio</label>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label><h4>Tipo da Questão</h4></label>
                         <div class="radio">
@@ -116,66 +117,64 @@
                                     <button class="btn btn-default">
                                         Cadastrar
                                     </button>
-                                    </form>
-                                    <div id="modalModulo" class="modal fade" role="dialog">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    <h4 class="modal-title">Adicionar Modulo</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form id="adicionarDisciplina">
-                                                        <div class="form-group">
-                                                            <label for="nomeModulo">Nome do Novo Modulo</label>
-                                                            <input class="form-control" placeholder="Digite o nome do modulo" type="text" id="nomeModulo" name="nomeModulo">
-                                                            <div class="form-group">
-                                                                <label for="disciplina"><h4>Disciplina</h4></label>
-                                                                <select id="disciplina" name="disciplina" class="form-control">
-                                                                    <% for(Subject dominio:dominios){ %>
-                                                                    <option value="<%=dominio.getIdDominio()%>"><%=dominio.getNomeDominio()%></option>
-                                                                    <% } %>
-                                                                </select>
-                                                                <br>
-                                                                <button class="btn btn-default" type="button" data-toggle="modal" data-target="#modalDisciplina">Adicionar Disciplina</button>
-                                                            </div>
-                                                        </div>
-                                                        <button type="button" class="btn btn-default" onClick="salvarModulo();">Salvar</button>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" id="fecharModulo" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                </div>
-                                            </div>
+                </form>
+                <div id="modalModulo" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Adicionar Modulo</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="adicionarDisciplina">
+                                    <div class="form-group">
+                                        <label for="nomeModulo">Nome do Novo Modulo</label>
+                                        <input class="form-control" placeholder="Digite o nome do modulo" type="text" id="nomeModulo" name="nomeModulo">
+                                        <div class="form-group">
+                                            <label for="disciplina"><h4>Disciplina</h4></label>
+                                            <select id="disciplina" name="disciplina" class="form-control">
+                                                <% for (Subject dominio : dominios) {%>
+                                                <option value="<%=dominio.getIdDominio()%>"><%=dominio.getNomeDominio()%></option>
+                                                <% }%>
+                                            </select>
+                                            <br>
+                                            <button class="btn btn-default" type="button" data-toggle="modal" data-target="#modalDisciplina">Adicionar Disciplina</button>
                                         </div>
                                     </div>
-                                    <div id="modalDisciplina" class="modal fade" style="top:60px; left:-15px" role="dialog">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    <h4 class="modal-title">Adicionar Disciplina</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form id="adicionarDisciplina">
-                                                        <div class="form-group">
-                                                            <label for="nomeDisciplina">Nome da nova Disciplina</label>
-                                                            <input class="form-control" placeholder="Digite o nome da disciplina" type="text" name="nomeDisciplina" id="nomeDisciplina">
-                                                        </div>
-                                                        <button type="button" class="btn btn-default" onclick="salvarDisciplina();">Salvar</button>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" id="fecharDisiciplina" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <button type="button" class="btn btn-default" onClick="salvarModulo();">Salvar</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="fecharModulo" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="modalDisciplina" class="modal fade" style="top:60px; left:-15px" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Adicionar Disciplina</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="adicionarDisciplina">
+                                    <div class="form-group">
+                                        <label for="nomeDisciplina">Nome da nova Disciplina</label>
+                                        <input class="form-control" placeholder="Digite o nome da disciplina" type="text" name="nomeDisciplina" id="nomeDisciplina">
                                     </div>
-                                    </div>
-                                    </div>
-                                    <script src="js/cropper.min.js"></script>
-                                    
-                                    <script src="js/CadastroQuestao.js"></script>
-                                    
-                                    </body>
-                                    </html>
+                                    <button type="button" class="btn btn-default" onclick="salvarDisciplina();">Salvar</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="fecharDisiciplina" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </div>
+        <script src="js/cropper.min.js"></script>
+        <script src="js/CadastroQuestao.js"></script>
+    </body>
+</html>

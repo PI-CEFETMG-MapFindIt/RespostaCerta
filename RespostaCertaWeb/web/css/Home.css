@@ -1,28 +1,16 @@
-label{
-  font-weight: normal;
+a:link {
+    color: black;
+    text-decoration: none;
 }
-
-.flexContainer{
-  display:flex;
-  align-items: center;
+a:visited {
+    color: black;
+    text-decoration: none;
 }
-
-.rightItem{
-   margin-left: auto;
+a:hover {
+    color: blue;
+    text-decoration: none;
 }
-
-.leftItem{
-   margin-right: auto
-}
-
-img{
-  max-width: 100%;
-  max-height: 100%;
-  margin-top: 5%;
-}
-
-@media (max-width: 550px){
-    img{margin-top: 15%;
-
-    }
+a:active {
+    color: black;
+    text-decoration: none;
 }

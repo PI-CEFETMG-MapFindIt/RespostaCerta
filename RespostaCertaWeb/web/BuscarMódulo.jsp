@@ -1,8 +1,4 @@
-<%-- 
-    Document   : BuscaQuestao
-    Created on : 16/07/2017, 20:29:00
-    Author     : umcan
---%>
+<%--Author:Vitor --%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Module"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

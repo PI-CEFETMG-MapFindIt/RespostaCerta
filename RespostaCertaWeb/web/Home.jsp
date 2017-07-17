@@ -17,7 +17,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Resposta Certa</title>
-        <link href="css/Home.css" rel="stylesheet">
     </head>
     <body>
         <%@include file="/Menu.jsp" %>
@@ -30,14 +29,14 @@
             <br>
             <div class="row">
                 <div class="col-md-5 col-md-offset-1">
-                    <div class="panel panel-default">
-                        <div class="panel-heading text-center">
-                             <h4>Questões Recentes</h4>
+                    <div class="panel panel-default" style="background-color: #7F7F7F">
+                        <div class="panel-heading text-center" style="background-color: black">
+                             <h4 style="color: white">Questões Recentes</h4>
                         </div>
                         <div class="panel-body">
                             <% for (Question ques : questoesNov) {%>
                                 <p></p>
-                                <a href="#">    
+                                <a href="/RespostaCerta/ControllerServlet?control=Questao&id=<%=ques.getIdQuestao()%>">    
                                     <div class="panel panel-default">    
                                         <div class="panel-body">
                                             <%=ques.getTituloQuestao()%>
@@ -49,14 +48,14 @@
                     </div>
                 </div>
                 <div class="col-md-5">
-                    <div class="panel panel-default">
-                        <div class="panel-heading text-center">
-                             <h4>Questões mais visualizadas</h4>
+                    <div class="panel panel-default" style="background-color: #7F7F7F">
+                        <div class="panel-heading text-center" style="background-color: black">
+                             <h4 style="color: white">Questões mais visualizadas</h4>
                         </div>
                         <div class="panel-body">
-                            <% for (Question ques : questoesNov) {%>
+                            <% for (Question ques : questoesVis) {%>
                                 <p></p>
-                                <a href="#">    
+                                <a href="/RespostaCerta/ControllerServlet?control=Questao&id=<%=ques.getIdQuestao()%>">    
                                     <div class="panel panel-default">    
                                         <div class="panel-body">
                                             <%=ques.getTituloQuestao()%>
@@ -71,14 +70,14 @@
 
             <div class="row">
                 <div class="col-md-5 col-md-offset-1">
-                    <div class="panel panel-default">
-                        <div class="panel-heading text-center">
-                             <h4>Disciplinas mais visualizadas</h4>
+                    <div class="panel panel-default" style="background-color: #7F7F7F">
+                        <div class="panel-heading text-center" style="background-color: black">
+                             <h4 style="color: white">Disciplinas mais visualizadas</h4>
                         </div>
                         <div class="panel-body">
                             <% for (Subject disc : disciplinas) {%>
                                 <p></p>
-                                <a href="#">    
+                                <a href="/RespostaCerta/ControllerServlet?control=ModulosDisciplina&id=<%=disc.getIdDominio()%>">    
                                     <div class="panel panel-default">    
                                         <div class="panel-body">
                                             <%=disc.getNomeDominio()%>
@@ -90,14 +89,14 @@
                     </div>
                 </div>
                 <div class="col-md-5">
-                    <div class="panel panel-default">
-                        <div class="panel-heading text-center">
-                             <h4>Módulos mais visualizados</h4>
+                    <div class="panel panel-default" style="background-color: #7F7F7F">
+                        <div class="panel-heading text-center" style="background-color: black">
+                             <h4 style="color: white">Módulos mais visualizados</h4>
                         </div>
                         <div class="panel-body">
                             <% for (Module mod : modulos) {%>
                                 <p></p>
-                                <a href="#">    
+                                <a href="/RespostaCerta/ControllerServlet?control=QuestoesModulo&id=<%=mod.getIdModulo()%>">    
                                     <div class="panel panel-default">    
                                         <div class="panel-body">
                                             <%=mod.getNomeModulo()%>
@@ -110,6 +109,7 @@
                 </div>        
             </div>
         </div>
+        <link href="css/Home.css" rel="stylesheet">
     </body>
 </html>
 

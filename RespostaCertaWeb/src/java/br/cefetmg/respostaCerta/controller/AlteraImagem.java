@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.respostaCerta.controller;
 
 import br.cefetmg.respostaCerta.model.dao.UserDAOImpl;
@@ -23,16 +18,17 @@ import sun.misc.BASE64Decoder;
 
 /**
  *
- * @author Terror
+ * @author Terror & Vitor
  */
 class AlteraImagem {
     public static String processa(HttpServletRequest request) throws IOException{
         try {
             UserManagement userMan = new UserManagementImpl(new UserDAOImpl());
             User user = userMan.getUserById((Long)request.getSession().getAttribute("usuario"));
-            
+            if(!"".equals(request.getParameter("blob"))){
+                user.setFotoUsuario(decodeToImage(request.getParameter("blob").substring(22)));
+            }
             userMan.updateUser(user.getIdUsuario(), user);
-            
             request.setAttribute("usuario", user);
             request.setAttribute("mensagem", "");
             return "Perfil.jsp";
@@ -40,5 +36,31 @@ class AlteraImagem {
             request.setAttribute("erro", ex.getMessage());
             return "Erro.jsp";
         }
+    }
+    
+    private static BufferedImage decodeToImage(String imageString) throws BusinessException {
+        BufferedImage image = null;
+        byte[] imageByte;
+        try {
+            BASE64Decoder decoder = new BASE64Decoder();
+            imageByte = decoder.decodeBuffer(imageString);
+            ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+            image = ImageIO.read(bis);
+            bis.close();
+        } catch (Exception e) {
+            throw new BusinessException("Erro na imagem");
+        }
+        image = redimensionar(image, 300, 300);
+        return image;
+    }
+    
+    private static BufferedImage redimensionar(Image originalImage, int scaledWidth, int scaledHeight){
+        int imageType = BufferedImage.TYPE_INT_RGB;
+        BufferedImage scaledBI = new BufferedImage(scaledWidth, scaledHeight, imageType);
+        Graphics2D g = scaledBI.createGraphics();
+        g.setComposite(AlphaComposite.Src);
+        g.drawImage(originalImage, 0, 0, scaledWidth, scaledHeight, null); 
+        g.dispose();
+        return scaledBI;
     }
 }

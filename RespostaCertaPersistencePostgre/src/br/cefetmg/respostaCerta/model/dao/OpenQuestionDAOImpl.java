@@ -23,6 +23,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author umcan
+ * @author Vitor
  */
 public class OpenQuestionDAOImpl implements OpenQuestionDAO{
     private static OpenQuestionDAOImpl openQuestionDAO = null;        
@@ -86,7 +87,7 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
             String sql = "INSERT INTO questao (idModulo, idUsuarioCriador, enunciadoQuestao, idtQuestao, dataCriacao, tituloQuestao, questPhoto, idtDificuldade) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
+            PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setLong(1, openQuestion.getModulo().getIdModulo());
             pstmt.setLong(2, openQuestion.getCriador().getIdUsuario());
             pstmt.setString(3, openQuestion.getEnunciadoQuestao());
@@ -99,7 +100,18 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 pstmt.setNull(7, Types.NULL);
             }
             pstmt.setString(8, String.valueOf(openQuestion.getIdtDificuldade()));
-            pstmt.executeUpdate();
+            int linhasAfetadas = pstmt.executeUpdate();
+            if (linhasAfetadas == 0) {
+                throw new PersistenceException("Criação da Questao Falhou");
+            }
+            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    openQuestion.setIdQuestao(generatedKeys.getLong(1));
+                }
+                else {
+                    throw new PersistenceException("Criação falhou, sem id's obtidos");
+                }
+            }
             pstmt.close();
             connection.close();
         } catch (ClassNotFoundException | SQLException | IOException e) {
@@ -178,7 +190,7 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                     + "JOIN modulo b ON b.idModulo=a.idModulo "
                     + "JOIN dominio c ON b.idDominio=c.idDominio "
                     + "JOIN usuario d ON a.idUsuarioCriador=d.idUsuario "
-                    + "WHERE a.idQuestao = ? ";
+                    + "WHERE a.idQuestao = ? AND a.idtQuestao='1' ";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, openQuestionId);
             ResultSet rs = pstmt.executeQuery();
@@ -362,23 +374,14 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
 
     @Override
     public List<Question> searchQuestion(String parameter) throws PersistenceException {
-        String[] textoSeparado = parameter.split(" ");
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String palavras="";
-            for(int i=0; i<textoSeparado.length; i++){
-                if(i==0){
-                    palavras += textoSeparado[i];
-                }else{
-                    palavras += " & " +textoSeparado[i];
-                }
-            }
             String SQL ="SELECT idQuestao "
                     + "FROM questao "
                     + "WHERE idtQuestao='1' AND "
-                    +"to_tsquery('portuguese','"
-                    + palavras
-                    + "' ) @@ to_tsvector(tituloQuestao || enunciadoQuestao)";
+                    +"plainto_tsquery('portuguese','"
+                    + parameter
+                    + "' ) @@ to_tsvector(tituloQuestao || ' ' || enunciadoQuestao)";
             PreparedStatement pstmt = connection.prepareStatement(SQL);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Question> lista = new ArrayList<>();

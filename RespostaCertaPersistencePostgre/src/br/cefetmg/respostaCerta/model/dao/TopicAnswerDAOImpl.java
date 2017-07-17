@@ -17,22 +17,17 @@ import br.cefetmg.util.db.ConnectionManager;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 import javax.imageio.ImageIO;
 
 /**
  *
- * @author umcan
+ * @author Vitor & Pedro Almeida
  */
 public class TopicAnswerDAOImpl implements TopicAnswerDAO{
 

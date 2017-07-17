@@ -15,7 +15,6 @@ import br.cefetmg.util.db.ConnectionManager;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +25,7 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author umcan
+ * @author Vitor
  */
 public class ForumDAOImpl implements ForumDAO{
     
@@ -61,10 +60,10 @@ public class ForumDAOImpl implements ForumDAO{
             Connection connection = ConnectionManager.getInstance().getConnection();
             String sql = "INSERT INTO forum (idQuestao, dataCriacao, status) VALUES(?, ?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, forum.getIdForum());
+            pstmt.setLong(1, forum.getQuestao().getIdQuestao());
             pstmt.setBoolean(3, forum.isStatus());
             pstmt.setDate(2, java.sql.Date.valueOf(forum.getDataCriacao()));
-            pstmt.executeQuery();
+            pstmt.executeUpdate();
             pstmt.close();
             connection.close();
         } catch (ClassNotFoundException | SQLException e) {
@@ -166,14 +165,17 @@ public class ForumDAOImpl implements ForumDAO{
                 questao.setModulo(mod);
                 blob = rs.getBinaryStream("questPhoto");  
                   
-                image = ImageIO.read(blob);
-                questao.setQuestPhoto(image);
+                if(blob!=null) {
+                    image = ImageIO.read(blob);
+                    questao.setQuestPhoto(image);
+                }
                 questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 forum.setQuestao(questao);
                 forum.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
                 forum.setStatus(rs.getBoolean("status"));
                 forum.setIdForum(rs.getLong("idQuestao"));
+                
             }
             rs.close();
             pstmt.close();

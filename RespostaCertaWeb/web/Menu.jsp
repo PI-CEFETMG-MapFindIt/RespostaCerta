@@ -1,4 +1,4 @@
-<%--Author:Pedro Almeida & Vitor --%>
+<%--Author:Pedro Almeida & Vitor Rodarte --%>
 
 <%@page import="br.cefetmg.respostaCerta.model.domain.User"%>
 <%@page import="br.cefetmg.respostaCerta.model.dao.UserDAOImpl"%>
@@ -11,20 +11,22 @@
     }   %>
 
 <link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/cropper.min.css">
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/cropper.min.js"></script>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="/RespostaCerta" style="color:white">RespostaCerta</a>         
         <%  if (request.getSession().getAttribute("usuario") != null) {
                 UserManagement management = new UserManagementImpl(new UserDAOImpl());
                 User usuario = management.getUserById((Long)request.getSession().getAttribute("usuario"));  %>
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="#Perfil" style="color:white">Bem Vindo, <%=usuario.getNomeUsuario()%></a></li>
+                <li><a style="color:white">Bem Vindo, <%=usuario.getNomeUsuario()%></a></li>
                 <%  char acesso = usuario.getIdtUsuario();  
                     if(acesso=='E') {  %>
-                        <p>Cadastro em Análise</p>
+                        <li style="color:white"><a href="#">Cadastro em Análise</a></li>
                     <%} else {%>
                         <li><a href="/RespostaCerta/ControllerServlet?control=PagPerfil">Perfil</a></li>
                         <li><a href="/RespostaCerta/ControllerServlet?control=Desempenho">Meu Desempenho</a></li> 
@@ -40,7 +42,7 @@
             </ul>
         <%  } else {    %>   
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#modalLogin" data-toggle="modal" style="color:white">Logar</a></li>
+                <li><a id="logar" href="#modalLogin" data-toggle="modal" style="color:white">Logar</a></li>
                 <li><a href="/RespostaCerta/ControllerServlet?control=PagCadastrar" style="color:white">Cadastrar</a></li>
             </ul>
         <%  }   %>           
@@ -97,5 +99,5 @@
     <script>$('#logar').click();</script>
 <%}%>
 
-<br><br><br>
+
 

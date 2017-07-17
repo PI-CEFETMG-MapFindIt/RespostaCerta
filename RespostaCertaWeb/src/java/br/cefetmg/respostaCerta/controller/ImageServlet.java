@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.respostaCerta.controller;
 
 import br.cefetmg.respostaCerta.model.dao.ClosedQuestionDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.OpenQuestionDAOImpl;
+import br.cefetmg.respostaCerta.model.dao.TopicDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.UserDAOImpl;
 import br.cefetmg.respostaCerta.model.domain.Question;
+import br.cefetmg.respostaCerta.model.domain.Topic;
 import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
@@ -16,13 +13,12 @@ import br.cefetmg.respostaCerta.model.service.ClosedQuestionManagement;
 import br.cefetmg.respostaCerta.model.service.ClosedQuestionManagementImpl;
 import br.cefetmg.respostaCerta.model.service.OpenQuestionManagement;
 import br.cefetmg.respostaCerta.model.service.OpenQuestionManagementImpl;
+import br.cefetmg.respostaCerta.model.service.TopicManagement;
+import br.cefetmg.respostaCerta.model.service.TopicManagementImpl;
 import br.cefetmg.respostaCerta.model.service.UserManagement;
 import br.cefetmg.respostaCerta.model.service.UserManagementImpl;
-import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
@@ -32,11 +28,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.ImageIcon;
 
 /**
  *
- * @author umcan
+ * @author Vitor
  */
 public class ImageServlet extends HttpServlet {
 
@@ -79,7 +74,15 @@ public class ImageServlet extends HttpServlet {
                             rd.forward(request, response);
                          }
                          break;
-                         
+            case "topic": TopicManagement manageT = new TopicManagementImpl(new TopicDAOImpl());
+                          try{
+                              Topic t = manageT.getTopicById(id);
+                              img = t.getMsgPhoto();
+                          } catch (BusinessException | PersistenceException ex) {
+                            request.setAttribute("erro", ex.getMessage());
+                            RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
+                            rd.forward(request, response);
+                         }                                
         }
         if(img==null){
             img = ImageIO.read(new URL("https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png"));

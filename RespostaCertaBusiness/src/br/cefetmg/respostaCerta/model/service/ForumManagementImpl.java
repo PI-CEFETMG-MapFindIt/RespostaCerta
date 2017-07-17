@@ -18,6 +18,7 @@ import br.cefetmg.respostaCerta.model.dao.TopicDAO;
 public class ForumManagementImpl implements ForumManagement{
     private final ForumDAO forumDAO;
     private final TopicDAO topicDAO;
+    
     public ForumManagementImpl (ForumDAO forumDAO, TopicDAO topicDAO){
         this.forumDAO= forumDAO;
         this.topicDAO=topicDAO;
