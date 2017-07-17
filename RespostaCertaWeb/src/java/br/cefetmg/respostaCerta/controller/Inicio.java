@@ -140,7 +140,7 @@ public class Inicio {
                 public int compare(Question o1, Question o2) {
                     return o1.getDataCriacao().compareTo(o2.getDataCriacao());
                 }
-            });
+            }.reversed());
             if(novasQuestoes.size()>7){
                 novasQuestoes = novasQuestoes.subList(0, 7);
             }
@@ -161,7 +161,7 @@ public class Inicio {
                 public int compare(Map.Entry<Long, Integer> o1, Map.Entry<Long, Integer> o2){
                     return ( o1.getValue() ).compareTo( o2.getValue() );
                 }
-        });
+        }.reversed());
         Map<Long, Integer> result = new LinkedHashMap<>();
         for (Map.Entry<Long, Integer> entry : list){
             result.put(entry.getKey(), entry.getValue());

@@ -424,24 +424,14 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
 
     @Override
     public List<Question> searchClosedQuestion(String parameter) throws PersistenceException{
-        String[] textoSeparado = parameter.split(" ");
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String palavras="";
-            for(int i=0; i<textoSeparado.length; i++){
-                if(i==0){
-                    palavras += textoSeparado[i];
-                }else{
-                    palavras += " & " +textoSeparado[i];
-                }
-            }
-            String SQL ="SELECT b.idQuestao "
-                    + "FROM questaoFechada a "
-                    + "JOIN questao b ON a.idQuestao=b.idQuestao "
+            String SQL ="SELECT idQuestao "
+                    + "FROM questao "
                     + "WHERE idtQuestao='0' AND "
-                    +"to_tsquery('portuguese','"
-                    + palavras
-                    + "' ) @@ to_tsvector(b.tituloQuestao || b.enunciadoQuestao)";
+                    +"plainto_tsquery('portuguese','"
+                    + parameter
+                    + "' ) @@ to_tsvector(tituloQuestao || ' ' || enunciadoQuestao)";
             PreparedStatement pstmt = connection.prepareStatement(SQL);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Question> lista = new ArrayList<>();

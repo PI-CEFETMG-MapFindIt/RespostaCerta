@@ -54,7 +54,7 @@
                              <h4>Questões mais visualizadas</h4>
                         </div>
                         <div class="panel-body">
-                            <% for (Question ques : questoesNov) {%>
+                            <% for (Question ques : questoesVis) {%>
                                 <p></p>
                                 <a href="/RespostaCerta/ControllerServlet?control=Questao&id=<%=ques.getIdQuestao()%>">    
                                     <div class="panel panel-default">    

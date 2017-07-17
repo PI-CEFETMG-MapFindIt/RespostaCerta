@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center">
                 <h3>
-                    <b><%= questao.getTituloQuestao()%></b>
+                    <b><%=questao.getTituloQuestao()%></b>
                 </h3>
                 <small>
                     <a href="/RespostaCerta/ControllerServlet?control=QuestoesModulo&id=<%=questao.getModulo().getIdModulo()%>"><%=questao.getModulo().getNomeModulo()%></a>
