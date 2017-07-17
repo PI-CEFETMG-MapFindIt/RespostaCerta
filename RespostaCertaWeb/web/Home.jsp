@@ -2,10 +2,11 @@
 
 <%@page import="java.util.List"%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Module"%>
+<%@page import="br.cefetmg.respostaCerta.model.domain.Subject"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
-<%List<Module> disciplinas = (List<Module>) request.getAttribute("mod");%>
+<%List<Subject> disciplinas = (List<Subject>) request.getAttribute("disciplinas");%>
 <html>
     <head>
         <meta charset="utf-8">
@@ -39,9 +40,19 @@
                     <div class="panel panel-default">
                         <div class="panel-heading text-center">
                              <h4>Disciplinas mais visualizadas</h4>
+                             <%=disciplinas.get(2)%>
                         </div>
                         <div class="panel-body">
-                            
+                            <% for (Subject disc : disciplinas) {%>
+                                <p></p>
+                                <a href="#">    
+                                    <div class="panel panel-default">    
+                                        <div class="panel-body">
+                                            <%=disc.getNomeDominio()%>
+                                        </div>
+                                    </div>
+                                </a>
+                            <%}%>
                         </div>
                     </div>
                 </div>
@@ -53,13 +64,12 @@
                              <h4>Domínios mais visualizados</h4>
                         </div>
                         <div class="panel-body">
-                            <% for (int n=0; n<7; n++) {%>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </body>
 </html>
 
