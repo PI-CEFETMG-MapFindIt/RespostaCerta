@@ -34,7 +34,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/RespostaCerta/ControllerServlet?control=Logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Sair</a></li>
                 </ul>
-                <form class="navbar-form navbar-right" action="/RespostaCerta/ControllerServlet?control=BuscarQuestao" method="POST">
+                <form class="navbar-form navbar-right" action="/RespostaCerta/ControllerServlet?control=Busca" method="POST">
                     <div class="input-group">
                         <select class="form-control" name="opcao">
                             <option>Questão</option>
@@ -57,7 +57,7 @@
                     <li><a id="logar" href="#modalLogin" data-toggle="modal">Logar</a></li>
                     <li><a href="/RespostaCerta/ControllerServlet?control=PagCadastrar">Cadastrar</a></li>
                 </ul>
-                <form class="navbar-form navbar-right" action="/RespostaCerta/ControllerServlet?control=BuscarQuestao" method="POST">
+                <form class="navbar-form navbar-right" action="/RespostaCerta/ControllerServlet?control=Busca" method="POST">
                     <div class="input-group">
                         <select class="form-control" name="opcao">
                             <option>Questão</option>

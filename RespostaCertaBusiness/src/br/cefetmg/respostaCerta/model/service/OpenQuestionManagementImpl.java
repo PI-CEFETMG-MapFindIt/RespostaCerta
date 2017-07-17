@@ -130,5 +130,13 @@ public class OpenQuestionManagementImpl implements OpenQuestionManagement{
         }
        return questO.searchQuestion(Parameter);
     }
+
+    @Override
+    public List<Question> getOpenQuestionByModule(Long id) throws BusinessException, PersistenceException {
+        if(id==null){
+            throw new BusinessException("Id não pode ser nulo");
+        }
+        return questO.getOpenQuestionByModule(id);
+    }
     
 }

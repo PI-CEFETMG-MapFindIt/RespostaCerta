@@ -182,7 +182,33 @@ public class SubjectDAOImpl implements SubjectDAO{
 
     @Override
     public List<Subject> searchSubjects(String busca) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] textoSeparado = busca.split(" ");
+        try{
+            Connection connection = ConnectionManager.getInstance().getConnection();
+            String palavras="";
+            for(int i=0; i<textoSeparado.length; i++){
+                if(i==0){
+                    palavras += textoSeparado[i];
+                }else{
+                    palavras += " & " +textoSeparado[i];
+                }
+            }
+            String SQL ="SELECT idDominio "
+                    + "FROM Dominio "
+                    + "WHERE "
+                    +"to_tsquery('portuguese','"
+                    + palavras
+                    + "' ) @@ to_tsvector(nomeDominio)";
+            PreparedStatement pstmt = connection.prepareStatement(SQL);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Subject> lista = new ArrayList<>();
+            while(rs.next()){
+                lista.add(getSubjectById(rs.getLong("idDominio")));
+            }
+            return lista;
+        }catch(ClassNotFoundException | SQLException e){
+            throw new PersistenceException(e.getMessage());
+        }
     }
     
 }

@@ -452,4 +452,74 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
             throw new PersistenceException(e.getMessage());
         }
     }
+
+    @Override
+    public List<Question> getClosedQuestionByModule(Long id) throws PersistenceException {
+        try {
+            Connection connection = ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT * "
+                    + "FROM questaoFechada a "
+                    + "JOIN questao b ON a.idQuestao=b.idQuestao "
+                    + "JOIN modulo c ON b.idModulo=c.idModulo "
+                    + "JOIN dominio d ON c.idDominio=d.idDominio "
+                    + "JOIN usuario e ON b.idUsuarioCriador=e.idUsuario "
+                    + "WHERE c.idModulo = ? AND b.idtQuestao='0'";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setLong(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Question> lista = new ArrayList<>();
+            while(rs.next()){
+                User autor = new User();
+                Subject sub = new Subject();
+                Module mod = new Module();
+                ClosedQuestion questao = new ClosedQuestion();
+                autor.setIdUsuario(rs.getLong("idUsuario"));
+                autor.setNomeUsuario(rs.getString("nomeUsuario"));
+                autor.setLoginUsuario(rs.getString("loginUsuario"));
+                autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
+                autor.setSenhaUsuario(rs.getString("senhaUsuario"));
+                InputStream blob = rs.getBinaryStream("userPhoto");  
+                  
+                BufferedImage image;
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
+                autor.setFotoUsuario(image);
+                questao.setCriador(autor);
+                questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
+                questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
+                questao.setIdQuestao(rs.getLong("idQuestao"));
+                questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
+                questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
+                mod.setIdModulo(rs.getLong("idModulo"));
+                mod.setNomeModulo(rs.getString("nomeModulo"));
+                sub.setIdDominio(rs.getLong("idDominio"));
+                sub.setNomeDominio(rs.getString("nomeDominio"));
+                mod.setDominio(sub);
+                questao.setModulo(mod);
+                blob = rs.getBinaryStream("questPhoto");  
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
+                questao.setQuestPhoto(image);
+                questao.setTituloQuestao(rs.getString("tituloQuestao"));
+                questao.setAlt1(rs.getString("alt1"));
+                questao.setAlt2(rs.getString("alt2"));
+                questao.setAlt3(rs.getString("alt3"));
+                questao.setAlt4(rs.getString("alt4"));
+                questao.setAlt5(rs.getString("alt5"));
+                questao.setCorreta(rs.getInt("altCorreta"));
+                lista.add(questao);
+            }
+            rs.close();
+            pstmt.close();
+            connection.close();
+            return lista;
+        } catch (ClassNotFoundException | SQLException | IOException e) {
+            throw new PersistenceException(e.getMessage());
+        }
+    }
 }

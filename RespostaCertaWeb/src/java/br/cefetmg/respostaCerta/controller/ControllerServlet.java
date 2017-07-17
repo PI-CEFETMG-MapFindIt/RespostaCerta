@@ -63,6 +63,8 @@ public class ControllerServlet extends HttpServlet {
             case "EditarModulo": jsp = EditarModulo.processa(request); break;
             case "ForumQuestao": jsp = ForumQuestao.processa(request); break;
             case "TopicoQuestao": jsp = TopicoQuestao.processa(request); break;
+            case "ModulosDisciplina": jsp = ModulosDisciplina.processa(request); break;
+            case "QuestoesModulo": jsp = QuestoesModulo.processa(request); break;
             default: jsp = Inicio.processa(request);
         }
         //Redirecionando pagina

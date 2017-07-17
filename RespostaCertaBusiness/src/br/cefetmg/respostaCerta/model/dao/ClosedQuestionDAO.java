@@ -22,4 +22,5 @@ public interface ClosedQuestionDAO {
     public List<ClosedQuestion> listAll() throws PersistenceException;
     public List<ClosedQuestion> getClosedQuestionsByUser(Long userId) throws PersistenceException;
     public List<Question> searchClosedQuestion(String parameter) throws PersistenceException;
+    public List<Question> getClosedQuestionByModule(Long id) throws PersistenceException;
 }

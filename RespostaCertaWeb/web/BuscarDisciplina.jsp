@@ -3,11 +3,11 @@
     Created on : 16/07/2017, 20:29:00
     Author     : umcan
 --%>
+<%@page import="br.cefetmg.respostaCerta.model.domain.Subject"%>
 <%@page import="java.util.List"%>
-<%@page import="br.cefetmg.respostaCerta.model.domain.Question"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%List <Question> lista=(List<Question>) request.getAttribute("questoes");%>
+<%List <Subject> lista=(List<Subject>) request.getAttribute("disciplinas");%>
 <html>
     <link href="css/BuscaQuestao.css" rel="stylesheet">
     <head>
@@ -27,12 +27,11 @@
             <div class="col-md-8 col-md-offset-2">
                 <ul class="list-group" id="result">
                     <%int id = 0;
-                        for (Question questao : lista) {%>
+                        for (Subject dominio : lista) {%>
                             <li class="list-group-item">
                                 <div class="flexContainer">
                                     <div class="leftItem">
-                                        <h4 id="tituloQuestao<%=id%>"><a href="/RespostaCerta/ControllerServlet?control=Questao&id=<%=questao.getIdQuestao()%>"><b>Questão  <%=questao.getTituloQuestao()%></b></a></h4>
-                                        <label for="tituloQuestao<%=id%>"><%=questao.getModulo().getNomeModulo()%></label>
+                                        <a id="tituloDominio<%=id%>" class="h4" href="/RespostaCerta/ControllerServlet?control=ModulosDisciplina&id=<%=dominio.getIdDominio()%>"><b> <%=dominio.getNomeDominio()%></b></a><br>
                                     </div>
                                 </div>
                             </li>

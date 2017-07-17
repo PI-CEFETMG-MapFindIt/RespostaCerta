@@ -9,17 +9,13 @@ import br.cefetmg.respostaCerta.model.domain.Module;
 import br.cefetmg.respostaCerta.model.domain.Subject;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.util.db.ConnectionManager;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 /**
  *
@@ -232,7 +228,33 @@ public class ModuleDAOImpl implements ModuleDAO{
 
     @Override
     public List<Module> searchModules(String busca) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] textoSeparado = busca.split(" ");
+        try{
+            Connection connection = ConnectionManager.getInstance().getConnection();
+            String palavras="";
+            for(int i=0; i<textoSeparado.length; i++){
+                if(i==0){
+                    palavras += textoSeparado[i];
+                }else{
+                    palavras += " & " +textoSeparado[i];
+                }
+            }
+            String SQL ="SELECT idModulo "
+                    + "FROM Modulo "
+                    + "WHERE "
+                    +"to_tsquery('portuguese','"
+                    + palavras
+                    + "' ) @@ to_tsvector(nomeModulo)";
+            PreparedStatement pstmt = connection.prepareStatement(SQL);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Module> lista = new ArrayList<>();
+            while(rs.next()){
+                lista.add(getModuleById(rs.getLong("idModulo")));
+            }
+            return lista;
+        }catch(ClassNotFoundException | SQLException e){
+            throw new PersistenceException(e.getMessage());
+        }
     }
     
 }
