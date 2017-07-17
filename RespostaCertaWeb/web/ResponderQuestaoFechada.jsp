@@ -33,6 +33,7 @@
             </div>
         </div>
         <br>
+        <%if(!Boolean.parseBoolean(request.getParameter("respondida"))){%>
         <form id="respostaQuestao" action="/RespostaCerta/ControllerServlet?control=EnviarRespostaFechada&id=<%=question.getIdQuestao()%>" method="GET">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 text-justify">
@@ -75,6 +76,70 @@
                 </div>
             </div>
         </form>
+        <%}else{%>
+        <form id="respostaQuestao" action="/RespostaCerta/ControllerServlet?control=Desempenho%>" method="GET">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-justify">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="option" id="option1" value="1">>
+                            <%if(question.getCorreta()== 1){%>
+                                <p style="color: green"> <%=question.getAlt1()%> </p>
+                            <%}else{%>
+                                <p style="color: red"> <%=question.getAlt1()%> </p>
+                            <%}%>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="option" id="option2" value="2">
+                            <%if(question.getCorreta()== 2){%>
+                                <p style="color: green"> <%=question.getAlt2()%> </p>
+                            <%}else{%>
+                                <p style="color: red"> <%=question.getAlt2()%> </p>
+                            <%}%>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="option" id="option3" value="3">
+                            <%if(question.getCorreta()== 3){%>
+                                <p style="color: green"> <%=question.getAlt3()%> </p>
+                            <%}else{%>
+                                <p style="color: red"> <%=question.getAlt3()%> </p>
+                            <%}%>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="option" id="option4" value="4">
+                                <%if(question.getCorreta()== 4){%>
+                                <p style="color: green"> <%=question.getAlt4()%> </p>
+                            <%}else{%>
+                                <p style="color: red"> <%=question.getAlt4()%> </p>
+                            <%}%>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="option" id="option5" value="5">
+                                <%if(question.getCorreta()== 5){%>
+                                <p style="color: green"> <%=question.getAlt5()%> </p>
+                            <%}else{%>
+                                <p style="color: red"> <%=question.getAlt5()%> </p>
+                            <%}%>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" align="center" id="titulo">
+                    Confira seu Desempenho:
+                    <input type="submit" class="btn btn-sucess" style="background-color: #555555; color:white; width:7vw">
+                </div>
+            </div>
+        </form>
+        <%}%>
     <script src="js/ResponderQuestao.js"></script>
 </body>
 </html>

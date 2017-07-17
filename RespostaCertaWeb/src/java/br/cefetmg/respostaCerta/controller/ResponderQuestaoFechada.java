@@ -21,25 +21,28 @@ import java.time.LocalDate;
  * @author Adalbs
  */
 public class ResponderQuestaoFechada {
-    public static String processa(HttpServletRequest request){
-        try{
+
+    public static String processa(HttpServletRequest request) {
+        try {
             LocalDate localdate = LocalDate.now();
             ClosedAnswerManagement mcq = new ClosedAnswerManagementImpl(new ClosedAnswerDAOImpl());
             UserManagement userMan = new UserManagementImpl(new UserDAOImpl());
-            User user = userMan.getUserById((Long)request.getSession().getAttribute("usuario"));
-            ClosedQuestionManagement manQuest= new ClosedQuestionManagementImpl(new ClosedQuestionDAOImpl()) ;
+            User user = userMan.getUserById((Long) request.getSession().getAttribute("usuario"));
+            ClosedQuestionManagement manQuest = new ClosedQuestionManagementImpl(new ClosedQuestionDAOImpl());
             ClosedAnswer answer = new ClosedAnswer();
             answer.setAutor(user);
             answer.setDataResposta(localdate);
             answer.setQuestao(manQuest.getQuestionById((Long) request.getAttribute("id")));
             answer.setResposta(Integer.parseInt(request.getParameter("option")));
-            if(answer.getResposta()==(manQuest.getQuestionById((Long) request.getAttribute("id")).getCorreta())){
+            if (answer.getResposta() == (manQuest.getQuestionById((Long) request.getAttribute("id")).getCorreta())) {
                 answer.setCorreta(true);
-            }else{
+            } else {
                 answer.setCorreta(false);
             }
+            request.setAttribute("question", manQuest.getQuestionById((Long) request.getAttribute("id")).getCorreta());
+            request.setAttribute("respondida", true);
             return "PagQuestaoFechada.jsp";
-        }catch(BusinessException | PersistenceException ex){
+        } catch (BusinessException | PersistenceException ex) {
             request.setAttribute("erro", ex.getMessage());
             return "Erro.jsp";
         }
