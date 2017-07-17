@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.respostaCerta.controller;
 
 import br.cefetmg.respostaCerta.model.dao.ClosedAnswerDAOImpl;
@@ -24,10 +19,7 @@ import java.util.List;
 import java.util.TreeMap;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- *
- * @author umcan
- */
+/* @author Pedro Almeida & Vitor Rodarte*/
 public class Inicio {
     public static String processa(HttpServletRequest request){
         try{

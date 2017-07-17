@@ -1,6 +1,5 @@
 <%--Author: Pedro Almeida--%>
 
-
 <%@page import="java.util.List"%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Topic"%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Question"%>

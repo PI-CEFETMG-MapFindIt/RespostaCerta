@@ -1,3 +1,5 @@
+<%--Author: Pedro Almeida & Pedro Otávio--%>
+
 <%@page import="java.util.List"%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Module"%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Question"%>
