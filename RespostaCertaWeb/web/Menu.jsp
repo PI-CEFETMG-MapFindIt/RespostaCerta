@@ -21,10 +21,10 @@
                 UserManagement management = new UserManagementImpl(new UserDAOImpl());
                 User usuario = management.getUserById((Long)request.getSession().getAttribute("usuario"));  %>
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="#Perfil" style="color:white">Bem Vindo, <%=usuario.getNomeUsuario()%></a></li>
+                <li><a href="#" style="color:white">Bem Vindo, <%=usuario.getNomeUsuario()%></a></li>
                 <%  char acesso = usuario.getIdtUsuario();  
                     if(acesso=='E') {  %>
-                        <p>Cadastro em Análise</p>
+                        <li style="color:white"><a href="#">Cadastro em Análise</a></li>
                     <%} else {%>
                         <li><a href="/RespostaCerta/ControllerServlet?control=PagPerfil">Perfil</a></li>
                         <li><a href="/RespostaCerta/ControllerServlet?control=Desempenho">Meu Desempenho</a></li> 

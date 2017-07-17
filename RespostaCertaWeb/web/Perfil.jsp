@@ -22,10 +22,10 @@
 	<h1 class="text-center">Perfil</h1>
 	<div class="row" aling="center">
             <div class="col-md-3">
-		<div class="display">
+		<div class="display center">
                     <% if(user.getFotoUsuario()!=null){%>
                             <img src="/RespostaCerta/ImageServlet?tipo=user&id=<%=user.getIdUsuario()%>">
-                    <%}%>
+                    <%}%><br>
                     <button type="button" class="btn button" data-toggle="modal" href="#modalAlteraImagem">Alterar Imagem</button>	
 		</div>										
             </div>
