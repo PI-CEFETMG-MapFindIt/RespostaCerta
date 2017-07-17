@@ -2,8 +2,8 @@
 
 <!DOCTYPE html>
 <% User user = (User)(request.getAttribute("usuario"));%>
-<% String firstName = user.getNomeUsuario().split(" ")[0];%> //'substring' gera erro com indice maior que string
-<% String lastName = user.getNomeUsuario().split(" ")[user.getNomeUsuario().split(" ").length-1];%> //teve que usar split
+<% String firstName = user.getNomeUsuario().split(" ")[0];%>
+<% String lastName = user.getNomeUsuario().split(" ")[user.getNomeUsuario().split(" ").length-1];%>
 <% String email = user.getLoginUsuario();%>
 <% String msg = (String)request.getAttribute("mensagem");%>
 
@@ -127,7 +127,7 @@
                     </div>
                     <div class="modal-body">
                         <h4>Confirma a exclus√£o da conta?</h4>
-                        <h6>Clicando em "Confirma" sua conta ser√° excluida, e todos os seus dados ser√£o perdidos.</h6>
+                        <h6>Clicando em "Confirma" sua conta ser· excluida, e todos os seus dados ser„o perdidos.</h6>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-default" id="btnDeletaConta" type="button">Confirmar</button>
