@@ -1,8 +1,11 @@
 <%--Author:Pedro Almeida--%>
 
+<%@page import="java.util.List"%>
+<%@page import="br.cefetmg.respostaCerta.model.domain.Module"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
+<%List<Module> disciplinas = (List<Module>) request.getAttribute("mod");%>
 <html>
     <head>
         <meta charset="utf-8">
@@ -27,6 +30,30 @@
                         </div>
                         <div class="panel-body">
                             
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center">
+                             <h4>Disciplinas mais visualizadas</h4>
+                        </div>
+                        <div class="panel-body">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center">
+                             <h4>Domínios mais visualizados</h4>
+                        </div>
+                        <div class="panel-body">
+                            <% for (int n=0; n<7; n++) {%>
                         </div>
                     </div>
                 </div>
