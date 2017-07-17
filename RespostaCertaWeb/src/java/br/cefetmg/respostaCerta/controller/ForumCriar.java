@@ -50,7 +50,7 @@ public class ForumCriar {
             t.setForum(forum);
             t.setTxtMensagem(mensagem);
             if(!"".equals(request.getParameter("blob")))
-                    t.setMsgPhoto(decodeToImage(request.getParameter("blob").substring(22)));
+                t.setMsgPhoto(decodeToImage(request.getParameter("blob").substring(22)));
             tpcMan.registerTopic(t);
             
             Question q = oqMan.getQuestionById(id);
