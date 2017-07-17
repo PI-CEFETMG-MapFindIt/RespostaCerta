@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  *
- * @author umcan
+ * @author Vitor
  */
 public class SubjectDAOImpl implements SubjectDAO{
 

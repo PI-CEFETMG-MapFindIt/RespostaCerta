@@ -1,3 +1,4 @@
+<%--Author:Vitor --%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.ClosedQuestion"%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Question"%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Subject"%>

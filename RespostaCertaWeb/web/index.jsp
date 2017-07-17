@@ -1,8 +1,4 @@
-<%-- 
-    Document   : index
-    Created on : 03/07/2017, 20:39:04
-    Author     : umcan
---%>
+<%--Author:Vitor --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -8,6 +8,10 @@ import br.cefetmg.respostaCerta.model.service.OpenQuestionManagement;
 import br.cefetmg.respostaCerta.model.service.OpenQuestionManagementImpl;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 
+ * @author Pedro Otávio
+ */
 public class VisualizarQuestao {
 
     public static String processa(HttpServletRequest request) {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.respostaCerta.controller;
 
 import java.io.IOException;
@@ -14,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author umcan
+ * @author Vitor & Pedro Almeida & Pedro Otávio & João Vitor
  */
 public class ControllerServlet extends HttpServlet {
 
@@ -51,7 +46,7 @@ public class ControllerServlet extends HttpServlet {
             case "Questao": jsp = VisualizarQuestao.processa(request); break;
             case "EditarQuestao": jsp = EditarQuestao.processa(request); break;
             case "Desempenho": jsp = Desempenho.processa(request); break;
-            case "SalvarResposta": jsp = SalvarResposta.processa(request); break;
+            case "SalvarResposta": jsp = ResponderQuestaoFechada.processa(request); break;
             case "PagGerenciarCadastro": jsp = PagGerenciarCadastro.processa(request); break;
             case "PagEditarModulo": jsp = PagEditarModulo.processa(request); break;
             case "PagEditarDominio": jsp = PagEditarDominio.processa(request); break;
@@ -70,7 +65,9 @@ public class ControllerServlet extends HttpServlet {
             case "AlteraSenha": jsp = AlteraSenha.processa(request); break;
             case "AlteraImagem": jsp = AlteraImagem.processa(request); break;
             case "DeletaConta": jsp = DeletaConta.processa(request); break;
-            case "ResponderQuestaoAberta": jsp = ResponderQuestaoAberta.processa(request); break;
+            case "ResponderQuestaoAberta": jsp = PagQuestaoAberta.processa(request); break;
+            case "PagQuestaoFechada": jsp = PagQuestaoFechada.processa(request); break;
+            case "ResponderQuestaoFechada": jsp = ResponderQuestaoFechada.processa(request); break;
             case "EnviarRespostaAberta": jsp = EnviarRespostaAberta.processa(request); break;
             default: jsp = Inicio.processa(request);
         }

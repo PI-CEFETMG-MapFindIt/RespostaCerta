@@ -29,13 +29,12 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
 
-/* @author Pedro Almeida & Vitor Rodarte*/
+/**
+ * 
+ * @author Pedro Almeida & Vitor Rodarte
+ */
 public class Inicio {
     public static String processa(HttpServletRequest request){
         try{

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.respostaCerta.controller;
 
 import br.cefetmg.respostaCerta.model.dao.OpenAnswerDAOImpl;
@@ -21,9 +16,6 @@ import br.cefetmg.respostaCerta.model.service.UserManagement;
 import br.cefetmg.respostaCerta.model.service.UserManagementImpl;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -39,27 +31,20 @@ class EnviarRespostaAberta {
             Long idq = Long.parseLong(request.getParameter("id"));
             OpenQuestionManagement oqm = new OpenQuestionManagementImpl(new OpenQuestionDAOImpl());
             Question question = oqm.getQuestionById(idq);
-            
-            System.out.println(question.getIdQuestao());
-            
             LocalDate localdate = LocalDate.now();
-            
             OpenAnswerManagement oam = new OpenAnswerManagementImpl(new OpenAnswerDAOImpl());
             OpenAnswer answer = new OpenAnswer();
             answer.setAutor(user);
             answer.setQuestao(question);
-            answer.setResposta((String)request.getAttribute("respostaAberta"));
+            answer.setResposta(request.getParameter("respostaAberta"));
+            answer.setIdtResposta('A');
             answer.setDataResposta(localdate);
-            System.out.println(localdate);
-            
             oam.registerQuestionAnswer(answer);
-            
-            System.out.println("Resposta registrada");
-            
         } catch (BusinessException | PersistenceException ex) {
-            Logger.getLogger(EnviarRespostaAberta.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("erro", ex.getMessage());
+            return "Erro.jsp";
         }
         
-        return Desempenho.processa(request);
+        return "index.jsp";
     }
 }

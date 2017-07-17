@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.respostaCerta.controller;
 
 import br.cefetmg.respostaCerta.model.dao.OpenQuestionDAOImpl;
@@ -18,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Terror
  */
-class ResponderQuestaoAberta {
+class PagQuestaoAberta {
     public static String processa(HttpServletRequest request) throws IOException{
         Long idq = Long.parseLong(request.getParameter("id"));
         OpenQuestionManagement oqm = new OpenQuestionManagementImpl(new OpenQuestionDAOImpl());

@@ -17,7 +17,10 @@ import br.cefetmg.respostaCerta.model.service.TopicManagementImpl;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
-/*@author Pedro Almeida*/
+/**
+ * 
+ * @author Pedro Almeida
+ */
 class TopicoQuestao {
     public static String processa(HttpServletRequest request){
         Long id = Long.parseLong(request.getParameter("id")); 

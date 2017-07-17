@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 <%--Author: Pedro Almeida, Vitor Rodarte, João Vitor--%>
+=======
+<%--Author:João Vitor --%>
+<!DOCTYPE html>
+>>>>>>> c061049b369707050de3a46695332674b994ed80
 
 <!DOCTYPE html>
 <% User user = (User)(request.getAttribute("usuario"));%>

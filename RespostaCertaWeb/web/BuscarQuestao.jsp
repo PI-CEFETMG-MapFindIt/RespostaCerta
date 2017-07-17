@@ -1,8 +1,4 @@
-<%-- 
-    Document   : BuscaQuestao
-    Created on : 09/07/2017, 12:40:47
-    Author     : Adalbs
---%>
+<%--Author:Adalberto & Vitor --%>
 <%@page import="java.util.List"%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Question"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

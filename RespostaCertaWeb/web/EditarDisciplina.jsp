@@ -1,8 +1,4 @@
-<%-- 
-    Document   : EditarDisciplina
-    Created on : 08/07/2017, 11:17:27
-    Author     : umcan
---%>
+<%--Author:Vitor --%>
 
 <%@page import="br.cefetmg.respostaCerta.model.domain.Subject"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
