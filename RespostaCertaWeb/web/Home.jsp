@@ -37,7 +37,7 @@
                         <div class="panel-body">
                             <% for (Question ques : questoesNov) {%>
                                 <p></p>
-                                <a href="#">    
+                                <a href="/RespostaCerta/ControllerServlet?control=Questao&id=<%=ques.getIdQuestao()%>">    
                                     <div class="panel panel-default">    
                                         <div class="panel-body">
                                             <%=ques.getTituloQuestao()%>
@@ -56,7 +56,7 @@
                         <div class="panel-body">
                             <% for (Question ques : questoesNov) {%>
                                 <p></p>
-                                <a href="#">    
+                                <a href="/RespostaCerta/ControllerServlet?control=Questao&id=<%=ques.getIdQuestao()%>">    
                                     <div class="panel panel-default">    
                                         <div class="panel-body">
                                             <%=ques.getTituloQuestao()%>
@@ -78,7 +78,7 @@
                         <div class="panel-body">
                             <% for (Subject disc : disciplinas) {%>
                                 <p></p>
-                                <a href="#">    
+                                <a href="/RespostaCerta/ControllerServlet?control=ModulosDisciplina&id=<%=disc.getIdDominio()%>">    
                                     <div class="panel panel-default">    
                                         <div class="panel-body">
                                             <%=disc.getNomeDominio()%>
@@ -97,7 +97,7 @@
                         <div class="panel-body">
                             <% for (Module mod : modulos) {%>
                                 <p></p>
-                                <a href="#">    
+                                <a href="/RespostaCerta/ControllerServlet?control=QuestoesModulo&id=<%=mod.getIdModulo()%>">    
                                     <div class="panel panel-default">    
                                         <div class="panel-body">
                                             <%=mod.getNomeModulo()%>

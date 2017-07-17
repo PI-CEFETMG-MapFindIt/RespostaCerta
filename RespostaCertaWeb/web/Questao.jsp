@@ -22,6 +22,11 @@
                 <h3>
                     <b><%= questao.getTituloQuestao()%></b>
                 </h3>
+                <small>
+                    <a href="/RespostaCerta/ControllerServlet?control=QuestoesModulo&id=<%=questao.getModulo().getIdModulo()%>"><%=questao.getModulo().getNomeModulo()%></a>
+                    <span>/</span>
+                    <a href="/RespostaCerta/ControllerServlet?control=ModulosDisciplina&id=<%=questao.getModulo().getDominio().getIdDominio()%>"><%=questao.getModulo().getDominio().getNomeDominio()%></a>
+                </small>
             </div>
         </div>
         <br>
