@@ -70,5 +70,4 @@ function mudarImagem(){
             $("#blob").val(base64data);
         }
     });
-
 }

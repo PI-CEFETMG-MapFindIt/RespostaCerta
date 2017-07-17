@@ -36,7 +36,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <% if(questao.getQuestPhoto()!=null){%>
-                            <div class="center">
+                            <div class="text-center">
                                 <img src="/RespostaCerta/ImageServlet?tipo=quest&id=<%=questao.getIdQuestao()%>">
                             </div>
                             <%}%>

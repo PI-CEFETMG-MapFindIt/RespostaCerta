@@ -165,8 +165,10 @@ public class ForumDAOImpl implements ForumDAO{
                 questao.setModulo(mod);
                 blob = rs.getBinaryStream("questPhoto");  
                   
-                image = ImageIO.read(blob);
-                questao.setQuestPhoto(image);
+                if(blob!=null) {
+                    image = ImageIO.read(blob);
+                    questao.setQuestPhoto(image);
+                }
                 questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 forum.setQuestao(questao);

@@ -117,66 +117,64 @@
                                     <button class="btn btn-default">
                                         Cadastrar
                                     </button>
-                                    </form>
-                                    <div id="modalModulo" class="modal fade" role="dialog">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    <h4 class="modal-title">Adicionar Modulo</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form id="adicionarDisciplina">
-                                                        <div class="form-group">
-                                                            <label for="nomeModulo">Nome do Novo Modulo</label>
-                                                            <input class="form-control" placeholder="Digite o nome do modulo" type="text" id="nomeModulo" name="nomeModulo">
-                                                            <div class="form-group">
-                                                                <label for="disciplina"><h4>Disciplina</h4></label>
-                                                                <select id="disciplina" name="disciplina" class="form-control">
-                                                                    <% for (Subject dominio : dominios) {%>
-                                                                    <option value="<%=dominio.getIdDominio()%>"><%=dominio.getNomeDominio()%></option>
-                                                                    <% }%>
-                                                                </select>
-                                                                <br>
-                                                                <button class="btn btn-default" type="button" data-toggle="modal" data-target="#modalDisciplina">Adicionar Disciplina</button>
-                                                            </div>
-                                                        </div>
-                                                        <button type="button" class="btn btn-default" onClick="salvarModulo();">Salvar</button>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" id="fecharModulo" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                </div>
-                                            </div>
+                </form>
+                <div id="modalModulo" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Adicionar Modulo</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="adicionarDisciplina">
+                                    <div class="form-group">
+                                        <label for="nomeModulo">Nome do Novo Modulo</label>
+                                        <input class="form-control" placeholder="Digite o nome do modulo" type="text" id="nomeModulo" name="nomeModulo">
+                                        <div class="form-group">
+                                            <label for="disciplina"><h4>Disciplina</h4></label>
+                                            <select id="disciplina" name="disciplina" class="form-control">
+                                                <% for (Subject dominio : dominios) {%>
+                                                <option value="<%=dominio.getIdDominio()%>"><%=dominio.getNomeDominio()%></option>
+                                                <% }%>
+                                            </select>
+                                            <br>
+                                            <button class="btn btn-default" type="button" data-toggle="modal" data-target="#modalDisciplina">Adicionar Disciplina</button>
                                         </div>
                                     </div>
-                                    <div id="modalDisciplina" class="modal fade" style="top:60px; left:-15px" role="dialog">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    <h4 class="modal-title">Adicionar Disciplina</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form id="adicionarDisciplina">
-                                                        <div class="form-group">
-                                                            <label for="nomeDisciplina">Nome da nova Disciplina</label>
-                                                            <input class="form-control" placeholder="Digite o nome da disciplina" type="text" name="nomeDisciplina" id="nomeDisciplina">
-                                                        </div>
-                                                        <button type="button" class="btn btn-default" onclick="salvarDisciplina();">Salvar</button>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" id="fecharDisiciplina" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <button type="button" class="btn btn-default" onClick="salvarModulo();">Salvar</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="fecharModulo" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="modalDisciplina" class="modal fade" style="top:60px; left:-15px" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Adicionar Disciplina</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="adicionarDisciplina">
+                                    <div class="form-group">
+                                        <label for="nomeDisciplina">Nome da nova Disciplina</label>
+                                        <input class="form-control" placeholder="Digite o nome da disciplina" type="text" name="nomeDisciplina" id="nomeDisciplina">
                                     </div>
-                                    </div>
-                                    </div>
-                                    <script src="js/cropper.min.js"></script>
-
-                                    <script src="js/CadastroQuestao.js"></script>
-
-                                    </body>
-                                    </html>
+                                    <button type="button" class="btn btn-default" onclick="salvarDisciplina();">Salvar</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="fecharDisiciplina" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </div>
+        <script src="js/cropper.min.js"></script>
+        <script src="js/CadastroQuestao.js"></script>
+    </body>
+</html>
