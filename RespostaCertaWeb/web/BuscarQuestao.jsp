@@ -31,8 +31,8 @@
                             <li class="list-group-item">
                                 <div class="flexContainer">
                                     <div class="leftItem">
-                                        <h4 id="tituloQuestao<%=id%>"><a href="/RespostaCerta/ControllerServlet?control=Questao&id=<%=questao.getIdQuestao()%>"><b><%=questao.getTituloQuestao()%></b></a></h4>
-                                        <label for="tituloQuestao<%=id%>"><%=questao.getModulo().getNomeModulo()%></label>
+                                        <a class="h4" href="/RespostaCerta/ControllerServlet?control=Questao&id=<%=questao.getIdQuestao()%>"><b><%=questao.getTituloQuestao()%></b></a><br>
+                                        <label for="tituloQuestao<%=id%>"><a class="h5" href="/RespostaCerta/ControllerServlet?control=QuestoesModulo&id=<%=questao.getModulo().getIdModulo()%>"><%=questao.getModulo().getNomeModulo()%></a></label>
                                     </div>
                                 </div>
                             </li>

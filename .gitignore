@@ -16,3 +16,6 @@
 /RespostaCertaWeb/dist/
 /RespostaCertaCore/dist/
 /RespostaCertaBusiness/dist/
+/RespostaCertaCore/build/
+/RespostaCertaBusiness/build/
+/RespostaCertaPersistencePostgre/build/

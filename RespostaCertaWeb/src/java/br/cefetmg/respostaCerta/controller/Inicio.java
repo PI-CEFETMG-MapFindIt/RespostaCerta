@@ -87,8 +87,8 @@ public class Inicio {
             while(it.hasNext()){
                 disc.add(disciplinas.get(it.next()));
             }
-            request.setAttribute("modulo", mod);
-            request.setAttribute("disciplina", disc);
+            request.setAttribute("modulos", mod);
+            request.setAttribute("disciplinas", disc);
             request.setAttribute("questao", it);
             return "Home.jsp";
         } catch (BusinessException | PersistenceException ex) {

@@ -437,7 +437,7 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
             String SQL ="SELECT b.idQuestao "
                     + "FROM questaoFechada a "
                     + "JOIN questao b ON a.idQuestao=b.idQuestao "
-                    + "WHERE "
+                    + "WHERE idtQuestao='0' AND "
                     +"to_tsquery('portuguese','"
                     + palavras
                     + "' ) @@ to_tsvector(b.tituloQuestao || b.enunciadoQuestao)";
