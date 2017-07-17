@@ -5,7 +5,6 @@
  */
 package br.cefetmg.respostaCerta.model.service;
 
-import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
 import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
@@ -22,4 +21,5 @@ public interface OpenQuestionManagement {
     public Question getQuestionById(Long id) throws BusinessException, PersistenceException;
     public List<Question> getQuestionsByUser(Long id) throws BusinessException, PersistenceException;
     public List<Question> searchQuestion(String Parameter) throws BusinessException, PersistenceException;
+    public List<Question> getOpenQuestionByModule(Long id) throws BusinessException, PersistenceException;
 }
