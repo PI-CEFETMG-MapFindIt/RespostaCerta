@@ -66,8 +66,8 @@ public class ControllerServlet extends HttpServlet {
             case "AlteraImagem": jsp = AlteraImagem.processa(request); break;
             case "DeletaConta": jsp = DeletaConta.processa(request); break;
             case "ResponderQuestaoAberta": jsp = PagQuestaoAberta.processa(request); break;
-            case "PagQuestaoFechada": jsp = PagQuestaoFechada.processa(request); break;
-            case "ResponderQuestaoFechada": jsp = ResponderQuestaoFechada.processa(request); break;
+            case "EnviarRespostaFechada": jsp = ResponderQuestaoFechada.processa(request); break;
+            case "ResponderQuestaoFechada": jsp = PagQuestaoFechada.processa(request); break;
             case "EnviarRespostaAberta": jsp = EnviarRespostaAberta.processa(request); break;
             default: jsp = Inicio.processa(request);
         }

@@ -18,7 +18,7 @@ import java.time.LocalDate;
 
 /**
  *
- * @author Adalbs
+ * @author Adalbs & Vitor
  */
 public class ResponderQuestaoFechada {
 
@@ -32,16 +32,19 @@ public class ResponderQuestaoFechada {
             ClosedAnswer answer = new ClosedAnswer();
             answer.setAutor(user);
             answer.setDataResposta(localdate);
-            answer.setQuestao(manQuest.getQuestionById((Long) request.getAttribute("id")));
+            answer.setQuestao(manQuest.getQuestionById(Long.parseLong(request.getParameter("id"))));
             answer.setResposta(Integer.parseInt(request.getParameter("option")));
-            if (answer.getResposta() == (manQuest.getQuestionById((Long) request.getAttribute("id")).getCorreta())) {
+            if (answer.getResposta() == answer.getQuestao().getCorreta()) {
                 answer.setCorreta(true);
             } else {
                 answer.setCorreta(false);
             }
-            request.setAttribute("question", manQuest.getQuestionById((Long) request.getAttribute("id")).getCorreta());
-            request.setAttribute("respondida", true);
-            return "PagQuestaoFechada.jsp";
+            answer.setIdtResposta('F');
+            request.setAttribute("escolha", Integer.valueOf(answer.getResposta()));
+            request.setAttribute("question", answer.getQuestao());
+            request.setAttribute("respondida", Boolean.valueOf(true));
+            mcq.registerQuestionAnswer(answer);
+            return "ResponderQuestaoFechada.jsp";
         } catch (BusinessException | PersistenceException ex) {
             request.setAttribute("erro", ex.getMessage());
             return "Erro.jsp";

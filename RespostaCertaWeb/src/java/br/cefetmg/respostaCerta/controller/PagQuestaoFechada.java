@@ -5,22 +5,21 @@ import br.cefetmg.respostaCerta.model.service.ClosedQuestionManagement;
 import br.cefetmg.respostaCerta.model.service.ClosedQuestionManagementImpl;
 import br.cefetmg.respostaCerta.model.dao.ClosedQuestionDAOImpl;
 import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
-import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 
 
 /**
  *
- * @author Adalberto
+ * @author Adalberto & Vitor
  */
 public class PagQuestaoFechada {
     public static String processa(HttpServletRequest request){
         try{
-            Question question = (Question) request.getAttribute("questao");
             ClosedQuestionManagement questionDAO = new ClosedQuestionManagementImpl(new ClosedQuestionDAOImpl());
-            ClosedQuestion closedQuestion = questionDAO.getQuestionById(question.getIdQuestao());
+            ClosedQuestion closedQuestion = questionDAO.getQuestionById(Long.parseLong(request.getParameter("id")));
             request.setAttribute("question", closedQuestion);
+            request.setAttribute("respondida", Boolean.valueOf(false));
             return "ResponderQuestaoFechada.jsp";
         }catch (PersistenceException | BusinessException  ex) {
             request.setAttribute("erro", ex.getMessage());
