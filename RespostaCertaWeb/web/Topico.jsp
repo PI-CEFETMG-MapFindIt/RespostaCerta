@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <%Topic topico = (Topic) request.getAttribute("topico");%>
 <%Question questao = (Question) request.getAttribute("questao");%>
-<%List<TopicAnswer> resposta = (List<TopicAnswer>) request.getAttribute("resposta");%>
+<%List<TopicAnswer> resposta = (List<TopicAnswer>) request.getAttribute("respostas");%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

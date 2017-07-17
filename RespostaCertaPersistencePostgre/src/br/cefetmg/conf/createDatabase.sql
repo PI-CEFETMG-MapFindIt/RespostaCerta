@@ -11,7 +11,7 @@ Database: PostgreSQL 9.4
 -- Table MensagemResposta
 
 CREATE TABLE MensagemResposta(
- idMensagemResposta Integer NOT NULL,
+ idMensagemResposta SERIAL,
  idMensagem Integer NOT NULL,
  idUsuario Integer NOT NULL,
  mensagem Text NOT NULL,

@@ -14,15 +14,8 @@ import br.cefetmg.respostaCerta.model.service.TopicManagement;
 import br.cefetmg.respostaCerta.model.service.TopicManagementImpl;
 import br.cefetmg.respostaCerta.model.service.UserManagement;
 import br.cefetmg.respostaCerta.model.service.UserManagementImpl;
-import java.awt.AlphaComposite;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import sun.misc.BASE64Decoder;
 
 /*@author Pedro Almeida*/
 public class TopicoCriar {

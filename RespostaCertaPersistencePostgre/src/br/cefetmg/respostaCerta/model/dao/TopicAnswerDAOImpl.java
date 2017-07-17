@@ -69,7 +69,7 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
             pstmt.setLong(2, topicAnswer.getAutor().getIdUsuario());
             pstmt.setString(3, topicAnswer.getTxtMensagem());
             pstmt.setDate(4, java.sql.Date.valueOf(topicAnswer.getDataResposta()));
-            pstmt.executeQuery();
+            pstmt.executeUpdate();
             pstmt.close();
             connection.close();
         } catch (ClassNotFoundException | SQLException e) {
