@@ -8,7 +8,6 @@
 <%  Boolean falhouLogin = (Boolean) request.getAttribute("falha");
     if(falhouLogin==null){
        falhouLogin=false;
-<<<<<<< HEAD
     }   %>
 
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -53,9 +52,7 @@
                         <div class="glyphicon glyphicon-search" aria-hidden="true"></div>
                     </button>
                 </div>
-=======
    }
-%>
 <div class="container-fluid">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
@@ -117,7 +114,6 @@
                         </div>
                     </div>
                 </form>
->>>>>>> 850622a4bb34ba975dca75cbfeaa45f6a0b08f49
             </div>
         </form>     
     </div>
