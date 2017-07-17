@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.respostaCerta.controller;
 
 import br.cefetmg.respostaCerta.model.dao.UserDAOImpl;
@@ -23,7 +18,7 @@ import sun.misc.BASE64Decoder;
 
 /**
  *
- * @author Terror
+ * @author Terror & Vitor
  */
 class AlteraImagem {
     public static String processa(HttpServletRequest request) throws IOException{

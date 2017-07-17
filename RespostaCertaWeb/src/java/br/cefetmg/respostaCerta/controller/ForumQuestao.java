@@ -13,7 +13,10 @@ import br.cefetmg.respostaCerta.model.service.TopicManagementImpl;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
-/*@author Pedro Almeida*/
+/**
+ * 
+ * @author Pedro Almeida
+ */
 public class ForumQuestao {
     public static String processa(HttpServletRequest request){
         

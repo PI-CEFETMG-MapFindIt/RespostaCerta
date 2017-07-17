@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.respostaCerta.controller;
 import br.cefetmg.respostaCerta.model.service.ClosedQuestionManagement;
 import br.cefetmg.respostaCerta.model.service.ClosedQuestionManagementImpl;
@@ -27,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author Adalbs
+ * @author Adalbs & Vitor
  */
 public class Busca {
     public static String processa(HttpServletRequest request){

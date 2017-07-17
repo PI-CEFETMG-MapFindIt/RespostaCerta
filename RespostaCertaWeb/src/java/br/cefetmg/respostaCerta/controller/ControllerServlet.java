@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.respostaCerta.controller;
 
 import java.io.IOException;
@@ -14,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author umcan
+ * @author Vitor & Pedro Almeida & Pedro Otávio & João Vitor
  */
 public class ControllerServlet extends HttpServlet {
 
