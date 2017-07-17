@@ -14,7 +14,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Forum: <%=questao.getTituloQuestao()%></title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/Forum.css" rel="stylesheet">
     </head>
     <body>
@@ -31,9 +30,6 @@
                 </div>
             </div>
         </div>        
-        <%="</div></div>"%>
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
         <script src="js/Questao.js"></script>
     </body>
 </html>

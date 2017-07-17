@@ -179,5 +179,10 @@ public class SubjectDAOImpl implements SubjectDAO{
             throw new PersistenceException(e.getMessage());
         }
     }
+
+    @Override
+    public List<Subject> searchSubjects(String busca) throws PersistenceException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

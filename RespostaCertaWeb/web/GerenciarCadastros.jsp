@@ -12,7 +12,6 @@
 
         <title>Resposta Certa</title>
 
-        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/GerenciarCadastros.css" rel="stylesheet">
     </head>
 
@@ -139,10 +138,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
         <script src="js/GerenciarCadastros.js"></script>
     </body>
 </html>

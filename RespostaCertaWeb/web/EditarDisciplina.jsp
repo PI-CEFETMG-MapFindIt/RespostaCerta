@@ -26,7 +26,5 @@
             </div>
             <input type="hidden" name="id" value="<%=disciplina.getIdDominio()%>"/>
         </form>
-    </div>
-    </div>
     </body>
 </html>

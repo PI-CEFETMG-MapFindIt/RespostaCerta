@@ -9,8 +9,7 @@
 
         <meta name="description" content="Source code generated using layoutit.com">
         <meta name="author" content="LayoutIt!">
-
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/cropper.min.css" rel="stylesheet">
         <link href="css/Cadastro.css" rel="stylesheet">
 
     </head>
@@ -62,6 +61,18 @@
                                        placeholder="__/__/____" required class="form-control" />
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-default btn-file">
+                                        Escolher Imagem de Perfil <input accept="image/*" type="file" id="imgInp">
+                                    </span>
+                                </span>
+                            </div>
+                            <br>
+                            <input type="hidden" id="blob" name="blob">
+                            <img id='novaImg'/>
+                        </div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
@@ -95,12 +106,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.mask.min.js"></script>
+<script src="js/cropper.min.js"></script>
 <script src="js/Menu.js"></script>
 <script src="js/Cadastro.js"></script>
 </body>

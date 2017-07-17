@@ -12,7 +12,6 @@
 
         <title>Minhas Questões</title>
 
-        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/MinhasQuestoes.css" rel="stylesheet">
 
     </head>
@@ -35,7 +34,7 @@
                         <div class="flexContainer">
                             <div class="leftItem">
                                 <a href="/RespostaCerta/ControllerServlet?control=Questao&id=<%=questao.getIdQuestao()%>" class="h4"><b><%=questao.getTituloQuestao()%></b></a><br>
-                                <label for="tituloQuestao<%=id%>"><a href="#"><%=questao.getModulo().getNomeModulo()%></a></label>
+                                <label for="tituloQuestao<%=id%>"><%=questao.getModulo().getNomeModulo()%></label>
                             </div>
                             <div class="rightItem">
 
@@ -72,10 +71,6 @@
                 </ul>
             </div>
         </div>
-    </div>
-</div>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
 <script src="js/MinhasQuestoes.js"></script>
 </body>
 </html>

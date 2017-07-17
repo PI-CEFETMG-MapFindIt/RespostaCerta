@@ -1,7 +1,7 @@
 <%-- 
     Document   : BuscaQuestao
-    Created on : 09/07/2017, 12:40:47
-    Author     : Adalbs
+    Created on : 16/07/2017, 20:29:00
+    Author     : umcan
 --%>
 <%@page import="java.util.List"%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Question"%>
@@ -9,17 +9,16 @@
 <!DOCTYPE html>
 <%List <Question> lista=(List<Question>) request.getAttribute("questoes");%>
 <html>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/BuscaQuestao.css" rel="stylesheet">
     <head>
-        <title>Reseultados <%request.getAttribute("query");%></title>
+        <title>Resultados <%=request.getAttribute("query")%></title>
     </head>
     <body>
         <%@include file="/Menu.jsp" %>
         <div class="row">
       		<div class="col-md-8 col-md-offset-2 text-center">
       			<h3>
-      				<b>Resultados da Busca: <%request.getAttribute("query");%></b>
+      				<b>Resultados da Busca: <%=request.getAttribute("query")%></b>
       			</h3>
       		</div>
       	</div>
@@ -32,8 +31,8 @@
                             <li class="list-group-item">
                                 <div class="flexContainer">
                                     <div class="leftItem">
-                                        <h4 id="tituloQuestao<%=id%>"><a href="#"><b>Questão  <%=questao.getTituloQuestao()%></b></a></h4>
-                                        <label for="tituloQuestao<%=id%>"><a href="#"><%=questao.getModulo()%></a></label>
+                                        <h4 id="tituloQuestao<%=id%>"><a href="/RespostaCerta/ControllerServlet?control=Questao&id=<%=questao.getIdQuestao()%>"><b>Questão  <%=questao.getTituloQuestao()%></b></a></h4>
+                                        <label for="tituloQuestao<%=id%>"><%=questao.getModulo().getNomeModulo()%></label>
                                     </div>
                                 </div>
                             </li>
@@ -43,10 +42,6 @@
                 </ul>
             </div>
       	</div>
-      </div>
-    </div>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/BuscaQuestao.js"></script>
   </body>
 </html>

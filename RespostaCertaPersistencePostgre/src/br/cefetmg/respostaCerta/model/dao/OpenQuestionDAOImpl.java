@@ -361,21 +361,23 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
 
     @Override
     public List<Question> searchQuestion(String parameter) throws PersistenceException {
-        String[] textoSeparado = parameter.split("\\s");
+        String[] textoSeparado = parameter.split(" ");
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String SQL ="SELECT b.idQuestao, "
-                    +"to_tsquery( ";
-                    for(int i=0; i>textoSeparado.length;i++){
-                        if(i==0 || i==textoSeparado.length-1){
-                            SQL += textoSeparado[i];
-                        }else{
-                            SQL += " & " +textoSeparado[i];
-                        }
-                    }
-                    SQL+=", 'portuguese' ) @@ to_tsvector(b.tituloQuestao) || to_tsvector(b.enunciadoQuestao) "
+            String palavras="";
+            for(int i=0; i<textoSeparado.length; i++){
+                if(i==0){
+                    palavras += textoSeparado[i];
+                }else{
+                    palavras += " & " +textoSeparado[i];
+                }
+            }
+            String SQL ="SELECT idQuestao "
                     + "FROM questao "
-                    + "WHERE idtQuestao=1";
+                    + "WHERE idtQuestao='1' AND "
+                    +"to_tsquery('portuguese','"
+                    + palavras
+                    + "' ) @@ to_tsvector(tituloQuestao || enunciadoQuestao)";
             PreparedStatement pstmt = connection.prepareStatement(SQL);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Question> lista = new ArrayList<>();

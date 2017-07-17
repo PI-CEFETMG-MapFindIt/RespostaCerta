@@ -229,5 +229,10 @@ public class ModuleDAOImpl implements ModuleDAO{
             throw new PersistenceException(e.getMessage());
         }
     }
+
+    @Override
+    public List<Module> searchModules(String busca) throws PersistenceException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

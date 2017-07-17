@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -83,7 +84,11 @@ public class UserDAOImpl implements UserDAO{
             pstmt.setString(2, user.getLoginUsuario());
             pstmt.setString(3, user.getSenhaUsuario());
             pstmt.setString(4, String.valueOf(user.getIdtUsuario()));
-            pstmt.setBinaryStream(5, imageToBlob(user.getFotoUsuario()));
+            if(user.getFotoUsuario()!=null){
+                pstmt.setBinaryStream(5, imageToBlob(user.getFotoUsuario()));
+            }else{
+                pstmt.setNull(5, Types.NULL);
+            }
             pstmt.execute();
             pstmt.close();
             connection.close();
@@ -107,7 +112,11 @@ public class UserDAOImpl implements UserDAO{
             pstmt.setString(2, user.getLoginUsuario());
             pstmt.setString(3, user.getSenhaUsuario());
             pstmt.setString(4, String.valueOf(user.getIdtUsuario()));
-            pstmt.setBinaryStream(5, imageToBlob(user.getFotoUsuario()));
+            if(user.getFotoUsuario()!=null){
+                pstmt.setBinaryStream(5, imageToBlob(user.getFotoUsuario()));
+            }else{
+                pstmt.setNull(5, Types.NULL);
+            }
             pstmt.setLong(6, user.getIdUsuario());
             pstmt.executeUpdate();
             pstmt.close();
@@ -164,8 +173,9 @@ public class UserDAOImpl implements UserDAO{
                 usuario.setSenhaUsuario(rs.getString("senhaUsuario"));
                 usuario.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
                 InputStream blob = rs.getBinaryStream("userPhoto");  
-                  
-                BufferedImage image = ImageIO.read(blob);
+                BufferedImage image=null;
+                if(blob!=null)
+                    image = ImageIO.read(blob);
                 usuario.setFotoUsuario(image);
             }
             rs.close();
@@ -200,7 +210,9 @@ public class UserDAOImpl implements UserDAO{
                 usuario.setSenhaUsuario(rs.getString("senhaUsuario"));
                 usuario.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
                 InputStream blob = rs.getBinaryStream("userPhoto");  
-                BufferedImage image = ImageIO.read(blob);
+                BufferedImage image=null;
+                if(blob!=null)
+                    image = ImageIO.read(blob);
                 usuario.setFotoUsuario(image);
                 lista.add(usuario);
             }
@@ -232,8 +244,10 @@ public class UserDAOImpl implements UserDAO{
                 usuario.setLoginUsuario(rs.getString("loginUsuario"));
                 usuario.setSenhaUsuario(rs.getString("senhaUsuario"));
                 usuario.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
-                InputStream blob = rs.getBinaryStream("userPhoto");  
-                BufferedImage image = ImageIO.read(blob);
+                InputStream blob = rs.getBinaryStream("userPhoto");
+                BufferedImage image=null;
+                if(blob!=null)
+                    image = ImageIO.read(blob);
                 usuario.setFotoUsuario(image);
             }
             rs.close();
@@ -264,7 +278,9 @@ public class UserDAOImpl implements UserDAO{
                 usuario.setSenhaUsuario(rs.getString("senhaUsuario"));
                 usuario.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
                 InputStream blob = rs.getBinaryStream("userPhoto");  
-                BufferedImage image = ImageIO.read(blob);
+                BufferedImage image=null;
+                if(blob!=null)
+                    image = ImageIO.read(blob);
                 usuario.setFotoUsuario(image);
                 usuarios.add(usuario);
             }

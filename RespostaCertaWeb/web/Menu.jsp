@@ -8,6 +8,7 @@
 <%  Boolean falhouLogin = (Boolean) request.getAttribute("falha");
     if(falhouLogin==null){
        falhouLogin=false;
+<<<<<<< HEAD
     }   %>
 
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -52,6 +53,71 @@
                         <div class="glyphicon glyphicon-search" aria-hidden="true"></div>
                     </button>
                 </div>
+=======
+   }
+%>
+<div class="container-fluid">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <%
+            User usuario = null;
+                if (request.getSession().getAttribute("usuario") != null) {
+                    UserManagement management = new UserManagementImpl(new UserDAOImpl());
+                    usuario = management.getUserById((Long)request.getSession().getAttribute("usuario"));
+                    
+            %>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/RespostaCerta/ControllerServlet?control=Logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Sair</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" action="/RespostaCerta/ControllerServlet?control=BuscarQuestao" method="POST">
+                    <div class="input-group">
+                        <select class="form-control" name="opcao">
+                            <option>Questão</option>
+                            <option>Módulo</option>
+                            <option>Domínio</option>
+                        </select>
+                        <div class="input-group-btn">
+                            <input type="text" class="form-control" placeholder="Pesquisar..." id="query" name="query" value="">
+                        </div>
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <% } else {
+            %>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a id="logar" href="#modalLogin" data-toggle="modal">Logar</a></li>
+                    <li><a href="/RespostaCerta/ControllerServlet?control=PagCadastrar">Cadastrar</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" action="/RespostaCerta/ControllerServlet?control=BuscarQuestao" method="POST">
+                    <div class="input-group">
+                        <select class="form-control" name="opcao">
+                            <option>Questão</option>
+                            <option>Módulo</option>
+                            <option>Disciplina</option>
+                        </select>
+                        <div class="input-group-btn">
+                            <input type="text" class="form-control" placeholder="Pesquisar..." id="query" name="query" value="">
+                        </div>
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                </form>
+>>>>>>> 850622a4bb34ba975dca75cbfeaa45f6a0b08f49
             </div>
         </form>     
     </div>

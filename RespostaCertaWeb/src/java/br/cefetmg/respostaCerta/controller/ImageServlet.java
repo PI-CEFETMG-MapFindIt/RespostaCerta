@@ -18,19 +18,21 @@ import br.cefetmg.respostaCerta.model.service.OpenQuestionManagement;
 import br.cefetmg.respostaCerta.model.service.OpenQuestionManagementImpl;
 import br.cefetmg.respostaCerta.model.service.UserManagement;
 import br.cefetmg.respostaCerta.model.service.UserManagementImpl;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -78,7 +80,10 @@ public class ImageServlet extends HttpServlet {
                          }
                          break;
                          
-        }     
+        }
+        if(img==null){
+            img = ImageIO.read(new URL("https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png"));
+        }
         response.setContentType("image/png");
         OutputStream out = response.getOutputStream();
         ImageIO.write((RenderedImage) img, "png", out);

@@ -14,7 +14,6 @@ import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
 import br.cefetmg.respostaCerta.model.domain.Module;
 import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.domain.Subject;
-import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.service.ClosedQuestionManagement;
@@ -27,6 +26,9 @@ import br.cefetmg.respostaCerta.model.service.SubjectManagement;
 import br.cefetmg.respostaCerta.model.service.SubjectManagementImpl;
 import br.cefetmg.respostaCerta.model.service.UserManagement;
 import br.cefetmg.respostaCerta.model.service.UserManagementImpl;
+import java.awt.AlphaComposite;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
@@ -117,7 +119,7 @@ public class CadastrarQuestao {
         }
     }
     
-    public static BufferedImage decodeToImage(String imageString) throws BusinessException {
+    private static BufferedImage decodeToImage(String imageString) throws BusinessException {
         BufferedImage image = null;
         byte[] imageByte;
         try {
@@ -129,6 +131,17 @@ public class CadastrarQuestao {
         } catch (Exception e) {
             throw new BusinessException("Erro na imagem");
         }
+        image = redimensionar(image, 300, 300);
         return image;
+    }
+    
+    private static BufferedImage redimensionar(Image originalImage, int scaledWidth, int scaledHeight){
+        int imageType = BufferedImage.TYPE_INT_RGB;
+        BufferedImage scaledBI = new BufferedImage(scaledWidth, scaledHeight, imageType);
+        Graphics2D g = scaledBI.createGraphics();
+        g.setComposite(AlphaComposite.Src);
+        g.drawImage(originalImage, 0, 0, scaledWidth, scaledHeight, null); 
+        g.dispose();
+        return scaledBI;
     }
 }

@@ -11,10 +11,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Cadastro de Questões</title>
-
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/CadastroQuestao.css" rel="stylesheet">
+        
         <link href="css/cropper.min.css" rel="stylesheet">
+        <link href="css/CadastroQuestao.css" rel="stylesheet">
     </head>
     <body>
         <%@include file="/Menu.jsp" %>
@@ -40,7 +39,7 @@
                         <label for="enunciado"><h4>Enunciado da Questão</h4></label>
                         <textarea class="form-control" rows="5" name="enunciado" id="enunciado" placeholder="Digite o enunciado da questão"></textarea>
                     </div>
-                    <div class="form-group" height="800px">
+                    <div class="form-group">
 			<div class="input-group">
                             <span class="input-group-btn">
 				<span class="btn btn-default btn-file">
@@ -174,10 +173,6 @@
                                     </div>
                                     </div>
                                     </div>
-                                    </div>
-                                    </div>
-                                    <script src="js/jquery.min.js"></script>
-                                    <script src="js/bootstrap.min.js"></script>
                                     <script src="js/cropper.min.js"></script>
                                     
                                     <script src="js/CadastroQuestao.js"></script>
