@@ -15,7 +15,7 @@
     </head>
 
     <body>
-        <%@include file="/Menu.jsp" %>%>
+        <%@include file="/Menu.jsp" %>
         <!--Aqui vem a parte interna-->
         <div class="row">
             <br>

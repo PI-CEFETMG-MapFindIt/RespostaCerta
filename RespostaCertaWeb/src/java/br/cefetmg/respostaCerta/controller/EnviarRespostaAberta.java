@@ -39,27 +39,20 @@ class EnviarRespostaAberta {
             Long idq = Long.parseLong(request.getParameter("id"));
             OpenQuestionManagement oqm = new OpenQuestionManagementImpl(new OpenQuestionDAOImpl());
             Question question = oqm.getQuestionById(idq);
-            
-            System.out.println(question.getIdQuestao());
-            
             LocalDate localdate = LocalDate.now();
-            
             OpenAnswerManagement oam = new OpenAnswerManagementImpl(new OpenAnswerDAOImpl());
             OpenAnswer answer = new OpenAnswer();
             answer.setAutor(user);
             answer.setQuestao(question);
-            answer.setResposta((String)request.getAttribute("respostaAberta"));
+            answer.setResposta(request.getParameter("respostaAberta"));
+            answer.setIdtResposta('A');
             answer.setDataResposta(localdate);
-            System.out.println(localdate);
-            
             oam.registerQuestionAnswer(answer);
-            
-            System.out.println("Resposta registrada");
-            
         } catch (BusinessException | PersistenceException ex) {
-            Logger.getLogger(EnviarRespostaAberta.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("erro", ex.getMessage());
+            return "Erro.jsp";
         }
         
-        return Desempenho.processa(request);
+        return "index.jsp";
     }
 }

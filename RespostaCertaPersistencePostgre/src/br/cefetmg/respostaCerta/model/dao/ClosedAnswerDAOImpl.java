@@ -20,6 +20,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -57,8 +58,8 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
 
         try {
             Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "INSERT INTO resposta (idUsuario, idQuestao, idtResposta, dataResposta) VALUES(?, ?, ?, ?) RETURNING idResposta";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
+            String sql = "INSERT INTO resposta (idUsuario, idQuestao, idtResposta, dataResposta) VALUES(?, ?, ?, ?)";
+            PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setLong(1, respostaFechada.getAutor().getIdUsuario());
             pstmt.setLong(2, respostaFechada.getQuestao().getIdQuestao());
             pstmt.setString(3, String.valueOf(respostaFechada.getIdtResposta()));
