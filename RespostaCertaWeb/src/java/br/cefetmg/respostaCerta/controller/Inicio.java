@@ -54,7 +54,7 @@ public class Inicio {
             while(it.hasNext()){
                 lista.add(modulos.get(it.next()));
             }
-            request.setAttribute("topicos", lista);
+            request.setAttribute("modulo", lista);
             return "Home.jsp";
         } catch (BusinessException | PersistenceException ex) {
             request.setAttribute("erro", ex.getMessage());
