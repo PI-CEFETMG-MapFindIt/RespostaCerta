@@ -13,8 +13,7 @@ import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
 import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *

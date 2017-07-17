@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Terror
  */
-class ResponderQuestaoAberta {
+class PagQuestaoAberta {
     public static String processa(HttpServletRequest request) throws IOException{
         Long idq = Long.parseLong(request.getParameter("id"));
         OpenQuestionManagement oqm = new OpenQuestionManagementImpl(new OpenQuestionDAOImpl());

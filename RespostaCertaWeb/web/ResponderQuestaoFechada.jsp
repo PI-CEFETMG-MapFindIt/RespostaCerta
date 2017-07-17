@@ -33,36 +33,36 @@
             </div>
         </div>
         <br>
-        <form>
+        <form id="respostaQuestao" action="/RespostaCerta/ControllerServlet?control=EnviarRespostaFechada&id=<%=question.getIdQuestao()%>" method="GET">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 text-justify">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="option" id="option1" value="option1">
+                            <input type="radio" name="option" id="option1" value="1">>
                                 <%=question.getAlt1()%>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="option" id="option2" value="option2">
+                            <input type="radio" name="option" id="option2" value="2">
                                 <%=question.getAlt2()%>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="option" id="option3" value="option3">
+                            <input type="radio" name="option" id="option3" value="3">
                                 <%=question.getAlt3()%>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="option" id="option4" value="option4">
+                            <input type="radio" name="option" id="option4" value="4">
                                 <%=question.getAlt4()%>	
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="option" id="option5" value="option5">
+                            <input type="radio" name="option" id="option5" value="5">
                                 <%=question.getAlt5()%>
                         </label>
                     </div>
