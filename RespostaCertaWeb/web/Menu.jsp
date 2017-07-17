@@ -40,7 +40,7 @@
             </ul>
         <%  } else {    %>   
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#modalLogin" data-toggle="modal" style="color:white">Logar</a></li>
+                <li><a id="logar" href="#modalLogin" data-toggle="modal" style="color:white">Logar</a></li>
                 <li><a href="/RespostaCerta/ControllerServlet?control=PagCadastrar" style="color:white">Cadastrar</a></li>
             </ul>
         <%  }   %>           
