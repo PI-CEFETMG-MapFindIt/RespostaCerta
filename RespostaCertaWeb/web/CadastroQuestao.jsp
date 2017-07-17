@@ -3,7 +3,7 @@
 <%@page import="br.cefetmg.respostaCerta.model.domain.Module"%>
 <!DOCTYPE html>
 <% List<Module> modulos = (List<Module>) request.getAttribute("modulos");
-   List<Subject> dominios = (List<Subject>) request.getAttribute("dominios");%>
+    List<Subject> dominios = (List<Subject>) request.getAttribute("dominios");%>
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Cadastro de Questões</title>
-        
+
         <link href="css/cropper.min.css" rel="stylesheet">
         <link href="css/CadastroQuestao.css" rel="stylesheet">
     </head>
@@ -24,7 +24,7 @@
                     <div class="form-group">
                         <label for="modulo"><h4>Modulo da Questão</h4></label>
                         <select id="modulo" name="modulo" class="form-control">
-                            <% for(Module modulo:modulos){ %>
+                            <% for (Module modulo : modulos) {%>
                             <option value="<%=modulo.getIdModulo()%>"><%=modulo.getNomeModulo()%></option>
                             <% } %>
                         </select>
@@ -40,15 +40,15 @@
                         <textarea class="form-control" rows="5" name="enunciado" id="enunciado" placeholder="Digite o enunciado da questão"></textarea>
                     </div>
                     <div class="form-group">
-			<div class="input-group">
+                        <div class="input-group">
                             <span class="input-group-btn">
-				<span class="btn btn-default btn-file">
+                                <span class="btn btn-default btn-file">
                                     Escolher Imagem... <input accept="image/*" type="file" id="imgInp">
                                 </span>
                             </span>
-			</div>
-			<br>
-			<input type="hidden" id="blob" name="blob">
+                        </div>
+                        <br>
+                        <input type="hidden" id="blob" name="blob">
                         <img id='novaImg'/>
                     </div>    
                     <div class="form-group">
@@ -66,7 +66,7 @@
                             <label><input type="radio" id="desafio" name="difQuestao" value="Desafio">Desafio</label>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label><h4>Tipo da Questão</h4></label>
                         <div class="radio">
@@ -132,9 +132,9 @@
                                                             <div class="form-group">
                                                                 <label for="disciplina"><h4>Disciplina</h4></label>
                                                                 <select id="disciplina" name="disciplina" class="form-control">
-                                                                    <% for(Subject dominio:dominios){ %>
+                                                                    <% for (Subject dominio : dominios) {%>
                                                                     <option value="<%=dominio.getIdDominio()%>"><%=dominio.getNomeDominio()%></option>
-                                                                    <% } %>
+                                                                    <% }%>
                                                                 </select>
                                                                 <br>
                                                                 <button class="btn btn-default" type="button" data-toggle="modal" data-target="#modalDisciplina">Adicionar Disciplina</button>
@@ -174,8 +174,8 @@
                                     </div>
                                     </div>
                                     <script src="js/cropper.min.js"></script>
-                                    
+
                                     <script src="js/CadastroQuestao.js"></script>
-                                    
+
                                     </body>
                                     </html>

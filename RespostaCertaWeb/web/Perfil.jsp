@@ -11,10 +11,9 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <title>Perfil</title>
-
-
+        <link href="css/cropper.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/Perfil.css">
     </head>
     <body>
         <%@include file="/Menu.jsp"%>
@@ -22,10 +21,10 @@
 	<h1 class="text-center">Perfil</h1>
 	<div class="row" aling="center">
             <div class="col-md-3">
-		<div class="display center">
+		<div class="display">
                     <% if(user.getFotoUsuario()!=null){%>
                             <img src="/RespostaCerta/ImageServlet?tipo=user&id=<%=user.getIdUsuario()%>">
-                    <%}%><br>
+                    <%}%>
                     <button type="button" class="btn button" data-toggle="modal" href="#modalAlteraImagem">Alterar Imagem</button>	
 		</div>										
             </div>
@@ -147,11 +146,11 @@
                     </div>
                     <div class="modal-body">
                         <form id="alteraImagem" action="/RespostaCerta/ControllerServlet?control=AlteraImagem" method="POST">
-                            <div class="form-group">
+                            <div class="form-group" align="center">
                                 <div class="input-group">
                                     <span class="input-group-btn">
                                         <span class="btn btn-default btn-file">
-                                            Selecionar Imagem<input accept="image/*" type="file" id="novaImagemInput" name="novaImagemInput">
+                                            Selecionar Imagem<input accept="image/*" type="file" id="imgInp" name="imgInp">
                                         </span>
                                     </span> 
                                 </div>
@@ -168,8 +167,8 @@
                 </div>
             </div>
         </div>
-</div>
-<script src="js/jquery.min.js"></script>
-<script src="js/Perfil.js"></script>
+        
+        <script src="js/cropper.min.js"></script>
+        <script src="js/Perfil.js"></script>
 </body>
 </html>
