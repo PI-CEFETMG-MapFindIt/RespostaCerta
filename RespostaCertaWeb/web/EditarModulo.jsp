@@ -1,9 +1,4 @@
-<%-- 
-    Document   : EditarMódulo
-    Created on : 08/07/2017, 11:17:12
-    Author     : umcan
---%>
-
+<%--Author:Vitor --%>
 <%@page import="java.util.List"%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Subject"%>
 <%@page import="br.cefetmg.respostaCerta.model.domain.Module"%>

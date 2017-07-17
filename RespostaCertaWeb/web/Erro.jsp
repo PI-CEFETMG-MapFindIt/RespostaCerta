@@ -1,9 +1,4 @@
-<%-- 
-    Document   : Erro
-    Created on : 30/06/2017, 23:01:56
-    Author     : umcan
---%>
-
+<%--Author:Vitor --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
