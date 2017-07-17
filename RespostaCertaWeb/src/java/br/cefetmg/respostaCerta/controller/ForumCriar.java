@@ -28,7 +28,10 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import sun.misc.BASE64Decoder;
 
-/*@author Pedro Almeida*/
+/**
+ * 
+ * @author Pedro Almeida
+ */
 public class ForumCriar {
     public static String processa(HttpServletRequest request){
         try {

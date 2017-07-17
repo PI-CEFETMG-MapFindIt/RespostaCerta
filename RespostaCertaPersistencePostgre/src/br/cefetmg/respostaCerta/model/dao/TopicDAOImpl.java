@@ -24,6 +24,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -88,8 +89,12 @@ public class TopicDAOImpl implements TopicDAO{
             pstmt.setLong(2, topic.getAutor().getIdUsuario());
             pstmt.setString(3, topic.getTxtMensagem());
             pstmt.setDate(4, java.sql.Date.valueOf(topic.getDataPostagem()));
-            pstmt.setBinaryStream(5, imageToBlob(topic.getMsgPhoto()));
-            pstmt.executeQuery();
+            if(topic.getMsgPhoto()!=null){
+                pstmt.setBinaryStream(5, imageToBlob(topic.getMsgPhoto()));
+            }else{
+                pstmt.setNull(5, Types.NULL);
+            }
+            pstmt.executeUpdate();
             pstmt.close();
             connection.close();
         } catch (ClassNotFoundException | SQLException | IOException e) {
@@ -170,7 +175,7 @@ public class TopicDAOImpl implements TopicDAO{
                     + "JOIN modulo c ON b.idModulo=c.idModulo "
                     + "JOIN dominio d ON c.idDominio=d.idDominio "
                     + "JOIN usuario e ON b.idUsuarioCriador=e.idUsuario "
-                    + "WHERE a.idQuestao = ? ";
+                    + "WHERE g.idMensagem = ? ";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, topicId);
             ResultSet rs = pstmt.executeQuery();

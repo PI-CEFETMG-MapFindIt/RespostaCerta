@@ -60,10 +60,10 @@ public class ForumDAOImpl implements ForumDAO{
             Connection connection = ConnectionManager.getInstance().getConnection();
             String sql = "INSERT INTO forum (idQuestao, dataCriacao, status) VALUES(?, ?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, forum.getIdForum());
+            pstmt.setLong(1, forum.getQuestao().getIdQuestao());
             pstmt.setBoolean(3, forum.isStatus());
             pstmt.setDate(2, java.sql.Date.valueOf(forum.getDataCriacao()));
-            pstmt.executeQuery();
+            pstmt.executeUpdate();
             pstmt.close();
             connection.close();
         } catch (ClassNotFoundException | SQLException e) {
@@ -175,6 +175,7 @@ public class ForumDAOImpl implements ForumDAO{
                 forum.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
                 forum.setStatus(rs.getBoolean("status"));
                 forum.setIdForum(rs.getLong("idQuestao"));
+                
             }
             rs.close();
             pstmt.close();
