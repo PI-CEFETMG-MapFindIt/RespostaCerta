@@ -2,8 +2,10 @@ package br.cefetmg.respostaCerta.controller;
 
 import br.cefetmg.respostaCerta.model.dao.ClosedQuestionDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.OpenQuestionDAOImpl;
+import br.cefetmg.respostaCerta.model.dao.TopicDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.UserDAOImpl;
 import br.cefetmg.respostaCerta.model.domain.Question;
+import br.cefetmg.respostaCerta.model.domain.Topic;
 import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
@@ -11,6 +13,8 @@ import br.cefetmg.respostaCerta.model.service.ClosedQuestionManagement;
 import br.cefetmg.respostaCerta.model.service.ClosedQuestionManagementImpl;
 import br.cefetmg.respostaCerta.model.service.OpenQuestionManagement;
 import br.cefetmg.respostaCerta.model.service.OpenQuestionManagementImpl;
+import br.cefetmg.respostaCerta.model.service.TopicManagement;
+import br.cefetmg.respostaCerta.model.service.TopicManagementImpl;
 import br.cefetmg.respostaCerta.model.service.UserManagement;
 import br.cefetmg.respostaCerta.model.service.UserManagementImpl;
 import java.awt.Image;
@@ -70,7 +74,15 @@ public class ImageServlet extends HttpServlet {
                             rd.forward(request, response);
                          }
                          break;
-                         
+            case "topic": TopicManagement manageT = new TopicManagementImpl(new TopicDAOImpl());
+                          try{
+                              Topic t = manageT.getTopicById(id);
+                              img = t.getMsgPhoto();
+                          } catch (BusinessException | PersistenceException ex) {
+                            request.setAttribute("erro", ex.getMessage());
+                            RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
+                            rd.forward(request, response);
+                         }                                
         }
         if(img==null){
             img = ImageIO.read(new URL("https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png"));

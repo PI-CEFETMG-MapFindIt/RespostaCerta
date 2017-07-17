@@ -178,7 +178,7 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                     + "JOIN modulo b ON b.idModulo=a.idModulo "
                     + "JOIN dominio c ON b.idDominio=c.idDominio "
                     + "JOIN usuario d ON a.idUsuarioCriador=d.idUsuario "
-                    + "WHERE a.idQuestao = ? ";
+                    + "WHERE a.idQuestao = ? AND a.idtQuestao='1' ";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, openQuestionId);
             ResultSet rs = pstmt.executeQuery();
