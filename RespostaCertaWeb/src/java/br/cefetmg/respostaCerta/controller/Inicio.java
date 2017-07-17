@@ -13,11 +13,17 @@ import br.cefetmg.respostaCerta.model.service.ClosedAnswerManagementImpl;
 import br.cefetmg.respostaCerta.model.service.OpenAnswerManagement;
 import br.cefetmg.respostaCerta.model.service.OpenAnswerManagementImpl;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,7 +47,7 @@ public class Inicio {
                 modulos.put(aberta.getQuestao().getModulo().getIdModulo(), aberta.getQuestao().getModulo());
                 disciplinas.put(aberta.getQuestao().getModulo().getDominio().getIdDominio(), aberta.getQuestao().getModulo().getDominio());
             }
-            HashMap<Long, Integer> contModulos = new HashMap<>();
+            Map<Long, Integer> contModulos = new HashMap<>();
             try{
                 for(Long modulo:modulos.keySet()){
                     if(contModulos.containsKey(modulo)){
@@ -54,9 +60,9 @@ public class Inicio {
                 request.setAttribute("erro", ex.getMessage());
                 return "Erro.jsp";
             }
-            Stream<Map.Entry<Long, Integer>> sorted = contModulos.entrySet().stream().sorted(Map.Entry.comparingByValue());
-            
-            HashMap<Long, Integer> contDisciplinas = new HashMap<>();
+            //Ordena HashMap pelo value
+            contModulos = ordenaPorValor(contModulos);
+            Map<Long, Integer> contDisciplinas = new HashMap<>();
             try{
                 for(Long disciplina:disciplinas.keySet()){
                     if(contDisciplinas.containsKey(disciplina)){
@@ -69,6 +75,8 @@ public class Inicio {
                 request.setAttribute("erro", ex.getMessage());
                 return "Erro.jsp";
             }
+            //Ordena o HashMap pelo value
+            contDisciplinas = ordenaPorValor(contDisciplinas);
             ArrayList<Module> mod = new ArrayList<>();
             Iterator<Long> it = contModulos.keySet().iterator();
             while(it.hasNext()){
@@ -87,5 +95,19 @@ public class Inicio {
             request.setAttribute("erro", ex.getMessage());
             return "Erro.jsp";
         }
+    }
+    public static Map<Long, Integer> ordenaPorValor(Map<Long, Integer> map){
+        List<Map.Entry<Long, Integer>> list = new LinkedList<>(map.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<Long, Integer>>(){
+                @Override
+                public int compare(Map.Entry<Long, Integer> o1, Map.Entry<Long, Integer> o2){
+                    return ( o1.getValue() ).compareTo( o2.getValue() );
+                }
+        });
+        Map<Long, Integer> result = new LinkedHashMap<>();
+        for (Map.Entry<Long, Integer> entry : list){
+            result.put(entry.getKey(), entry.getValue());
+        }
+        return result;
     }
 }
