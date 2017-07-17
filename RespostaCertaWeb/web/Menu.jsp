@@ -1,14 +1,59 @@
+<%--Author:Pedro Almeida & Vitor --%>
 
 <%@page import="br.cefetmg.respostaCerta.model.domain.User"%>
-<%@page import="br.cefetmg.respostaCerta.model.service.UserManagementImpl"%>
+<%@page import="br.cefetmg.respostaCerta.model.dao.UserDAOImpl"%>
 <%@page import="br.cefetmg.respostaCerta.model.service.UserManagement"%>
-<%@page import="br.cefetmg.respostaCerta.model.dao.UserDAOImpl"%>
-<%@page import="br.cefetmg.respostaCerta.model.dao.UserDAOImpl"%>
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/Menu.css" rel="stylesheet">
-<% Boolean falhouLogin = (Boolean) request.getAttribute("falha");
-   if(falhouLogin==null){
+<%@page import="br.cefetmg.respostaCerta.model.service.UserManagementImpl"%>
+
+<%  Boolean falhouLogin = (Boolean) request.getAttribute("falha");
+    if(falhouLogin==null){
        falhouLogin=false;
+<<<<<<< HEAD
+    }   %>
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/RespostaCerta" style="color:white">RespostaCerta</a>         
+        <%  if (request.getSession().getAttribute("usuario") != null) {
+                UserManagement management = new UserManagementImpl(new UserDAOImpl());
+                User usuario = management.getUserById((Long)request.getSession().getAttribute("usuario"));  %>
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="#Perfil" style="color:white">Bem Vindo, <%=usuario.getNomeUsuario()%></a></li>
+                <%  char acesso = usuario.getIdtUsuario();  
+                    if(acesso=='E') {  %>
+                        <p>Cadastro em Análise</p>
+                    <%} else {%>
+                        <li><a href="#Perfil">Perfil</a></li>
+                        <li><a href="/RespostaCerta/ControllerServlet?control=Desempenho">Meu Desempenho</a></li> 
+                    <%if(acesso=='P' || acesso=='G') {%>
+                        <li><a href="/RespostaCerta/ControllerServlet?control=PagCadastrarQuestao">Cadastrar Questão</a></li>
+                        <li><a href="/RespostaCerta/ControllerServlet?control=PagMinhasQuestoes">Minhas Questões</a></li>
+                    <%if(acesso=='G') {%>
+                        <li><a href="/RespostaCerta/ControllerServlet?control=PagGerenciarCadastro">Gerenciamento de Cadastros</a></li>           
+                <%}}}%>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/RespostaCerta/ControllerServlet?control=Logout" style="color:white">Sair</a></li>
+            </ul>
+        <%  } else {    %>   
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#modalLogin" data-toggle="modal" style="color:white">Logar</a></li>
+                <li><a href="/RespostaCerta/ControllerServlet?control=PagCadastrar" style="color:white">Cadastrar</a></li>
+            </ul>
+        <%  }   %>           
+        <form class="navbar-form navbar-right">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Digite sua pesquisa...">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="button"  style="background-color:gray; color:white">
+                        <div class="glyphicon glyphicon-search" aria-hidden="true"></div>
+                    </button>
+                </div>
+=======
    }
 %>
 <div class="container-fluid">
@@ -72,74 +117,46 @@
                         </div>
                     </div>
                 </form>
+>>>>>>> 850622a4bb34ba975dca75cbfeaa45f6a0b08f49
             </div>
-            <% } %>
-        </div>
-    </nav>
-    <% if (request.getSession().getAttribute("usuario") != null) { %>
-    <div id="wrapper" class="toggled">
-        <div class="container-fluid">
-            <div id="sidebar-wrapper">
-                <ul class="sidebar-nav">
-                    <br><br><br>
-                    <img src="/RespostaCerta/ImageServlet?tipo=user&id=<%=usuario.getIdUsuario()%>" alt="..." width="200" height="200">`
-                    <li class="sidebar-brand"><a href="#" class="navbar-brand" style="color:white"><%=usuario.getNomeUsuario()%></a></li>
-                    <% if(usuario.getIdtUsuario()!='E'){%>
-                    <li><a href="/RespostaCerta/">Página Inicial</a></li>
-                    <li><a href="/RespostaCerta/ControllerServlet?control=Desempenho">Desempenho</a></li>
-                    <%}else{%>
-                    <p>Cadastro de Professor em Análise</p>
-                    <%}%>
-                    <% if(usuario.getIdtUsuario()=='P' || usuario.getIdtUsuario()=='G'){%>
-                    <li><a href="/RespostaCerta/ControllerServlet?control=PagCadastrarQuestao">Cadastrar Questão</a></li>
-                    <li><a href="/RespostaCerta/ControllerServlet?control=PagMinhasQuestoes">Minhas Questões</a></li>
-                    <% } %>
-                    <% if(usuario.getIdtUsuario()=='G'){%>
-                    <li><a href="/RespostaCerta/ControllerServlet?control=PagGerenciarCadastro">Gerenciamento de Cadastros</a></li>
-                    <%}%>
-                </ul>
+        </form>     
+    </div>
+</nav>
+        
+<div id="modalLogin" class="modal fade" role="dialog">
+    <div  class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Logar</h4>
             </div>
-        </div>
-        <%} else {%>
-        <div id="modalLogin" class="modal fade role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Logar</h4>
+            <form id="fazerLogin" action="/RespostaCerta/ControllerServlet?control=Login" method="POST">    
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="emailUsuario">E-mail</label>
+                        <input class="form-control" placeholder="Digite o seu e-mail" required type="email" name="emailUsuario" id="emailUsuario">
                     </div>
-                    <div class="modal-body">
-                        <form id="fazerLogin" action="/RespostaCerta/ControllerServlet?control=Login" method="POST">
-                            <div class="form-group">
-                                <label for="emailUsuario">E-mail</label>
-                                <input class="form-control" placeholder="Digite o seu e-mail" required type="email" name="emailUsuario" id="emailUsuario">
-                            </div>
-                            <div class="form-group">
-                                <label for="senhaUsuario">Senha</label>
-                                <input class="form-control" type="password" name="senhaUsuario" required id="senhaUsuario">
-                            </div>
-                            <%if(falhouLogin){%>
-                            <div class="form-group" style="color:red;">
-                                <p>E-mail ou senha incorreto</p>
-                            </div>
-                            <%}%>
-                            <button class="btn btn-default" type="submit">Login</button>
-                        </form>
+                    <div class="form-group">
+                        <label for="senhaUsuario">Senha</label>
+                        <input class="form-control" type="password" name="senhaUsuario" required id="senhaUsuario">
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                    </div>
+                    <%if(falhouLogin){%>
+                        <div class="form-group" style="color:red;">
+                            <p>E-mail ou senha incorreto</p>
+                        </div>
+                    <%}%>
                 </div>
-            </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="submit">Login</button>
+                </div>
+            </form>        
         </div>
-        <% }%>
-        <br>
-        <br>
-        <br>
-        <!--Aqui vem a parte interna-->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/Menu.js"></script>
-        <%if(falhouLogin){%>
-        <script>$('#logar').click();</script>
-        <%}%>
+    </div>
+</div>        
+
+<%if(falhouLogin){%>
+    <script>$('#logar').click();</script>
+<%}%>
+
+<br><br><br>
+
