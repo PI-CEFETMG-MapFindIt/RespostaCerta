@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -57,13 +58,15 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
     @Override
     synchronized public void insert(OpenAnswer openAnswer) throws PersistenceException {
         try {
+            Date date = Date.valueOf(openAnswer.getDataResposta());
+            
             Connection connection = ConnectionManager.getInstance().getConnection();
             String sql = "INSERT INTO resposta (idUsuario, idQuestao, idtResposta, dataResposta) VALUES(?, ?, ?, ?) RETURNING idResposta";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, openAnswer.getAutor().getIdUsuario());
             pstmt.setLong(2, openAnswer.getQuestao().getIdQuestao());
             pstmt.setString(3, String.valueOf(openAnswer.getIdtResposta()));
-            pstmt.setDate(4, java.sql.Date.valueOf(openAnswer.getDataResposta()));
+            pstmt.setDate(4, date);
             int linhasAfetadas = pstmt.executeUpdate();
             if (linhasAfetadas == 0) {
                 throw new PersistenceException("Criação da Resposta Falhou");
