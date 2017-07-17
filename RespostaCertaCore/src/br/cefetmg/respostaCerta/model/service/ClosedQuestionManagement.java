@@ -24,4 +24,5 @@ public interface ClosedQuestionManagement {
     public List<ClosedQuestion> getQuestionsByUser(Long id) throws BusinessException, PersistenceException;
     public List<Question> searchClosedQuestion(String Parameter) throws BusinessException, PersistenceException;
     public List<Question> getClosedQuestionByModule(Long id) throws BusinessException, PersistenceException;
+    public List<ClosedQuestion> getAllQuestions() throws BusinessException, PersistenceException;
 }

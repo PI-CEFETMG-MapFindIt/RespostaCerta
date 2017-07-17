@@ -245,7 +245,8 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                     + "JOIN modulo b ON b.idModulo=a.idModulo "
                     + "JOIN dominio c ON b.idDominio=c.idDominio "
                     + "JOIN usuario d ON a.idUsuarioCriador=d.idUsuario "
-                    + "WHERE a.idtQuestao='1'";
+                    + "WHERE a.idtQuestao='1' "
+                    + "ORDER BY a.dataCriacao DESC";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Question> lista = new ArrayList<>();

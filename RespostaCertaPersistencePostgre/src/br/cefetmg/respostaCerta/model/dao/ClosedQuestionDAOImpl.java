@@ -292,7 +292,8 @@ public class ClosedQuestionDAOImpl implements ClosedQuestionDAO{
                     + "JOIN questao b ON a.idQuestao=b.idQuestao "
                     + "JOIN modulo c ON b.idModulo=c.idModulo "
                     + "JOIN dominio d ON c.idDominio=d.idDominio "
-                    + "JOIN usuario e ON b.idUsuarioCriador=e.idUsuario ";
+                    + "JOIN usuario e ON b.idUsuarioCriador=e.idUsuario "
+                    + "ORDER BY b.dataCriacao DESC";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<ClosedQuestion> lista = new ArrayList<>();

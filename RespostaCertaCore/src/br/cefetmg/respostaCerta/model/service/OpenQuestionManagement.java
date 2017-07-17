@@ -22,4 +22,5 @@ public interface OpenQuestionManagement {
     public List<Question> getQuestionsByUser(Long id) throws BusinessException, PersistenceException;
     public List<Question> searchQuestion(String Parameter) throws BusinessException, PersistenceException;
     public List<Question> getOpenQuestionByModule(Long id) throws BusinessException, PersistenceException;
+    public List<Question> getAllQuestions() throws BusinessException, PersistenceException;
 }
