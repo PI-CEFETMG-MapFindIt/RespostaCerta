@@ -23,6 +23,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +87,7 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
         try{
             Connection connection = ConnectionManager.getInstance().getConnection();
             String sql = "INSERT INTO questao (idModulo, idUsuarioCriador, enunciadoQuestao, idtQuestao, dataCriacao, tituloQuestao, questPhoto, idtDificuldade) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
+            PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setLong(1, openQuestion.getModulo().getIdModulo());
             pstmt.setLong(2, openQuestion.getCriador().getIdUsuario());
             pstmt.setString(3, openQuestion.getEnunciadoQuestao());
@@ -99,7 +100,18 @@ public class OpenQuestionDAOImpl implements OpenQuestionDAO{
                 pstmt.setNull(7, Types.NULL);
             }
             pstmt.setString(8, String.valueOf(openQuestion.getIdtDificuldade()));
-            pstmt.executeUpdate();
+            int linhasAfetadas = pstmt.executeUpdate();
+            if (linhasAfetadas == 0) {
+                throw new PersistenceException("Criação da Questao Falhou");
+            }
+            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    openQuestion.setIdQuestao(generatedKeys.getLong(1));
+                }
+                else {
+                    throw new PersistenceException("Criação falhou, sem id's obtidos");
+                }
+            }
             pstmt.close();
             connection.close();
         } catch (ClassNotFoundException | SQLException | IOException e) {
