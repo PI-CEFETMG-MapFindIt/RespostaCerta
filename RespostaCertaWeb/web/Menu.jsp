@@ -26,7 +26,7 @@
                     if(acesso=='E') {  %>
                         <p>Cadastro em Análise</p>
                     <%} else {%>
-                        <li><a href="#Perfil">Perfil</a></li>
+                        <li><a href="/RespostaCerta/ControllerServlet?control=PagPerfil">Perfil</a></li>
                         <li><a href="/RespostaCerta/ControllerServlet?control=Desempenho">Meu Desempenho</a></li> 
                     <%if(acesso=='P' || acesso=='G') {%>
                         <li><a href="/RespostaCerta/ControllerServlet?control=PagCadastrarQuestao">Cadastrar Questão</a></li>
