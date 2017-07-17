@@ -14,7 +14,7 @@
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="/RespostaCerta" style="color:white">RespostaCerta</a>         
         <%  if (request.getSession().getAttribute("usuario") != null) {

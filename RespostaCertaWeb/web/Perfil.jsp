@@ -16,7 +16,6 @@
     </head>
     <body>
         <%@include file="/Menu.jsp"%>
-        <br><br><br>
         <div class="container-fluid">
             <h1 class="text-center">Perfil</h1>
             <div class="row" aling="center">
@@ -171,6 +170,7 @@
         </div>
         
         <link href="css/Perfil.css" rel="stylesheet">
+        <link href="css/cropper.min.css" rel="stylesheet">
         <script src="js/cropper.min.js"></script>
         <script src="js/Perfil.js"></script>
     </body>
