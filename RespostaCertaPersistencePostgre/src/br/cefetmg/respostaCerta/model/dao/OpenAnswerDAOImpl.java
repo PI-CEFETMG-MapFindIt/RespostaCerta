@@ -27,7 +27,7 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author umcan
+ * @author Vitor
  */
 public class OpenAnswerDAOImpl implements OpenAnswerDAO{
 

@@ -15,7 +15,6 @@ import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +26,7 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author umcan
+ * @author Vitor
  */
 public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
     private static ClosedAnswerDAOImpl closedDAO = null;         

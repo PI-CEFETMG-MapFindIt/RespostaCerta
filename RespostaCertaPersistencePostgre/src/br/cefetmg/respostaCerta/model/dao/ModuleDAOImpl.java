@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  *
- * @author umcan
+ * @author Vitor
  */
 public class ModuleDAOImpl implements ModuleDAO{
 

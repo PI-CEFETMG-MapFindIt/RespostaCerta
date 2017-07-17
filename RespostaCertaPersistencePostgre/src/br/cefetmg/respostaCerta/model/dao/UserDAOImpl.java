@@ -26,7 +26,7 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author umcan
+ * @author Vitor
  */
 public class UserDAOImpl implements UserDAO{
 

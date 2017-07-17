@@ -30,7 +30,7 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author umcan
+ * @author Vitor
  */
 public class OpenQuestionDAOImpl implements OpenQuestionDAO{
     private static OpenQuestionDAOImpl openQuestionDAO = null;        
