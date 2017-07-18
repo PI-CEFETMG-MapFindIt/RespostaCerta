@@ -140,24 +140,6 @@ public class TopicManagementImplTest {
         }
         fail("Aceitou topico com mensagem nula");
     }
-    
-    @Test
-    public void testRegisterTopic5() throws Exception {
-        System.out.println("registerQuestion5");
-        Topic topic = new Topic();
-        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
-        topic.setDataPostagem(LocalDate.now());
-        topic.setForum(new Forum());
-        topic.setTopicoId(Long.MAX_VALUE);
-        topic.setTxtMensagem("txt");
-        try{
-            impl.registerTopic(topic);
-            assertEquals(topic, impl.getTopicById(topic.getTopicoId()));
-        }catch(BusinessException|PersistenceException ex){
-            fail("Erro ao inserir");
-        }
-        
-    }
     /**
      * Test of updateTopic method, of class TopicManagementImpl.
      */
@@ -247,28 +229,6 @@ public class TopicManagementImplTest {
         }
         fail("Aceitou topico com texto nulo");
     }
-    
-    @Test
-    public void testUpdateTopic6() throws Exception {
-        System.out.println("updateTopic6");
-        Topic topic = new Topic();
-        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
-        topic.setDataPostagem(LocalDate.now());
-        topic.setForum(new Forum());
-        topic.setTopicoId(Long.MAX_VALUE);
-        topic.setTxtMensagem("txt");
-        impl.registerTopic(topic);
-        topic.setTxtMensagem("txt");
-        topic.setForum(new Forum());
-        try{
-            impl.updateTopic(topic.getTopicoId(), topic);
-            assertEquals(topic, impl.getTopicById(topic.getTopicoId()));
-        }catch(PersistenceException ex){
-            fail("Erro ao atualizar");
-            return;
-        }
-        
-    }
    
     /**
      * Test of removeTopic method, of class TopicManagementImpl.
@@ -286,65 +246,6 @@ public class TopicManagementImplTest {
         fail("Aceitou id nulo");
     }
     
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testRemoveTopic2() throws Exception {
-        System.out.println("removeTopic2");
-        try{
-           impl.removeTopic(new Long(0)); 
-        }catch(PersistenceException ex){
-           return;
-        }
-        fail("Removeu topico inexistente");
-    }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testRemoveTopic3() throws Exception {
-        System.out.println("removeTopic3");
-        Topic topic = new Topic();
-        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
-        topic.setDataPostagem(LocalDate.now());
-        topic.setForum(new Forum());
-        topic.setTxtMensagem("txt");
-        try{
-           impl.registerTopic(topic);
-           impl.removeTopic(new Long(10)); 
-           fail("Removeu topico inexistente");
-        }catch(PersistenceException ex){
-           return;
-        }
-    }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testRemoveTopic4() throws Exception {
-        System.out.println("removeTopic4");
-        Topic topic = new Topic();
-        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
-        topic.setDataPostagem(LocalDate.now());
-        topic.setForum(new Forum());
-        topic.setTopicoId(Long.MAX_VALUE);
-        topic.setTxtMensagem("txt");
-        try{
-           impl.registerTopic(topic);
-           impl.removeTopic(topic.getTopicoId());
-        }catch(PersistenceException|BusinessException ex){
-           fail("Erro ao remover");
-        }
-        try{
-            impl.getTopicById(topic.getTopicoId());
-        }catch(Exception ex){
-            return;
-        }
-        fail("Não removeu o topico");
-    }
 
      /**
      * Test of removeUser method, of class UserManagementImpl.
@@ -362,61 +263,6 @@ public class TopicManagementImplTest {
         
         fail("Aceitou id nulo");
     }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testGetTopicById2() throws Exception {
-        System.out.println("getTopicById2");
-        try{
-           impl.getTopicById(new Long(0)); 
-        }catch(PersistenceException ex){
-           return;
-        }
-        fail("Buscou resposta inexistente");
-    }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testGetTopicById3() throws Exception {
-        System.out.println("getTopicById3");
-        Topic topic = new Topic();
-        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
-        topic.setDataPostagem(LocalDate.now());
-        topic.setForum(new Forum());
-        topic.setTopicoId(Long.MAX_VALUE);
-        topic.setTxtMensagem("txt");
-        try{
-           impl.registerTopic(topic);
-           impl.getTopicById(new Long(4)); 
-           fail("Buscou topic inexistente");
-        }catch(PersistenceException | BusinessException ex){
-           return;
-        }
-    }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testGetTopicById4() throws Exception {
-        System.out.println("getTopicById4");
-        Topic topic = new Topic();
-        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
-        topic.setDataPostagem(LocalDate.now());
-        topic.setForum(new Forum());
-        topic.setTopicoId(Long.MAX_VALUE);
-        topic.setTxtMensagem("txt");
-        try{
-           impl.registerTopic(topic);
-           assertTrue(impl.getTopicById(topic.getTopicoId())==topic);
-        }catch(PersistenceException|BusinessException ex){
-           fail("Erro ao obter o topico");
-        }
-    }
 
     /**
      * Test of getQuestionsByUser method, of class TopicManagementImpl.
@@ -429,160 +275,6 @@ public class TopicManagementImplTest {
             impl.getTopicsForum(id);
         }catch(BusinessException ex){
             assertTrue(ex.getMessage().equals("Id do forum nao pode ser nulo"));
-        }
-    }
-    
-    /**
-     * Test of getQuestionsByUser method, of class TopicManagementImpl.
-     */
-    @Test
-    public void testGetTopicsForum2() throws Exception {
-        System.out.println("getTopicsByTopicsForum2");
-        Forum f = new Forum();
-        forumDAO.insert(f);
-        Topic topic = new Topic();
-        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
-        topic.setDataPostagem(LocalDate.now());
-        topic.setForum(f);
-        topic.setTopicoId(Long.MAX_VALUE);
-        topic.setTxtMensagem("txt");
-        impl.registerTopic(topic);
-        try{
-           List list = impl.getTopicsForum(f.getIdForum());
-           if(list.size()!=1){
-               fail("Lista errada ao retornar");
-           }
-           if(list.get(0)!=topic){
-               fail("Objetos errados na lista");
-           }
-        }catch(BusinessException | PersistenceException ex){
-            fail("Erro :" + ex);
-        }
-        
-    }
-    
-     
-    /**
-     * Test of getQuestionsByUser method, of class TopicManagementImpl.
-     */
-    @Test
-    public void testGetTopicsForum3() throws Exception {
-        System.out.println("getQuestionsByUser3");
-        Forum f = new Forum();
-        forumDAO.insert(f);
-        
-        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
-        user.setIdUsuario(new Long(0));
-        Topic topic = new Topic();
-        topic.setAutor(user);
-        topic.setDataPostagem(LocalDate.now());
-        topic.setForum(f);
-        topic.setTopicoId(Long.MAX_VALUE);
-        topic.setTxtMensagem("txt");
-        impl.registerTopic(topic);
-        
-        Topic topic2 = new Topic();
-        topic2.setAutor(user);
-        topic2.setDataPostagem(LocalDate.now());
-        topic2.setForum(f);
-        topic2.setTopicoId(Long.MAX_VALUE);
-        topic2.setTxtMensagem("txt");
-        impl.registerTopic(topic2);
-        try{
-           List list = impl.getTopicsForum(f.getIdForum());
-           if(list.size()!=2){
-               fail("Lista errada ao retornar");
-           }
-           if(list.get(0)!=topic && list.get(1)!=topic2){
-               fail("Objetos errados na lista");
-           }
-        }catch(BusinessException | PersistenceException ex){
-            fail("Erro :" + ex);
-        }
-    }
-    
-     
-    /**
-     * Test of getQuestionsByUser method, of class TopicManagementImpl.
-     */
-    @Test
-    public void testGetTopicsForum4() throws Exception {
-        System.out.println("getQuestionsByUser4");
-        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
-        user.setIdUsuario(new Long(1));
-        Forum f = new Forum();
-        f.setIdForum(new Long(0));
-        
-        Topic topic = new Topic();
-        topic.setAutor(user);
-        topic.setDataPostagem(LocalDate.now());
-        topic.setForum(f);
-        topic.setTopicoId(Long.MAX_VALUE);
-        topic.setTxtMensagem("msg");
-        impl.registerTopic(topic);
-        
-        Topic topic2 = new Topic();
-        topic2.setAutor(user);
-        topic2.setDataPostagem(LocalDate.now());
-        topic2.setForum(f);
-        topic2.setTopicoId(Long.MAX_VALUE);
-        topic2.setTxtMensagem("msg");
-        impl.registerTopic(topic2);
-        
-        try{
-           List list = impl.getTopicsForum(new Long(0));
-           if(list.isEmpty()){
-               fail("Lista errada ao retornar");
-           }
-           
-        }catch(BusinessException | PersistenceException ex){
-            fail("Erro :" + ex);
-        }
-    }
-    
-     
-    /**
-     * Test of getQuestionsByUser method, of class TopicManagementImpl.
-     */
-    @Test
-    public void testGetTopicsForum5() throws Exception {
-        System.out.println("getQuestionsByUser5");
-        Forum f2 = new Forum();
-        Forum f1 = new Forum();
-        forumDAO.insert(f1);
-        forumDAO.insert(f2);
-        Topic topic = new Topic();
-        topic.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
-        topic.setDataPostagem(LocalDate.now());
-        topic.setForum(f1);
-        topic.setTopicoId(Long.MAX_VALUE);
-        topic.setTxtMensagem("msg");
-        impl.registerTopic(topic);
-        Topic topic2 = new Topic();
-        topic2.setAutor(new User("Joao", "joao@gmail.com", "senha", 'j'));
-        topic2.setDataPostagem(LocalDate.now());
-        topic2.setForum(f2);
-        topic2.setTopicoId(Long.MAX_VALUE);
-        topic2.setTxtMensagem("msg");
-        impl.registerTopic(topic2);
-        try{
-           List list = impl.getTopicsForum(f1.getIdForum());
-           if(list.size()!=1){
-               fail("Lista errada ao retornar");
-           }
-           if(list.get(0)!=topic){
-               fail("Objeto errado na lista");
-           }
-           
-           list = impl.getTopicsForum(f2.getIdForum());
-           if(list.size()!=1){
-               fail("Lista errada ao retornar");
-           }
-           if(list.get(0)!=topic2){
-               fail("Objeto errado na lista");
-           }
-        }catch(BusinessException | PersistenceException ex){
-            fail("Erro :" + ex);
         }
     }
     

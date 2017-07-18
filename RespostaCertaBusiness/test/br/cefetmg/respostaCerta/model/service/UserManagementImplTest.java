@@ -124,19 +124,6 @@ public class UserManagementImplTest {
         }
         fail("Aceitou usuario com nome nulo");
     }
-    
-    @Test
-    public void testRegisterUser5() throws Exception {
-        System.out.println("registerUser5");
-        User user = new User("Joao", "joao@oi.com", "senha", 'p');
-        try{
-            impl.registerUser(user);
-            assertEquals(user, impl.getUserById(user.getIdUsuario()));
-        }catch(BusinessException|PersistenceException ex){
-            fail("Erro ao inserir");
-        }
-        
-    }
 
     /**
      * Test of registerUser method, of class UserManagementImpl.
@@ -226,22 +213,6 @@ public class UserManagementImplTest {
         fail("Aceitou ID nulo");
     }
     
-    /**
-     * Test of updateUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testUpdateUser6() throws Exception {
-        System.out.println("updateUser6");
-        User user = new User();
-        user.setLoginUsuario("joao@oi.com");
-        user.setSenhaUsuario("senha");
-        user.setIdtUsuario('p');
-        user.setNomeUsuario("Joao");
-        impl.registerUser(user);
-        User user2=new User("Maria", "maria@gmail.com", "senha", 'p');
-        impl.updateUser(user.getIdUsuario(), user2);
-        assertTrue(impl.getUserById(user.getIdUsuario())==user2);
-    }
 
     /**
      * Test of removeUser method, of class UserManagementImpl.
@@ -264,56 +235,6 @@ public class UserManagementImplTest {
      * Test of removeUser method, of class UserManagementImpl.
      */
     @Test
-    public void testRemoveUser2() throws Exception {
-        System.out.println("removeUser2");
-        try{
-           impl.removeUser(new Long(0)); 
-        }catch(PersistenceException ex){
-           return;
-        }
-        fail("Removeu usuario inexistente");
-    }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testRemoveUser3() throws Exception {
-        System.out.println("removeUser3");
-        try{
-           impl.registerUser(new User("joao", "joao@gmail.com", "senha", 'p'));
-           impl.removeUser(new Long(4)); 
-        }catch(PersistenceException ex){
-           return;
-        }
-        fail("Removeu usuario inexistente");
-    }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testRemoveUser4() throws Exception {
-        System.out.println("removeUser4");
-        User user= new User("joao", "joao@gmail.com", "senha", 'j');
-        try{
-           impl.registerUser(user);
-           impl.removeUser(user.getIdUsuario());
-        }catch(PersistenceException|BusinessException ex){
-           fail("Erro ao remover");
-        }
-        try{
-            impl.getUserById(user.getIdUsuario());
-        }catch(Exception ex){
-            return;
-        }
-        fail("Não removeu o usuario");
-    }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
     public void testGetUserById1() throws Exception {
         System.out.println("getUserById1");
         Long id = null;
@@ -325,50 +246,6 @@ public class UserManagementImplTest {
         }
         
         fail("Aceitou id nulo");
-    }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testGetUserById2() throws Exception {
-        System.out.println("getUserById2");
-        try{
-           impl.getUserById(new Long(0)); 
-        }catch(PersistenceException ex){
-           return;
-        }
-        fail("Buscou usuario inexistente");
-    }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testGetUserById3() throws Exception {
-        System.out.println("getUserById3");
-        try{
-           impl.registerUser(new User("joao", "joao@gmail.com", "senha", 'p'));
-           impl.removeUser(new Long(4)); 
-        }catch(PersistenceException ex){
-           return;
-        }
-        fail("Buscou usuario inexistente");
-    }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testGetUserById4() throws Exception {
-        System.out.println("getUserById4");
-        User user= new User("joao", "joao@gmail.com", "senha", 'j');
-        try{
-           impl.registerUser(user);
-           assertTrue(impl.getUserById(user.getIdUsuario())==user);
-        }catch(PersistenceException|BusinessException ex){
-           fail("Erro ao obter o usuario");
-        }
     }
     
 }

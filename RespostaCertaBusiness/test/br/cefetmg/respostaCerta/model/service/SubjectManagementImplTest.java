@@ -90,19 +90,6 @@ public class SubjectManagementImplTest {
         }
         fail("Aceitou dominio com nome nulo");
     }
-    
-    @Test
-    public void testRegisterSubject4() throws Exception {
-        System.out.println("registerSubject4");
-        Subject subject = new Subject("Dominio");
-        try{
-            impl.registerSubject(subject);
-            assertEquals(subject, impl.getSubjectById(subject.getIdDominio()));
-        }catch(BusinessException|PersistenceException ex){
-            fail("Erro ao inserir");
-        }
-        
-    }
 
     /**
      * Test of registerSubject method, of class SubjectManagementImpl.
@@ -149,19 +136,6 @@ public class SubjectManagementImplTest {
         }
         fail("Aceitou ID nulo");
     }
-    
-    /**
-     * Test of updateSubject method, of class SubjectManagementImpl.
-     */
-    @Test
-    public void testUpdateSubject5() throws Exception {
-        System.out.println("updateSubject5");
-        Subject subject = new Subject("Dominio");
-        impl.registerSubject(subject);
-        Subject subject2=new Subject("Dominio2");
-        impl.updateSubject(subject.getIdDominio(), subject2);
-        assertTrue(impl.getSubjectById(subject.getIdDominio())==subject2);
-    }
 
     /**
      * Test of removeSubject method, of class SubjectManagementImpl.
@@ -179,55 +153,7 @@ public class SubjectManagementImplTest {
         fail("Aceitou id nulo");
     }
     
-    /**
-     * Test of removeSubject method, of class SubjectManagementImpl.
-     */
-    @Test
-    public void testRemoveSubject2() throws Exception {
-        System.out.println("removeSubject2");
-        try{
-           impl.removeSubject(new Long(0)); 
-        }catch(PersistenceException ex){
-           return;
-        }
-        fail("Removeu dominio inexistente");
-    }
     
-    /**
-     * Test of removeSubject method, of class SubjectManagementImpl.
-     */
-    @Test
-    public void testRemoveSubject3() throws Exception {
-        System.out.println("removeSubject3");
-        try{
-           impl.registerSubject(new Subject("Dominio"));
-           impl.removeSubject(new Long(0)); 
-        }catch(PersistenceException ex){
-           return;
-        }
-        fail("Removeu dominio inexistente");
-    }
-    
-    /**
-     * Test of removeSubject method, of class SubjectManagementImpl.
-     */
-    @Test
-    public void testRemoveSubject4() throws Exception {
-        System.out.println("removeSubject4");
-        Subject user= new Subject("Dominio");
-        try{
-           impl.registerSubject(user);
-           impl.removeSubject(user.getIdDominio());
-        }catch(PersistenceException|BusinessException ex){
-           fail("Erro ao remover");
-        }
-        try{
-            impl.getSubjectById(user.getIdDominio());
-        }catch(Exception ex){
-            return;
-        }
-        fail("Não removeu o dominio");
-    }
     
     /**
      * Test of removeSubject method, of class SubjectManagementImpl.
@@ -244,50 +170,6 @@ public class SubjectManagementImplTest {
         }
         
         fail("Aceitou id nulo");
-    }
-    
-    /**
-     * Test of removeSubject method, of class SubjectManagementImpl.
-     */
-    @Test
-    public void testGetSubjectById2() throws Exception {
-        System.out.println("getSubjectById2");
-        try{
-           impl.getSubjectById(new Long(0)); 
-        }catch(PersistenceException ex){
-           return;
-        }
-        fail("Buscou dominio inexistente");
-    }
-    
-    /**
-     * Test of removeSubject method, of class SubjectManagementImpl.
-     */
-    @Test
-    public void testGetSubjectById3() throws Exception {
-        System.out.println("getSubjectById3");
-        try{
-           impl.registerSubject(new Subject("Dominio"));
-           impl.removeSubject(new Long(4)); 
-        }catch(PersistenceException ex){
-           return;
-        }
-        fail("Buscou dominio inexistente");
-    }
-    
-    /**
-     * Test of removeSubject method, of class SubjectManagementImpl.
-     */
-    @Test
-    public void testGetSubjectById4() throws Exception {
-        System.out.println("getSubjectById4");
-        Subject subject= new Subject("Dominio");
-        try{
-           impl.registerSubject(subject);
-           assertTrue(impl.getSubjectById(subject.getIdDominio())==subject);
-        }catch(PersistenceException|BusinessException ex){
-           fail("Erro ao obter o dominio");
-        }
     }
     
 }
