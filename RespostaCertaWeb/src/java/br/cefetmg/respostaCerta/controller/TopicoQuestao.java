@@ -41,4 +41,20 @@ class TopicoQuestao {
             return "Erro.jsp";
         }
     }
+    
+    public static String processa(HttpServletRequest request, Long id){
+        TopicManagement tpcMan = new TopicManagementImpl(new TopicDAOImpl());
+        TopicAnswerManagement tpcAMan = new TopicAnswerManagementImpl(new TopicAnswerDAOImpl());
+        try {
+            List<TopicAnswer> r = tpcAMan.getAnswersTopic(id);
+            request.setAttribute("respostas", r);
+            Topic t = tpcMan.getTopicById(id);
+            request.setAttribute("topico", t);
+            request.setAttribute("questao", t.getForum().getQuestao());
+            return "Topico.jsp";
+        } catch (BusinessException | PersistenceException ex) {
+            request.setAttribute("erro", ex.getMessage());
+            return "Erro.jsp";
+        }
+    }
 }

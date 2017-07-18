@@ -137,10 +137,10 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
 
             String sql = "SELECT f.idMensagemResposta idMensagemResposta, f.mensagem respMensagem, f.dataResposta dataResposta, "
                     + "h.idUsuario idUsuarioMR, h.nomeUsuario nomeUsuarioMR, h.loginUsuario loginUsuarioMR, h.senhaUsuario senhaUsuarioMR, h.idtUsuario idtUsuarioMR, h.userPhoto userPhotoMR, "
-                    + "g.mensagem topicMensagem, g.dataPost dataPost, g.image topicImage, g.idMensagem idTopic "
+                    + "g.mensagem topicMensagem, g.dataPost dataPost, g.image topicImage, g.idMensagem idTopic, "
                     + "i.idUsuario idUsuarioM, i.nomeUsuario nomeUsuarioM, i.loginUsuario loginUsuarioM, i.senhaUsuario senhaUsuarioM, i.idtUsuario idtUsuarioM, i.userPhoto userPhotoM, "
                     + "a.idQuestao idQuestaoForum, a.dataCriacao dataCriacaoForum, a.status statusForum, "
-                    + "b.idQuestao idQuestao, b.idtDificuldade idtDificuldade, b.enunciadoQuestao enunciadoQuestao, b.idtQuestao idtQuestao, b.dataCriacao dataCriacaoQuestao, b.tituloQuestao tituloQuestao, b.questPhoto questPhoto "
+                    + "b.idQuestao idQuestao, b.idtDificuldade idtDificuldade, b.enunciadoQuestao enunciadoQuestao, b.idtQuestao idtQuestao, b.dataCriacao dataCriacaoQuestao, b.tituloQuestao tituloQuestao, b.questPhoto questPhoto, "
                     + "c.idModulo idModulo, c.nomeModulo nomeModulo, "
                     + "d.idDominio idDominio, d.nomeDominio nomeDominio, "
                     + "e.idUsuario idUsuarioQ, e.nomeUsuario nomeUsuarioQ, e.loginUsuario loginUsuarioQ, e.senhaUsuario senhaUsuarioQ, e.idtUsuario idtUsuarioQ, e.userPhoto userPhotoQ "
@@ -153,7 +153,7 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                     + "JOIN modulo c ON b.idModulo=c.idModulo "
                     + "JOIN dominio d ON c.idDominio=d.idDominio "
                     + "JOIN usuario e ON b.idUsuarioCriador=e.idUsuario "
-                    + "WHERE a.idQuestao = ? ";
+                    + "WHERE f.idMensagemResposta = ? ";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, topicAnswerId);
             ResultSet rs = pstmt.executeQuery();
@@ -174,7 +174,11 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 autorResposta.setIdtUsuario(rs.getString("idtUsuarioMR").charAt(0));
                 InputStream blob = rs.getBinaryStream("userPhotoMR");  
                   
-                BufferedImage image = ImageIO.read(blob);
+                BufferedImage image;
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 autorResposta.setFotoUsuario(image);
                 
                 autorTopico.setIdUsuario(rs.getLong("idUsuarioM"));
@@ -184,7 +188,10 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 autorTopico.setIdtUsuario(rs.getString("idtUsuarioM").charAt(0));
                 blob = rs.getBinaryStream("userPhotoM");  
                   
-                image = ImageIO.read(blob);
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 autorTopico.setFotoUsuario(image);
                 
                 autorQuestao.setIdUsuario(rs.getLong("idUsuarioQ"));
@@ -213,7 +220,10 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 blob = rs.getBinaryStream("questPhoto");  
                   
-                image = ImageIO.read(blob);
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 
@@ -227,7 +237,10 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 topico.setForum(forum);
                 blob = rs.getBinaryStream("topicImage");  
                   
-                image = ImageIO.read(blob);
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 topico.setMsgPhoto(image);
                 topico.setTopicoId(rs.getLong("idTopic"));
                 topico.setTxtMensagem(rs.getString("topicMensagem"));
@@ -295,7 +308,11 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 autorResposta.setIdtUsuario(rs.getString("idtUsuarioMR").charAt(0));
                 InputStream blob = rs.getBinaryStream("userPhotoMR");  
                   
-                BufferedImage image = ImageIO.read(blob);
+                BufferedImage image;
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 autorResposta.setFotoUsuario(image);
                 
                 autorTopico.setIdUsuario(rs.getLong("idUsuarioM"));
@@ -315,7 +332,10 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 autorQuestao.setIdtUsuario(rs.getString("idtUsuarioQ").charAt(0));
                 blob = rs.getBinaryStream("userPhotoQ");  
                   
-                image = ImageIO.read(blob);
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 autorQuestao.setFotoUsuario(image);
                 
                 sub.setIdDominio(rs.getLong("idDominio"));
@@ -334,7 +354,10 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
                 blob = rs.getBinaryStream("questPhoto");  
                   
-                image = ImageIO.read(blob);
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 
@@ -346,9 +369,11 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 topico.setAutor(autorTopico);
                 topico.setDataPostagem(rs.getDate("dataPost").toLocalDate());
                 topico.setForum(forum);
-                blob = rs.getBinaryStream("topicImage");  
-                  
-                image = ImageIO.read(blob);
+                blob = rs.getBinaryStream("topicImage");       
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 topico.setMsgPhoto(image);
                 topico.setTopicoId(rs.getLong("idTopic"));
                 topico.setTxtMensagem(rs.getString("topicMensagem"));
@@ -416,7 +441,11 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 autorResposta.setIdtUsuario(rs.getString("idtUsuarioMR").charAt(0));
                 InputStream blob = rs.getBinaryStream("userPhotoMR");  
                   
-                BufferedImage image = ImageIO.read(blob);
+                BufferedImage image;
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 autorResposta.setFotoUsuario(image);
                 
                 autorTopico.setIdUsuario(rs.getLong("idUsuarioM"));
@@ -426,7 +455,10 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 autorTopico.setIdtUsuario(rs.getString("idtUsuarioM").charAt(0));
                 blob = rs.getBinaryStream("userPhotoM");  
                   
-                image = ImageIO.read(blob);
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 autorTopico.setFotoUsuario(image);
                 
                 autorQuestao.setIdUsuario(rs.getLong("idUsuarioQ"));
@@ -457,6 +489,8 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                   
                 if(blob!=null)
                     image = ImageIO.read(blob);
+                else
+                    image=null;
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 
@@ -472,6 +506,8 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
                 
                 if(blob!=null)
                     image = ImageIO.read(blob);
+                else
+                    image=null;
                 topico.setMsgPhoto(image);
                 topico.setTopicoId(rs.getLong("idTopic"));
                 topico.setTxtMensagem(rs.getString("topicMensagem"));

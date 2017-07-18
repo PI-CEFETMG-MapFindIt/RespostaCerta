@@ -71,6 +71,8 @@ public class ControllerServlet extends HttpServlet {
             case "EnviarRespostaFechada": jsp = ResponderQuestaoFechada.processa(request); break;
             case "ResponderQuestaoFechada": jsp = PagQuestaoFechada.processa(request); break;
             case "EnviarRespostaAberta": jsp = EnviarRespostaAberta.processa(request); break;
+            case "ExcluirRespostaTopico": jsp = ExcluirRespostaTopico.processa(request); break;
+            case "ExcluirTopico": jsp = ExcluirTopico.processa(request); break;
             default: jsp = Inicio.processa(request);
         }
         //Redirecionando pagina

@@ -29,13 +29,18 @@
                                 <a href="/RespostaCerta/ControllerServlet?control=TopicoQuestao&id=<%=top.getTopicoId()%>">
                                     <div class="panel panel-default">
                                         <div class="panel-heading" style="background-color: #7F7F7F">
-                                            <div class="row" style="color: white">
-                                                <div class="col-md-6 text-right">
+                                            <div class="row">
+                                                <div class="col-md-5 text-right" style="color: white">
                                                     <%=autor.getNomeUsuario()%>
                                                 </div>
-                                                <div class="col-md-6 text-left">
+                                                <div class="col-md-5 text-left" style="color: white">
                                                     <%=top.getDataPostagem()%>
                                                 </div>
+                                                    <% if(((Long)request.getSession().getAttribute("usuario")).equals(autor.getIdUsuario())){%>
+                                                <div class="col-md-2 text-right">
+                                                    <a href="/RespostaCerta/ControllerServlet?control=ExcluirTopico&id=<%=top.getTopicoId()%>" class="excluirTopico">Excluir Tópico</a>
+                                                </div>
+                                                <%}%>
                                             </div>
                                         </div>
                                         <div class="panel-body text-left">
@@ -83,7 +88,7 @@
                             </div>
                         </div>
                         <br>
-                        <form action="/RespostaCerta/ControllerServlet?control=ForumCriar&id=<%=questao.getIdQuestao()%>" method="POST">    
+                        <form id="formTopico" action="/RespostaCerta/ControllerServlet?control=ForumCriar&id=<%=questao.getIdQuestao()%>" method="POST">    
                             <div class="modal-body text-center">
                                 <div class="form-group">
                                     <textarea class="form-control" rows="5" name="mensagem" 
@@ -105,7 +110,7 @@
                             </div>
                             <div class="modal-footer" style="background-color: #7F7F7F;">  
                                 <div class="text-center">    
-                                    <button class="btn btn-default" type="submit"
+                                    <button class="btn btn-default" type="button" onclick="setTimeout(function(){$('#formTopico').submit();}, 1000)"
                                     style="border-radius: 0px; background-color: black; 
                                     color: white">Inserir</button>
                                     <button class="btn btn-default" data-dismiss="modal"

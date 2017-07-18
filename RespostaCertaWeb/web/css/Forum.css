@@ -11,6 +11,42 @@ a:active {
     color: black;
 }
 
+.excluir{
+    color:#9d9d9d;
+    text-decoration:none;
+}
+
+.excluir:link{
+    color:#9d9d9d;
+    text-decoration:none;
+}
+.excluir:visited{
+    color:#9d9d9d;
+    text-decoration:none;
+}
+.excluir:hover{
+    color:#ffffff;
+    text-decoration:none;
+}
+
+.excluirTopico{
+    color:#ffffff;
+    text-decoration:none;
+}
+
+.excluirTopico:link{
+    color:#ffffff;
+    text-decoration:none;
+}
+.excluirTopico:visited{
+    color:#ffffff;
+    text-decoration:none;
+}
+.excluirTopico:hover{
+    color:#9d9d9d;
+    text-decoration:none;
+}
+
 .btn-file {
     position: relative;
     overflow: hidden;

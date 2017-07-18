@@ -36,5 +36,23 @@ public class ForumQuestao {
             request.setAttribute("erro", ex.getMessage());
             return "Erro.jsp";
         }
+    }   
+    public static String processa(HttpServletRequest request, Long id){
+        TopicManagement tpcMan = new TopicManagementImpl(new TopicDAOImpl());
+        OpenQuestionManagement oqMan = new OpenQuestionManagementImpl(new OpenQuestionDAOImpl());
+        ClosedQuestionManagement clMan = new ClosedQuestionManagementImpl(new ClosedQuestionDAOImpl());
+        try {
+            List<Topic> topico = tpcMan.getTopicsForum(id);
+            request.setAttribute("topico", topico);
+            Question q = oqMan.getQuestionById(id);
+            if(q.getIdQuestao()==null){
+                q = clMan.getQuestionById(id);
+            }
+            request.setAttribute("questao", q);
+            return "Forum.jsp";
+        } catch (BusinessException | PersistenceException ex) {
+            request.setAttribute("erro", ex.getMessage());
+            return "Erro.jsp";
+        }
     }    
 }

@@ -29,13 +29,18 @@
                             <p></p>
                             <div class="panel panel-default">
                                 <div class="panel-heading" style="background-color: #7F7F7F">
-                                    <div class="row" style="color: white">
-                                        <div class="col-md-6 text-right">
+                                    <div class="row">
+                                        <div class="col-md-5 text-right" style="color: white">
                                             <%=autor.getNomeUsuario()%>
                                         </div>
-                                        <div class="col-md-6 text-left">
+                                        <div class="col-md-5 text-left" style="color: white">
                                             <%=topico.getDataPostagem()%>
                                         </div>
+                                        <%if(request.getSession().getAttribute("usuario").equals(autor.getIdUsuario())){%>
+                                        <div class="col-md-2 text-right">
+                                            <a href="/RespostaCerta/ControllerServlet?control=ExcluirTopico&id=<%=topico.getTopicoId()%>" class="excluirTopico">Excluir Tópico</a>
+                                        </div>
+                                        <%}%>
                                     </div>
                                 </div>
                                 <div class="panel-body text-left">
@@ -66,12 +71,17 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading" style="background-color: black">
                                         <div class="row" style="color: white">
-                                            <div class="col-md-6 text-right">
+                                            <div class="col-md-5 text-right">
                                                 <%=autorRes.getNomeUsuario()%>
                                             </div>
-                                            <div class="col-md-6 text-left">
+                                            <div class="col-md-5 text-left">
                                                 <%=res.getDataResposta()%>
                                             </div>
+                                            <%if(request.getSession().getAttribute("usuario").equals(autorRes.getIdUsuario()) || request.getSession().getAttribute("usuario").equals(autor.getIdUsuario())){%>
+                                            <div class="col-md-2 text-right">
+                                                <a href="/RespostaCerta/ControllerServlet?control=ExcluirRespostaTopico&id=<%=res.getIdMensagemResposta()%>" class="excluir">Excluir</a>
+                                            </div>
+                                            <%}%>
                                         </div>
                                     </div>
                                     <div class="panel-body text-left">
