@@ -175,86 +175,13 @@ public class PerformanceManagementImplTest {
         }
     }
     
+    
+  
     /**
      * Test of calculateErrors method, of class PerformanceManagementImpl.
      */
     @Test
     public void testCalculateErrors6() throws Exception {
-        System.out.println("calculateErrors6");
-        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
-        user.setIdUsuario(new Long(0));
-        ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject"), "modulo"), user,   "enunciado", true, LocalDate.now(), "titulo", null, 'F'), LocalDate.now(), 'f', true);
-        ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject2"), "modulo2"), user,   "enunciado2", true, LocalDate.now(), "titulo2", null, 'F'), LocalDate.now(), 'f', false);
-        answer.insert(resp1);
-        answer.insert(resp2);
-        try{
-            if(impl.calculateErrors(user)!=50){
-                fail("Valor errado");
-            }
-            
-        }catch(BusinessException | PersistenceException ex){
-            fail("Erro ao calcular");
-        }
-    }
-    
-    /**
-     * Test of calculateErrors method, of class PerformanceManagementImpl.
-     */
-    @Test
-    public void testCalculateErrors7() throws Exception {
-        System.out.println("calculateErrors7");
-        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
-        user.setIdUsuario(new Long(0));
-        ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject"), "modulo"), user,   "enunciado", true, LocalDate.now(), "titulo", null, 'F'), LocalDate.now(), 'f', true);
-        ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject2"), "modulo2"), user,   "enunciado2", true, LocalDate.now(), "titulo2", null, 'F'), LocalDate.now(), 'f', true);
-        answer.insert(resp1);
-        answer.insert(resp2);
-        try{
-            if(impl.calculateErrors(user)!=0){
-                fail("Valor errado");
-            }
-            
-        }catch(BusinessException | PersistenceException ex){
-            fail("Erro ao calcular");
-        }
-    }
-    
-    /**
-     * Test of calculateErrors method, of class PerformanceManagementImpl.
-     */
-    @Test
-    public void testCalculateErrors8() throws Exception {
-        System.out.println("calculateErrors8");
-        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
-        user.setIdUsuario(new Long(0));
-        ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject"), "modulo"), user,   "enunciado", true, LocalDate.now(), "titulo", null, 'F'), LocalDate.now(), 'f', true);
-        ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject2"), "modulo2"), user,   "enunciado2", true, LocalDate.now(), "titulo2", null, 'F'), LocalDate.now(), 'f', false);
-        ClosedAnswer resp3;
-        resp3 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject3"), "modulo3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null, 'F'), LocalDate.now(), 'f', false);
-        answer.insert(resp1);
-        answer.insert(resp2);
-        answer.insert(resp3);
-        try{
-            if(impl.calculateErrors(user)!=((2.0*100)/3.0)){
-                fail("Valor errado");
-            }
-            
-        }catch(BusinessException | PersistenceException ex){
-            fail("Erro ao calcular");
-        }
-    }
-    
-    /**
-     * Test of calculateErrors method, of class PerformanceManagementImpl.
-     */
-    @Test
-    public void testCalculateErrors9() throws Exception {
         System.out.println("calculateErrors9");
         User user = new User("Joao", "joao@gmail.com", "senha", 'j');
         user.setIdUsuario(new Long(0));
@@ -393,91 +320,7 @@ public class PerformanceManagementImplTest {
     }
     
     
-    /**
-     * Test of calculateErrors method, of class PerformanceManagementImpl.
-     */
-    @Test
-    public void testCalculateErrorsByModule10() throws Exception {
-        System.out.println("calculateErrorsByModule10");
-        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
-        user.setIdUsuario(new Long(0));
-        Module m = new Module(new Subject( "subject"), "modulo");
-        m.setIdModulo(new Long(0));
-        ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, m, user,   "enunciado", true, LocalDate.now(), "titulo", null, 'F'), LocalDate.now(), 'f', true);
-        ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject2"), "modulo2"), user,   "enunciado2", true, LocalDate.now(), "titulo2", null, 'F'), LocalDate.now(), 'f', false);
-        ClosedAnswer resp3;
-        resp3 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject3"), "modulo3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null, 'F'), LocalDate.now(), 'f', false);
-        resp2.getQuestao().getModulo().setIdModulo(new Long(1));
-        resp3.getQuestao().getModulo().setIdModulo(new Long(1));
-        answer.insert(resp1);
-        answer.insert(resp2);
-        answer.insert(resp3);
-        try{
-            if(impl.calculateErrorsByModule(user, m)!=0){
-                fail("Valor errado");
-            }
-            
-        }catch(BusinessException | PersistenceException ex){
-            fail("Erro ao calcular");
-        }
-    }
     
-    /**
-     * Test of calculateErrors method, of class PerformanceManagementImpl.
-     */
-    @Test
-    public void testCalculateErrorsByModule11() throws Exception {
-        System.out.println("calculateErrorsByModule11");
-        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
-        user.setIdUsuario(new Long(0));
-        Module m = new Module(new Subject( "subject"), "modulo");
-        m.setIdModulo(new Long(0));
-        ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, m , user,   "enunciado", true, LocalDate.now(), "titulo", null, 'F'), LocalDate.now(), 'f', true);
-        ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, m , user,   "enunciado2", true, LocalDate.now(), "titulo2", null, 'F'), LocalDate.now(), 'f', false);
-        ClosedAnswer resp3;
-        resp3 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject3"), "modulo3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null, 'F'), LocalDate.now(), 'f', false);
-        resp3.getQuestao().getModulo().setIdModulo(new Long(1));
-        answer.insert(resp1);
-        answer.insert(resp2);
-        answer.insert(resp3);
-        try{
-            if(impl.calculateErrorsByModule(user, m)!=50){
-                fail("Valor errado");
-            }
-            
-        }catch(BusinessException | PersistenceException ex){
-            fail("Erro ao calcular");
-        }
-    }
-    
-    /**
-     * Test of calculateErrors method, of class PerformanceManagementImpl.
-     */
-    @Test
-    public void testCalculateErrorsByModule12() throws Exception {
-        System.out.println("calculateErrorsByModule12");
-        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
-        user.setIdUsuario(new Long(0));
-        Module m = new Module(new Subject( "subject"), "modulo");
-        ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject3"),  "modulo3") , user,   "enunciado", true, LocalDate.now(), "titulo", null, 'F'), LocalDate.now(), 'f', true);
-        ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject3"),  "modulo3") , user,   "enunciado2", true, LocalDate.now(), "titulo2", null, 'F'), LocalDate.now(), 'f', false);
-        ClosedAnswer resp3;
-        resp3 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject3"), "modulo3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null, 'F'), LocalDate.now(), 'f', false);
-        answer.insert(resp1);
-        answer.insert(resp2);
-        answer.insert(resp3);
-        try{
-            impl.calculateErrorsByModule(user, m);
-        }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("O usuario não respondeu nenhuma questão desse módulo"));
-        }
-    }
 
     /**
      * Test of calculateErrors method, of class PerformanceManagementImpl.
@@ -588,93 +431,5 @@ public class PerformanceManagementImplTest {
         }catch(BusinessException ex){
             assertTrue(ex.getMessage().equals("Nome do dominio não pode ser nulo"));
         }
-    }
-    
-    /**
-     * Test of calculateErrors method, of class PerformanceManagementImpl.
-     */
-    @Test
-    public void testCalculateErrorsBySubject9() throws Exception {
-        System.out.println("calculateErrorsBySubject9");
-        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
-        user.setIdUsuario(new Long(0));
-        Subject s = new Subject(  "subject");
-        s.setIdDominio(new Long(0));
-        ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(s, "nome"), user,   "enunciado", true, LocalDate.now(), "titulo", null, 'F'), LocalDate.now(), 'f', true);
-        ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject2"), "modulo2"), user,   "enunciado2", true, LocalDate.now(), "titulo2", null, 'F'), LocalDate.now(), 'f', false);
-        ClosedAnswer resp3;
-        resp3 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject3"), "modulo3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null, 'F'), LocalDate.now(), 'f', false);
-        resp2.getQuestao().getModulo().getDominio().setIdDominio(new Long(1));
-        resp3.getQuestao().getModulo().getDominio().setIdDominio(new Long(1));
-        answer.insert(resp1);
-        answer.insert(resp2);
-        answer.insert(resp3);
-        try{
-            System.out.println(impl.calculateErrorsBySubject(user, s));
-            if(impl.calculateErrorsBySubject(user, s)!=0){
-                fail("Valor errado");
-            }
-            
-        }catch(BusinessException | PersistenceException ex){
-            fail("Erro ao calcular");
-        }
-    }
-    
-    /**
-     * Test of calculateErrors method, of class PerformanceManagementImpl.
-     */
-    @Test
-    public void testCalculateErrorsBySubject10() throws Exception {
-        System.out.println("calculateErrorsBySubject10");
-        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
-        user.setIdUsuario(new Long(0));
-        Subject s = new Subject("subject");
-        s.setIdDominio(new Long(0));
-        ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(s,   "nome") , user,   "enunciado", true, LocalDate.now(), "titulo", null, 'F'), LocalDate.now(), 'f', true);
-        ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(s,   "nome2") , user,   "enunciado2", true, LocalDate.now(), "titulo2", null, 'F'), LocalDate.now(), 'f', false);
-        ClosedAnswer resp3;
-        resp3 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject3"), "modulo3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null, 'F'), LocalDate.now(), 'f', false);
-        resp3.getQuestao().getModulo().getDominio().setIdDominio(new Long(1));
-        answer.insert(resp1);
-        answer.insert(resp2);
-        answer.insert(resp3);
-        try{
-            if(impl.calculateErrorsBySubject(user, s)!=50){
-                fail("Valor errado");
-            }
-            
-        }catch(BusinessException | PersistenceException ex){
-            fail("Erro ao calcular");
-        }
-    }
-    
-    /**
-     * Test of calculateErrors method, of class PerformanceManagementImpl.
-     */
-    @Test
-    public void testCalculateErrorsBySubject11() throws Exception {
-        System.out.println("calculateErrorsBySubject11");
-        User user = new User("Joao", "joao@gmail.com", "senha", 'j');
-        user.setIdUsuario(new Long(0));
-        Subject s = new Subject(  "subject");
-        ClosedAnswer resp1;
-        resp1 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject3"),  "modulo3") , user,   "enunciado", true, LocalDate.now(), "titulo", null, 'F'), LocalDate.now(), 'f', true);
-        ClosedAnswer resp2;
-        resp2 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject3"),  "modulo3") , user,   "enunciado2", true, LocalDate.now(), "titulo2", null, 'F'), LocalDate.now(), 'f', false);
-        ClosedAnswer resp3;
-        resp3 = new ClosedAnswer(0, user, new ClosedQuestion(null, null, null, null, null, 0, new Module(new Subject( "subject3"), "modulo3"), user,   "enunciado3", true, LocalDate.now(), "titulo3", null, 'F'), LocalDate.now(), 'f', false);
-        answer.insert(resp1);
-        answer.insert(resp2);
-        answer.insert(resp3);
-        try{
-            impl.calculateErrorsBySubject(user, s);
-        }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("O usuario não respondeu nenhuma questão desse dominio"));
-        }
-    }
-    
+    }        
 }

@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author pedro
+ * @author pedro & adalberto
  */
 public class ClosedQuestionManagementImplTest {
     private static ClosedQuestionDAO closedQuestionDAO;
@@ -298,16 +298,6 @@ public class ClosedQuestionManagementImplTest {
         fail("Aceitou alternativa nula");
     }
     
-    @Test
-    public void testRegisterQuestion12() throws Exception {
-        System.out.println("RegisterQuestion12");
-        ClosedQuestion question = new ClosedQuestion("1", "2", "3", "4", "5", 1, new Module(), 
-        new User(), "Test", true, LocalDate.MIN, "Test", null, 'F');
-        
-        impl.registerQuestion(question);
-        assertTrue(impl.getQuestionById(question.getIdQuestao()) == question);
-    }
-
     /**
      * Test of updateQuestion method, of class ClosedQuestionManagementImpl.
      */
@@ -545,40 +535,7 @@ public class ClosedQuestionManagementImplTest {
         fail("Aceitou alternativa nula");
     }
     
-    @Test
-    public void testUpdateQuestion12() throws Exception {
-        System.out.println("UpdateQuestion12");
-        ClosedQuestion question = new ClosedQuestion();
-        question.setCriador(new User());
-        question.setDataCriacao(LocalDate.MIN);
-        question.setModulo(new Module());
-        question.setEnunciadoQuestao("");
-        question.setTituloQuestao("");
-        question.setAlt1("");
-        question.setAlt2("");
-        question.setAlt3("");
-        question.setAlt4("");
-        question.setAlt5("");
-        try{
-            impl.updateQuestion(null,question);
-        }catch(BusinessException ex){
-            assertTrue(ex.getMessage().equals("Id não pode ser nulo"));
-            return;
-        }
-        fail("Aceitou Id nulo");
-    }
     
-    @Test
-    public void testUpdateQuestion13() throws Exception {
-        System.out.println("UpdateQuestion13");
-        ClosedQuestion question = new ClosedQuestion("1", "2", "3", "4", "5", 1, new Module(), 
-        new User(), "Test", true, LocalDate.MIN, "Test", null, 'F');
-      
-        impl.registerQuestion(question);
-        question.setCorreta(2);
-        impl.updateQuestion(new Long(1), question);
-        assertTrue(impl.getQuestionById(new Long(1)).getCorreta() == 2);        
-    }
 
     /**
      * Test of removeQuestion method, of class ClosedQuestionManagementImpl.

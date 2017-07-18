@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author umcan
+ * @author umcan & Adalberto
  */
 public class OpenAnswerManagementImplTest {
     private static OpenAnswerDAO openAnswerDAO;
@@ -103,20 +103,7 @@ public class OpenAnswerManagementImplTest {
         }
         fail("Aceitou resposta com data nula");
     }
-    @Test
-    public void testRegisterQuestionAnswer4() throws Exception {
-        System.out.println("registerOpenAnswer4");
-        User us = new User("Joao", "joao@oi.com", "senha", 'p');
-        Question q = new Question(null, null, "enunciado", true, LocalDate.now(), "titulo", null, 'F');
-        OpenAnswer open = new OpenAnswer("a", us, q, LocalDate.now(), 'f', true);
-        try{
-            impl.registerQuestionAnswer(open);
-            assertEquals(open, impl.getQuestionAnswerById(open.getIdResposta()));
-        }catch(BusinessException|PersistenceException ex){
-            fail("Erro ao inserir");
-        }
-        
-    }
+    
     /**
      * Test of registerUser method, of class UserManagementImpl.
      */
@@ -177,26 +164,7 @@ public class OpenAnswerManagementImplTest {
             return;
         }
         fail("Aceitou id nulo");
-    }
-   
-    /**
-     * Test of updateUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testUpdateQuestionAnswer5() throws Exception {
-        System.out.println("updateQuestionAnswer5");
-        OpenAnswer openAnswer = new OpenAnswer();
-        openAnswer.setAutor(new User("Joao", "jao", "senha", 'p'));
-        openAnswer.setDataResposta(LocalDate.now());
-        impl.registerQuestionAnswer(openAnswer);
-        OpenAnswer openAnswer2 = new OpenAnswer();
-        openAnswer2.setAutor(new User("Maria", "maria@gmail.com", "senha", 'p'));
-        openAnswer2.setDataResposta(LocalDate.now());
-        impl.updateQuestionAnswer(openAnswer.getIdResposta(), openAnswer2);
-        assertTrue(impl.getQuestionAnswerById(openAnswer.getIdResposta()).equals(openAnswer2));
-    }
-
-   
+    } 
     /**
      * Test of removeUser method, of class UserManagementImpl.
      */
@@ -213,60 +181,7 @@ public class OpenAnswerManagementImplTest {
         fail("Aceitou id nulo");
     }
     
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testRemoveQuestionAnswer2() throws Exception {
-        System.out.println("removeQuestionAnswer2");
-        try{
-           impl.removeQuestionAnswer(new Long(0)); 
-        }catch(PersistenceException ex){
-           return;
-        }
-        fail("Removeu resposta inexistente");
-    }
     
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testRemoveQuestionAnswer3() throws Exception {
-        System.out.println("removeQuestionAnswer3");
-        OpenAnswer openAnswer = new OpenAnswer();
-        openAnswer.setAutor(new User("Joao", "jao", "senha", 'p'));
-        openAnswer.setDataResposta(LocalDate.now());
-        try{
-           impl.registerQuestionAnswer(openAnswer);
-           impl.removeQuestionAnswer(new Long(3)); 
-        }catch(PersistenceException ex){
-           return;
-        }
-        fail("Removeu resposta inexistente");
-    }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testRemoveQuestionAnswer4() throws Exception {
-        System.out.println("removeQuestionAnswer4");
-        OpenAnswer openAnswer = new OpenAnswer();
-        openAnswer.setAutor(new User("Joao", "jao", "senha", 'p'));
-        openAnswer.setDataResposta(LocalDate.now());
-        try{
-           impl.registerQuestionAnswer(openAnswer);
-           impl.removeQuestionAnswer(openAnswer.getIdResposta());
-        }catch(PersistenceException|BusinessException ex){
-           fail("Erro ao remover");
-        }
-        try{
-            impl.getQuestionAnswerById(openAnswer.getIdResposta());
-        }catch(Exception ex){
-            return;
-        }
-        fail("Não removeu a resposta");
-    }
 
      /**
      * Test of removeUser method, of class UserManagementImpl.
@@ -283,55 +198,6 @@ public class OpenAnswerManagementImplTest {
         }
         
         fail("Aceitou id nulo");
-    }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testGetQuestionAnswerById2() throws Exception {
-        System.out.println("getQuestionAnswerById2");
-        try{
-           impl.getQuestionAnswerById(new Long(0)); 
-        }catch(PersistenceException ex){
-           return;
-        }
-        fail("Buscou resposta inexistente");
-    }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testGetQuestionAnswerById3() throws Exception {
-        System.out.println("getQuestionAnswerById3");
-        OpenAnswer openAnswer = new OpenAnswer();
-        openAnswer.setAutor(new User("Joao", "jao", "senha", 'p'));
-        openAnswer.setDataResposta(LocalDate.now());
-        try{
-           impl.registerQuestionAnswer(openAnswer);
-           impl.removeQuestionAnswer(new Long(4)); 
-        }catch(PersistenceException ex){
-           return;
-        }
-        fail("Buscou resposta inexistente");
-    }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testGetQuestionAnswerById4() throws Exception {
-        System.out.println("getQuestionAnswerById4");
-        OpenAnswer openAnswer = new OpenAnswer();
-        openAnswer.setAutor(new User("Joao", "jao", "senha", 'p'));
-        openAnswer.setDataResposta(LocalDate.now());
-        try{
-           impl.registerQuestionAnswer(openAnswer);
-           assertTrue(impl.getQuestionAnswerById(openAnswer.getIdResposta())==openAnswer);
-        }catch(PersistenceException|BusinessException ex){
-           fail("Erro ao obter a resposta");
-        }
     }
     
 }

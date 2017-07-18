@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author pedro
+ * @author pedro & Adalberto
  */
 public class ForumManagementImplTest {
     private static ForumDAO forumDAO;

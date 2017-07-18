@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author umcan
+ * @author umcan & Adalberto
  */
 public class ClosedAnswerManagementImplTest {
     private static ClosedAnswerDAO closedAnswerDAO;
@@ -105,23 +105,7 @@ public class ClosedAnswerManagementImplTest {
         }
         fail("Aceitou resposta com data nula");
     }
-    @Test
-    public void testRegisterQuestionAnswer4() throws Exception {
-        System.out.println("registerClosedAnswer4");
-        User us = new User("Joao", "joao@oi.com", "senha", 'p');
-        Module m = new Module(new Subject("a"), "a");
-        m.setIdModulo(new Long(0));
-        us.setIdUsuario(new Long(0));
-        ClosedQuestion q = new ClosedQuestion("a", "a", "a", "a", "a", 0, m, us, "enunciado", true, LocalDate.now(), "titulo", null, 'F');
-        ClosedAnswer closed = new ClosedAnswer(0, us, q, LocalDate.now(), 'f', true);
-        try{
-            impl.registerQuestionAnswer(closed);
-            assertEquals(closed, impl.getQuestionAnswerById(closed.getIdResposta()));
-        }catch(BusinessException|PersistenceException ex){
-            fail("Erro ao inserir");
-        }
-        
-    }
+    
     /**
      * Test of registerUser method, of class UserManagementImpl.
      */
@@ -183,22 +167,6 @@ public class ClosedAnswerManagementImplTest {
         fail("Aceitou id nulo");
     }
    
-    /**
-     * Test of updateUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testUpdateQuestionAnswer5() throws Exception {
-        System.out.println("updateQuestionAnswer5");
-        ClosedAnswer closedAnswer = new ClosedAnswer();
-        closedAnswer.setAutor(new User("Joao", "jao", "senha", 'p'));
-        closedAnswer.setDataResposta(LocalDate.now());
-        impl.registerQuestionAnswer(closedAnswer);
-        ClosedAnswer closedAnswer2 = new ClosedAnswer();
-        closedAnswer2.setAutor(new User("Maria", "maria@gmail.com", "senha", 'p'));
-        closedAnswer2.setDataResposta(LocalDate.now());
-        impl.updateQuestionAnswer(closedAnswer.getIdResposta(), closedAnswer2);
-        assertTrue(impl.getQuestionAnswerById(closedAnswer.getIdResposta()).equals(closedAnswer2));
-    }
 
    
     /**
@@ -231,46 +199,6 @@ public class ClosedAnswerManagementImplTest {
         fail("Removeu resposta inexistente");
     }
     
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testRemoveQuestionAnswer3() throws Exception {
-        System.out.println("removeQuestionAnswer3");
-        ClosedAnswer closedAnswer = new ClosedAnswer();
-        closedAnswer.setAutor(new User("Joao", "jao", "senha", 'p'));
-        closedAnswer.setDataResposta(LocalDate.now());
-        try{
-           impl.registerQuestionAnswer(closedAnswer);
-           impl.removeQuestionAnswer(new Long(3)); 
-        }catch(PersistenceException ex){
-           return;
-        }
-        fail("Removeu resposta inexistente");
-    }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testRemoveQuestionAnswer4() throws Exception {
-        System.out.println("removeQuestionAnswer4");
-        ClosedAnswer closedAnswer = new ClosedAnswer();
-        closedAnswer.setAutor(new User("Joao", "jao", "senha", 'p'));
-        closedAnswer.setDataResposta(LocalDate.now());
-        try{
-           impl.registerQuestionAnswer(closedAnswer);
-           impl.removeQuestionAnswer(closedAnswer.getIdResposta());
-        }catch(PersistenceException|BusinessException ex){
-           fail("Erro ao remover");
-        }
-        try{
-            impl.getQuestionAnswerById(closedAnswer.getIdResposta());
-        }catch(Exception ex){
-            return;
-        }
-        fail("Não removeu a resposta");
-    }
 
      /**
      * Test of removeUser method, of class UserManagementImpl.
@@ -315,27 +243,9 @@ public class ClosedAnswerManagementImplTest {
         try{
            impl.registerQuestionAnswer(closedAnswer);
            impl.removeQuestionAnswer(new Long(4)); 
-        }catch(PersistenceException ex){
+        }catch(Exception ex){
            return;
         }
         fail("Buscou resposta inexistente");
-    }
-    
-    /**
-     * Test of removeUser method, of class UserManagementImpl.
-     */
-    @Test
-    public void testGetQuestionAnswerById4() throws Exception {
-        System.out.println("getQuestionAnswerById4");
-        ClosedAnswer closedAnswer = new ClosedAnswer();
-        closedAnswer.setAutor(new User("Joao", "jao", "senha", 'p'));
-        closedAnswer.setDataResposta(LocalDate.now());
-        try{
-           impl.registerQuestionAnswer(closedAnswer);
-           assertTrue(impl.getQuestionAnswerById(closedAnswer.getIdResposta())==closedAnswer);
-        }catch(PersistenceException|BusinessException ex){
-           fail("Erro ao obter o usuario");
-        }
-    }
-    
+    }    
 }

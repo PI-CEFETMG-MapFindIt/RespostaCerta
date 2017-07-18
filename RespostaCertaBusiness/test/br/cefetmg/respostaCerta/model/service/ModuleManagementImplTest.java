@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author pedro
+ * @author pedro & Adalberto
  */
 public class ModuleManagementImplTest {
     private static ModuleDAO moduleDAO;

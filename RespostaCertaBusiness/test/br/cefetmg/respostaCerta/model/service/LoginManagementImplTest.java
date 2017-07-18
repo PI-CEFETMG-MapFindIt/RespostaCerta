@@ -120,28 +120,11 @@ public class LoginManagementImplTest {
         }
         fail("Aceitou senha nula");
     }
-    
     /**
      * Test of loginUser method, of class LoginManagementImpl.
      */
     @Test
     public void testLoginUser5() throws Exception {
-        System.out.println("loginUser5");
-        String username = "username";
-        String password = "senha";
-        try{
-            impl.loginUser(username, password);
-        }catch(BusinessException|PersistenceException ex){
-            return;
-        }
-        fail("Logou usuario inexistente");
-    }
-    
-    /**
-     * Test of loginUser method, of class LoginManagementImpl.
-     */
-    @Test
-    public void testLoginUser6() throws Exception {
         System.out.println("loginUser6");
         User user = new User("Joao", "joao@gmail.com", "senha", 'p');
         userDAO.insert(user);
