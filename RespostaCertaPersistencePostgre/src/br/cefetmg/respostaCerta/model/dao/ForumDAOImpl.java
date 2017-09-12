@@ -149,8 +149,11 @@ public class ForumDAOImpl implements ForumDAO{
                 autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
                 autor.setSenhaUsuario(rs.getString("senhaUsuario"));
                 InputStream blob = rs.getBinaryStream("userPhoto");  
-                  
-                BufferedImage image = ImageIO.read(blob);
+                BufferedImage image;
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 autor.setFotoUsuario(image);
                 questao.setCriador(autor);
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
@@ -218,7 +221,11 @@ public class ForumDAOImpl implements ForumDAO{
                 autor.setSenhaUsuario(rs.getString("senhaUsuario"));
                 InputStream blob = rs.getBinaryStream("userPhoto");  
                   
-                BufferedImage image = ImageIO.read(blob);
+                BufferedImage image;
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 autor.setFotoUsuario(image);
                 questao.setCriador(autor);
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
@@ -234,7 +241,10 @@ public class ForumDAOImpl implements ForumDAO{
                 questao.setModulo(mod);
                 blob = rs.getBinaryStream("questPhoto");  
                   
-                image = ImageIO.read(blob);
+                if(blob!=null)
+                    image = ImageIO.read(blob);
+                else
+                    image=null;
                 questao.setQuestPhoto(image);
                 questao.setTituloQuestao(rs.getString("tituloQuestao"));
                 forum.setQuestao(questao);
