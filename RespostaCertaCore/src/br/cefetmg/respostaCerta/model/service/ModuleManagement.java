@@ -16,12 +16,12 @@ import java.util.List;
  *
  * @author umcan
  */
-public interface ModuleManagement extends Remote{
-    public void registerModule(Module module) throws BusinessException, PersistenceException, RemoteException;
-    public void updateModule(Long id, Module module) throws BusinessException, PersistenceException, RemoteException;
-    public void removeModule(Long id) throws BusinessException, PersistenceException, RemoteException;
-    public Module getModuleById(Long id) throws BusinessException, PersistenceException, RemoteException;
-    public List<Module> getModulesSubject(Long subjectId) throws BusinessException, PersistenceException, RemoteException;
-    public List<Module> getAllModules() throws BusinessException, PersistenceException, RemoteException;
-    public List<Module> searchModules(String busca) throws BusinessException, PersistenceException, RemoteException;
+public interface ModuleManagement{
+    public void registerModule(Module module) throws BusinessException, PersistenceException;
+    public void updateModule(Long id, Module module) throws BusinessException, PersistenceException;
+    public void removeModule(Long id) throws BusinessException, PersistenceException;
+    public Module getModuleById(Long id) throws BusinessException, PersistenceException;
+    public List<Module> getModulesSubject(Long subjectId) throws BusinessException, PersistenceException;
+    public List<Module> getAllModules() throws BusinessException, PersistenceException;
+    public List<Module> searchModules(String busca) throws BusinessException, PersistenceException;
 }

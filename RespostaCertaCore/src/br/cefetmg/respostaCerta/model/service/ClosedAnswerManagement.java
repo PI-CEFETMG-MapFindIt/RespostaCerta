@@ -16,11 +16,11 @@ import java.util.List;
  *
  * @author aluno
  */
-public interface ClosedAnswerManagement extends Remote{
-    public void registerQuestionAnswer(ClosedAnswer questionAnswer) throws BusinessException, PersistenceException, RemoteException;
-    public void updateQuestionAnswer(Long id, ClosedAnswer questionAnswer) throws BusinessException, PersistenceException, RemoteException;
-    public void removeQuestionAnswer(Long id) throws BusinessException, PersistenceException, RemoteException;
-    public ClosedAnswer getQuestionAnswerById(Long id) throws BusinessException, PersistenceException, RemoteException;
-    public List<ClosedAnswer> getAllAnswers() throws BusinessException, PersistenceException, RemoteException;
-    public List<ClosedAnswer> getAnswerByUser(Long id) throws BusinessException, PersistenceException, RemoteException;
+public interface ClosedAnswerManagement{
+    public void registerQuestionAnswer(ClosedAnswer questionAnswer) throws BusinessException, PersistenceException;
+    public void updateQuestionAnswer(Long id, ClosedAnswer questionAnswer) throws BusinessException, PersistenceException;
+    public void removeQuestionAnswer(Long id) throws BusinessException, PersistenceException;
+    public ClosedAnswer getQuestionAnswerById(Long id) throws BusinessException, PersistenceException;
+    public List<ClosedAnswer> getAllAnswers() throws BusinessException, PersistenceException;
+    public List<ClosedAnswer> getAnswerByUser(Long id) throws BusinessException, PersistenceException;
 }

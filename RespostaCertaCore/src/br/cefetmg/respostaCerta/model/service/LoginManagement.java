@@ -15,6 +15,6 @@ import java.rmi.RemoteException;
  *
  * @author umcan
  */
-public interface LoginManagement extends Remote{
-    public User loginUser(String email, String password) throws BusinessException, PersistenceException, RemoteException;
+public interface LoginManagement{
+    public User loginUser(String email, String password) throws BusinessException, PersistenceException;
 }

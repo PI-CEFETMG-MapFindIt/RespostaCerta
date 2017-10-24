@@ -16,13 +16,13 @@ import java.util.List;
  *
  * @author umcan
  */
-public interface OpenQuestionManagement extends Remote{
-    public void registerQuestion(Question question) throws BusinessException, PersistenceException, RemoteException;
-    public void updateQuestion(Long id, Question question) throws BusinessException, PersistenceException, RemoteException;
-    public void removeQuestion(Long id) throws BusinessException, PersistenceException, RemoteException;
-    public Question getQuestionById(Long id) throws BusinessException, PersistenceException, RemoteException;
-    public List<Question> getQuestionsByUser(Long id) throws BusinessException, PersistenceException, RemoteException;
-    public List<Question> searchQuestion(String Parameter) throws BusinessException, PersistenceException, RemoteException;
-    public List<Question> getOpenQuestionByModule(Long id) throws BusinessException, PersistenceException, RemoteException;
-    public List<Question> getAllQuestions() throws BusinessException, PersistenceException, RemoteException;
+public interface OpenQuestionManagement{
+    public void registerQuestion(Question question) throws BusinessException, PersistenceException;
+    public void updateQuestion(Long id, Question question) throws BusinessException, PersistenceException;
+    public void removeQuestion(Long id) throws BusinessException, PersistenceException;
+    public Question getQuestionById(Long id) throws BusinessException, PersistenceException;
+    public List<Question> getQuestionsByUser(Long id) throws BusinessException, PersistenceException;
+    public List<Question> searchQuestion(String Parameter) throws BusinessException, PersistenceException;
+    public List<Question> getOpenQuestionByModule(Long id) throws BusinessException, PersistenceException;
+    public List<Question> getAllQuestions() throws BusinessException, PersistenceException;
 }

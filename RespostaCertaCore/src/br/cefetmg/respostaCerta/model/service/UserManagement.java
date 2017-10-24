@@ -16,10 +16,10 @@ import java.util.List;
  *
  * @author umcan
  */
-public interface UserManagement extends Remote{
-    public void registerUser(User user) throws BusinessException, PersistenceException, RemoteException;
-    public void updateUser(Long id, User user) throws BusinessException, PersistenceException, RemoteException;
-    public void removeUser(Long id) throws BusinessException, PersistenceException, RemoteException;
-    public User getUserById(Long id) throws BusinessException, PersistenceException, RemoteException;
-    public List<User> getUserByIdt(char idt) throws BusinessException, PersistenceException, RemoteException;
+public interface UserManagement{
+    public void registerUser(User user) throws BusinessException, PersistenceException;
+    public void updateUser(Long id, User user) throws BusinessException, PersistenceException;
+    public void removeUser(Long id) throws BusinessException, PersistenceException;
+    public User getUserById(Long id) throws BusinessException, PersistenceException;
+    public List<User> getUserByIdt(char idt) throws BusinessException, PersistenceException;
 }

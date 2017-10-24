@@ -17,8 +17,8 @@ import java.rmi.RemoteException;
  *
  * @author umcan
  */
-public interface PerformanceManagement extends Remote{
-    public Double calculateErrors(User usuario) throws BusinessException, PersistenceException, RemoteException;
-    public Double calculateErrorsByModule(User usuario, Module modulo) throws BusinessException, PersistenceException, RemoteException;
-    public Double calculateErrorsBySubject(User usuario, Subject disciplina) throws BusinessException, PersistenceException, RemoteException;
+public interface PerformanceManagement{
+    public Double calculateErrors(User usuario) throws BusinessException, PersistenceException;
+    public Double calculateErrorsByModule(User usuario, Module modulo) throws BusinessException, PersistenceException;
+    public Double calculateErrorsBySubject(User usuario, Subject disciplina) throws BusinessException, PersistenceException;
 }

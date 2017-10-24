@@ -17,10 +17,10 @@ import java.util.List;
  *
  * @author umcan
  */
-public interface OpenAnswerManagement extends Remote{
-    public void registerQuestionAnswer(OpenAnswer questionAnswer) throws BusinessException, PersistenceException, RemoteException;
-    public void updateQuestionAnswer(Long id, OpenAnswer questionAnswer) throws BusinessException, PersistenceException, RemoteException;
-    public void removeQuestionAnswer(Long id) throws BusinessException, PersistenceException, RemoteException;
-    public OpenAnswer getQuestionAnswerById(Long id) throws BusinessException, PersistenceException, RemoteException;
-    public List<OpenAnswer> getAllAnswers() throws BusinessException, PersistenceException, RemoteException;
+public interface OpenAnswerManagement{
+    public void registerQuestionAnswer(OpenAnswer questionAnswer) throws BusinessException, PersistenceException;
+    public void updateQuestionAnswer(Long id, OpenAnswer questionAnswer) throws BusinessException, PersistenceException;
+    public void removeQuestionAnswer(Long id) throws BusinessException, PersistenceException;
+    public OpenAnswer getQuestionAnswerById(Long id) throws BusinessException, PersistenceException;
+    public List<OpenAnswer> getAllAnswers() throws BusinessException, PersistenceException;
 }
