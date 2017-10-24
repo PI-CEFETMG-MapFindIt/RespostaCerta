@@ -9,7 +9,8 @@ import br.cefetmg.respostaCerta.model.domain.Subject;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.dao.SubjectDAOImpl;
-import br.cefetmg.respostaCerta.model.service.SubjectManagement;
+import br.cefetmg.respostaCerta.model.server.SubjectManagement;
+import java.rmi.RemoteException;
 import java.util.List;
 /**
  *
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class SubjectManagementImpl implements SubjectManagement{
 
-    private final SubjectManagement sub;
+    private final br.cefetmg.respostaCerta.model.service.SubjectManagement sub;
 
     public SubjectManagementImpl(){
         this.sub = new br.cefetmg.respostaCerta.model.service.SubjectManagementImpl(new SubjectDAOImpl());
@@ -32,7 +33,7 @@ public class SubjectManagementImpl implements SubjectManagement{
      * @throws PersistenceException
      */
     @Override
-    public void registerSubject(Subject subject) throws BusinessException, PersistenceException {
+    public void registerSubject(Subject subject) throws BusinessException, PersistenceException, RemoteException{
         if(subject==null){
             throw new BusinessException("Subject não pode ser nulo");
         }
@@ -50,7 +51,7 @@ public class SubjectManagementImpl implements SubjectManagement{
      * @throws PersistenceException
      */
     @Override
-    public void updateSubject(Long id, Subject subject) throws BusinessException, PersistenceException {
+    public void updateSubject(Long id, Subject subject) throws BusinessException, PersistenceException, RemoteException{
         if(id == null){
             throw new BusinessException("ID não pode ser nulo");
         }
@@ -70,7 +71,7 @@ public class SubjectManagementImpl implements SubjectManagement{
      * @throws PersistenceException
      */
     @Override
-    public void removeSubject(Long id) throws BusinessException, PersistenceException {
+    public void removeSubject(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id == null){
             throw new BusinessException("ID não pode ser nulo");
         }

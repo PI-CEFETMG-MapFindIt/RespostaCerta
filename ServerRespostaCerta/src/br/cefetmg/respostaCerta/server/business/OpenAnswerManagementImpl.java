@@ -9,15 +9,15 @@ import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.dao.OpenAnswerDAOImpl;
 import br.cefetmg.respostaCerta.model.domain.OpenAnswer;
-import br.cefetmg.respostaCerta.model.service.OpenAnswerManagement;
-import java.rmi.Remote;
+import br.cefetmg.respostaCerta.model.server.OpenAnswerManagement;
+import java.rmi.RemoteException;
 import java.util.List;
 /**
  *
  * @author adalbs
  */
 public class OpenAnswerManagementImpl implements OpenAnswerManagement{
-    private final OpenAnswerManagement openAnswerManagement;
+    private final br.cefetmg.respostaCerta.model.service.OpenAnswerManagement openAnswerManagement;
 
     public OpenAnswerManagementImpl(){
         this.openAnswerManagement = new br.cefetmg.respostaCerta.model.service.OpenAnswerManagementImpl(new OpenAnswerDAOImpl());
@@ -30,7 +30,7 @@ public class OpenAnswerManagementImpl implements OpenAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public void registerQuestionAnswer(OpenAnswer questionAnswer) throws BusinessException, PersistenceException {
+    public void registerQuestionAnswer(OpenAnswer questionAnswer) throws BusinessException, PersistenceException, RemoteException{
         if(questionAnswer==null){
             throw new BusinessException("A resposta não pode ser nula");
         }
@@ -51,7 +51,7 @@ public class OpenAnswerManagementImpl implements OpenAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public void updateQuestionAnswer(Long id, OpenAnswer questionAnswer) throws BusinessException, PersistenceException {
+    public void updateQuestionAnswer(Long id, OpenAnswer questionAnswer) throws BusinessException, PersistenceException, RemoteException{
         if(questionAnswer==null){
             throw new BusinessException("A resposta não pode ser nula");
         }
@@ -74,7 +74,7 @@ public class OpenAnswerManagementImpl implements OpenAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public void removeQuestionAnswer(Long id) throws BusinessException, PersistenceException {
+    public void removeQuestionAnswer(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("ID não pode ser nulo");
         }
@@ -89,7 +89,7 @@ public class OpenAnswerManagementImpl implements OpenAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public OpenAnswer getQuestionAnswerById(Long id) throws BusinessException, PersistenceException {
+    public OpenAnswer getQuestionAnswerById(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("ID não pode ser nulo");
         }
@@ -97,7 +97,7 @@ public class OpenAnswerManagementImpl implements OpenAnswerManagement{
     }
 
     @Override
-    public List<OpenAnswer> getAllAnswers() throws BusinessException, PersistenceException {
+    public List<OpenAnswer> getAllAnswers() throws BusinessException, PersistenceException, RemoteException{
         return openAnswerManagement.getAllAnswers();
     }
     

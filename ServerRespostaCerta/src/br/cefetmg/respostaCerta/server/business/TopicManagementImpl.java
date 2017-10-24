@@ -10,8 +10,9 @@ import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.dao.TopicDAO;
 import br.cefetmg.respostaCerta.model.dao.TopicDAOImpl;
-import br.cefetmg.respostaCerta.model.service.TopicManagement;
+import br.cefetmg.respostaCerta.model.server.TopicManagement;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ import java.util.List;
  */
 public class TopicManagementImpl implements TopicManagement{
 
-    private final TopicManagement topicManagement;
+    private final br.cefetmg.respostaCerta.model.service.TopicManagement topicManagement;
 
     public TopicManagementImpl() {
         this.topicManagement = new br.cefetmg.respostaCerta.model.service.TopicManagementImpl(new TopicDAOImpl());
@@ -35,7 +36,7 @@ public class TopicManagementImpl implements TopicManagement{
      * @throws PersistenceException
      */
     @Override
-    public void registerTopic(Topic topic) throws BusinessException, PersistenceException {
+    public void registerTopic(Topic topic) throws BusinessException, PersistenceException, RemoteException{
         if(topic == null){
             throw new BusinessException ("Topico não pode ser nulo");
         }
@@ -59,7 +60,7 @@ public class TopicManagementImpl implements TopicManagement{
      * @throws PersistenceException
      */
     @Override
-    public void updateTopic(Long id, Topic topic) throws BusinessException, PersistenceException {
+    public void updateTopic(Long id, Topic topic) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");
         }
@@ -88,7 +89,7 @@ public class TopicManagementImpl implements TopicManagement{
      * @throws PersistenceException
      */
     @Override
-    public void removeTopic(Long id) throws BusinessException, PersistenceException {
+    public void removeTopic(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("ID não pode ser nulo");
         }
@@ -103,7 +104,7 @@ public class TopicManagementImpl implements TopicManagement{
      * @throws PersistenceException
      */
     @Override
-    public Topic getTopicById(Long id) throws BusinessException, PersistenceException {
+    public Topic getTopicById(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id == null){
             throw new BusinessException("ID não pode ser nulo");
         }
@@ -118,7 +119,7 @@ public class TopicManagementImpl implements TopicManagement{
      * @throws PersistenceException
      */
     @Override
-    public List<Topic> getTopicsForum(Long id) throws BusinessException, PersistenceException {
+    public List<Topic> getTopicsForum(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("Id do forum nao pode ser nulo");
         }

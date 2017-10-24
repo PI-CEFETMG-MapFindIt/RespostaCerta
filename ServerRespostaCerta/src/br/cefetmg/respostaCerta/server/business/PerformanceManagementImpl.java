@@ -14,7 +14,8 @@ import br.cefetmg.respostaCerta.model.dao.ClosedAnswerDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.ClosedQuestionDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.ModuleDAOImpl;
 import br.cefetmg.respostaCerta.model.dao.SubjectDAOImpl;
-import br.cefetmg.respostaCerta.model.service.PerformanceManagement;
+import br.cefetmg.respostaCerta.model.server.PerformanceManagement;
+import java.rmi.RemoteException;
 /**
  *
  * @author adalbs
@@ -22,7 +23,7 @@ import br.cefetmg.respostaCerta.model.service.PerformanceManagement;
 public class PerformanceManagementImpl implements PerformanceManagement{
     
     
-    private final PerformanceManagement perf;
+    private final br.cefetmg.respostaCerta.model.service.PerformanceManagement perf;
 
     /**
      *
@@ -45,7 +46,7 @@ public class PerformanceManagementImpl implements PerformanceManagement{
      * retorna o percentual de erros de questões
      */
     @Override
-    public Double calculateErrors(User user) throws BusinessException, PersistenceException {
+    public Double calculateErrors(User user) throws BusinessException, PersistenceException, RemoteException{
         if(user == null){
           throw new BusinessException("Usuario não pode ser nulo");  
         }
@@ -74,7 +75,7 @@ public class PerformanceManagementImpl implements PerformanceManagement{
      * Retorna o percentual de erros por modulo
      */
     @Override
-    public Double calculateErrorsByModule(User user, Module modulo) throws BusinessException, PersistenceException {
+    public Double calculateErrorsByModule(User user, Module modulo) throws BusinessException, PersistenceException, RemoteException{
         if(user == null){
           throw new BusinessException("Usuario não pode ser nulo");  
         }
@@ -112,7 +113,7 @@ public class PerformanceManagementImpl implements PerformanceManagement{
      * retorna o percentual de erros por disciplina
      */
     @Override
-    public Double calculateErrorsBySubject(User user, Subject disciplina) throws BusinessException, PersistenceException {
+    public Double calculateErrorsBySubject(User user, Subject disciplina) throws BusinessException, PersistenceException, RemoteException{
         if(user == null){
           throw new BusinessException("Usuario não pode ser nulo");  
         }

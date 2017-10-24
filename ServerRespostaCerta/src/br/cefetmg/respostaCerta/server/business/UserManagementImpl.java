@@ -10,8 +10,9 @@ import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.dao.UserDAO;
 import br.cefetmg.respostaCerta.model.dao.UserDAOImpl;
-import br.cefetmg.respostaCerta.model.service.UserManagement;
+import br.cefetmg.respostaCerta.model.server.UserManagement;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ import java.util.List;
  */
 public class UserManagementImpl implements UserManagement{
 
-    private final UserManagement userManagement;
+    private final br.cefetmg.respostaCerta.model.service.UserManagement userManagement;
 
     /**
      *
@@ -39,7 +40,7 @@ public class UserManagementImpl implements UserManagement{
      *  método registra um usario no banco de dados
      */
     @Override
-    public void registerUser(User user) throws BusinessException, PersistenceException {
+    public void registerUser(User user) throws BusinessException, PersistenceException, RemoteException{
         if(user==null){
             throw new BusinessException("Usuario não pode ser nulo");
         }
@@ -64,7 +65,7 @@ public class UserManagementImpl implements UserManagement{
      * métado que atualiza um usuario já registrado
      */
     @Override
-    public void updateUser(Long id, User user) throws BusinessException, PersistenceException {
+    public void updateUser(Long id, User user) throws BusinessException, PersistenceException, RemoteException{
         if(user==null){
             throw new BusinessException("Usuario não pode ser nulo");
         }
@@ -90,7 +91,7 @@ public class UserManagementImpl implements UserManagement{
      * @throws PersistenceException
      */
     @Override
-    public void removeUser(Long id) throws BusinessException, PersistenceException {
+    public void removeUser(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id == null){
             throw new BusinessException("ID de busca nulo");
         }
@@ -105,7 +106,7 @@ public class UserManagementImpl implements UserManagement{
      * @throws PersistenceException
      */
     @Override
-    public User getUserById(Long id) throws BusinessException, PersistenceException {
+    public User getUserById(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id == null){
             throw new BusinessException ("ID não pode ser nulo");
         }
@@ -113,7 +114,7 @@ public class UserManagementImpl implements UserManagement{
     }
 
     @Override
-    public List<User> getUserByIdt(char idt) throws BusinessException, PersistenceException {
+    public List<User> getUserByIdt(char idt) throws BusinessException, PersistenceException, RemoteException{
         return userManagement.getUserByIdt(idt);
     }
 

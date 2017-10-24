@@ -8,10 +8,10 @@ package br.cefetmg.respostaCerta.server.business;
 import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-import br.cefetmg.respostaCerta.model.dao.OpenQuestionDAO;
 import br.cefetmg.respostaCerta.model.dao.OpenQuestionDAOImpl;
-import br.cefetmg.respostaCerta.model.service.OpenQuestionManagement;
+import br.cefetmg.respostaCerta.model.server.OpenQuestionManagement;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 /**
  *
@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class OpenQuestionManagementImpl implements OpenQuestionManagement{
     
-    private final OpenQuestionManagement questO;
+    private final br.cefetmg.respostaCerta.model.service.OpenQuestionManagement questO;
 
     public OpenQuestionManagementImpl() {
         this.questO = new br.cefetmg.respostaCerta.model.service.OpenQuestionManagementImpl(new OpenQuestionDAOImpl());
@@ -32,7 +32,7 @@ public class OpenQuestionManagementImpl implements OpenQuestionManagement{
      * @throws PersistenceException
      */
     @Override
-    public void registerQuestion(Question question) throws BusinessException, PersistenceException {
+    public void registerQuestion(Question question) throws BusinessException, PersistenceException, RemoteException{
         if(question==null){
             throw new BusinessException("Question não pode ser nulo");
         }
@@ -62,7 +62,7 @@ public class OpenQuestionManagementImpl implements OpenQuestionManagement{
      * @throws PersistenceException
      */
     @Override
-    public void updateQuestion(Long id, Question question) throws BusinessException, PersistenceException {
+    public void updateQuestion(Long id, Question question) throws BusinessException, PersistenceException, RemoteException{
         if(question==null){
             throw new BusinessException("Question não pode ser nulo");
         }
@@ -94,7 +94,7 @@ public class OpenQuestionManagementImpl implements OpenQuestionManagement{
      * @throws PersistenceException
      */
     @Override
-    public void removeQuestion(Long id) throws BusinessException, PersistenceException {
+    public void removeQuestion(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");
         }
@@ -109,7 +109,7 @@ public class OpenQuestionManagementImpl implements OpenQuestionManagement{
      * @throws PersistenceException
      */
     @Override
-    public Question getQuestionById(Long id) throws BusinessException, PersistenceException {
+    public Question getQuestionById(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");
         }
@@ -117,7 +117,7 @@ public class OpenQuestionManagementImpl implements OpenQuestionManagement{
     }
 
     @Override
-    public List<Question> getQuestionsByUser(Long id) throws BusinessException, PersistenceException {
+    public List<Question> getQuestionsByUser(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");
         }
@@ -126,7 +126,7 @@ public class OpenQuestionManagementImpl implements OpenQuestionManagement{
     }
 
     @Override
-    public List<Question> searchQuestion(String Parameter) throws BusinessException, PersistenceException {
+    public List<Question> searchQuestion(String Parameter) throws BusinessException, PersistenceException, RemoteException{
         if(Parameter.isEmpty()){
             throw new BusinessException("Parametro não pode ser nulo");
         }
@@ -134,7 +134,7 @@ public class OpenQuestionManagementImpl implements OpenQuestionManagement{
     }
 
     @Override
-    public List<Question> getOpenQuestionByModule(Long id) throws BusinessException, PersistenceException {
+    public List<Question> getOpenQuestionByModule(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");
         }
@@ -142,7 +142,7 @@ public class OpenQuestionManagementImpl implements OpenQuestionManagement{
     }
 
     @Override
-    public List<Question> getAllQuestions() throws BusinessException, PersistenceException {
+    public List<Question> getAllQuestions() throws BusinessException, PersistenceException, RemoteException{
         return questO.getAllQuestions();
     }
     

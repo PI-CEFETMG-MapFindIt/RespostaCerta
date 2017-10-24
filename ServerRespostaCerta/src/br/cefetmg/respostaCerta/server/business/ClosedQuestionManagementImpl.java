@@ -11,8 +11,9 @@ import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
 import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-import br.cefetmg.respostaCerta.model.service.ClosedQuestionManagement;
+import br.cefetmg.respostaCerta.model.server.ClosedQuestionManagement;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ import java.util.List;
  * @author aluno
  */
 public class ClosedQuestionManagementImpl implements ClosedQuestionManagement{
-    private final ClosedQuestionManagement questC;
+    private final br.cefetmg.respostaCerta.model.service.ClosedQuestionManagement questC;
 
     public ClosedQuestionManagementImpl() {
         super();
@@ -34,7 +35,7 @@ public class ClosedQuestionManagementImpl implements ClosedQuestionManagement{
      * @throws PersistenceException
      */
     @Override
-    public void registerQuestion(ClosedQuestion question) throws BusinessException, PersistenceException {
+    public void registerQuestion(ClosedQuestion question) throws BusinessException, PersistenceException, RemoteException{
         if(question==null){
             throw new BusinessException("Question não pode ser nulo");
         }
@@ -67,7 +68,7 @@ public class ClosedQuestionManagementImpl implements ClosedQuestionManagement{
      * @throws PersistenceException
      */
     @Override
-    public void updateQuestion(Long id, ClosedQuestion question) throws BusinessException, PersistenceException {
+    public void updateQuestion(Long id, ClosedQuestion question) throws BusinessException, PersistenceException, RemoteException{
         if(question==null){
             throw new BusinessException("Question não pode ser nulo");
         }
@@ -102,7 +103,7 @@ public class ClosedQuestionManagementImpl implements ClosedQuestionManagement{
      * @throws PersistenceException
      */
     @Override
-    public void removeQuestion(Long id) throws BusinessException, PersistenceException {
+    public void removeQuestion(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");
         }
@@ -117,7 +118,7 @@ public class ClosedQuestionManagementImpl implements ClosedQuestionManagement{
      * @throws PersistenceException
      */
     @Override
-    public ClosedQuestion getQuestionById(Long id) throws BusinessException, PersistenceException {
+    public ClosedQuestion getQuestionById(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");
         }
@@ -130,9 +131,10 @@ public class ClosedQuestionManagementImpl implements ClosedQuestionManagement{
      * @return
      * @throws BusinessException
      * @throws PersistenceException
+     * @throws java.rmi.RemoteException
      */
     @Override
-    public List<ClosedQuestion> getQuestionsByUser(Long id) throws BusinessException, PersistenceException {
+    public List<ClosedQuestion> getQuestionsByUser(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");
         }
@@ -141,7 +143,7 @@ public class ClosedQuestionManagementImpl implements ClosedQuestionManagement{
     }
     
     @Override
-    public List<Question> searchClosedQuestion(String Parameter) throws BusinessException, PersistenceException{
+    public List<Question> searchClosedQuestion(String Parameter) throws BusinessException, PersistenceException, RemoteException{
         if(Parameter.isEmpty()){
             throw new BusinessException("Parametro não pode ser nulo");
         }
@@ -149,7 +151,7 @@ public class ClosedQuestionManagementImpl implements ClosedQuestionManagement{
     }
 
     @Override
-    public List<Question> getClosedQuestionByModule(Long id) throws BusinessException, PersistenceException {
+    public List<Question> getClosedQuestionByModule(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");
         }
@@ -157,7 +159,7 @@ public class ClosedQuestionManagementImpl implements ClosedQuestionManagement{
     }
 
     @Override
-    public List<ClosedQuestion> getAllQuestions() throws BusinessException, PersistenceException {
+    public List<ClosedQuestion> getAllQuestions() throws BusinessException, PersistenceException, RemoteException{
         return questC.getAllQuestions();
     }
 }

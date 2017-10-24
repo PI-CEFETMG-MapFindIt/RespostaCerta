@@ -10,8 +10,9 @@ import br.cefetmg.respostaCerta.model.dao.ClosedAnswerDAOImpl;
 import br.cefetmg.respostaCerta.model.domain.ClosedAnswer;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-import br.cefetmg.respostaCerta.model.service.ClosedAnswerManagement;
+import br.cefetmg.respostaCerta.model.server.ClosedAnswerManagement;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ import java.util.List;
  * @author aluno
  */
 public class ClosedAnswerManagementImpl implements ClosedAnswerManagement{
-    private final ClosedAnswerManagement closedAnswerManagement;
+    private final br.cefetmg.respostaCerta.model.service.ClosedAnswerManagement closedAnswerManagement;
 
     public ClosedAnswerManagementImpl() {
         super();
@@ -33,7 +34,7 @@ public class ClosedAnswerManagementImpl implements ClosedAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public void registerQuestionAnswer(ClosedAnswer questionAnswer) throws BusinessException, PersistenceException {
+    public void registerQuestionAnswer(ClosedAnswer questionAnswer) throws BusinessException, PersistenceException, RemoteException{
         if(questionAnswer==null){
             throw new BusinessException("A resposta não pode ser nula");
         }
@@ -55,7 +56,7 @@ public class ClosedAnswerManagementImpl implements ClosedAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public void updateQuestionAnswer(Long id, ClosedAnswer questionAnswer) throws BusinessException, PersistenceException {
+    public void updateQuestionAnswer(Long id, ClosedAnswer questionAnswer) throws BusinessException, PersistenceException, RemoteException{
         if(questionAnswer==null){
             throw new BusinessException("A resposta não pode ser nula");
         }
@@ -78,7 +79,7 @@ public class ClosedAnswerManagementImpl implements ClosedAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public void removeQuestionAnswer(Long id) throws BusinessException, PersistenceException {
+    public void removeQuestionAnswer(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("ID não pode ser nulo");
         }
@@ -93,7 +94,7 @@ public class ClosedAnswerManagementImpl implements ClosedAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public ClosedAnswer getQuestionAnswerById(Long id) throws BusinessException, PersistenceException {
+    public ClosedAnswer getQuestionAnswerById(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("ID não pode ser nulo");
         }
@@ -101,12 +102,12 @@ public class ClosedAnswerManagementImpl implements ClosedAnswerManagement{
     }
 
     @Override
-    public List<ClosedAnswer> getAllAnswers() throws BusinessException, PersistenceException {
+    public List<ClosedAnswer> getAllAnswers() throws BusinessException, PersistenceException, RemoteException{
         return closedAnswerManagement.getAllAnswers();
     }
     
     @Override
-    public List<ClosedAnswer> getAnswerByUser(Long id) throws BusinessException, PersistenceException{
+    public List<ClosedAnswer> getAnswerByUser(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("ID não pode ser nulo");
         }

@@ -8,24 +8,19 @@ package br.cefetmg.respostaCerta.server.business;
 import br.cefetmg.respostaCerta.model.domain.Forum;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-import br.cefetmg.respostaCerta.model.dao.ForumDAO;
 import br.cefetmg.respostaCerta.model.dao.ForumDAOImpl;
-import br.cefetmg.respostaCerta.model.dao.TopicDAO;
 import br.cefetmg.respostaCerta.model.dao.TopicDAOImpl;
-import br.cefetmg.respostaCerta.model.service.ForumManagement;
-import br.cefetmg.respostaCerta.model.service.TopicManagement;
-import java.rmi.Remote;
+import br.cefetmg.respostaCerta.model.server.ForumManagement;
+import java.rmi.RemoteException;
 
 /**
  *
  * @author adalbs
  */
 public class ForumManagementImpl implements ForumManagement{
-    private final ForumManagement forumManagement;
-    private final TopicManagement topicManagement;
+    private final br.cefetmg.respostaCerta.model.service.ForumManagement forumManagement;
     
     public ForumManagementImpl(){
-        this.topicManagement= new br.cefetmg.respostaCerta.model.service.TopicManagementImpl(new TopicDAOImpl());
         this.forumManagement= new br.cefetmg.respostaCerta.model.service.ForumManagementImpl(new ForumDAOImpl(), new TopicDAOImpl());
     }
 
@@ -38,7 +33,7 @@ public class ForumManagementImpl implements ForumManagement{
      * 
      */
     @Override
-    public void registerForum(Forum forum) throws BusinessException, PersistenceException {
+    public void registerForum(Forum forum) throws BusinessException, PersistenceException, RemoteException{
         if(forum==null){
             throw new BusinessException("O forum não pode ser nulo");
         }
@@ -60,7 +55,7 @@ public class ForumManagementImpl implements ForumManagement{
      * Atualiza um forum já existente
      */
     @Override
-    public void updateForum(Long id, Forum forum) throws BusinessException, PersistenceException {
+    public void updateForum(Long id, Forum forum) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");
         }
@@ -86,7 +81,7 @@ public class ForumManagementImpl implements ForumManagement{
      * @throws PersistenceException
      */
     @Override
-    public void removeForum(Long id) throws BusinessException, PersistenceException {
+    public void removeForum(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("Id não pode ser nulo");
         }
@@ -100,7 +95,7 @@ public class ForumManagementImpl implements ForumManagement{
      * @throws PersistenceException
      */
     @Override
-    public Forum getForumById(Long id) throws BusinessException, PersistenceException {
+    public Forum getForumById(Long id) throws BusinessException, PersistenceException, RemoteException{
        if(id==null){
             throw new BusinessException("Id não pode ser nulo");
         }

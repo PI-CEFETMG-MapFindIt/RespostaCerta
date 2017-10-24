@@ -5,13 +5,12 @@
  */
 package br.cefetmg.respostaCerta.server.business;
 
-import br.cefetmg.respostaCerta.model.dao.ModuleDAO;
 import br.cefetmg.respostaCerta.model.dao.ModuleDAOImpl;
 import br.cefetmg.respostaCerta.model.domain.Module;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-import br.cefetmg.respostaCerta.model.service.ModuleManagement;
-import java.rmi.Remote;
+import br.cefetmg.respostaCerta.model.server.ModuleManagement;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -19,7 +18,7 @@ import java.util.List;
  * @author adalbs
  */
 public class ModuleManagementImpl implements ModuleManagement{
-    private final ModuleManagement moduleManagement;
+    private final br.cefetmg.respostaCerta.model.service.ModuleManagement moduleManagement;
     
     public ModuleManagementImpl(){
         this.moduleManagement = new br.cefetmg.respostaCerta.model.service.ModuleManagementImpl(new ModuleDAOImpl());
@@ -32,7 +31,7 @@ public class ModuleManagementImpl implements ModuleManagement{
      * @throws PersistenceException
      */
     @Override
-    public void registerModule(Module module) throws BusinessException, PersistenceException {
+    public void registerModule(Module module) throws BusinessException, PersistenceException, RemoteException{
         if(module==null){
             throw new BusinessException("Modulo não pode ser nulo");
         }
@@ -53,7 +52,7 @@ public class ModuleManagementImpl implements ModuleManagement{
      * @throws PersistenceException
      */
     @Override
-    public void updateModule(Long id, Module module) throws BusinessException, PersistenceException {
+    public void updateModule(Long id, Module module) throws BusinessException, PersistenceException, RemoteException{
         if(module==null){
             throw new BusinessException("Modulo não pode ser nulo");
         }
@@ -76,7 +75,7 @@ public class ModuleManagementImpl implements ModuleManagement{
      * @throws PersistenceException
      */
     @Override
-    public void removeModule(Long id) throws BusinessException, PersistenceException {
+    public void removeModule(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("ID não pode ser nulo");
         }
@@ -91,7 +90,7 @@ public class ModuleManagementImpl implements ModuleManagement{
      * @throws PersistenceException
      */
     @Override
-    public Module getModuleById(Long id) throws BusinessException, PersistenceException {
+    public Module getModuleById(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("ID não pode ser nulo");
         } 
@@ -99,7 +98,7 @@ public class ModuleManagementImpl implements ModuleManagement{
     }
 
     @Override
-    public List<Module> getModulesSubject(Long subjectId) throws BusinessException, PersistenceException {
+    public List<Module> getModulesSubject(Long subjectId) throws BusinessException, PersistenceException, RemoteException{
         if(subjectId==null){
             throw new BusinessException("ID não pode ser nulo");
         } 
@@ -107,12 +106,12 @@ public class ModuleManagementImpl implements ModuleManagement{
     }
 
     @Override
-    public List<Module> getAllModules() throws BusinessException, PersistenceException {
+    public List<Module> getAllModules() throws BusinessException, PersistenceException, RemoteException{
         return moduleManagement.getAllModules();
     }
 
     @Override
-    public List<Module> searchModules(String busca) throws BusinessException, PersistenceException {
+    public List<Module> searchModules(String busca) throws BusinessException, PersistenceException, RemoteException{
         if(busca==null || busca.equals("")){
             throw new BusinessException("Busca Vazia");
         }

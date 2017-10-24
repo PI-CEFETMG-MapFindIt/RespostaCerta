@@ -9,16 +9,15 @@ import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.dao.UserDAOImpl;
-import br.cefetmg.respostaCerta.model.service.LoginManagement;
-import br.cefetmg.respostaCerta.model.service.UserManagement;
-import java.rmi.Remote;
+import br.cefetmg.respostaCerta.model.server.LoginManagement;
+import java.rmi.RemoteException;
 /**
  *
  * @author adalbs
  */
 public class LoginManagementImpl implements LoginManagement{
     
-    private final LoginManagement loginManagement;
+    private final br.cefetmg.respostaCerta.model.service.LoginManagement loginManagement;
     
     public LoginManagementImpl() {
         this.loginManagement = new br.cefetmg.respostaCerta.model.service.LoginManagementImpl(new UserDAOImpl());
@@ -33,7 +32,7 @@ public class LoginManagementImpl implements LoginManagement{
      * @throws PersistenceException
      */
     @Override
-    public User loginUser(String email, String password) throws BusinessException, PersistenceException {
+    public User loginUser(String email, String password) throws BusinessException, PersistenceException, RemoteException{
         if(email == null || password == null || email.equals("") || password.equals("")){
             throw new BusinessException("Dados de login não podem ser vazios");
         }

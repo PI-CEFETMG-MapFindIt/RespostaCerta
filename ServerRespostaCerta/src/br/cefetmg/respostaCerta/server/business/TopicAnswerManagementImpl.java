@@ -10,8 +10,9 @@ import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.dao.TopicAnswerDAO;
 import br.cefetmg.respostaCerta.model.dao.TopicAnswerDAOImpl;
-import br.cefetmg.respostaCerta.model.service.TopicAnswerManagement;
+import br.cefetmg.respostaCerta.model.server.TopicAnswerManagement;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ import java.util.List;
  * @author adalbs
  */
 public class TopicAnswerManagementImpl implements TopicAnswerManagement{
-    private final TopicAnswerManagement answerManagement;
+    private final br.cefetmg.respostaCerta.model.service.TopicAnswerManagement answerManagement;
     
     public TopicAnswerManagementImpl(){
         this.answerManagement = new br.cefetmg.respostaCerta.model.service.TopicAnswerManagementImpl(new TopicAnswerDAOImpl());
@@ -32,7 +33,7 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public void registerTopicAnswer(TopicAnswer topicAnswer) throws BusinessException, PersistenceException {
+    public void registerTopicAnswer(TopicAnswer topicAnswer) throws BusinessException, PersistenceException, RemoteException{
         if(topicAnswer==null){
             throw new BusinessException("TopicAnswer não pode ser nulo");
         }
@@ -56,7 +57,7 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public void updateTopicAnswer(Long id, TopicAnswer topicAnswer) throws BusinessException, PersistenceException {
+    public void updateTopicAnswer(Long id, TopicAnswer topicAnswer) throws BusinessException, PersistenceException, RemoteException{
         if(id == null){
             throw new BusinessException("ID não pode ser nulo");
         }
@@ -85,7 +86,7 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public void removeTopicAnswer(Long id) throws BusinessException, PersistenceException {
+    public void removeTopicAnswer(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id == null){
             throw new BusinessException("ID não pode ser nulo");
         }
@@ -100,7 +101,7 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public TopicAnswer getTopicAnswerById(Long id) throws BusinessException, PersistenceException {
+    public TopicAnswer getTopicAnswerById(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id == null){
             throw new BusinessException("ID não pode ser nulo");
         }
@@ -116,7 +117,7 @@ public class TopicAnswerManagementImpl implements TopicAnswerManagement{
      * @throws PersistenceException
      */
     @Override
-    public List<TopicAnswer> getAnswersTopic(Long id) throws BusinessException, PersistenceException {
+    public List<TopicAnswer> getAnswersTopic(Long id) throws BusinessException, PersistenceException, RemoteException{
         if(id==null){
             throw new BusinessException("ID não pode ser nulo");
         }
