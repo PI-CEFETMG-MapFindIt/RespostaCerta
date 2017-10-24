@@ -9,16 +9,18 @@ import br.cefetmg.respostaCerta.model.domain.Topic;
 import br.cefetmg.respostaCerta.model.domain.TopicAnswer;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
  *
  * @author umcan
  */
-public interface TopicManagement {
-    public void registerTopic(Topic topic) throws BusinessException, PersistenceException;
-    public void updateTopic(Long id, Topic  topic) throws BusinessException, PersistenceException;
-    public void removeTopic(Long id) throws BusinessException, PersistenceException;
-    public Topic getTopicById(Long id) throws BusinessException, PersistenceException;
-    public List<Topic> getTopicsForum(Long id) throws BusinessException, PersistenceException;
+public interface TopicManagement extends Remote{
+    public void registerTopic(Topic topic) throws BusinessException, PersistenceException, RemoteException;
+    public void updateTopic(Long id, Topic  topic) throws BusinessException, PersistenceException, RemoteException;
+    public void removeTopic(Long id) throws BusinessException, PersistenceException, RemoteException;
+    public Topic getTopicById(Long id) throws BusinessException, PersistenceException, RemoteException;
+    public List<Topic> getTopicsForum(Long id) throws BusinessException, PersistenceException, RemoteException;
 }

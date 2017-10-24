@@ -9,15 +9,17 @@ import br.cefetmg.respostaCerta.model.domain.Forum;
 import br.cefetmg.respostaCerta.model.domain.Topic;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
  *
  * @author umcan
  */
-public interface ForumManagement {
-    public void registerForum(Forum forum) throws BusinessException, PersistenceException;
-    public void updateForum(Long id, Forum  forum) throws BusinessException, PersistenceException;
-    public void removeForum(Long id) throws BusinessException, PersistenceException;
-    public Forum getForumById(Long id) throws BusinessException, PersistenceException;
+public interface ForumManagement extends Remote{
+    public void registerForum(Forum forum) throws BusinessException, PersistenceException, RemoteException;
+    public void updateForum(Long id, Forum  forum) throws BusinessException, PersistenceException, RemoteException;
+    public void removeForum(Long id) throws BusinessException, PersistenceException, RemoteException;
+    public Forum getForumById(Long id) throws BusinessException, PersistenceException, RemoteException;
 }
