@@ -1,0 +1,12 @@
+/RespostaCertaJFX/build/
+/RespostaCertaJFX/dist/
+/RespostaCertaBusiness/build/
+/RespostaCertaCore/dist/
+/RespostaCertaCore/build/
+/RespostaCertaPersistencePostgre/build/
+/RespostaCertaPersistencePostgre/dist/
+/RespostaCertaServer/build/
+/RespostaCertaWeb/build/
+/RespostaCertaBusiness/dist/
+/RespostaCertaServer/dist/
+/RespostaCertaWeb/dist/
