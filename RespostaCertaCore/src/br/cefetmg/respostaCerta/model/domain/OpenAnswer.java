@@ -5,13 +5,14 @@
  */
 package br.cefetmg.respostaCerta.model.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  *
  * @author umcan
  */
-public class OpenAnswer extends QuestionAnswer{
+public class OpenAnswer extends QuestionAnswer implements Serializable{
     private String resposta;
     private Question questao;
     public OpenAnswer() {

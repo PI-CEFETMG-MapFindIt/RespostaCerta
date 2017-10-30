@@ -5,11 +5,13 @@
  */
 package br.cefetmg.respostaCerta.model.domain;
 
+import java.io.Serializable;
+
 /**
  *
  * @author umcan
  */
-public class Module {
+public class Module implements Serializable{
     private Subject dominio;
     private Long idModulo;
     private String nomeModulo;

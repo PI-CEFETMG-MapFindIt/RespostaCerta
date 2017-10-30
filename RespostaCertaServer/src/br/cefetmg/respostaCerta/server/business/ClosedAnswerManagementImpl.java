@@ -5,13 +5,11 @@
  */
 package br.cefetmg.respostaCerta.server.business;
 
-import br.cefetmg.respostaCerta.model.dao.ClosedAnswerDAO;
 import br.cefetmg.respostaCerta.model.dao.ClosedAnswerDAOImpl;
 import br.cefetmg.respostaCerta.model.domain.ClosedAnswer;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
 import br.cefetmg.respostaCerta.model.server.ClosedAnswerManagement;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 

@@ -6,13 +6,14 @@
 package br.cefetmg.respostaCerta.model.domain;
 
 import java.awt.Image;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  *
  * @author umcan
  */
-public class ClosedQuestion extends Question{
+public class ClosedQuestion extends Question implements Serializable{
     private String alt1;
     private String alt2;
     private String alt3;

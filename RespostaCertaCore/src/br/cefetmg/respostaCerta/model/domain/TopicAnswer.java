@@ -5,13 +5,14 @@
  */
 package br.cefetmg.respostaCerta.model.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  *
  * @author umcan
  */
-public class TopicAnswer {
+public class TopicAnswer implements Serializable{
     private Topic mensagem;
     private Long idMensagemResposta;
     private User autor;

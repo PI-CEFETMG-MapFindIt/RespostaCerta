@@ -6,13 +6,14 @@
 package br.cefetmg.respostaCerta.model.domain;
 
 import java.awt.Image;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  *
  * @author umcan
  */
-public class Question {
+public class Question implements Serializable{
     private Module modulo;
     private User criador;
     private Long idQuestao;

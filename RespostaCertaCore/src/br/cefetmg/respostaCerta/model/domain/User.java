@@ -6,12 +6,13 @@
 package br.cefetmg.respostaCerta.model.domain;
 
 import java.awt.Image;
+import java.io.Serializable;
 
 /**
  *
  * @author umcan
  */
-public class User {
+public class User implements Serializable{
     private Long idUsuario;
     private String nomeUsuario;
     private String loginUsuario;
