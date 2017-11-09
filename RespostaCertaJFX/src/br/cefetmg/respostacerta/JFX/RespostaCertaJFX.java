@@ -1,5 +1,6 @@
 package br.cefetmg.respostacerta.JFX;
 
+import br.cefetmg.respostacerta.JFX.controllers.MainController;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

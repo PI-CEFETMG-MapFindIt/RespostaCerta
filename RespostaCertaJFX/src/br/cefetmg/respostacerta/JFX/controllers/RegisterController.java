@@ -1,5 +1,6 @@
-package br.cefetmg.respostacerta.JFX;
+package br.cefetmg.respostacerta.JFX.controllers;
 
+import br.cefetmg.respostacerta.JFX.RespostaCertaJFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;

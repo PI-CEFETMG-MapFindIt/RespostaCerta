@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.cefetmg.respostacerta.JFX;
+package br.cefetmg.respostacerta.JFX.controllers;
 
+import br.cefetmg.respostacerta.JFX.RespostaCertaJFX;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;

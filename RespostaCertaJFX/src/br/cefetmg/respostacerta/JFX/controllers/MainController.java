@@ -20,8 +20,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import br.cefetmg.respostaCerta.model.server.ClosedAnswerManagement;
@@ -31,7 +29,10 @@ import br.cefetmg.respostaCerta.model.server.OpenQuestionManagement;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import javafx.collections.ObservableList;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class MainController {
     @FXML
@@ -44,10 +45,28 @@ public class MainController {
     public ListView modVisualizados;
     @FXML
     public ListView subVisualizados;
-    private RespostaCertaJFX jfx;
+    private RespostaCertaJFX main;
     
     public MainController() {
         choiceBox = new ChoiceBox<>();
+    }
+    
+    //Abre a janela de Login
+    public void entrar() {
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("Login");
+        window.setResizable(false);
+        window.setScene(new Scene(main.load("Entrar.fxml"), 500, 200));
+        window.showAndWait();
+    }
+    
+    public void cadastrar() {
+        
+    }
+    
+    public void pesquisar() {
+        
     }
     
     @FXML
@@ -190,9 +209,8 @@ public class MainController {
         return result;
     }
 
-    public void setJfx(RespostaCertaJFX jfx) {
-        this.jfx = jfx;
+    public void setMain(RespostaCertaJFX main) {
+        this.main = main;
     }
-    
    
 }
