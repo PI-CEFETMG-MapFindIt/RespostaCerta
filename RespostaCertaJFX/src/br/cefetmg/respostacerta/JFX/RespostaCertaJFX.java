@@ -33,12 +33,12 @@ public class RespostaCertaJFX extends Application {
     }
     
     //Retorna a interface FXML carregada
-    private Parent load(String url){
+    public Parent load(String url){
         try {
             loader.setLocation(getClass().getResource(url));
             //Adiciona o main ao controller ativo 
             MainController main = loader.getController();
-            main.mainView=this;
+            main.setMain(this);
             return loader.load();
         } catch (Exception ex) {
             //Fecha a aplicação caso ocorra erro no Loader
