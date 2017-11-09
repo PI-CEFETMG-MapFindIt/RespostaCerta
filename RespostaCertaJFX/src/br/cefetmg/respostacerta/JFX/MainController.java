@@ -11,6 +11,7 @@ public class MainController {
     
     public ChoiceBox<String> choiceBox;
     private final FXMLLoader loader;
+    public RespostaCertaJFX mainView;
     
     public MainController() {
         loader = new FXMLLoader();
