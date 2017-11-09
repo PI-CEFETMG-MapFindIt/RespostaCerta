@@ -277,9 +277,11 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
                 autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
                 autor.setSenhaUsuario(rs.getString("senhaUsuario"));
                 InputStream blob = rs.getBinaryStream("userPhoto");  
-                  
-                BufferedImage image = ImageIO.read(blob);
-                autor.setFotoUsuario(image);
+                BufferedImage image= null;
+                if(blob!=null){
+                    image = ImageIO.read(blob);
+                    autor.setFotoUsuario(image);
+                }
                 open.setAutor(autor);
                 open.setDataResposta(rs.getDate("dataResposta").toLocalDate());
                 open.setIdResposta(rs.getLong("idResposta"));
@@ -290,9 +292,10 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
                 autorQuestao.setIdtUsuario(rs.getString("idtUsuarioQuestao").charAt(0));
                 autorQuestao.setSenhaUsuario(rs.getString("senhaUsuarioQuestao"));
                 blob = rs.getBinaryStream("userPhotoQuestao");  
-                  
-                image = ImageIO.read(blob);
-                autorQuestao.setFotoUsuario(image);
+                if(blob!=null){
+                    image = ImageIO.read(blob);
+                    autorQuestao.setFotoUsuario(image);
+                }
                 questao.setCriador(autorQuestao);
                 questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
                 questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));

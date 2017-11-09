@@ -149,25 +149,25 @@ public class MainController {
             ObservableList items=modVisualizados.getItems();
             for(Module modulo: mod){
                 System.out.println(modulo.getNomeModulo());
-                items.add(modulo.getNomeModulo() + "-" + modulo.getDominio().getNomeDominio());
+                items.add(modulo.getNomeModulo().trim() + "-" + modulo.getDominio().getNomeDominio().trim());
             }
             modVisualizados.setItems(items);
             items=subVisualizados.getItems();
             for(Subject sub:disc){
                 System.out.println(sub.getNomeDominio());
-                items.add(sub.getNomeDominio());
+                items.add(sub.getNomeDominio().trim());
             }
             subVisualizados.setItems(items);
             items=questRecentes.getItems();
             for(Question question:novasQuestoes){
                 System.out.println(question.getTituloQuestao());
-                items.add(question.getTituloQuestao() + "-" + question.getModulo().getNomeModulo() + "-" + question.getModulo().getDominio().getNomeDominio());
+                items.add(question.getTituloQuestao().trim() + "-" + question.getModulo().getNomeModulo().trim() + "-" + question.getModulo().getDominio().getNomeDominio().trim());
             }
             questRecentes.setItems(items);
             items=questVisualizadas.getItems();
             for(Question question:quest){
                 System.out.println(question.getTituloQuestao());
-                items.add(question.getTituloQuestao() + "-" + question.getModulo().getNomeModulo() + "-" + question.getModulo().getDominio().getNomeDominio());
+                items.add(question.getTituloQuestao().trim() + "-" + question.getModulo().getNomeModulo().trim() + "-" + question.getModulo().getDominio().getNomeDominio().trim());
             }
             questVisualizadas.setItems(items);
         } catch (RemoteException | NotBoundException | BusinessException | PersistenceException | ClassCastException ex) {
