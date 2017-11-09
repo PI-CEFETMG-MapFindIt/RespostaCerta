@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="300.0" maxWidth="500.0" minHeight="196.0" minWidth="500.0" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #1b1918;" stylesheets="@bootstrap3.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.respostacerta.JFX.MainController">
+<Pane maxHeight="300.0" maxWidth="500.0" minHeight="196.0" minWidth="500.0" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #1b1918;" stylesheets="@bootstrap3.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.respostacerta.JFX.MainController">
    <children>
-      <TextField alignment="CENTER" prefWidth="400.0" promptText="Email" />
-      <Button layoutX="142.0" layoutY="150.0" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#entrar" prefWidth="100.0" style="-fx-background-color: #9c9491; -fx-border-radius: 0; -fx-border-color: none; -fx-text-fill: white;" text="Entrar" textFill="#f8f8f8" />
-      <TextField alignment="CENTER" layoutY="66.0" prefWidth="400.0" promptText="Password" />
-      <Button layoutX="258.0" layoutY="150.0" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#entrar" prefWidth="100.0" style="-fx-background-color: #9c9491; -fx-border-radius: 0; -fx-border-color: none; -fx-text-fill: white;" text="Entrar" textFill="#f8f8f8" />
+      <VBox prefHeight="200.0" prefWidth="500.0">
+         <children>
+            <TextField alignment="CENTER" maxWidth="400.0" minWidth="400.0" prefWidth="400.0" promptText="Email">
+               <VBox.margin>
+                  <Insets left="50.0" top="50.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField alignment="CENTER" maxWidth="400.0" minWidth="400.0" prefWidth="400.0" promptText="Password">
+               <VBox.margin>
+                  <Insets left="50.0" top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <HBox alignment="CENTER">
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#entrar" prefWidth="100.0" style="-fx-background-color: #9c9491; -fx-border-radius: 0; -fx-border-color: none; -fx-text-fill: white;" text="Entrar" textFill="#f8f8f8">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <Button minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#entrar" prefWidth="100.0" style="-fx-background-color: #9c9491; -fx-border-radius: 0; -fx-border-color: none; -fx-text-fill: white;" text="Sair" textFill="#f8f8f8">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </Pane>
