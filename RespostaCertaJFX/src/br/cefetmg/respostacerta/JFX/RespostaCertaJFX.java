@@ -17,6 +17,8 @@ public class RespostaCertaJFX extends Application {
         primaryStage.setScene(new Scene(root, 1270, 785));
         primaryStage.setResizable(false);
         primaryStage.show();
+        MainController main = loader.getController();
+        main.mainView=this;
     }
 
     public static void main(String[] args) {

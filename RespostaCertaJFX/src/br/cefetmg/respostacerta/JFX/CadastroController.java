@@ -6,28 +6,27 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 
 public class CadastroController {
     @FXML
-    public TextField modulo;
+    public TextField primNome;
     @FXML
-    public TextField discipina;
+    public TextField ultNome;
     @FXML
-    public TextField tituloQuest;
+    public TextField email;
     @FXML
-    public TextField enunciadoQuest;
+    public TextField confEmail;
     @FXML
-    public RadioButton idtFacil;
+    public PasswordField senha;
     @FXML
-    public RadioButton idtModerada;
+    public PasswordField senhaConf;
     @FXML
-    public RadioButton idtDificil;
+    public DatePicker dataNasc;
     @FXML
-    public RadioButton idtDesafio;
+    public RadioButton idtProf;
     @FXML
-    public RadioButton idtObjetiva;
-    @FXML
-    public RadioButton idtDiscursiva;
+    public RadioButton idtAluno;
     
     public RespostaCertaJFX mainView;
     
@@ -36,17 +35,11 @@ public class CadastroController {
     
     @FXML
     public void initialize() {
-        
-    }
-    
-    @FXML
-    public void objetiva(){
-        
-    }
-    
-    @FXML
-    public void discursiva(){
-        
+        ToggleGroup group = new ToggleGroup();
+        idtAluno.setToggleGroup(group);
+        idtAluno.setSelected(true);
+
+        idtProf.setToggleGroup(group);
     }
     
     @FXML
