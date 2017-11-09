@@ -242,8 +242,3 @@ ALTER TABLE Mensagem ADD CONSTRAINT Relationship24 FOREIGN KEY (idUsuario) REFER
 
 ALTER TABLE Questao ADD CONSTRAINT Relationship12 FOREIGN KEY (idUsuarioCriador) REFERENCES Usuario (idUsuario) ON DELETE CASCADE ON UPDATE CASCADE
 ;
-
-
-
-
-
