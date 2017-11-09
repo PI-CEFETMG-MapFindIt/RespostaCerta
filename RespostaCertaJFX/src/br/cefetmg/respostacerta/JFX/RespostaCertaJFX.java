@@ -1,5 +1,6 @@
 package br.cefetmg.respostacerta.JFX;
 
+import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostacerta.JFX.controllers.MainController;
 import java.io.IOException;
 import javafx.application.Application;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 public class RespostaCertaJFX extends Application {
     //Loader para carregar as telas em FXML
     private FXMLLoader loader;
+    private User usuarioLogado;
     
     //Lança o aplicativo
     public static void main(String[] args) {
@@ -48,4 +50,14 @@ public class RespostaCertaJFX extends Application {
             return null;
         }
     }
+
+    public User getUsuarioLogado() {
+        return usuarioLogado;
+    }
+
+    public void setUsuarioLogado(User usuarioLogado) {
+        this.usuarioLogado = usuarioLogado;
+    }
+    
+    
 }

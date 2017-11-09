@@ -5,7 +5,26 @@
  */
 package br.cefetmg.respostacerta.JFX.controllers;
 
+import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
+import br.cefetmg.respostaCerta.model.domain.Module;
+import br.cefetmg.respostaCerta.model.domain.Question;
+import br.cefetmg.respostaCerta.model.domain.Subject;
+import br.cefetmg.respostaCerta.model.exception.BusinessException;
+import br.cefetmg.respostaCerta.model.exception.PersistenceException;
+import br.cefetmg.respostaCerta.model.server.ClosedQuestionManagement;
+import br.cefetmg.respostaCerta.model.server.ModuleManagement;
+import br.cefetmg.respostaCerta.model.server.OpenQuestionManagement;
+import br.cefetmg.respostaCerta.model.server.SubjectManagement;
 import br.cefetmg.respostacerta.JFX.RespostaCertaJFX;
+import java.rmi.AccessException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -48,7 +67,14 @@ public class NewQuestionController {
     
     private int opObjetiva=0;
     
-    public RespostaCertaJFX mainView;
+    //Textos das opções objetivas
+    public TextArea txt1;
+    public TextArea txt2;
+    public TextArea txt3;
+    public TextArea txt4;
+    public TextArea txt5;
+    
+    public RespostaCertaJFX main;
     
     public NewQuestionController() {
         
@@ -65,19 +91,19 @@ public class NewQuestionController {
         ToggleGroup alt = new ToggleGroup();
         RadioButton alt1 = new RadioButton();
         alt1.setToggleGroup(alt);
-        TextArea txt1 = new TextArea();
+        txt1 = new TextArea();
         RadioButton alt2 = new RadioButton();
         alt2.setToggleGroup(alt);
-        TextArea txt2 = new TextArea();
+        txt2 = new TextArea();
         RadioButton alt3 = new RadioButton();
         alt3.setToggleGroup(alt);
-        TextArea txt3 = new TextArea();
+        txt3 = new TextArea();
         RadioButton alt4 = new RadioButton();
         alt4.setToggleGroup(alt);
-        TextArea txt4 = new TextArea();
+        txt4 = new TextArea();
         RadioButton alt5 = new RadioButton();
         alt5.setToggleGroup(alt);
-        TextArea txt5 = new TextArea();
+        txt5 = new TextArea();
         flow1.getChildren().add(alt1);
         flow1.getChildren().add(txt1);
         flow2.getChildren().add(alt2);
@@ -189,6 +215,153 @@ public class NewQuestionController {
     
     @FXML
     public void cadastrar(){
-        
+        if(idtDiscursiva.isSelected()){
+            Question q = new Question();
+            q.setCriador(main.getUsuarioLogado());
+            q.setDataCriacao(LocalDate.now());
+            q.setEnunciadoQuestao(enunciado.getText());
+            q.setIdtQuestao(true);
+            Module m = checkModule(modulo.getText());
+            if(m==null){
+               Registry registry;
+               try {
+                    registry = LocateRegistry.getRegistry("localhost", 2222);
+                    SubjectManagement subj = (SubjectManagement)registry.lookup("SubjectManagement");
+                    ModuleManagement mod = (ModuleManagement)registry.lookup("ModuleManagement");
+                    Subject s = checkSubject(disciplina.getText());
+                    if(s==null){
+                        s.setNomeDominio(disciplina.getText());
+                        subj.registerSubject(s);
+                    }
+                    m.setDominio(s);
+                    m.setNomeModulo(modulo.getText());
+                    mod.registerModule(m);
+               } catch (RemoteException | NotBoundException ex) {
+                    System.out.println("Erro: " + ex.getMessage());
+               } catch (BusinessException | PersistenceException ex) {
+                    System.out.println("Erro: " + ex.getMessage());
+                }
+            }
+            q.setModulo(m);
+            q.setTituloQuestao(titulo.getText());
+            if(idtFacil.isSelected()){
+                q.setIdtDificuldade('F');
+            }
+            if(idtModerada.isSelected()){
+                q.setIdtDificuldade('M');
+            }
+            if(idtDificil.isSelected()){
+                q.setIdtDificuldade('D');
+            }
+            if(idtDesafio.isSelected()){
+                q.setIdtDificuldade('X');
+            }
+            Registry registry;
+            try {
+                registry = LocateRegistry.getRegistry("localhost", 2222);
+                OpenQuestionManagement opQ = (OpenQuestionManagement)registry.lookup("OpenQuestionManagement");
+                opQ.registerQuestion(q);
+            } catch (RemoteException | NotBoundException ex) {
+                System.out.println("Erro: " + ex.getMessage());
+            } catch (BusinessException | PersistenceException ex) {
+                System.out.println("Erro: " + ex.getMessage());
+            }
+            
+        }else{
+            ClosedQuestion q = new ClosedQuestion();
+            q.setCriador(main.getUsuarioLogado());
+            q.setDataCriacao(LocalDate.now());
+            q.setEnunciadoQuestao(enunciado.getText());
+            q.setIdtQuestao(true);
+            Module m = checkModule(modulo.getText());
+            if(m==null){
+               Registry registry;
+               try {
+                    registry = LocateRegistry.getRegistry("localhost", 2222);
+                    SubjectManagement subj = (SubjectManagement)registry.lookup("SubjectManagement");
+                    ModuleManagement mod = (ModuleManagement)registry.lookup("ModuleManagement");
+                    Subject s = checkSubject(disciplina.getText());
+                    if(s==null){
+                        s.setNomeDominio(disciplina.getText());
+                        subj.registerSubject(s);
+                    }
+                    m.setDominio(s);
+                    m.setNomeModulo(modulo.getText());
+                    mod.registerModule(m);
+               } catch (RemoteException | NotBoundException ex) {
+                    System.out.println("Erro: " + ex.getMessage());
+               } catch (BusinessException | PersistenceException ex) {
+                    System.out.println("Erro: " + ex.getMessage());
+                }
+            }
+            q.setModulo(m);
+            q.setTituloQuestao(titulo.getText());
+            if(idtFacil.isSelected()){
+                q.setIdtDificuldade('F');
+            }
+            if(idtModerada.isSelected()){
+                q.setIdtDificuldade('M');
+            }
+            if(idtDificil.isSelected()){
+                q.setIdtDificuldade('D');
+            }
+            if(idtDesafio.isSelected()){
+                q.setIdtDificuldade('X');
+            }
+            q.setCorreta(opObjetiva);
+            q.setAlt1(txt1.getText());
+            q.setAlt2(txt2.getText());
+            q.setAlt3(txt3.getText());
+            q.setAlt4(txt4.getText());
+            q.setAlt5(txt5.getText());
+            Registry registry;
+            try {
+                registry = LocateRegistry.getRegistry("localhost", 2222);
+                ClosedQuestionManagement clQ = (ClosedQuestionManagement)registry.lookup("ClosedQuestionManagement");
+                clQ.registerQuestion(q);
+            } catch (RemoteException | NotBoundException ex) {
+                System.out.println("Erro: " + ex.getMessage());
+            } catch (BusinessException | PersistenceException ex) {
+                System.out.println("Erro: " + ex.getMessage());
+            }
+        }
+    }
+    
+    public Module checkModule(String module){
+        Registry registry;
+        try {
+            registry = LocateRegistry.getRegistry("localhost", 2222);
+            ModuleManagement mod = (ModuleManagement)registry.lookup("ModuleManagement");
+            List<Module> lis = mod.getAllModules();
+            for(Module m:lis){
+                if(m.getNomeModulo().equals(module)){
+                    return m;
+                }
+            }
+        } catch (RemoteException | NotBoundException ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        } catch (BusinessException | PersistenceException ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
+        return null;
+    }
+    
+    public Subject checkSubject(String sub){
+        Registry registry;
+        try {
+            registry = LocateRegistry.getRegistry("localhost", 2222);
+            SubjectManagement subj = (SubjectManagement)registry.lookup("SubjectManagement");
+            List<Subject> lis = subj.getAllSubjects();
+            for(Subject s:lis){
+                if(s.getNomeDominio().equals(sub)){
+                    return s;
+                }
+            }
+        } catch (RemoteException | NotBoundException ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        } catch (BusinessException | PersistenceException ex) {
+            System.out.println("Erro: " + ex.getMessage());
+        }
+        return null;
     }
 }
