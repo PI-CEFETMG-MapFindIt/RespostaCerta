@@ -8,7 +8,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
-public class CadastroController {
+public class RegisterController {
     @FXML
     public TextField primNome;
     @FXML
@@ -30,7 +30,7 @@ public class CadastroController {
     
     public RespostaCertaJFX mainView;
     
-    public CadastroController() {
+    public RegisterController() {
     }
     
     @FXML

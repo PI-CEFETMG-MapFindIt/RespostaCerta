@@ -9,9 +9,11 @@ import javafx.stage.Stage;
 
 public class MainController {
     
+    //Elemento da interface
     public ChoiceBox<String> choiceBox;
-    private final FXMLLoader loader;
     public RespostaCertaJFX mainView;
+    private final FXMLLoader loader;
+    private Parent root;
     
     public MainController() {
         loader = new FXMLLoader();
@@ -25,7 +27,7 @@ public class MainController {
     
     public void entrar() throws Exception {
         loader.setLocation(getClass().getResource("Entrar.fxml"));
-        Parent root = loader.load();
+        root = loader.load();
    
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -39,4 +41,9 @@ public class MainController {
     public void cadastrar() {
         
     }
+    
+    public void pesquisar() {
+        
+    }
+    
 }
