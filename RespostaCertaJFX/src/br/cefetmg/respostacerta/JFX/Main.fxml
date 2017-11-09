@@ -45,12 +45,12 @@
                   <Insets left="-3.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Button minHeight="30.0" minWidth="50.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: #1b1918; -fx-border-radius: 0; -fx-border-color: none; -fx-text-fill: white;" text="Entrar" textFill="#f8f8f8">
+            <Button minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#entrar" prefWidth="100.0" style="-fx-background-color: #1b1918; -fx-border-radius: 0; -fx-border-color: none; -fx-text-fill: white;" text="Entrar" textFill="#f8f8f8">
                <HBox.margin>
                   <Insets left="165.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Button minHeight="30.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: #1b1918; -fx-border-radius: 0; -fx-border-color: none; -fx-text-fill: white;" text="Cadastrar" textFill="#f8f8f8">
+            <Button minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#cadastrar" prefWidth="100.0" style="-fx-background-color: #1b1918; -fx-border-radius: 0; -fx-border-color: none; -fx-text-fill: white;" text="Cadastrar" textFill="#f8f8f8">
                <HBox.margin>
                   <Insets left="15.0" top="10.0" />
                </HBox.margin>
