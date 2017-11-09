@@ -7,6 +7,8 @@ public class MainController {
     
     public ChoiceBox<String> choiceBox;
     
+    public RespostaCertaJFX mainView;
+    
     public MainController() {
         choiceBox = new ChoiceBox<>();
     }
