@@ -10,7 +10,9 @@ public class RespostaCertaJFX extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Main.fxml"));
+        Parent root = loader.load();
         primaryStage.setTitle("Resposta Certa");
         primaryStage.setScene(new Scene(root, 1270, 785));
         primaryStage.setResizable(false);
