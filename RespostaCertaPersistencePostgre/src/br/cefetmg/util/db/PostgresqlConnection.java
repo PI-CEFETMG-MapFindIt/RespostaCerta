@@ -11,7 +11,7 @@ public class PostgresqlConnection implements ConnectionFactory {
     private final static String dbDriver = "org.postgresql.Driver";
     private final static String dbURL = "jdbc:postgresql://localhost:5432/RespostaCerta";
     private final static String user = "postgres";
-    private final static String pass = "postgres";
+    private final static String pass = "123456";
 
     public PostgresqlConnection() {
     }
