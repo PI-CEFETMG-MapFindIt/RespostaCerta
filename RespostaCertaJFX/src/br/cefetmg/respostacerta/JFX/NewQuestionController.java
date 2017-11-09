@@ -10,13 +10,11 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
 /**
@@ -47,6 +45,8 @@ public class NewQuestionController {
     @FXML
     public Pane objPane;
     
+    private int opObjetiva=0;
+    
     public RespostaCertaJFX mainView;
     
     public NewQuestionController() {
@@ -56,6 +56,11 @@ public class NewQuestionController {
     @FXML
     public void objetiva(){
         ObservableList<Node> children = objPane.getChildren();
+        FlowPane flow1 = new FlowPane();
+        FlowPane flow2 = new FlowPane();
+        FlowPane flow3 = new FlowPane();
+        FlowPane flow4 = new FlowPane();
+        FlowPane flow5 = new FlowPane();
         ToggleGroup alt = new ToggleGroup();
         RadioButton alt1 = new RadioButton();
         alt1.setToggleGroup(alt);
@@ -72,16 +77,67 @@ public class NewQuestionController {
         RadioButton alt5 = new RadioButton();
         alt5.setToggleGroup(alt);
         TextArea txt5 = new TextArea();
-        children.add(alt1);
-        children.add(txt1);
-        children.add(alt2);
-        children.add(txt2);
-        children.add(alt3);
-        children.add(txt3);
-        children.add(alt4);
-        children.add(txt4);
-        children.add(alt5);
-        children.add(txt5);
+        flow1.getChildren().add(alt1);
+        flow1.getChildren().add(txt1);
+        flow2.getChildren().add(alt2);
+        flow2.getChildren().add(txt2);
+        flow3.getChildren().add(alt3);
+        flow3.getChildren().add(txt3);
+        flow4.getChildren().add(alt4);
+        flow4.getChildren().add(txt4);
+        flow5.getChildren().add(alt5);
+        flow5.getChildren().add(txt5);
+        
+        children.add(flow1);
+        children.add(flow2);
+        children.add(flow3);
+        children.add(flow4);
+        children.add(flow5);
+        
+        alt1.selectedProperty().addListener(new ChangeListener<Boolean>(){
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    opObjetiva=1;
+                }
+            }
+        });
+        
+        alt2.selectedProperty().addListener(new ChangeListener<Boolean>(){
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    opObjetiva=2;
+                }
+            }
+        });
+        
+        alt3.selectedProperty().addListener(new ChangeListener<Boolean>(){
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    opObjetiva=3;
+                }
+            }
+        });
+        
+        alt4.selectedProperty().addListener(new ChangeListener<Boolean>(){
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    opObjetiva=4;
+                }
+            }
+        });
+        
+        alt5.selectedProperty().addListener(new ChangeListener<Boolean>(){
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    opObjetiva=5;
+                }
+            }
+        });
     }
    
     @FXML
@@ -92,7 +148,7 @@ public class NewQuestionController {
     
     @FXML
     public void initialize() {
-        //Define grupos dos radio's
+        //Define grupos dos radios
         ToggleGroup diff = new ToggleGroup();
         
         idtFacil.setSelected(true);
