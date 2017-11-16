@@ -7,15 +7,36 @@ package br.cefetmg.respostaCerta.model.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author umcan
  */
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "idtResposta", length = 1, discriminatorType = DiscriminatorType.CHAR)
+@DiscriminatorValue("R")
 public class QuestionAnswer implements Serializable{
+    @ManyToOne
     private User autor;
+    @Temporal(TemporalType.DATE)
     private LocalDate dataResposta;
+    @Column(insertable=false, updatable=false)
     private char idtResposta;
+    @Id
+    @GeneratedValue
     private Long idResposta;
     private boolean correta;
 

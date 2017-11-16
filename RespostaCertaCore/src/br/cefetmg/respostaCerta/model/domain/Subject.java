@@ -6,12 +6,18 @@
 package br.cefetmg.respostaCerta.model.domain;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  *
  * @author umcan
  */
+@Entity
 public class Subject implements Serializable{
+    @Id
+    @GeneratedValue
     private Long idDominio;
     private String nomeDominio;
 

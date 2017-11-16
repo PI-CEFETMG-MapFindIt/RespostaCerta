@@ -8,11 +8,15 @@ package br.cefetmg.respostaCerta.model.domain;
 import java.awt.Image;
 import java.io.Serializable;
 import java.time.LocalDate;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
 /**
  *
  * @author umcan
  */
+@Entity
+@DiscriminatorValue(value = "1")
 public class ClosedQuestion extends Question implements Serializable{
     private String alt1;
     private String alt2;

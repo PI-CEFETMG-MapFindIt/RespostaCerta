@@ -7,13 +7,19 @@ package br.cefetmg.respostaCerta.model.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author umcan
  */
+@Entity
+@DiscriminatorValue(value = "A")
 public class OpenAnswer extends QuestionAnswer implements Serializable{
     private String resposta;
+    @ManyToOne
     private Question questao;
     public OpenAnswer() {
     }
