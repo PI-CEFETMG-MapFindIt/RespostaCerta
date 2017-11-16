@@ -15,6 +15,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import org.hibernate.criterion.MatchMode;
 
 /**
  *
@@ -22,15 +26,16 @@ import java.util.List;
  */
 public class SubjectDAOImpl implements SubjectDAO{
 
-    private static SubjectDAOImpl subjectDAO = null;        
-  
+    private static SubjectDAOImpl subjectDAO = null;    
     private static long subjectCount;
+    private EntityManagerFactory factory;
     
     /**
      *
      */
     public SubjectDAOImpl() { 
         subjectCount = 0;
+        factory = Persistence.createEntityManagerFactory("Module");
     }
 
     /**
@@ -52,28 +57,9 @@ public class SubjectDAOImpl implements SubjectDAO{
      */
     @Override
     synchronized public void insert(Subject subject) throws PersistenceException {
-        try{
-            Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "INSERT INTO Dominio (nomeDominio) VALUES(?)";
-            PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1, subject.getNomeDominio());
-            int linhasAfetadas = pstmt.executeUpdate();
-            if (linhasAfetadas == 0) {
-                throw new PersistenceException("Criação da Questao Falhou");
-            }
-            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    subject.setIdDominio(generatedKeys.getLong(1));
-                }
-                else {
-                    throw new PersistenceException("Criação falhou, sem id's obtidos");
-                }
-            }
-            pstmt.close();
-            connection.close();
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new PersistenceException(e.getMessage());
-        }
+        EntityManager man = factory.createEntityManager();
+        man.persist(subject);
+        man.close();
     }
     
     /**
@@ -83,18 +69,9 @@ public class SubjectDAOImpl implements SubjectDAO{
      */
     @Override
     synchronized public void update(Subject subject) throws PersistenceException {
-        try{
-            Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "UPDATE Dominio SET nomeDominio = ? WHERE idDominio = ?";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(2, subject.getIdDominio());
-            pstmt.setString(1, subject.getNomeDominio());
-            pstmt.executeUpdate();
-            pstmt.close();
-            connection.close(); 
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new PersistenceException(e.getMessage());
-        }
+        EntityManager man = factory.createEntityManager();
+        man.merge(subject);
+        man.close();
     }
 
     /**
@@ -105,19 +82,11 @@ public class SubjectDAOImpl implements SubjectDAO{
      */
     @Override
     synchronized public Subject delete(Long subjectId) throws PersistenceException {
-        try {
-            Subject dominio= this.getSubjectById(subjectId);
-            Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "DELETE FROM Dominio WHERE idDominio = ?";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, subjectId);
-            pstmt.executeUpdate();
-            pstmt.close();
-            connection.close();
-            return dominio;
-        } catch (PersistenceException | ClassNotFoundException | SQLException e) {
-            throw new PersistenceException(e.getMessage());
-        }
+        EntityManager man = factory.createEntityManager();
+        Subject s = man.find(Subject.class, subjectId);
+        man.remove(s);
+        man.close();
+        return s;
     }
 
     /**
@@ -128,26 +97,10 @@ public class SubjectDAOImpl implements SubjectDAO{
      */
     @Override
     public Subject getSubjectById(Long subjectId) throws PersistenceException {
-        try {
-            Connection connection = ConnectionManager.getInstance().getConnection();
-
-            String sql = "SELECT * FROM Dominio WHERE idDominio = ?";
-            
-            PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, subjectId);
-            ResultSet rs = pstmt.executeQuery(); 
-            Subject sub = new Subject();
-            if (rs.next()) {
-                sub.setIdDominio(rs.getLong("idDominio"));
-                sub.setNomeDominio(rs.getString("nomeDominio"));
-            }
-            rs.close();
-            pstmt.close();
-            connection.close();
-            return sub;
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new PersistenceException(e.getMessage());
-        }
+        EntityManager man = factory.createEntityManager();
+        Subject s = man.find(Subject.class, subjectId);
+        man.close();
+        return s;
     }
 
     /**
@@ -157,58 +110,18 @@ public class SubjectDAOImpl implements SubjectDAO{
      */
     @Override
     public List<Subject> listAll() throws PersistenceException {
-        try {
-            Connection connection = ConnectionManager.getInstance().getConnection();
-
-            String sql = "SELECT * FROM Dominio ORDER BY nomeDominio";
-            
-            PreparedStatement pstmt = connection.prepareStatement(sql);
-            ResultSet rs = pstmt.executeQuery(); 
-            ArrayList<Subject> lista = new ArrayList<>();
-            while (rs.next()) {
-                Subject sub = new Subject();
-                sub.setIdDominio(rs.getLong("idDominio"));
-                sub.setNomeDominio(rs.getString("nomeDominio"));
-                lista.add(sub);
-            }
-            rs.close();
-            pstmt.close();
-            connection.close();
-            return lista;
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new PersistenceException(e.getMessage());
-        }
+        EntityManager man = factory.createEntityManager();
+        List<Subject> m = man.createQuery("from subject").getResultList();
+        man.close();
+        return m;
     }
 
     @Override
     public List<Subject> searchSubjects(String busca) throws PersistenceException {
-        String[] textoSeparado = busca.split(" ");
-        try{
-            Connection connection = ConnectionManager.getInstance().getConnection();
-            String palavras="";
-            for(int i=0; i<textoSeparado.length; i++){
-                if(i==0){
-                    palavras += textoSeparado[i];
-                }else{
-                    palavras += " & " +textoSeparado[i];
-                }
-            }
-            String SQL ="SELECT idDominio "
-                    + "FROM Dominio "
-                    + "WHERE "
-                    +"to_tsquery('portuguese','"
-                    + palavras
-                    + "' ) @@ to_tsvector(nomeDominio)";
-            PreparedStatement pstmt = connection.prepareStatement(SQL);
-            ResultSet rs = pstmt.executeQuery();
-            ArrayList<Subject> lista = new ArrayList<>();
-            while(rs.next()){
-                lista.add(getSubjectById(rs.getLong("idDominio")));
-            }
-            return lista;
-        }catch(ClassNotFoundException | SQLException e){
-            throw new PersistenceException(e.getMessage());
-        }
+        EntityManager man = factory.createEntityManager();
+        List<Subject> m = man.createQuery("from Subject m where m.nomeDominio like :searchkey").setParameter("searchKey", MatchMode.ANYWHERE.toMatchString(busca)).getResultList();
+        man.close();
+        return m;
     }
     
 }

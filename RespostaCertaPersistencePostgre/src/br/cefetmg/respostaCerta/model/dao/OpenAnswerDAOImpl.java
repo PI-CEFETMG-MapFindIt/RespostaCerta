@@ -24,6 +24,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -31,12 +34,13 @@ import javax.imageio.ImageIO;
  */
 public class OpenAnswerDAOImpl implements OpenAnswerDAO{
 
-    private static OpenAnswerDAOImpl openAnswerDAO = null;        
-   
+    private static OpenAnswerDAOImpl openAnswerDAO = null; 
     private static long openAnswerCount;
+    private EntityManagerFactory factory;
     
     public OpenAnswerDAOImpl() { 
         openAnswerCount = 0;
+        factory = Persistence.createEntityManagerFactory("OpenAnswer");
     }
 
     /**
@@ -58,39 +62,9 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
      */
     @Override
     synchronized public void insert(OpenAnswer openAnswer) throws PersistenceException {
-        try {
-            Date date = Date.valueOf(openAnswer.getDataResposta());
-            
-            Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "INSERT INTO resposta (idUsuario, idQuestao, idtResposta, dataResposta) VALUES(?, ?, ?, ?)";
-            PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            pstmt.setLong(1, openAnswer.getAutor().getIdUsuario());
-            pstmt.setLong(2, openAnswer.getQuestao().getIdQuestao());
-            pstmt.setString(3, String.valueOf(openAnswer.getIdtResposta()));
-            pstmt.setDate(4, date);
-            int linhasAfetadas = pstmt.executeUpdate();
-            if (linhasAfetadas == 0) {
-                throw new PersistenceException("Criação da Resposta Falhou");
-            }
-
-            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    openAnswer.setIdResposta(generatedKeys.getLong(1));
-                }
-                else {
-                    throw new PersistenceException("Criação falhou, sem id's obtidos");
-                }
-            }
-            sql = "INSERT INTO respostaAberta (idResposta, resposta) VALUES (?, ?)";
-            pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, openAnswer.getIdResposta());
-            pstmt.setString(2, openAnswer.getResposta());
-            pstmt.executeUpdate();
-            pstmt.close();
-            connection.close();
-        } catch (PersistenceException | ClassNotFoundException | SQLException e) {
-            throw new PersistenceException(e.getMessage());
-        }
+        EntityManager man = factory.createEntityManager();
+        man.persist(openAnswer);
+        man.close();
     }
     
     /**
@@ -100,26 +74,9 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
      */
     @Override
     synchronized public void update(OpenAnswer openAnswer) throws PersistenceException {
-        try{
-            Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "UPDATE resposta SET idUsuario = ?, idQuestao = ?, idtResposta = ?, dataResposta = ? WHERE idResposta = ?";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, openAnswer.getAutor().getIdUsuario());
-            pstmt.setLong(2, openAnswer.getQuestao().getIdQuestao());
-            pstmt.setString(3, String.valueOf(openAnswer.getIdtResposta()));
-            pstmt.setDate(4, java.sql.Date.valueOf(openAnswer.getDataResposta()));
-            pstmt.setLong(5, openAnswer.getIdResposta());
-            pstmt.executeUpdate();
-            sql = "UPDATE respostaAberta SET resposta = ? WHERE idResposta = ?";
-            pstmt = connection.prepareStatement(sql);
-            pstmt.setString(1, openAnswer.getResposta());
-            pstmt.setLong(2, openAnswer.getIdResposta());
-            pstmt.executeUpdate();
-            pstmt.close();
-            connection.close(); 
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new PersistenceException(e.getMessage());
-        }
+        EntityManager man = factory.createEntityManager();
+        man.merge(openAnswer);
+        man.close();
     }
 
     /**
@@ -130,23 +87,11 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
      */
     @Override
     synchronized public OpenAnswer delete(Long openAnswerId) throws PersistenceException {
-        try {
-            OpenAnswer resposta= this.getOpenAnswerById(openAnswerId);
-            Connection connection = ConnectionManager.getInstance().getConnection();
-            String sql = "DELETE FROM resposta WHERE idResposta = ?";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, openAnswerId);
-            pstmt.executeUpdate();
-            sql = "DELETE FROM RespostaAberta WHERE idResposta = ?";
-            pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, openAnswerId);
-            pstmt.executeUpdate();
-            pstmt.close();
-            connection.close();
-            return resposta;
-        } catch (PersistenceException | ClassNotFoundException | SQLException e) {
-            throw new PersistenceException(e.getMessage());
-        }
+        EntityManager man = factory.createEntityManager();
+        OpenAnswer resp = man.find(OpenAnswer.class, openAnswerId);
+        man.remove(resp);
+        man.close();
+        return resp;
     }
 
     /**
@@ -157,84 +102,10 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
      */
     @Override
     public OpenAnswer getOpenAnswerById(Long openAnswerId) throws PersistenceException {
-        try {
-            Connection connection = ConnectionManager.getInstance().getConnection();
-
-            String sql = "SELECT a.resposta resposta, b.idResposta idResposta, b.idtResposta idtResposta, b.dataResposta dataResposta, "
-                    + "c.idUsuario idUsuario, c.nomeUsuario nomeUsuario, c.loginUsuario loginUsuario, c.senhaUsuario senhaUsuario, c.idtUsuario idtUsuario, "
-                    + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao, "
-                    + "d.tituloQuestao tituloQuestao, d.idtDificuldade idtDificuldade, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.idModulo idModulo, "
-                    + "f.nomeDominio nomeDominio, f.idDominio idDominio, "
-                    + "g.idUsuario idUsuarioQuestao, g.nomeUsuario nomeUsuarioQuestao, g.loginUsuario loginUsuarioQuestao, g.senhaUsuario senhaUsuarioQuestao, "
-                    + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao "
-                    + "FROM respostaAberta a "
-                    + "JOIN resposta b ON a.idResposta=b.idResposta "
-                    + "JOIN Usuario c ON c.idUsuario=b.idUsuario "
-                    + "JOIN Questao d ON d.idQuestao=b.idQuestao "
-                    + "JOIN Modulo e ON e.idModulo=d.idModulo "
-                    + "JOIN Dominio f ON f.idDominio=e.idDominio "
-                    + "JOIN Usuario g ON g.idUsuario=d.idUsuarioCriador "
-                    + "WHERE a.idResposta = ?";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, openAnswerId);
-            ResultSet rs = pstmt.executeQuery();
-            OpenAnswer open = new OpenAnswer();
-            User autor = new User();
-            User autorQuestao = new User();
-            Subject sub = new Subject();
-            Module mod = new Module();
-            Question questao = new Question();
-            if (rs.next()) {
-                autor.setIdUsuario(rs.getLong("idUsuario"));
-                autor.setNomeUsuario(rs.getString("nomeUsuario"));
-                autor.setLoginUsuario(rs.getString("loginUsuario"));
-                autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
-                autor.setSenhaUsuario(rs.getString("senhaUsuario"));
-                InputStream blob = rs.getBinaryStream("userPhoto");  
-                  
-                BufferedImage image = ImageIO.read(blob);
-                autor.setFotoUsuario(image);
-                open.setAutor(autor);
-                open.setDataResposta(rs.getDate("dataResposta").toLocalDate());
-                open.setIdResposta(rs.getLong("idResposta"));
-                open.setIdtResposta(rs.getString("idtResposta").charAt(0));
-                autorQuestao.setIdUsuario(rs.getLong("idUsuarioQuestao"));
-                autorQuestao.setNomeUsuario(rs.getString("nomeUsuarioQuestao"));
-                autorQuestao.setLoginUsuario(rs.getString("loginUsuarioQuestao"));
-                autorQuestao.setIdtUsuario(rs.getString("idtUsuarioQuestao").charAt(0));
-                autorQuestao.setSenhaUsuario(rs.getString("senhaUsuarioQuestao"));
-                blob = rs.getBinaryStream("userPhotoQuestao");  
-                  
-                image = ImageIO.read(blob);
-                autorQuestao.setFotoUsuario(image);
-                questao.setCriador(autorQuestao);
-                questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
-                questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
-                questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
-                questao.setIdQuestao(rs.getLong("idQuestao"));
-                questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
-                mod.setIdModulo(rs.getLong("idModulo"));
-                mod.setNomeModulo(rs.getString("nomeModulo"));
-                sub.setIdDominio(rs.getLong("idDominio"));
-                sub.setNomeDominio(rs.getString("nomeDominio"));
-                mod.setDominio(sub);
-                questao.setModulo(mod);
-                blob = rs.getBinaryStream("questPhoto");  
-                if(blob!=null){
-                    image = ImageIO.read(blob);
-                    questao.setQuestPhoto(image);
-                }
-                questao.setTituloQuestao(rs.getString("tituloQuestao"));
-                open.setQuestao(questao);
-                open.setResposta(rs.getString("resposta"));
-            }
-            rs.close();
-            pstmt.close();
-            connection.close();
-            return open;
-        } catch (ClassNotFoundException | SQLException | IOException e) {
-            throw new PersistenceException(e.getMessage());
-        }       
+        EntityManager man = factory.createEntityManager();
+        OpenAnswer resp = man.find(OpenAnswer.class, openAnswerId);
+        man.close();
+        return resp;
     }
 
     /**
@@ -244,87 +115,9 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
      */
     @Override
     public List<OpenAnswer> listAll() throws PersistenceException {
-        try {
-            Connection connection = ConnectionManager.getInstance().getConnection();
-
-            String sql = "SELECT a.resposta resposta, b.idResposta idResposta, b.idtResposta idtResposta, b.dataResposta dataResposta, "
-                    + "c.idUsuario idUsuario, c.nomeUsuario nomeUsuario, c.loginUsuario loginUsuario, c.senhaUsuario senhaUsuario, c.idtUsuario idtUsuario, "
-                    + "c.userPhoto userPhoto, d.enunciadoQuestao enunciadoQuestao, d.idtQuestao idtQuestao, d.dataCriacao dataCriacao, d.idQuestao idQuestao, "
-                    + "d.tituloQuestao tituloQuestao, d.idtDificuldade idtDificuldade, d.questPhoto questPhoto, e.nomeModulo nomeModulo, e.idModulo idModulo, "
-                    + "f.nomeDominio nomeDominio, f.idDominio idDominio, "
-                    + "g.idUsuario idUsuarioQuestao, g.nomeUsuario nomeUsuarioQuestao, g.loginUsuario loginUsuarioQuestao, g.senhaUsuario senhaUsuarioQuestao, "
-                    + "g.idtUsuario idtUsuarioQuestao, g.userPhoto userPhotoQuestao "
-                    + "FROM respostaAberta a "
-                    + "JOIN resposta b ON a.idResposta=b.idResposta "
-                    + "JOIN Usuario c ON c.idUsuario=b.idUsuario "
-                    + "JOIN Questao d ON d.idQuestao=b.idQuestao "
-                    + "JOIN Modulo e ON e.idModulo=d.idModulo "
-                    + "JOIN Dominio f ON f.idDominio=e.idDominio "
-                    + "JOIN Usuario g ON g.idUsuario=d.idUsuarioCriador";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
-            ResultSet rs = pstmt.executeQuery();
-            ArrayList<OpenAnswer> lista = new ArrayList();
-            while(rs.next()) {
-                OpenAnswer open = new OpenAnswer();
-                User autor = new User();
-                User autorQuestao = new User();
-                Subject sub = new Subject();
-                Module mod = new Module();
-                Question questao = new Question();
-                autor.setIdUsuario(rs.getLong("idUsuario"));
-                autor.setNomeUsuario(rs.getString("nomeUsuario"));
-                autor.setLoginUsuario(rs.getString("loginUsuario"));
-                autor.setIdtUsuario(rs.getString("idtUsuario").charAt(0));
-                autor.setSenhaUsuario(rs.getString("senhaUsuario"));
-                InputStream blob = rs.getBinaryStream("userPhoto");  
-                BufferedImage image= null;
-                if(blob!=null){
-                    image = ImageIO.read(blob);
-                    autor.setFotoUsuario(image);
-                }
-                open.setAutor(autor);
-                open.setDataResposta(rs.getDate("dataResposta").toLocalDate());
-                open.setIdResposta(rs.getLong("idResposta"));
-                open.setIdtResposta(rs.getString("idtResposta").charAt(0));
-                autorQuestao.setIdUsuario(rs.getLong("idUsuarioQuestao"));
-                autorQuestao.setNomeUsuario(rs.getString("nomeUsuarioQuestao"));
-                autorQuestao.setLoginUsuario(rs.getString("loginUsuarioQuestao"));
-                autorQuestao.setIdtUsuario(rs.getString("idtUsuarioQuestao").charAt(0));
-                autorQuestao.setSenhaUsuario(rs.getString("senhaUsuarioQuestao"));
-                blob = rs.getBinaryStream("userPhotoQuestao");  
-                if(blob!=null){
-                    image = ImageIO.read(blob);
-                    autorQuestao.setFotoUsuario(image);
-                }
-                questao.setCriador(autorQuestao);
-                questao.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
-                questao.setEnunciadoQuestao(rs.getString("enunciadoQuestao"));
-                questao.setIdQuestao(rs.getLong("idQuestao"));
-                questao.setIdtDificuldade(rs.getString("idtDificuldade").charAt(0));
-                questao.setIdtQuestao(rs.getBoolean("idtQuestao"));
-                mod.setIdModulo(rs.getLong("idModulo"));
-                mod.setNomeModulo(rs.getString("nomeModulo"));
-                sub.setIdDominio(rs.getLong("idDominio"));
-                sub.setNomeDominio(rs.getString("nomeDominio"));
-                mod.setDominio(sub);
-                questao.setModulo(mod);
-                blob = rs.getBinaryStream("questPhoto");  
-                if(blob!=null){
-                    image = ImageIO.read(blob);
-                    questao.setQuestPhoto(image);
-                }
-                questao.setTituloQuestao(rs.getString("tituloQuestao"));
-                open.setQuestao(questao);
-                open.setResposta(rs.getString("resposta"));
-                lista.add(open);
-            }
-            rs.close();
-            pstmt.close();
-            connection.close();
-            return lista;
-        } catch (ClassNotFoundException | SQLException | IOException e) {
-            throw new PersistenceException(e.getMessage());
-        }
+        EntityManager man = factory.createEntityManager();
+        List<OpenAnswer> resp = man.createQuery("from OpenAnswer").getResultList();
+        return resp;
     }
     
 }
