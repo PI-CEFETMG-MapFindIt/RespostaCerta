@@ -8,17 +8,31 @@ package br.cefetmg.respostaCerta.model.domain;
 import java.awt.Image;
 import java.io.Serializable;
 import java.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author umcan
  */
+@Entity
 public class Topic implements Serializable{
+    @ManyToOne
     private User autor;
     private String txtMensagem;
+    @Temporal(TemporalType.DATE)
     private LocalDate dataPostagem;
+    @Lob
     private Image msgPhoto;
+    @ManyToOne
     private Forum forum;
+    @Id
+    @GeneratedValue
     private Long topicoId;
 
     public Topic() {

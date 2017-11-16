@@ -16,7 +16,7 @@ import javax.persistence.Entity;
  * @author umcan
  */
 @Entity
-@DiscriminatorValue(value = "1")
+@DiscriminatorValue(value = "0")
 public class ClosedQuestion extends Question implements Serializable{
     private String alt1;
     private String alt2;

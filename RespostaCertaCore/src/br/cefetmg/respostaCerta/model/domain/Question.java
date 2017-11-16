@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,6 +44,7 @@ public class Question implements Serializable{
     @Temporal(TemporalType.DATE)
     private LocalDate dataCriacao;
     private String tituloQuestao;
+    @Lob
     private Image questPhoto;
     private char idtDificuldade;
 

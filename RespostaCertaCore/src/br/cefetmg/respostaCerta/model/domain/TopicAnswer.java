@@ -7,16 +7,28 @@ package br.cefetmg.respostaCerta.model.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author umcan
  */
+@Entity
 public class TopicAnswer implements Serializable{
+    @ManyToOne
     private Topic mensagem;
+    @Id
+    @GeneratedValue
     private Long idMensagemResposta;
+    @ManyToOne
     private User autor;
     private String txtMensagem;
+    @Temporal(TemporalType.DATE)
     private LocalDate dataResposta;
 
     public TopicAnswer() {

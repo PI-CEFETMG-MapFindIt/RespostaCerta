@@ -7,17 +7,25 @@ package br.cefetmg.respostaCerta.model.domain;
 
 import java.awt.Image;
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Lob;
 
 /**
  *
  * @author umcan
  */
+@Entity
 public class User implements Serializable{
+    @Id
+    @GeneratedValue
     private Long idUsuario;
     private String nomeUsuario;
     private String loginUsuario;
     private String senhaUsuario;
     private char idtUsuario;
+    @Lob
     private Image fotoUsuario;
 
     public User() {

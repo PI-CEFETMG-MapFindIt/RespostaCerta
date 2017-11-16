@@ -272,7 +272,7 @@ public class NewQuestionController {
             q.setCriador(main.getUsuarioLogado());
             q.setDataCriacao(LocalDate.now());
             q.setEnunciadoQuestao(enunciado.getText());
-            q.setIdtQuestao(true);
+            q.setIdtQuestao(false);
             Module m = checkModule(modulo.getText());
             if(m==null){
                Registry registry;
