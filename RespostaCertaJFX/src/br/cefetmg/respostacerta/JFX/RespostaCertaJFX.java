@@ -1,8 +1,7 @@
 package br.cefetmg.respostacerta.JFX;
 
-import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostacerta.JFX.controllers.MainController;
-import java.io.IOException;
+import br.cefetmg.respostaCerta.model.domain.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,14 +32,13 @@ public class RespostaCertaJFX extends Application {
         primaryStage.setScene(new Scene(load("Main.fxml"), 1270, 785));
         primaryStage.setResizable(false);
         primaryStage.show();
-        
     }
     
     //Retorna a interface FXML carregada
     public Parent load(String url){
         try {
             loader.setLocation(getClass().getResource(url));
-            //Adiciona o main ao controller ativo 
+            //Adiciona o Main ao controller ativo 
             MainController main = loader.getController();
             main.setMain(this);
             return loader.load();
@@ -58,6 +56,4 @@ public class RespostaCertaJFX extends Application {
     public void setUsuarioLogado(User usuarioLogado) {
         this.usuarioLogado = usuarioLogado;
     }
-    
-    
 }

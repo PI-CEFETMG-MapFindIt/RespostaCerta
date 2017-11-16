@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.respostacerta.JFX.controllers;
 
 import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
@@ -16,15 +11,12 @@ import br.cefetmg.respostaCerta.model.server.ModuleManagement;
 import br.cefetmg.respostaCerta.model.server.OpenQuestionManagement;
 import br.cefetmg.respostaCerta.model.server.SubjectManagement;
 import br.cefetmg.respostacerta.JFX.RespostaCertaJFX;
-import java.rmi.AccessException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -37,10 +29,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
-/**
- *
- * @author Pós Graduação
- */
 public class NewQuestionController {
     @FXML
     public TextField modulo;
@@ -75,10 +63,6 @@ public class NewQuestionController {
     public TextArea txt5;
     
     public RespostaCertaJFX main;
-    
-    public NewQuestionController() {
-        
-    }
     
     @FXML
     public void objetiva(){

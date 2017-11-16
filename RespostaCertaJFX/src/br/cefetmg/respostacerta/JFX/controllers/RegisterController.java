@@ -3,8 +3,6 @@ package br.cefetmg.respostacerta.JFX.controllers;
 import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.BusinessException;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-import br.cefetmg.respostaCerta.model.server.ClosedAnswerManagement;
-import br.cefetmg.respostaCerta.model.server.OpenAnswerManagement;
 import br.cefetmg.respostaCerta.model.server.UserManagement;
 import br.cefetmg.respostacerta.JFX.RespostaCertaJFX;
 import java.math.BigInteger;
@@ -14,8 +12,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
@@ -87,7 +83,6 @@ public class RegisterController {
             System.out.println("Erro ao conectar: " + ex.getMessage());
         } catch (BusinessException | PersistenceException ex) {
             System.out.println("Erro: " + ex.getMessage());
-        }
-            
+        }     
     }
 }

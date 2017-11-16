@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package br.cefetmg.respostacerta.JFX.controllers;
+ package br.cefetmg.respostacerta.JFX.controllers;
 
 import br.cefetmg.respostaCerta.model.domain.Question;
 import br.cefetmg.respostacerta.JFX.RespostaCertaJFX;
@@ -15,20 +10,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 
-/**
- *
- * @author aluno
- */
 public class MyQuestionController {
-    public RespostaCertaJFX mainView;
+    
+    public RespostaCertaJFX main;
     
     @FXML
     public FlowPane panel;
-    
-    public MyQuestionController() {
         
-    }
-    
     public void initialize() {
         ObservableList<Node> lista = panel.getChildren();
         List<Question> minhasQuestoes = null; //TODO
@@ -41,7 +29,6 @@ public class MyQuestionController {
             pane.getChildren().add(editar);
             pane.getChildren().add(deletar);
             lista.add(pane);
-        }
-                
+        }          
     }
 }

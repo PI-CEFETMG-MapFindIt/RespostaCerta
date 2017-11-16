@@ -45,30 +45,14 @@ public class MainController {
     public ListView modVisualizados;
     @FXML
     public ListView subVisualizados;
+    
     private RespostaCertaJFX main;
     
     public MainController() {
         choiceBox = new ChoiceBox<>();
     }
     
-    //Abre a janela de Login
-    public void entrar() {
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Login");
-        window.setResizable(false);
-        window.setScene(new Scene(main.load("Entrar.fxml"), 500, 200));
-        window.showAndWait();
-    }
-    
-    public void cadastrar() {
-        
-    }
-    
-    public void pesquisar() {
-        
-    }
-    
+    //Pseudo Construtor
     @FXML
     public void initialize() {
         choiceBox.getItems().addAll("Questão", "Módulo", "Disciplina");
@@ -194,6 +178,24 @@ public class MainController {
         }
     }
     
+    //Abre a janela de Login
+    public void entrar() {
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("Login");
+        window.setResizable(false);
+        window.setScene(new Scene(main.load("Entrar.fxml"), 500, 200));
+        window.showAndWait();
+    }
+    
+    public void cadastrar() {
+        
+    }
+    
+    public void pesquisar() {
+        
+    }
+    
     public Map<Long, Integer> ordenaPorValor(Map<Long, Integer> map){
         List<Map.Entry<Long, Integer>> list = new LinkedList<>(map.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<Long, Integer>>(){
@@ -211,6 +213,5 @@ public class MainController {
 
     public void setMain(RespostaCertaJFX main) {
         this.main = main;
-    }
-   
+    } 
 }
