@@ -7,6 +7,7 @@ package br.cefetmg.respostaCerta.model.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,7 +23,6 @@ import javax.persistence.TemporalType;
 public class Forum implements Serializable{
     @OneToOne
     private Question questao;
-    @Temporal(TemporalType.DATE)
     private LocalDate dataCriacao;
     private boolean status;
     @Id

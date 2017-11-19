@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class PostgresqlConnection implements ConnectionFactory {
 
@@ -23,11 +26,14 @@ public class PostgresqlConnection implements ConnectionFactory {
     }
     
     public static void main(String[] args) {
-        try {
+        /*try {
             ConnectionFactory cf = new PostgresqlConnection();            
             cf.getConnection();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(PostgresqlConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
+        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ClosedAnswer");
+        EntityManager em = emf.createEntityManager();
     }
 }

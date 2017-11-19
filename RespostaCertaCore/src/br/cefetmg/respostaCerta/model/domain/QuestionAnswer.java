@@ -17,8 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -29,9 +27,6 @@ import javax.persistence.TemporalType;
 @DiscriminatorColumn(name = "idtResposta", length = 1, discriminatorType = DiscriminatorType.CHAR)
 @DiscriminatorValue("R")
 public class QuestionAnswer implements Serializable{
-    @ManyToOne
-    private User autor;
-    @Temporal(TemporalType.DATE)
     private LocalDate dataResposta;
     @Column(insertable=false, updatable=false)
     private char idtResposta;
@@ -39,6 +34,8 @@ public class QuestionAnswer implements Serializable{
     @GeneratedValue
     private Long idResposta;
     private boolean correta;
+    @ManyToOne
+    private User autor;
 
     public QuestionAnswer() {
     }

@@ -6,6 +6,7 @@
 package br.cefetmg.respostaCerta.model.domain;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -14,6 +15,7 @@ import javax.persistence.ManyToOne;
  *
  * @author umcan
  */
+@Entity
 public class Module implements Serializable{
     @ManyToOne
     private Subject dominio;

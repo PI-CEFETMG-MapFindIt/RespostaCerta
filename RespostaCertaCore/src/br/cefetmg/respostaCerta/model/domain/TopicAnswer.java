@@ -28,7 +28,6 @@ public class TopicAnswer implements Serializable{
     @ManyToOne
     private User autor;
     private String txtMensagem;
-    @Temporal(TemporalType.DATE)
     private LocalDate dataResposta;
 
     public TopicAnswer() {

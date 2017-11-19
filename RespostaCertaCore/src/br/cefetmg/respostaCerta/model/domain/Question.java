@@ -41,7 +41,6 @@ public class Question implements Serializable{
     private String enunciadoQuestao;
     @Column(insertable=false, updatable=false)
     private boolean idtQuestao;
-    @Temporal(TemporalType.DATE)
     private LocalDate dataCriacao;
     private String tituloQuestao;
     @Lob

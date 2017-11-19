@@ -25,7 +25,6 @@ public class Topic implements Serializable{
     @ManyToOne
     private User autor;
     private String txtMensagem;
-    @Temporal(TemporalType.DATE)
     private LocalDate dataPostagem;
     @Lob
     private Image msgPhoto;
