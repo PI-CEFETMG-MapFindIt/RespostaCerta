@@ -5,18 +5,23 @@
  */
 package br.cefetmg.respostaCerta.model.domain;
 
+import br.cefetmg.respostaCerta.util.Converter;
 import java.awt.Image;
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Table;
 
 /**
  *
  * @author umcan
  */
 @Entity
+@Table(name="Usuario")
 public class User implements Serializable{
     @Id
     @GeneratedValue
@@ -26,7 +31,8 @@ public class User implements Serializable{
     private String senhaUsuario;
     private char idtUsuario;
     @Lob
-    private Image fotoUsuario;
+    @Basic(fetch=FetchType.LAZY)
+    private Byte[] fotoUsuario;
 
     public User() {
     }
@@ -37,7 +43,7 @@ public class User implements Serializable{
         this.loginUsuario = loginUsuario;
         this.senhaUsuario = senhaUsuario;
         this.idtUsuario = idtUsuario;
-        this.fotoUsuario=fotoUsuario;
+        this.fotoUsuario=Converter.ImageToByteArray(fotoUsuario);
     }
     
     public User(String nomeUsuario, String loginUsuario, String senhaUsuario, char idtUsuario) {
@@ -88,11 +94,11 @@ public class User implements Serializable{
     }  
 
     public Image getFotoUsuario() {
-        return fotoUsuario;
+        return Converter.ByteArrayToImage(fotoUsuario);
     }
 
     public void setFotoUsuario(Image fotoUsuario) {
-        this.fotoUsuario = fotoUsuario;
+        this.fotoUsuario=Converter.ImageToByteArray(fotoUsuario);
     }
     
 }

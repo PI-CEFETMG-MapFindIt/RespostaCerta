@@ -5,16 +5,17 @@
  */
 package br.cefetmg.respostaCerta.model.domain;
 
+import br.cefetmg.respostaCerta.util.Converter;
 import java.awt.Image;
 import java.io.Serializable;
 import java.time.LocalDate;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -27,7 +28,8 @@ public class Topic implements Serializable{
     private String txtMensagem;
     private LocalDate dataPostagem;
     @Lob
-    private Image msgPhoto;
+    @Basic(fetch=FetchType.LAZY)
+    private Byte[] msgPhoto;
     @ManyToOne
     private Forum forum;
     @Id
@@ -41,7 +43,7 @@ public class Topic implements Serializable{
         this.autor = autor;
         this.txtMensagem = txtMensagem;
         this.dataPostagem = dataPostagem;
-        this.msgPhoto = msgPhoto;
+        this.msgPhoto = Converter.ImageToByteArray(msgPhoto);
         this.forum = forum;
     }
 
@@ -70,11 +72,11 @@ public class Topic implements Serializable{
     }
 
     public Image getMsgPhoto() {
-        return msgPhoto;
+        return Converter.ByteArrayToImage(msgPhoto);
     }
 
     public void setMsgPhoto(Image msgPhoto) {
-        this.msgPhoto = msgPhoto;
+        this.msgPhoto = Converter.ImageToByteArray(msgPhoto);
     }
 
     public Forum getForum() {

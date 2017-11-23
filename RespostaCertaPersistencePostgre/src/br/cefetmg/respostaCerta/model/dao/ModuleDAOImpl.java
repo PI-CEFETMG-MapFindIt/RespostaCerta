@@ -6,16 +6,7 @@
 package br.cefetmg.respostaCerta.model.dao;
 
 import br.cefetmg.respostaCerta.model.domain.Module;
-import br.cefetmg.respostaCerta.model.domain.Question;
-import br.cefetmg.respostaCerta.model.domain.Subject;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-import br.cefetmg.util.db.ConnectionManager;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -37,7 +28,7 @@ public class ModuleDAOImpl implements ModuleDAO{
      */
     public ModuleDAOImpl() { 
         moduleCount = 0;
-        factory = Persistence.createEntityManagerFactory("Module");
+        factory = Persistence.createEntityManagerFactory("RespostaCerta");
     }
 
     /**
@@ -60,7 +51,9 @@ public class ModuleDAOImpl implements ModuleDAO{
     @Override
     synchronized public void insert(Module module) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         man.persist(module);
+        man.getTransaction().commit();
         man.close();
     }
     
@@ -72,7 +65,9 @@ public class ModuleDAOImpl implements ModuleDAO{
     @Override
     synchronized public void update(Module module) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         man.merge(module);
+        man.getTransaction().commit();
         man.close();
     }
 
@@ -85,8 +80,10 @@ public class ModuleDAOImpl implements ModuleDAO{
     @Override
     synchronized public Module delete(Long moduleId) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         Module m = man.find(Module.class, moduleId);
         man.remove(m);
+        man.getTransaction().commit();
         man.close();
         return m;
     }
@@ -100,7 +97,9 @@ public class ModuleDAOImpl implements ModuleDAO{
     @Override
     public Module getModuleById(Long moduleId) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         Module m = man.find(Module.class, moduleId);
+        man.getTransaction().commit();
         man.close();
         return m;
     }
@@ -113,7 +112,9 @@ public class ModuleDAOImpl implements ModuleDAO{
     @Override
     public List<Module> listAll() throws PersistenceException {
         EntityManager man = factory.createEntityManager();
-        List<Module> m = man.createQuery("from module").getResultList();
+        man.getTransaction().begin();
+        List<Module> m = man.createQuery("Select from module m", Module.class).getResultList();
+        man.getTransaction().commit();
         man.close();
         return m;
     }
@@ -121,7 +122,9 @@ public class ModuleDAOImpl implements ModuleDAO{
     @Override
     public List<Module> getModulesSubject(long subjectId) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
-        List<Module> m = man.createQuery("from module m where m.dominio=" + subjectId).getResultList();
+        man.getTransaction().begin();
+        List<Module> m = man.createQuery("Select m from module m where m.dominio=" + subjectId, Module.class).getResultList();
+        man.getTransaction().commit();
         man.close();
         return m;
     }
@@ -129,7 +132,9 @@ public class ModuleDAOImpl implements ModuleDAO{
     @Override
     public List<Module> searchModules(String busca) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
-        List<Module> m = man.createQuery("from ClosedQuestion m where m.nomeModulo like :searchkey").setParameter("searchKey", MatchMode.ANYWHERE.toMatchString(busca)).getResultList();
+        man.getTransaction().begin();
+        List<Module> m = man.createQuery("Select m from Module m where m.nomeModulo like :searchkey", Module.class).setParameter("searchKey", MatchMode.ANYWHERE.toMatchString(busca)).getResultList();
+        man.getTransaction().commit();
         man.close();
         return m;
     }

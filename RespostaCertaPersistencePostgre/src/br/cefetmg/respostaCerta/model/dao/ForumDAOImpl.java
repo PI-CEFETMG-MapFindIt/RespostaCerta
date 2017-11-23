@@ -24,7 +24,7 @@ public class ForumDAOImpl implements ForumDAO{
     
     public ForumDAOImpl() { 
         forumCount = 0;
-        factory = Persistence.createEntityManagerFactory("Forum");
+        factory = Persistence.createEntityManagerFactory("RespostaCerta");
     }
 
     /**
@@ -47,7 +47,9 @@ public class ForumDAOImpl implements ForumDAO{
     @Override
     synchronized public void insert(Forum forum) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         man.persist(forum);
+        man.getTransaction().commit();
         man.close();
     }
     
@@ -59,7 +61,9 @@ public class ForumDAOImpl implements ForumDAO{
     @Override
     synchronized public void update(Forum forum) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         man.merge(forum);
+        man.getTransaction().commit();
         man.close();
     }
 
@@ -72,8 +76,10 @@ public class ForumDAOImpl implements ForumDAO{
     @Override
     synchronized public Forum delete(Long forumId) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         Forum f = man.find(Forum.class, forumId);
         man.remove(f);
+        man.getTransaction().commit();
         man.close();
         return f;
     }
@@ -87,7 +93,9 @@ public class ForumDAOImpl implements ForumDAO{
     @Override
     public Forum getForumById(Long forumId) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         Forum f = man.find(Forum.class, forumId);
+        man.getTransaction().commit();
         man.close();
         return f;
     }
@@ -100,7 +108,9 @@ public class ForumDAOImpl implements ForumDAO{
     @Override
     public List<Forum> listAll() throws PersistenceException {
         EntityManager man = factory.createEntityManager();
-        List<Forum> f = man.createQuery("from Forum").getResultList();
+        man.getTransaction().begin();
+        List<Forum> f = man.createQuery("Select m from Forum m", Forum.class).getResultList();
+        man.getTransaction().commit();
         man.close();
         return f;
     }

@@ -7,13 +7,6 @@ package br.cefetmg.respostaCerta.model.dao;
 
 import br.cefetmg.respostaCerta.model.domain.Subject;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-import br.cefetmg.util.db.ConnectionManager;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -35,7 +28,7 @@ public class SubjectDAOImpl implements SubjectDAO{
      */
     public SubjectDAOImpl() { 
         subjectCount = 0;
-        factory = Persistence.createEntityManagerFactory("Module");
+        factory = Persistence.createEntityManagerFactory("RespostaCerta");
     }
 
     /**
@@ -58,7 +51,9 @@ public class SubjectDAOImpl implements SubjectDAO{
     @Override
     synchronized public void insert(Subject subject) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         man.persist(subject);
+        man.getTransaction().commit();
         man.close();
     }
     
@@ -70,7 +65,9 @@ public class SubjectDAOImpl implements SubjectDAO{
     @Override
     synchronized public void update(Subject subject) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         man.merge(subject);
+        man.getTransaction().commit();
         man.close();
     }
 
@@ -83,8 +80,10 @@ public class SubjectDAOImpl implements SubjectDAO{
     @Override
     synchronized public Subject delete(Long subjectId) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         Subject s = man.find(Subject.class, subjectId);
         man.remove(s);
+        man.getTransaction().commit();
         man.close();
         return s;
     }
@@ -98,7 +97,9 @@ public class SubjectDAOImpl implements SubjectDAO{
     @Override
     public Subject getSubjectById(Long subjectId) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         Subject s = man.find(Subject.class, subjectId);
+        man.getTransaction().commit();
         man.close();
         return s;
     }
@@ -111,7 +112,9 @@ public class SubjectDAOImpl implements SubjectDAO{
     @Override
     public List<Subject> listAll() throws PersistenceException {
         EntityManager man = factory.createEntityManager();
-        List<Subject> m = man.createQuery("from subject").getResultList();
+        man.getTransaction().begin();
+        List<Subject> m = man.createQuery("Select m from subject m", Subject.class).getResultList();
+        man.getTransaction().commit();
         man.close();
         return m;
     }
@@ -119,7 +122,9 @@ public class SubjectDAOImpl implements SubjectDAO{
     @Override
     public List<Subject> searchSubjects(String busca) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
-        List<Subject> m = man.createQuery("from Subject m where m.nomeDominio like :searchkey").setParameter("searchKey", MatchMode.ANYWHERE.toMatchString(busca)).getResultList();
+        man.getTransaction().begin();
+        List<Subject> m = man.createQuery("Select m from Subject m where m.nomeDominio like :searchkey", Subject.class).setParameter("searchKey", MatchMode.ANYWHERE.toMatchString(busca)).getResultList();
+        man.getTransaction().commit();
         man.close();
         return m;
     }

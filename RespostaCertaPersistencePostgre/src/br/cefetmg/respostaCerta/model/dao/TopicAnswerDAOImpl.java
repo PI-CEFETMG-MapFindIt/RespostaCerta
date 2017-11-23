@@ -5,25 +5,9 @@
  */
 package br.cefetmg.respostaCerta.model.dao;
 
-import br.cefetmg.respostaCerta.model.domain.Forum;
-import br.cefetmg.respostaCerta.model.domain.Module;
-import br.cefetmg.respostaCerta.model.domain.Question;
-import br.cefetmg.respostaCerta.model.domain.Subject;
-import br.cefetmg.respostaCerta.model.domain.Topic;
 import br.cefetmg.respostaCerta.model.domain.TopicAnswer;
-import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-import br.cefetmg.util.db.ConnectionManager;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -43,7 +27,7 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
      */
     public TopicAnswerDAOImpl() { 
         topicAnswerCount = 0;
-        factory = Persistence.createEntityManagerFactory("TopicAnswer");
+        factory = Persistence.createEntityManagerFactory("RespostaCerta");
     }
 
     /**
@@ -66,7 +50,9 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
     @Override
     synchronized public void insert(TopicAnswer topicAnswer) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         man.persist(topicAnswer);
+        man.getTransaction().commit();
         man.close();
     }
     
@@ -78,7 +64,9 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
     @Override
     synchronized public void update(TopicAnswer topicAnswer) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         man.merge(topicAnswer);
+        man.getTransaction().commit();
         man.close();
     }
 
@@ -91,8 +79,10 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
     @Override
     synchronized public TopicAnswer delete(Long topicAnswerId) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         TopicAnswer a = man.find(TopicAnswer.class, topicAnswerId);
         man.remove(a);
+        man.getTransaction().commit();
         man.close();
         return a;
     }
@@ -106,7 +96,9 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
     @Override
     public TopicAnswer getTopicAnswerById(Long topicAnswerId) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         TopicAnswer a = man.find(TopicAnswer.class, topicAnswerId);
+        man.getTransaction().commit();
         man.close();
         return a;         
     }
@@ -119,7 +111,9 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
     @Override
     public List<TopicAnswer> listAll() throws PersistenceException {
         EntityManager man = factory.createEntityManager();
-        List<TopicAnswer> a = man.createQuery("from TopicAnswer").getResultList();
+        man.getTransaction().begin();
+        List<TopicAnswer> a = man.createQuery("Select m from TopicAnswer m", TopicAnswer.class).getResultList();
+        man.getTransaction().commit();
         man.close();
         return a;
     }
@@ -128,7 +122,9 @@ public class TopicAnswerDAOImpl implements TopicAnswerDAO{
     @Override
     public List<TopicAnswer> getTopicAnswer(Long mensagemID) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
-        List<TopicAnswer> a = man.createQuery("from topicanswer m where m.mensagem=" + mensagemID).getResultList();
+        man.getTransaction().begin();
+        List<TopicAnswer> a = man.createQuery("Select m from topicanswer m where m.mensagem=" + mensagemID, TopicAnswer.class).getResultList();
+        man.getTransaction().commit();
         man.close();
         return a;
     }

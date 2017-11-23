@@ -5,25 +5,9 @@
  */
 package br.cefetmg.respostaCerta.model.dao;
 
-import br.cefetmg.respostaCerta.model.domain.Module;
 import br.cefetmg.respostaCerta.model.domain.OpenAnswer;
-import br.cefetmg.respostaCerta.model.domain.Question;
-import br.cefetmg.respostaCerta.model.domain.Subject;
-import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-import br.cefetmg.util.db.ConnectionManager;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
-import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -40,7 +24,7 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
     
     public OpenAnswerDAOImpl() { 
         openAnswerCount = 0;
-        factory = Persistence.createEntityManagerFactory("OpenAnswer");
+        factory = Persistence.createEntityManagerFactory("RespostaCerta");
     }
 
     /**
@@ -63,7 +47,9 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
     @Override
     synchronized public void insert(OpenAnswer openAnswer) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         man.persist(openAnswer);
+        man.getTransaction().commit();
         man.close();
     }
     
@@ -75,7 +61,9 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
     @Override
     synchronized public void update(OpenAnswer openAnswer) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         man.merge(openAnswer);
+        man.getTransaction().commit();
         man.close();
     }
 
@@ -88,8 +76,10 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
     @Override
     synchronized public OpenAnswer delete(Long openAnswerId) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         OpenAnswer resp = man.find(OpenAnswer.class, openAnswerId);
         man.remove(resp);
+        man.getTransaction().commit();
         man.close();
         return resp;
     }
@@ -103,7 +93,9 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
     @Override
     public OpenAnswer getOpenAnswerById(Long openAnswerId) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         OpenAnswer resp = man.find(OpenAnswer.class, openAnswerId);
+        man.getTransaction().commit();
         man.close();
         return resp;
     }
@@ -116,7 +108,9 @@ public class OpenAnswerDAOImpl implements OpenAnswerDAO{
     @Override
     public List<OpenAnswer> listAll() throws PersistenceException {
         EntityManager man = factory.createEntityManager();
-        List<OpenAnswer> resp = man.createQuery("from OpenAnswer").getResultList();
+        man.getTransaction().begin();
+        List<OpenAnswer> resp = man.createQuery("Select m from OpenAnswer m", OpenAnswer.class).getResultList();
+        man.getTransaction().commit();
         return resp;
     }
     

@@ -5,22 +5,23 @@
  */
 package br.cefetmg.respostaCerta.model.domain;
 
+import br.cefetmg.respostaCerta.util.Converter;
 import java.awt.Image;
 import java.io.Serializable;
 import java.time.LocalDate;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -44,7 +45,8 @@ public class Question implements Serializable{
     private LocalDate dataCriacao;
     private String tituloQuestao;
     @Lob
-    private Image questPhoto;
+    @Basic(fetch=FetchType.LAZY)
+    private Byte[] questPhoto;
     private char idtDificuldade;
 
     public Question() {
@@ -68,7 +70,7 @@ public class Question implements Serializable{
         this.idtQuestao = idtQuestao;
         this.dataCriacao = dataCriacao;
         this.tituloQuestao = tituloQuestao;
-        this.questPhoto = questPhoto;
+        this.questPhoto = Converter.ImageToByteArray(questPhoto);
         this.idtDificuldade=idtDificuldade;
     }
 
@@ -181,11 +183,11 @@ public class Question implements Serializable{
     }
 
     public Image getQuestPhoto() {
-        return questPhoto;
+        return Converter.ByteArrayToImage(questPhoto);
     }
 
     public void setQuestPhoto(Image questPhoto) {
-        this.questPhoto = questPhoto;
+        this.questPhoto = Converter.ImageToByteArray(questPhoto);
     }
 
     public char getIdtDificuldade() {

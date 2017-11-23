@@ -5,24 +5,9 @@
  */
 package br.cefetmg.respostaCerta.model.dao;
 
-import br.cefetmg.util.db.ConnectionManager;
 import br.cefetmg.respostaCerta.model.domain.ClosedAnswer;
-import br.cefetmg.respostaCerta.model.domain.ClosedQuestion;
-import br.cefetmg.respostaCerta.model.domain.Module;
-import br.cefetmg.respostaCerta.model.domain.Subject;
-import br.cefetmg.respostaCerta.model.domain.User;
 import br.cefetmg.respostaCerta.model.exception.PersistenceException;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
-import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -38,7 +23,7 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
     
     public ClosedAnswerDAOImpl() { 
         closedCount = 0;
-        factory = Persistence.createEntityManagerFactory("ClosedAnswer");
+        factory = Persistence.createEntityManagerFactory("RespostaCerta");
     }
 
     /**
@@ -60,7 +45,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
     @Override
     synchronized public void insert(ClosedAnswer respostaFechada) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         man.persist(respostaFechada);
+        man.getTransaction().commit();
         man.close();
     }
     
@@ -72,7 +59,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
     @Override
     synchronized public void update(ClosedAnswer closedAnswer) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         man.merge(closedAnswer);
+        man.getTransaction().commit();
         man.close();
     }
 
@@ -85,8 +74,10 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
     @Override
     synchronized public ClosedAnswer delete(Long closedId) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         ClosedAnswer resp = man.find(ClosedAnswer.class, closedId);
         man.remove(resp);
+        man.getTransaction().commit();
         man.close();
         return resp;
     }
@@ -100,7 +91,9 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
     @Override
     public ClosedAnswer getClosedAnswerById(Long closedId) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
+        man.getTransaction().begin();
         ClosedAnswer resp = man.find(ClosedAnswer.class, closedId);
+        man.getTransaction().commit();
         man.close();
         return resp;
     }
@@ -113,14 +106,20 @@ public class ClosedAnswerDAOImpl implements ClosedAnswerDAO{
     @Override
     public List<ClosedAnswer> listAll() throws PersistenceException {
         EntityManager man = factory.createEntityManager();
-        List<ClosedAnswer> resp = man.createQuery("from ClosedAnswer").getResultList();
+        man.getTransaction().begin();
+        List<ClosedAnswer> resp = man.createQuery("Select m from ClosedAnswer m", ClosedAnswer.class).getResultList();
+        man.getTransaction().commit();
+        man.close();
         return resp;
     }    
 
     @Override
     public List<ClosedAnswer> getClosedAnswerByUser(Long userId) throws PersistenceException {
         EntityManager man = factory.createEntityManager();
-        List<ClosedAnswer> resp = man.createQuery("from ClosedAnswer m where m.autor=" + userId).getResultList();
+        man.getTransaction().begin();
+        List<ClosedAnswer> resp = man.createQuery("Select m from ClosedAnswer m where m.autor=" + userId, ClosedAnswer.class).getResultList();
+        man.getTransaction().commit();
+        man.close();
         return resp;
     }
 }
