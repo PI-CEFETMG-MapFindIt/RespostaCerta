@@ -31,6 +31,7 @@ public class RespostaCertaJFX extends Application {
         primaryStage.setTitle("Resposta Certa");
         primaryStage.setScene(new Scene(load("Main.fxml"), 1270, 785));
         primaryStage.setResizable(false);
+        System.out.println("\n\n\n\nteste\n\n\n\n");
         primaryStage.show();
         
         //Adiciona o Main ao controller ativo 
@@ -45,6 +46,7 @@ public class RespostaCertaJFX extends Application {
             return loader.load();
         } catch (Exception ex) {
             //Fecha a aplicação caso ocorra erro no Loader
+            System.out.println(ex);
             System.exit(0);
             return null;
         }

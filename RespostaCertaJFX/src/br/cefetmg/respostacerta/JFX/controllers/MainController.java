@@ -33,6 +33,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 public class MainController {
     @FXML
@@ -57,6 +58,7 @@ public class MainController {
     public void initialize() {
         choiceBox.getItems().addAll("Questão", "Módulo", "Disciplina");
         choiceBox.setValue("Questão");
+        
         try {
             Registry registry = LocateRegistry.getRegistry("localhost", 2222);
             ClosedAnswerManagement  closedAnswer = (ClosedAnswerManagement)registry.lookup("ClosedAnswerManagement");
@@ -180,16 +182,18 @@ public class MainController {
     
     //Abre a janela de Login
     public void entrar() {
+        /*
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Login");
         window.setResizable(false);
         window.setScene(new Scene(main.load("Entrar.fxml"), 500, 200));
-        window.showAndWait();
+        window.showAndWait();*/
+        System.out.println("entrar");
     }
     
     public void cadastrar() {
-        
+        JOptionPane.showMessageDialog(null,"cadastro");
     }
     
     public void pesquisar() {
